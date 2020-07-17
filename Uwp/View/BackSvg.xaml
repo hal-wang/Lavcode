@@ -1,0 +1,93 @@
+﻿<UserControl
+    x:Class="Hubery.Lavcode.Uwp.View.BackSvg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch">
+
+    <Viewbox Stretch="UniformToFill"
+             Visibility="{x:Bind ImgVisible,Converter={StaticResource BooleanConverter},Mode=OneWay}"
+              HorizontalAlignment="Center"
+             VerticalAlignment="Bottom">
+        <Grid Width="1600"
+              Height="900">
+            <Path Data="M 957 450 539 900 1396 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.22"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 957 450 872.9 900 1396 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.30"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M -60 900 398 662 816 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.16"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 337 900 398 662 816 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.24"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 1203 546 1552 900 876 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.20"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 1203 546 1552 900 1162 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.28"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 641 695 886 900 367 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.22"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 587 900 641 695 886 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.30"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 1710 900 1401 632 1096 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.15"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 1710 900 1401 632 1365 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.23"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 1210 900 971 687 725 900">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.10"/>
+                </Path.Fill>
+            </Path>
+            <Path Data="M 943 900 1210 900 971 687">
+                <Path.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}"
+                                     Opacity="0.18"/>
+                </Path.Fill>
+            </Path>
+        </Grid>
+    </Viewbox>
+</UserControl>

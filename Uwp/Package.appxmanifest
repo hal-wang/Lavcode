@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+         IgnorableNamespaces="uap mp rescap desktop4">
+
+  <Identity
+    Name="524473F72DB2F.Lavcode"
+    Publisher="CN=DE563658-45D3-43E3-9C46-3C554C973EB5"
+    Version="0.0.5.0" />
+
+  <mp:PhoneIdentity PhoneProductId="86e8b2e6-ca18-4681-a722-f6624730a6dd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Lavcode</DisplayName>
+    <PublisherDisplayName>wang h.</PublisherDisplayName>
+    <Logo>Assets\Images\Visual\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+                 desktop4:SupportsMultipleInstances="true"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="Hubery.Lavcode.App">
+      <uap:VisualElements
+        DisplayName="Lavcode"
+        Square150x150Logo="Assets\Images\Visual\Square150x150Logo.png"
+        Square44x44Logo="Assets\Images\Visual\Square44x44Logo.png"
+        Description="Hubery.Lavcode"
+        BackgroundColor="black">
+        <uap:DefaultTile Wide310x150Logo="Assets\Images\Visual\Wide310x150Logo.png" Square71x71Logo="Assets\Images\Visual\SmallTile.png" Square310x310Logo="Assets\Images\Visual\LargeTile.png" ShortName="Lavcode">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Assets\Images\Visual\SplashScreen.png"  BackgroundColor="black"/>
+        <uap:LockScreen BadgeLogo="Assets\Images\Visual\BadgeLogo.png" Notification="badge"/>
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/>
+          <uap:Rotation Preference="landscapeFlipped"/></uap:InitialRotationPreference>
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="lavcode">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.lavcode</uap:FileType>
+              <uap:FileType>.lc</uap:FileType>
+              <uap:FileType>.db</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:Logo>Assets/Images/circular_logo.png</uap:Logo>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <rescap:Capability Name="confirmAppClose" />
+    <Capability Name="internetClient"/>
+  </Capabilities>
+</Package>

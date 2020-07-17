@@ -1,0 +1,712 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{6A58D9D3-2DA7-43A0-AB3F-98819E0CF729}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hubery.Lavcode.Uwp</RootNamespace>
+    <AssemblyName>Hubery.Lavcode.Uwp</AssemblyName>
+    <DefaultLanguage>zh-cn</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <PackageCertificateThumbprint>099058AE8826739F63137D2CE791BD6F502FD666</PackageCertificateThumbprint>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateKeyFile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <LangVersion>8.0</LangVersion>
+    <DisableXbfLineInfo>False</DisableXbfLineInfo>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ApiExtend.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Global\Db.cs" />
+    <Compile Include="Global\Default.cs" />
+    <Compile Include="Global\GitHub.cs" />
+    <Compile Include="Global\Sync.cs" />
+    <Compile Include="Helpers\GitHubHelper.cs" />
+    <Compile Include="View\BackSvg.xaml.cs">
+      <DependentUpon>BackSvg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Commands.xaml.cs">
+      <DependentUpon>Commands.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Comment\CommentList.xaml.cs">
+      <DependentUpon>CommentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Comment\CommentSource.cs" />
+    <Compile Include="View\Feedback\FeedbackDialog.xaml.cs">
+      <DependentUpon>FeedbackDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Feedback\FeedbackDialogViewModel.cs" />
+    <Compile Include="View\Feedback\MarkdownPreview.xaml.cs">
+      <DependentUpon>MarkdownPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FirstUseDialog.xaml.cs">
+      <DependentUpon>FirstUseDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GitHub\Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconControl\IconControl.xaml.cs">
+      <DependentUpon>IconControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconControl\IconViewModel.cs" />
+    <Compile Include="Controls\IconSelecter\IconSource.cs" />
+    <Compile Include="Controls\Logo.xaml.cs">
+      <DependentUpon>Logo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Rating.xaml.cs">
+      <DependentUpon>Rating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Setting\SettingDialog.xaml.cs">
+      <DependentUpon>SettingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Setting\SettingViewModel.cs" />
+    <Compile Include="View\Sync\SyncHelper\BaseSyncHelper.cs" />
+    <Compile Include="View\Sync\History\HistoryDialog.xaml.cs">
+      <DependentUpon>HistoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sync\History\HistoryItem.cs" />
+    <Compile Include="View\Sync\History\HistoryViewModel.cs" />
+    <Compile Include="View\Sync\SyncFileHandler.xaml.cs">
+      <DependentUpon>SyncFileHandler.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sync\SyncHelper\FileSyncHelper.cs" />
+    <Compile Include="View\Sync\SyncHelper\ISyncHelper.cs" />
+    <Compile Include="View\Sync\Validator.xaml.cs">
+      <DependentUpon>Validator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Version.xaml.cs">
+      <DependentUpon>Version.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Dialog\LayoutDialog.cs" />
+    <Compile Include="Controls\Dialog\LayoutDialogButtonClickEventArgs.cs" />
+    <Compile Include="Controls\TeachingTip\LayoutTeachingTip.cs" />
+    <Compile Include="Controls\Loading\ILoading.cs" />
+    <Compile Include="Controls\Loading\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Loading\PartialLoading.xaml.cs">
+      <DependentUpon>PartialLoading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Message\IMessage.cs" />
+    <Compile Include="Controls\Message\MessageContent.xaml.cs">
+      <DependentUpon>MessageContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Message\MessageItem.cs" />
+    <Compile Include="Controls\Message\MessageList.xaml.cs">
+      <DependentUpon>MessageList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Message\MessageType.cs" />
+    <Compile Include="Controls\Message\NotifyPopup.xaml.cs">
+      <DependentUpon>NotifyPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Message\StickyMessage.xaml.cs">
+      <DependentUpon>StickyMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PathButton.xaml.cs">
+      <DependentUpon>PathButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PopupLayout.cs" />
+    <Compile Include="Controls\Setting\BaseSettingCell.cs" />
+    <Compile Include="Controls\Setting\BoolSettingCell.cs" />
+    <Compile Include="Controls\Setting\TextSettingCell.cs" />
+    <Compile Include="Controls\TitleBar.xaml.cs">
+      <DependentUpon>TitleBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\AncestorConverter.cs" />
+    <Compile Include="Converters\BackColorToForeColorConverter.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
+    <Compile Include="Converters\BooleanToValueConverter.cs" />
+    <Compile Include="Converters\ConverterHelper.cs" />
+    <Compile Include="Converters\DateFormatConverter.cs" />
+    <Compile Include="Converters\DateParseConverter.cs" />
+    <Compile Include="Converters\IsDarkColorToValueConverter.cs" />
+    <Compile Include="Converters\IsDarkThemeToValueConverter.cs" />
+    <Compile Include="Converters\IsEqualConverter.cs" />
+    <Compile Include="Converters\IsNullConverter.cs" />
+    <Compile Include="Converters\IsNullToValueConverter.cs" />
+    <Compile Include="Converters\IsStrEmptyConverter.cs" />
+    <Compile Include="Converters\IsStrEmptyToValueConverter.cs" />
+    <Compile Include="Converters\MathConverter.cs" />
+    <Compile Include="Converters\NoBreakConverter.cs" />
+    <Compile Include="Converters\NumCompareConverter.cs" />
+    <Compile Include="Converters\NumToSendTipConverter.cs" />
+    <Compile Include="Converters\TestConverter.cs" />
+    <Compile Include="Converters\ThicknessConverter.cs" />
+    <Compile Include="Converters\TimestampConverter.cs" />
+    <Compile Include="Cryptography\Aes.cs" />
+    <Compile Include="Cryptography\OperationType.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
+    <Compile Include="Helpers\ConvertHelper.cs" />
+    <Compile Include="Helpers\ImgHelper.cs" />
+    <Compile Include="Helpers\LoadingHelper.cs" />
+    <Compile Include="Helpers\Logger\LogHelper.cs" />
+    <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\PopupHelper.cs" />
+    <Compile Include="Helpers\ResourcesHelper.cs" />
+    <Compile Include="Helpers\SqliteHelper.cs" />
+    <Compile Include="Helpers\Sqlite\Config.cs" />
+    <Compile Include="Helpers\Sqlite\DelectedItem.cs" />
+    <Compile Include="Helpers\Sqlite\Folder.cs" />
+    <Compile Include="Helpers\Sqlite\Icon.cs" />
+    <Compile Include="Helpers\Sqlite\KeyValuePair.cs" />
+    <Compile Include="Helpers\Sqlite\Password.cs" />
+    <Compile Include="Helpers\ThemeHelper.cs" />
+    <Compile Include="Helpers\TitleBarHelper.cs" />
+    <Compile Include="ICloneable.cs" />
+    <Compile Include="IElementViewModel.cs" />
+    <Compile Include="Helpers\Logger\Log.cs" />
+    <Compile Include="Model\Config.cs" />
+    <Compile Include="Model\IconItem.cs" />
+    <Compile Include="Model\StorageType.cs" />
+    <Compile Include="Model\UniqueItem.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="TaskExtend.cs" />
+    <Compile Include="View\FolderList\EditFolder.xaml.cs">
+      <DependentUpon>EditFolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconSelecter\SetPathIcon.xaml.cs">
+      <DependentUpon>SetPathIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\MainViewModel.cs" />
+    <Compile Include="View\Notices\NoticesPage.xaml.cs">
+      <DependentUpon>NoticesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Notices\NoticesViewModel.cs" />
+    <Compile Include="Global\Others.cs" />
+    <Compile Include="View\Sync\SyncHelper\DavSyncHelper.cs" />
+    <Compile Include="View\FolderList\FolderHelper.cs" />
+    <Compile Include="View\Sync\Merge.cs" />
+    <Compile Include="Helpers\SettingHelper.cs" />
+    <Compile Include="Helpers\Sqlite\SqliteHelper.cs" />
+    <Compile Include="View\Sync\CloudItem.cs" />
+    <Compile Include="View\Sync\CloudType.cs" />
+    <Compile Include="Model\DelectedItem.cs" />
+    <Compile Include="Model\Folder.cs" />
+    <Compile Include="Model\IconType.cs" />
+    <Compile Include="Model\KeyValuePair.cs" />
+    <Compile Include="Model\Password.cs" />
+    <Compile Include="Model\Icon.cs" />
+    <Compile Include="View\Sync\SyncViewModel.cs" />
+    <Compile Include="View\Feedback\FeedbackPage.xaml.cs">
+      <DependentUpon>FeedbackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Feedback\FeedbackViewModel.cs" />
+    <Compile Include="View\Feedback\Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sync\LoginViewModel.cs" />
+    <Compile Include="View\PasswordList\MoveToViewModel.cs" />
+    <Compile Include="View\FolderList\FolderListViewModel.cs" />
+    <Compile Include="View\GitHub\GitHubViewModel.cs" />
+    <Compile Include="View\Auth\AuthViewModel.cs" />
+    <Compile Include="Model\FolderItem.cs" />
+    <Compile Include="View\PasswordDetail\KeyValuePairItem.cs" />
+    <Compile Include="Model\PasswordItem.cs" />
+    <Compile Include="View\PasswordDetail\PasswordDetailViewModel.cs" />
+    <Compile Include="View\PasswordDetail\PasswordGeneratorViewModel.cs" />
+    <Compile Include="View\PasswordList\PasswordListViewModel.cs" />
+    <Compile Include="View\Sync\SyncDialog.xaml.cs">
+      <DependentUpon>SyncDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordDetail\CustomKeyDialog.xaml.cs">
+      <DependentUpon>CustomKeyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HelpDialog.xaml.cs">
+      <DependentUpon>HelpDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sync\LoginDialog.xaml.cs">
+      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordList\MoveToDialog.xaml.cs">
+      <DependentUpon>MoveToDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FolderList\FolderList.xaml.cs">
+      <DependentUpon>FolderList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GitHub\GitHub.xaml.cs">
+      <DependentUpon>GitHub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Auth\AuthPage.xaml.cs">
+      <DependentUpon>AuthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordDetail\PasswordDetail.xaml.cs">
+      <DependentUpon>PasswordDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordDetail\PasswordGenerator.xaml.cs">
+      <DependentUpon>PasswordGenerator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordList\PasswordList.xaml.cs">
+      <DependentUpon>PasswordList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconSelecter\IconSelecter.xaml.cs">
+      <DependentUpon>IconSelecter.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Images\alipay.jpg" />
+    <Content Include="Assets\Images\circular_logo.png" />
+    <Content Include="Assets\Images\qq_group.jpg" />
+    <Content Include="Assets\Images\Visual\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\Images\Visual\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\Images\Visual\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\Images\Visual\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\Images\Visual\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Images\Visual\LargeTile.scale-100.png" />
+    <Content Include="Assets\Images\Visual\LargeTile.scale-125.png" />
+    <Content Include="Assets\Images\Visual\LargeTile.scale-150.png" />
+    <Content Include="Assets\Images\Visual\LargeTile.scale-200.png" />
+    <Content Include="Assets\Images\Visual\LargeTile.scale-400.png" />
+    <Content Include="Assets\Images\Visual\SmallTile.scale-100.png" />
+    <Content Include="Assets\Images\Visual\SmallTile.scale-125.png" />
+    <Content Include="Assets\Images\Visual\SmallTile.scale-150.png" />
+    <Content Include="Assets\Images\Visual\SmallTile.scale-200.png" />
+    <Content Include="Assets\Images\Visual\SmallTile.scale-400.png" />
+    <Content Include="Assets\Images\Visual\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Images\Visual\SplashScreen.scale-125.png" />
+    <Content Include="Assets\Images\Visual\SplashScreen.scale-150.png" />
+    <Content Include="Assets\Images\Visual\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Images\Visual\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Images\Visual\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Images\Visual\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Images\Visual\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Images\Visual\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Images\Visual\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Images\Visual\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Images\Visual\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Images\Visual\StoreLogo.scale-125.png" />
+    <Content Include="Assets\Images\Visual\StoreLogo.scale-150.png" />
+    <Content Include="Assets\Images\Visual\StoreLogo.scale-200.png" />
+    <Content Include="Assets\Images\Visual\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Images\Visual\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Images\Visual\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Images\Visual\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Images\Visual\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Images\Visual\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Images\wechat_qr.png" />
+    <Content Include="Assets\Images\wxpay.jpg" />
+    <Content Include="Assets\Images\windows_hello.png" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Properties\Default.rd.xml" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="View\BackSvg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Commands.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Comment\CommentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Feedback\FeedbackDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Feedback\MarkdownPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FirstUseDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GitHub\Icon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\IconControl\IconControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Logo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Rating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Setting\SettingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sync\History\HistoryDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sync\SyncFileHandler.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sync\Validator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Version.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dialog\Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TeachingTip\Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Loading\Loading.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Loading\PartialLoading.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Message\MessageContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Message\MessageList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Message\NotifyPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Message\StickyMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PathButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Setting\Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TitleBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Converters\ConvertersDict.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sync\SyncDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Feedback\FeedbackPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Feedback\Icon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FolderList\EditFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\IconSelecter\SetPathIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Notices\NoticesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordDetail\CustomKeyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HelpDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sync\LoginDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordList\MoveToDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FolderList\FolderList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GitHub\GitHub.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Auth\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordDetail\PasswordDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordDetail\PasswordGenerator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordList\PasswordList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\IconSelecter\IconSelecter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Services.Store.Engagement">
+      <Version>10.1901.28001</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp">
+      <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.UI.Xaml">
+      <Version>2.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmLightLibs">
+      <Version>5.4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Octokit">
+      <Version>0.48.0</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.7.335</Version>
+    </PackageReference>
+    <PackageReference Include="System.Interactive.Async">
+      <Version>4.1.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
+      <Name>Microsoft Engagement Framework</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs.Desktop, Version=14.0">
+      <Name>Visual C++ 2015 UWP Desktop Runtime for native apps</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

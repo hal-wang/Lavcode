@@ -1,0 +1,66 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions">
+
+    <Style x:Key="LightButtonStyle" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid"
+                          Background="{TemplateBinding Background}"
+                          Padding="{TemplateBinding Padding}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          CornerRadius="{TemplateBinding CornerRadius}"
+                          extensions:Mouse.Cursor="Hand">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0.7"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0.5"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          BorderThickness="0"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

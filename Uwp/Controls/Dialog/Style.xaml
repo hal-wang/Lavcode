@@ -1,0 +1,217 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:hcucl="using:Hubery.Lavcode.Uwp.Controls.Dialog"
+    xmlns:loading="using:Hubery.Lavcode.Uwp.Controls.Loading"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:hcuc="using:Hubery.Lavcode.Uwp.Controls">
+
+    <Style TargetType="Button" x:Key="DialogPrimaryButtonStyle" BasedOn="{StaticResource AccentButtonStyle}"/>
+    <Style TargetType="Button" x:Key="DialogSecondaryButtonStyle" BasedOn="{StaticResource ButtonRevealStyle}"/>
+
+    <Style TargetType="hcucl:LayoutDialog" x:Key="LayoutDialog">
+        <Setter Property="Padding" Value="0 10 0 14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="hcucl:LayoutDialog">
+                    <Border>
+                        <Border.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemAltHighColor}"
+                                             Opacity="0.4"/>
+                        </Border.Background>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ButtonsVisibilityStates">
+                                <VisualState x:Name="AllVisible" />
+                                <VisualState x:Name="NoneVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PrimaryVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="PrimaryButton.(Grid.Column)" Value="0" />
+                                        <Setter Target="PrimaryButton.(Grid.ColumnSpan)" Value="6" />
+                                        <Setter Target="PrimaryButton.Margin" Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SecondaryVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="SecondaryButton.(Grid.Column)" Value="0" />
+                                        <Setter Target="SecondaryButton.(Grid.ColumnSpan)" Value="6" />
+                                        <Setter Target="SecondaryButton.Margin" Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="CloseVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="CloseButton.(Grid.Column)" Value="0" />
+                                        <Setter Target="CloseButton.(Grid.ColumnSpan)" Value="6" />
+                                        <Setter Target="CloseButton.Margin" Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PrimaryAndSecondaryVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="CloseButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="PrimaryButton.(Grid.Column)" Value="0" />
+                                        <Setter Target="PrimaryButton.(Grid.ColumnSpan)" Value="3" />
+                                        <Setter Target="SecondaryButton.(Grid.Column)" Value="3" />
+                                        <Setter Target="SecondaryButton.(Grid.ColumnSpan)" Value="3" />
+                                        <Setter Target="PrimaryButton.Margin" Value="0 0 6 0"/>
+                                        <Setter Target="SecondaryButton.Margin" Value="6 0 0 0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PrimaryAndCloseVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="SecondaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="PrimaryButton.(Grid.Column)" Value="0" />
+                                        <Setter Target="PrimaryButton.(Grid.ColumnSpan)" Value="3" />
+                                        <Setter Target="CloseButton.(Grid.Column)" Value="3" />
+                                        <Setter Target="CloseButton.(Grid.ColumnSpan)" Value="3" />
+                                        <Setter Target="PrimaryButton.Margin" Value="0 0 6 0"/>
+                                        <Setter Target="CloseButton.Margin" Value="6 0 0 0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SecondaryAndCloseVisible">
+                                    <VisualState.Setters>
+                                        <Setter Target="PrimaryButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="SecondaryButton.(Grid.Column)" Value="0" />
+                                        <Setter Target="SecondaryButton.(Grid.ColumnSpan)" Value="3" />
+                                        <Setter Target="CloseButton.(Grid.Column)" Value="3" />
+                                        <Setter Target="CloseButton.(Grid.ColumnSpan)" Value="3" />
+                                        <Setter Target="SecondaryButton.Margin" Value="0 0 6 0"/>
+                                        <Setter Target="CloseButton.Margin" Value="6 0 0 0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="DefaultButtonStates">
+                                <VisualState x:Name="NoDefaultButton" />
+                                <VisualState x:Name="PrimaryAsDefaultButton">
+                                    <VisualState.Setters>
+                                        <Setter Target="PrimaryButton.Style" Value="{ThemeResource DialogPrimaryButtonStyle}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SecondaryAsDefaultButton">
+                                    <VisualState.Setters>
+                                        <Setter Target="SecondaryButton.Style" Value="{ThemeResource DialogPrimaryButtonStyle}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="CloseAsDefaultButton">
+                                    <VisualState.Setters>
+                                        <Setter Target="CloseButton.Style" Value="{ThemeResource DialogPrimaryButtonStyle}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <controls:DropShadowPanel BlurRadius="10"
+                                                  ShadowOpacity="0.6"
+                                                  OffsetX="0"
+                                                  OffsetY="0"
+                                                  Color="{ThemeResource SystemBaseHighColor}"
+                                                  IsMasked="True"
+                                                  Margin="20"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center">
+                            <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                    BorderThickness="1"
+                                    Padding="24 18"
+                                    MinHeight="{ThemeResource ContentDialogMinHeight}"
+                                    MinWidth="{ThemeResource ContentDialogMinWidth}">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}" Opacity="0.3"/>
+                                </Border.BorderBrush>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{TemplateBinding Title}"
+                                                   VerticalAlignment="Top"
+                                                   FontSize="{TemplateBinding TitleFontSize}"/>
+                                        <ContentControl Content="{TemplateBinding TitleExtension}"
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Stretch"
+                                                        VerticalAlignment="Stretch"
+                                                        HorizontalContentAlignment="Stretch"
+                                                        VerticalContentAlignment="Stretch"/>
+                                        <hcuc:PathButton Margin="10 0 -10 0"
+                                                         Grid.Column="2"
+                                                         x:Name="ExitButton"
+                                                         Foreground="Red"
+                                                         VerticalAlignment="Top"
+                                                         ToolTipService.ToolTip="退出"
+                                                         Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsExitButtonVisible,Mode=OneWay,Converter={StaticResource BooleanConverter}}"
+                                                         Data="M571.904 501.76L885.76 187.904c15.872-15.872 15.872-41.984 0-57.856l-1.536-1.536c-15.872-15.872-41.984-15.872-57.856 0L512 442.368 198.144 128c-15.872-15.872-41.984-15.872-57.856 0l-1.536 1.536a40.192 40.192 0 0 0 0 57.856L452.608 501.76 138.752 815.616c-15.872 15.872-15.872 41.984 0 57.856l1.536 1.536c15.872 15.872 41.984 15.872 57.856 0L512 561.152l313.856 313.856c15.872 15.872 41.984 15.872 57.856 0l1.536-1.536c15.872-15.872 15.872-41.984 0-57.856L571.904 501.76z"/>
+                                    </Grid>
+
+                                    <ContentControl Content="{TemplateBinding Content}"
+                                            Margin="{TemplateBinding Padding}"
+                                            Grid.Row="1"
+                                            HorizontalContentAlignment="Stretch"
+                                            VerticalContentAlignment="Stretch"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Style="{ThemeResource DialogSecondaryButtonStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                Content="{TemplateBinding PrimaryButtonText}"
+                                                x:Name="PrimaryButton"
+                                                Margin="0 0 6 0"/>
+
+                                        <Button Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Style="{ThemeResource DialogSecondaryButtonStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                Content="{TemplateBinding SecondaryButtonText}"
+                                                x:Name="SecondaryButton"
+                                                Margin="6 0"/>
+
+                                        <Button Grid.Column="4"
+                                                Grid.ColumnSpan="2"
+                                                Style="{ThemeResource DialogSecondaryButtonStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                Content="{TemplateBinding CloseButtonText}"
+                                                x:Name="CloseButton"
+                                                Margin="6 0 0 0"/>
+                                    </Grid>
+
+                                    <loading:PartialLoading IsLoading="{TemplateBinding IsLoading}"
+                                                            Grid.RowSpan="3"/>
+                                </Grid>
+                            </Border>
+                        </controls:DropShadowPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

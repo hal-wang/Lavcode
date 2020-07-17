@@ -1,0 +1,16 @@
+﻿<hcuc:PopupLayout
+    xmlns:loading="using:Hubery.Lavcode.Uwp.Controls.Loading"
+    x:Class="Hubery.Lavcode.Uwp.Controls.Loading.Loading"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:hcuc="using:Hubery.Lavcode.Uwp.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <loading:PartialLoading Clickable="{x:Bind Clickable,Mode=OneWay}"
+                            BackgroundOpacity="{x:Bind BackgroundOpacity,Mode=OneWay}"
+                            LoadingStr="{x:Bind LoadingStr,Mode=OneWay}"
+                            PaneOpacity="{x:Bind PaneOpacity,Mode=OneWay}"
+                            IsLoading="True"/>
+</hcuc:PopupLayout>

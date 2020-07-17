@@ -1,0 +1,322 @@
+﻿<UserControl
+    x:Class="Hubery.Lavcode.Uwp.View.FolderList.FolderList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hluci="using:Hubery.Lavcode.Uwp.Controls.IconControl"
+    xmlns:hluvf="using:Hubery.Lavcode.Uwp.View.FolderList"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:primitiveContract7Present="using:Microsoft.UI.Xaml.Controls.Primitives?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
+    xmlns:wuxc="using:Windows.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="600">
+
+    <UserControl.DataContext>
+        <hluvf:FolderListViewModel x:Name="Model"/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <x:Double x:Key="TabViewItemHeaderMinHeight">40</x:Double>
+            <x:Double x:Key="TabViewItemHeaderMinWidth">48</x:Double>
+            <x:Double x:Key="TabViewItemHeaderMaxWidth">200</x:Double>
+            <Style x:Name="TabViewButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackground}"/>
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                <Setter Property="CornerRadius" Value="{Binding Converter={StaticResource TopCornerRadiusFilterConverter}, Source={ThemeResource OverlayCornerRadius}}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="Margin" Value="0,7,0,0"/>
+                <Setter Property="Padding" Value="10,10,10,11"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" Background="{TemplateBinding Background}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" FontWeight="SemiLight" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TabViewItemHeaderBackgroundPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TabViewItemHeaderBackgroundPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <PointerDownThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ContentPresenter>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TabViewStyle" TargetType="muxc:TabView">
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="Padding" Value="{ThemeResource TabViewHeaderPadding}"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="muxc:TabView">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid x:Name="TabContainerGrid" XYFocusKeyboardNavigation="Enabled">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="LeftContentColumn" Width="Auto"/>
+                                        <ColumnDefinition x:Name="TabColumn" Width="Auto"/>
+                                        <ColumnDefinition x:Name="AddButtonColumn" Width="Auto"/>
+                                        <ColumnDefinition x:Name="RightContentColumn" Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter x:Name="LeftContentPresenter" ContentTemplate="{TemplateBinding TabStripHeaderTemplate}" Content="{TemplateBinding TabStripHeader}" Grid.Column="0"/>
+                                    <Grid x:Name="ShadowReceiver" Grid.ColumnSpan="4"/>
+                                    <primitiveContract7Present:TabViewListView x:Name="TabListView" AllowDrop="{TemplateBinding AllowDropTabs}" CanReorderItems="{TemplateBinding CanReorderTabs}" Grid.Column="1" CanDragItems="{TemplateBinding CanDragTabs}" ItemTemplate="{TemplateBinding TabItemTemplate}" ItemsSource="{TemplateBinding TabItemsSource}" ItemTemplateSelector="{TemplateBinding TabItemTemplateSelector}"/>
+                                    <Button x:Name="AddButton" Command="{TemplateBinding AddTabButtonCommand}" CommandParameter="{TemplateBinding AddTabButtonCommandParameter}" Content="&#xE710;" Grid.Column="2" IsTextScaleFactorEnabled="False" Style="{StaticResource TabViewButtonStyle}" VerticalAlignment="Stretch" Visibility="{Binding IsAddTabButtonVisible, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                    <ContentPresenter x:Name="RightContentPresenter" ContentTemplate="{TemplateBinding TabStripFooterTemplate}" Content="{TemplateBinding TabStripFooter}" Grid.Column="3" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                                <Grid x:Name="ShadowCaster" Background="Transparent" Height="10" Margin="0,0,0,-10" Grid.Row="0" VerticalAlignment="Bottom"/>
+                                <ContentPresenter x:Name="TabContentPresenter" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Grid.Row="1"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource PrimaryAcrylicBrush}">
+        <!--用于引导定位-->
+        <Border HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="30 40 0 0"
+                Height="0"
+                Width="0"
+                Opacity="0"
+                x:Name="AddButtonPosition"/>
+        
+        <muxc:TabView Style="{StaticResource TabViewStyle}"
+                      Grid.Row="1"
+                      MinHeight="40"
+                      VerticalAlignment="Top"
+                      CanDragTabs="True"
+                      TabDragCompleted="{x:Bind Model.DragCompleted}"
+                      TabItemsSource="{x:Bind Model.FolderItems}"
+                      SelectedIndex="{x:Bind Model.SelectedIndex,Mode=TwoWay}"
+                      AddTabButtonClick="{x:Bind Model.HandleAddFolder}">
+            <muxc:TabView.TabItemTemplate>
+                <DataTemplate>
+                    <muxc:TabViewItem Header="{Binding Name}"
+                                      IsClosable="False"
+                                      Height="40">
+                        <muxc:TabViewItem.Template>
+                            <ControlTemplate TargetType="muxc:TabViewItem">
+                                <Grid x:Name="LayoutRoot" Margin="-1,0,0,0" Padding="{TemplateBinding Padding}">
+                                    <Grid.RenderTransform>
+                                        <ScaleTransform x:Name="LayoutRootScale"/>
+                                    </Grid.RenderTransform>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="PointerOver">
+                                                <VisualState.Setters>
+                                                    <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundPointerOver}"/>
+                                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPointerOver}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed">
+                                                <VisualState.Setters>
+                                                    <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundPressed}"/>
+                                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPressed}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
+                                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundSelected}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="PointerOverSelected">
+                                                <VisualState.Setters>
+                                                    <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
+                                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPointerOver}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="PressedSelected">
+                                                <VisualState.Setters>
+                                                    <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
+                                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPressed}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="DisabledStates">
+                                            <VisualState x:Name="Enabled"/>
+                                            <VisualState x:Name="Disabled">
+                                                <VisualState.Setters>
+                                                    <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundDisabled}"/>
+                                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundDisabled}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="DataVirtualizationStates">
+                                            <VisualState x:Name="DataAvailable"/>
+                                            <VisualState x:Name="DataPlaceholder"/>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="ReorderHintStates">
+                                            <VisualStateGroup.Transitions>
+                                                <VisualTransition GeneratedDuration="0:0:0.2" To="NoReorderHint"/>
+                                            </VisualStateGroup.Transitions>
+                                            <VisualState x:Name="NoReorderHint"/>
+                                            <VisualState x:Name="BottomReorderHint">
+                                                <Storyboard>
+                                                    <DragOverThemeAnimation Direction="Bottom" TargetName="LayoutRoot" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="TopReorderHint">
+                                                <Storyboard>
+                                                    <DragOverThemeAnimation Direction="Top" TargetName="LayoutRoot" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="RightReorderHint">
+                                                <Storyboard>
+                                                    <DragOverThemeAnimation Direction="Right" TargetName="LayoutRoot" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="LeftReorderHint">
+                                                <Storyboard>
+                                                    <DragOverThemeAnimation Direction="Left" TargetName="LayoutRoot" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="DragStates">
+                                            <VisualStateGroup.Transitions>
+                                                <VisualTransition GeneratedDuration="0:0:0.2" To="NotDragging"/>
+                                            </VisualStateGroup.Transitions>
+                                            <VisualState x:Name="NotDragging"/>
+                                            <VisualState x:Name="Dragging">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0" Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemDragThemeOpacity}"/>
+                                                    <DragItemThemeAnimation TargetName="LayoutRoot"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="DraggingTarget"/>
+                                            <VisualState x:Name="MultipleDraggingPrimary"/>
+                                            <VisualState x:Name="MultipleDraggingSecondary"/>
+                                            <VisualState x:Name="DraggedPlaceholder"/>
+                                            <VisualState x:Name="Reordering">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.240" Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemReorderThemeOpacity}"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="ReorderingTarget">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.240" Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemReorderTargetThemeOpacity}"/>
+                                                    <DoubleAnimation Duration="0:0:0.240" Storyboard.TargetName="LayoutRootScale" Storyboard.TargetProperty="ScaleX" To="{ThemeResource ListViewItemReorderTargetThemeScale}"/>
+                                                    <DoubleAnimation Duration="0:0:0.240" Storyboard.TargetName="LayoutRootScale" Storyboard.TargetProperty="ScaleY" To="{ThemeResource ListViewItemReorderTargetThemeScale}"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="MultipleReorderingPrimary"/>
+                                            <VisualState x:Name="ReorderedPlaceholder">
+                                                <Storyboard>
+                                                    <FadeOutThemeAnimation TargetName="LayoutRoot"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="DragOver">
+                                                <Storyboard>
+                                                    <DropTargetItemThemeAnimation TargetName="LayoutRoot"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Border x:Name="TabSeparator" BorderThickness="1" BorderBrush="{ThemeResource TabViewItemSeparator}" HorizontalAlignment="Right" Margin="0,6,0,6" Width="1"/>
+                                    <Grid x:Name="TabContainer"
+                                          Background="{ThemeResource TabViewItemHeaderBackground}"
+                                          BorderThickness="{TemplateBinding BorderThickness}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          CornerRadius="{Binding Converter={StaticResource TopCornerRadiusFilterConverter}, Source={ThemeResource OverlayCornerRadius}}"
+                                          Grid.Column="1"
+                                          FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                                          Control.IsTemplateFocusTarget="True"
+                                          Padding="8,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <hluci:IconControl Icon="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=DataContext.Icon}"
+                                                           Height="32"
+                                                           Width="32"
+                                                           VerticalAlignment="Center"
+                                                           x:Name="IconControl" />
+                                        <ContentPresenter x:Name="ContentPresenter"
+                                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                          Content="{TemplateBinding Header}"
+                                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                          Grid.Column="1"
+                                                          FontWeight="{TemplateBinding FontWeight}"
+                                                          FontSize="14"
+                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          OpticalMarginAlignment="TrimSideBearings"
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                          Margin="8 0 0 0"/>
+                                        <Button x:Name="CloseButton" Visibility="Collapsed"/>
+                                    </Grid>
+                                </Grid>
+                            </ControlTemplate>
+                        </muxc:TabViewItem.Template>
+                        <muxc:TabViewItem.ContextFlyout>
+                            <wuxc:MenuFlyout>
+                                <MenuFlyoutItem Text="添加"
+                                    Click="AddMenu_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <SymbolIcon Symbol="Add"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem Text="编辑"
+                                                Icon="Edit"
+                                                Click="EditMenu_Click"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="删除"
+                                                Foreground="Red"
+                                                Icon="Delete"
+                                                Click="DeleteMenu_Click"/>
+                            </wuxc:MenuFlyout>
+                        </muxc:TabViewItem.ContextFlyout>
+                    </muxc:TabViewItem>
+                </DataTemplate>
+            </muxc:TabView.TabItemTemplate>
+        </muxc:TabView>
+    </Grid>
+</UserControl>
