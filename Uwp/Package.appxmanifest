@@ -9,10 +9,10 @@
 
   <Identity
     Name="524473F72DB2F.Lavcode"
-    Publisher="CN=DE563658-45D3-43E3-9C46-3C554C973EB5"
+    Publisher="CN=72C1148F-5C2B-4F28-9B8C-891A63D2777E"
     Version="0.0.5.0" />
 
-  <mp:PhoneIdentity PhoneProductId="86e8b2e6-ca18-4681-a722-f6624730a6dd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="65b4f4bc-a147-4379-9ad4-8186c4baaacb" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Lavcode</DisplayName>

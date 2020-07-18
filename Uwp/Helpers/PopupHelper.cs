@@ -1,5 +1,6 @@
 ﻿using Hubery.Lavcode.Uwp.Controls.Dialog;
 using Hubery.Lavcode.Uwp.Controls.TeachingTip;
+using Hubery.Lavcode.Uwp.Helpers.Logger;
 using Microsoft.Services.Store.Engagement;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -63,7 +64,25 @@ namespace Hubery.Lavcode.Uwp.Helpers
             return await layoutDialog.ShowAsync();
         }
 
-        public async static Task ShowRating() => await StoreRequestHelper.SendRequestAsync(StoreContext.GetDefault(), 16, string.Empty);
+        public async static Task ShowRating()  // await StoreRequestHelper.SendRequestAsync(StoreContext.GetDefault(), 16, string.Empty);
+        {
+            StoreRateAndReviewResult result = await StoreContext.GetDefault().RequestRateAndReviewAppAsync();
+
+            switch (result.Status)
+            {
+                case StoreRateAndReviewStatus.Succeeded:
+                case StoreRateAndReviewStatus.CanceledByUser:
+                    break;
+
+                case StoreRateAndReviewStatus.NetworkError:
+                    MessageHelper.ShowDanger("请求失败，请检查网络设置");
+                    break;
+
+                default:
+                    MessageHelper.ShowError(result.ExtendedError);
+                    break;
+            }
+        }
 
         public async static Task ShowFeedback() => await StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
 
