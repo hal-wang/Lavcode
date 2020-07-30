@@ -39,7 +39,7 @@ namespace Hubery.Lavcode.Uwp.View.GitHub
             }
             catch (Exception ex)
             {
-                MessageHelper.ShowError(ex);
+                MessageHelper.ShowError(ex, 0);
                 return;
             }
             finally
