@@ -29,9 +29,9 @@ namespace Hubery.Lavcode.Uwp.View
             App.Frame.Navigate(typeof(FeedbackPage));
         }
 
-        private void GitHubFlyout_Opened(object sender, object e)
+        private void GitFlyout_Opened(object sender, object e)
         {
-            FindName(nameof(GitHub));
+            FindName(nameof(GiteeInfo));
         }
 
         private void NoticeBtn_Click(object sender, RoutedEventArgs e)

@@ -1,12 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Helpers;
-using Octokit;
+using Hubery.Lavcode.Uwp.Model.Api;
+using Hubery.Yt.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.View.GitHub
+namespace Hubery.Lavcode.Uwp.View.Gitee
 {
-    public class GitHubViewModel : ViewModelBase
+    public class GiteeInfoViewModel : ViewModelBase
     {
         private bool _loading = false;
         public bool Loading
@@ -34,8 +35,7 @@ namespace Hubery.Lavcode.Uwp.View.GitHub
 
             try
             {
-                var github = GitHubHelper.GetBaseClient();
-                Repository = await github.Repository.Get(Global.GitHubAccount, Global.Repos);
+                Repository = await ApiExtendHelper.GetRepos();
             }
             catch (Exception ex)
             {

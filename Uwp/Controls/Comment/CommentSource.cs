@@ -1,6 +1,7 @@
 ﻿using Hubery.Lavcode.Uwp.Helpers;
+using Hubery.Lavcode.Uwp.Helpers.Api;
+using Hubery.Yt.Uwp.Helpers;
 using Microsoft.Toolkit.Collections;
-using Octokit;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,31 +12,30 @@ namespace Hubery.Lavcode.Uwp.Controls.Comment
     /// <summary>
     /// 自动加载更多 Comments
     /// </summary>
-    public class CommentSource : IIncrementalSource<IssueComment>
+    public class CommentSource : IIncrementalSource<Model.Api.Comment>
     {
-        private readonly int _issueNumber;
-        public CommentSource(int issueNumber)
+        private readonly string _issueNumber;
+        public CommentSource(string issueNumber)
         {
             _issueNumber = issueNumber;
         }
 
-        private readonly GitHubClient _client = GitHubHelper.GetBaseClient();
-        public async Task<IEnumerable<IssueComment>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Model.Api.Comment>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default)
         {
             try
             {
-                return await _client.Issue.Comment.GetAllForIssue(Global.GitHubAccount, Global.Repos, _issueNumber,
-                new ApiOptions()
+                var res = await ApiHelper.Repos.Get($"{Global.GiteeAccount}/{Global.Repos}/issues/{_issueNumber}/comments?page={pageIndex + 1}&per_page={pageSize}&order=desc");
+                if (!await res.IsSuccess())
                 {
-                    PageCount = 1,
-                    PageSize = pageSize,
-                    StartPage = pageIndex + 1,
-                });
+                    return new List<Model.Api.Comment>();
+                }
+
+                return await res.GetContent<List<Model.Api.Comment>>();
             }
             catch (Exception ex)
             {
                 MessageHelper.ShowError(ex, 0);
-                return new List<IssueComment>();
+                return new List<Model.Api.Comment>();
             }
         }
     }

@@ -53,12 +53,12 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             }
         }
 
-        public string CommentUrl { get; } = $"https://github.com/{Global.GitHubAccount}/{Global.Repos}/issues/{Global.FeedbackIssueNumber}";
-        private async void GitHub_Click(object sender, RoutedEventArgs e)
+        public string FeedbackUrl { get; } = $"{Global.ReposUrl}/issues/{Global.FeedbackIssueId}";
+        private async void Git_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var uriBing = new Uri(CommentUrl);
+                var uriBing = new Uri(FeedbackUrl);
                 var success = await Launcher.LaunchUriAsync(uriBing);
             }
             catch (Exception ex)

@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Controls.Comment;
 using Hubery.Lavcode.Uwp.Helpers;
+using Hubery.Lavcode.Uwp.Model.Api;
+using Hubery.Yt.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
-using Octokit;
 using System;
 using System.Threading.Tasks;
 
@@ -17,8 +18,8 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             set { Set(ref _issue, value); }
         }
 
-        private IncrementalLoadingCollection<CommentSource, IssueComment> _feedbacks = null;
-        public IncrementalLoadingCollection<CommentSource, IssueComment> Feedbacks
+        private IncrementalLoadingCollection<CommentSource, Comment> _feedbacks = null;
+        public IncrementalLoadingCollection<CommentSource, Comment> Feedbacks
         {
             get { return _feedbacks; }
             set { Set(ref _feedbacks, value); }
@@ -43,7 +44,7 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             {
                 await GetIssueInfo();
 
-                Feedbacks = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(Global.FeedbackIssueNumber));
+                Feedbacks = new IncrementalLoadingCollection<CommentSource, Comment>(new CommentSource(Global.FeedbackIssueId));
                 Feedbacks.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -58,8 +59,7 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
 
         private async Task GetIssueInfo()
         {
-            GitHubClient _client = GitHubHelper.GetBaseClient();
-            Issue = await _client.Issue.Get(Global.GitHubAccount, Global.Repos, Global.FeedbackIssueNumber);
+            Issue = await ApiExtendHelper.GetIssue(Global.FeedbackIssueId);
         }
 
         public async void HandleFeedback()
@@ -75,7 +75,9 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
                 return;
             }
 
-            Feedbacks.Add(fbDialog.CommentResult);
+            Feedbacks.Insert(0, fbDialog.CommentResult);
+            Issue.Comments++;
+            RaisePropertyChanged(nameof(Issue));
         }
     }
 }

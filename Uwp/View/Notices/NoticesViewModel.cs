@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Controls.Comment;
 using Hubery.Lavcode.Uwp.Helpers;
+using Hubery.Lavcode.Uwp.Model.Api;
+using Hubery.Yt.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
-using Octokit;
 using System;
 using System.Threading.Tasks;
 
@@ -17,8 +18,8 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             set { Set(ref _issue, value); }
         }
 
-        private IncrementalLoadingCollection<CommentSource, IssueComment> _notices = null;
-        public IncrementalLoadingCollection<CommentSource, IssueComment> Notices
+        private IncrementalLoadingCollection<CommentSource, Comment> _notices = null;
+        public IncrementalLoadingCollection<CommentSource, Comment> Notices
         {
             get { return _notices; }
             set { Set(ref _notices, value); }
@@ -44,7 +45,7 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             {
                 await GetIssueInfo();
 
-                Notices = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(Global.NoticeIssueNumber));
+                Notices = new IncrementalLoadingCollection<CommentSource, Comment>(new CommentSource(Global.NoticeIssueId));
                 Notices.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -62,8 +63,7 @@ namespace Hubery.Lavcode.Uwp.View.Notices
 
         private async Task GetIssueInfo()
         {
-            GitHubClient _client = GitHubHelper.GetBaseClient();
-            Issue = await _client.Issue.Get(Global.GitHubAccount, Global.Repos, Global.NoticeIssueNumber);
+            Issue = await ApiExtendHelper.GetIssue(Global.NoticeIssueId);
         }
     }
 }

@@ -2,18 +2,18 @@
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.GitHub
+namespace Hubery.Lavcode.Uwp.View.Gitee
 {
-    public sealed partial class GitHub : UserControl
+    public sealed partial class GiteeInfo : UserControl
     {
-        public GitHub()
+        public GiteeInfo()
         {
             this.InitializeComponent();
 
-            Loaded += GitHub_Loaded;
+            Loaded += GiteeInfo_Loaded;
         }
 
-        private async void GitHub_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void GiteeInfo_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await Model.Init();
         }
