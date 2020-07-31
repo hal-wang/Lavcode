@@ -11,6 +11,8 @@ namespace Hubery.Lavcode.Uwp.View.Notices
 {
     public class NoticesViewModel : ViewModelBase
     {
+        public string Author => Global.GiteeAccount;
+
         private Issue _issue = null;
         public Issue Issue
         {
@@ -24,7 +26,6 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             get { return _notices; }
             set { Set(ref _notices, value); }
         }
-
 
         public async void HandleRefresh()
         {

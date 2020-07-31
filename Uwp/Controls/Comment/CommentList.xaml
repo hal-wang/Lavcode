@@ -1,7 +1,7 @@
 ﻿<!--
     某个 Issue 下的Comments
     -->
-    
+
 <UserControl
     x:Class="Hubery.Lavcode.Uwp.Controls.Comment.CommentList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -33,22 +33,35 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="0" />
             </Style>
         </ListView.ItemContainerStyle>
 
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="mapi:Comment">
-                <StackPanel Margin="4 10">
-                    <Grid>
-                        <TextBlock Text="{x:Bind User.Name}"/>
-                        <TextBlock Text="{x:Bind CreatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
-                                       HorizontalAlignment="Right"/>
-                    </Grid>
-                    <controls:MarkdownTextBlock x:Name="MarkdownText"
-                                                    Margin="6"
-                                                    Text="{x:Bind Body}"
-                                                    Background="Transparent"/>
-                </StackPanel>
+                <ScrollViewer MaxHeight="600">
+                    <StackPanel Margin="10 10 16 4">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Border VerticalAlignment="Center"
+                                    Width="24"
+                                    Height="24"
+                                    CornerRadius="12"
+                                    Margin="0 0 6 0">
+                                    <Image Source="{x:Bind User.AvatarUrl}"/>
+                                </Border>
+                                <TextBlock Text="{x:Bind User.Name}"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <TextBlock Text="{x:Bind CreatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
+                                   HorizontalAlignment="Right"/>
+                        </Grid>
+                        <controls:MarkdownTextBlock x:Name="MarkdownText"
+                                                Margin="6"
+                                                Text="{x:Bind Body}"
+                                                Background="Transparent"/>
+                    </StackPanel>
+                </ScrollViewer>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
