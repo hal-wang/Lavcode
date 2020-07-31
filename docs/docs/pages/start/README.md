@@ -17,10 +17,10 @@ title: 介绍
 
 ### 先看截图
 
-![截图1](./demo1.png)
-![截图2](./demo2.png)
-![截图3](./demo3.png)
-![截图4](./demo4.png)
+![截图1](/screenshots/1.png)
+![截图2](/screenshots/2.png)
+![截图3](/screenshots/3.png)
+![截图4](/screenshots/4.png)
 
 ### 界面
 
