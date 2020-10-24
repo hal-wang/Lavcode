@@ -1,5 +1,7 @@
-﻿using Hubery.Lavcode.Uwp.Controls.Dialog;
-using Hubery.Lavcode.Uwp.Helpers;
+﻿using Hubery.Lavcode.Uwp.Helpers;
+using Hubery.Tools;
+using Hubery.Tools.Uwp.Controls.Dialog;
+using Hubery.Tools.Uwp.Helpers;
 using System.Security.Cryptography;
 using System.Text;
 using Windows.UI.Xaml;

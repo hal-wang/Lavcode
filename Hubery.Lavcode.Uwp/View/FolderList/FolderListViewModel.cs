@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Lavcode.Uwp.Helpers.Sqlite;
 using Hubery.Lavcode.Uwp.Model;
+using Hubery.Tools.Uwp.Helpers;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;

@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hlucg="using:Hubery.Lavcode.Uwp.View.Gitee"
-    xmlns:loading="using:Hubery.Lavcode.Uwp.Controls.Loading"
+    xmlns:htucl="using:Hubery.Tools.Uwp.Controls.Loading"
     mc:Ignorable="d">
 
     <UserControl.DataContext>
@@ -66,6 +66,6 @@
             </RichTextBlock>
         </StackPanel>
 
-        <loading:PartialLoading IsLoading="{x:Bind Model.Loading,Mode=OneWay}"/>
+        <htucl:PartialLoading IsLoading="{x:Bind Model.Loading,Mode=OneWay}"/>
     </Grid>
 </UserControl>

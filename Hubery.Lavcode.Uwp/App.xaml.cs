@@ -1,7 +1,7 @@
 ﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Helpers.Logger;
 using Hubery.Lavcode.Uwp.View.Auth;
 using Hubery.Lavcode.Uwp.View.Main;
+using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;

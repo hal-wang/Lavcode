@@ -1,5 +1,5 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Model;
+﻿using Hubery.Lavcode.Uwp.Model;
+using Hubery.Tools;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -21,7 +21,7 @@ namespace Hubery.Lavcode.Uwp.Helpers.Sqlite
             }
             else
             {
-                return ConvertHelper.GetValue<T>(result.Value);
+                return DataExtend.GetValue<T>(result.Value);
             }
         }
 

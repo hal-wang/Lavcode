@@ -1,5 +1,5 @@
 ﻿<dialog:LayoutDialog
-    xmlns:dialog="using:Hubery.Lavcode.Uwp.Controls.Dialog"
+    xmlns:dialog="using:Hubery.Tools.Uwp.Controls.Dialog"
     x:Class="Hubery.Lavcode.Uwp.View.Feedback.MarkdownPreview"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

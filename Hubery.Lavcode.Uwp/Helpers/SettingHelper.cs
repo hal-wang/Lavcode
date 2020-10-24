@@ -1,39 +1,13 @@
 ﻿using Hubery.Lavcode.Uwp.View.Sync;
+using Hubery.Tools.Uwp.Helpers;
 using System;
-using System.Runtime.CompilerServices;
-using Windows.Storage;
 
 namespace Hubery.Lavcode.Uwp.Helpers
 {
-    public class SettingHelper
+    public class SettingHelper : SettingConfigBase
     {
         private SettingHelper() { }
         public static SettingHelper Instance { get; } = new SettingHelper();
-
-        private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
-
-        private T Get<T>(T defaultValue = default, [CallerMemberName] string propertyName = null)
-        {
-            if (string.IsNullOrEmpty(propertyName))
-            {
-                throw new Exception();
-            }
-
-            object result = _localSettings.Values[propertyName];
-            if (result == null)
-            {
-                return defaultValue;
-            }
-            else
-            {
-                return (T)result;
-            }
-        }
-
-        private void Set<T>(T value, [CallerMemberName] string propertyName = null)
-        {
-            _localSettings.Values[propertyName] = value;
-        }
 
         #region Sync
         public string DavAccount

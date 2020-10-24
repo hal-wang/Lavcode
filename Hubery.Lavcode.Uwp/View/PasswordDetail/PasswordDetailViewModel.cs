@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Lavcode.Uwp.Helpers.Sqlite;
 using Hubery.Lavcode.Uwp.Model;
+using Hubery.Tools;
+using Hubery.Tools.Uwp.Controls.Message;
+using Hubery.Tools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -550,7 +552,7 @@ namespace Hubery.Lavcode.Uwp.View.PasswordDetail
         {
             if (string.IsNullOrEmpty(value))
             {
-                MessageHelper.ShowSticky(button, "无内容", Controls.Message.MessageType.Warning);
+                MessageHelper.ShowSticky(button, "无内容", MessageType.Warning);
                 return;
             }
 
@@ -558,7 +560,7 @@ namespace Hubery.Lavcode.Uwp.View.PasswordDetail
             dataPackage.SetText(value);
             Clipboard.SetContent(dataPackage);
 
-            MessageHelper.ShowSticky(button, $"已复制 {key}\n受限于UWP，请在关闭软件前粘贴", Controls.Message.MessageType.Primary);
+            MessageHelper.ShowSticky(button, $"已复制 {key}\n受限于UWP，请在关闭软件前粘贴", MessageType.Primary);
         }
 
         public void CopyPswd(object sender, RoutedEventArgs e)

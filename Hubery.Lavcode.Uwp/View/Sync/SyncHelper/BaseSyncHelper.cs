@@ -1,4 +1,6 @@
 ﻿using Hubery.Lavcode.Uwp.Helpers;
+using Hubery.Tools;
+using Hubery.Tools.Uwp.Helpers;
 using System;
 using System.IO;
 using System.Security.Cryptography;

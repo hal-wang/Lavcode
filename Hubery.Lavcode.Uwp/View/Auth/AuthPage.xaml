@@ -8,10 +8,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hcuc="using:Hubery.Lavcode.Uwp.Controls"
     xmlns:hluc="using:Hubery.Lavcode.Uwp.Controls"
     xmlns:hluv="using:Hubery.Lavcode.Uwp.View"
     xmlns:hluva="using:Hubery.Lavcode.Uwp.View.Auth"
+    xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -35,9 +35,9 @@
             
             <hluc:Logo />
             
-            <hcuc:TitleBar Grid.Column="1">
+            <htuc:TitleBar Grid.Column="1">
                 <hluv:Version/>
-            </hcuc:TitleBar>
+            </htuc:TitleBar>
             
             <hluv:Commands Grid.Column="2"
                            HaveLogin="False"/>

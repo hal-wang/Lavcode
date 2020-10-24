@@ -1,6 +1,6 @@
-﻿using Hubery.Lavcode.Uwp;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
+﻿using Hubery.Lavcode.Uwp.Helpers.Sqlite;
 using Hubery.Lavcode.Uwp.Model;
+using Hubery.Tools;
 using System.Collections.Generic;
 
 namespace Hubery.Lavcode.Uwp.View.FolderList

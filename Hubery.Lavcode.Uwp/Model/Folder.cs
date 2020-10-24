@@ -1,10 +1,10 @@
-﻿using Hubery.Lavcode.Uwp;
+﻿using Hubery.Tools;
 using SQLite;
 using System;
 
 namespace Hubery.Lavcode.Uwp.Model
 {
-    public class Folder : UniqueItem,ICloneable<Folder>
+    public class Folder : UniqueItem, ICloneable<Folder>
     {
         [MaxLength(100)]
         public string Name { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Lavcode.Uwp.Model;
+using Hubery.Tools.Uwp.Helpers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

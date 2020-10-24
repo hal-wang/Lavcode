@@ -1,5 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Windows.ApplicationModel;
+﻿using Hubery.Tools.Uwp.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;

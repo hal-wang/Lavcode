@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Hubery.Lavcode.Uwp;
-using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Lavcode.Uwp.View.Sync.SyncHelper;
+using Hubery.Tools;
+using Hubery.Tools.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;

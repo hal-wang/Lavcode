@@ -2,10 +2,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="./Button.xaml"/>
         <ResourceDictionary Source="./TextBox.xaml"/>
-        <ResourceDictionary Source="/Controls/Dialog/Style.xaml"/>
-        <ResourceDictionary Source="/Controls/TeachingTip/Style.xaml"/>
-        <ResourceDictionary Source="/Controls/Setting/Style.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

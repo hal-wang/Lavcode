@@ -1,14 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Lavcode.Uwp.Helpers.Api;
-using Hubery.Lavcode.Uwp.Model;
 using Hubery.Lavcode.Uwp.Model.Api;
+using Hubery.Tools.Uwp.Helpers;
 using Hubery.Yt.Uwp.Helpers;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 
 namespace Hubery.Lavcode.Uwp.View.Feedback

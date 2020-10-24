@@ -1,16 +1,14 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using Hubery.Lavcode.Uwp;
-using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.View.Sync.SyncHelper;
 using Hubery.Lavcode.Uwp.Helpers.Sqlite;
 using Hubery.Lavcode.Uwp.Model;
+using Hubery.Lavcode.Uwp.View.Sync.SyncHelper;
+using Hubery.Tools;
+using Hubery.Tools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Windows.Input;
 using Windows.Storage;
 
 namespace Hubery.Lavcode.Uwp.View.Sync.History

@@ -1,5 +1,6 @@
-﻿using Hubery.Lavcode.Uwp.Controls.Dialog;
-using Hubery.Lavcode.Uwp.Helpers;
+﻿using Hubery.Tools.Uwp.Controls.Dialog;
+using Hubery.Tools.Uwp.Controls.Message;
+using Hubery.Tools.Uwp.Helpers;
 using Windows.UI.Xaml;
 
 namespace Hubery.Lavcode.Uwp.View.Sync.History
@@ -20,7 +21,7 @@ namespace Hubery.Lavcode.Uwp.View.Sync.History
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            MessageHelper.ShowSticky(sender as FrameworkElement, "仅记录本地\n不记录 云端 和 导出文件", Controls.Message.MessageType.Info);
+            MessageHelper.ShowSticky(sender as FrameworkElement, "仅记录本地\n不记录 云端 和 导出文件", MessageType.Info);
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

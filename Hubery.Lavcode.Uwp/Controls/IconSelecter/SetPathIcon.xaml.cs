@@ -1,5 +1,6 @@
-﻿using Hubery.Lavcode.Uwp.Controls.Dialog;
-using Hubery.Lavcode.Uwp.Helpers;
+﻿using Hubery.Lavcode.Uwp.Helpers;
+using Hubery.Tools.Uwp.Controls.Dialog;
+using Hubery.Tools.Uwp.Helpers;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -43,7 +44,7 @@ namespace Hubery.Lavcode.Uwp.Controls.IconSelecter
             SetPathIcon setPathIcon = d as SetPathIcon;
             try
             {
-                setPathIcon.Data = ImgHelper.PathMarkupToGeometry(setPathIcon.PathStr);
+                setPathIcon.Data = Helpers.ImgHelper.PathMarkupToGeometry(setPathIcon.PathStr);
                 //{
                 //    Data = (Geometry)TypeDescriptor.GetConverter(typeof(Geometry)).ConvertFrom(e.NewValue as string)
                 //};
