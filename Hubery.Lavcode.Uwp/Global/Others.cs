@@ -11,6 +11,6 @@ namespace Hubery.Lavcode.Uwp
         public static string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}";
 
         public static string DragPasswordHeader { get; } = "Lavcode_P";
-        public static string PpUrl { get; } = $"{HomeUrl}/pages/pp/zh/";
+        public static string PpUrl { get; } = $"{HomeUrl}/pp/zh/";
     }
 }
