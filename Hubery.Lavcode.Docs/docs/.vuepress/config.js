@@ -45,6 +45,7 @@ module.exports = {
     sidebar: {
       "/usage/": ["", "svgicon/"],
       "/pp/": ["en/", "zh/"],
+      "/pages/pp/": ["en/", "zh/"], // 已过时，存在是为了兼容 uwp 0.1.0 版本和之前
       "/dev/": [""],
     },
   },
