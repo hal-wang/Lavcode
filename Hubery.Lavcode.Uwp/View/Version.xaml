@@ -15,10 +15,10 @@
     FontFamily="{ThemeResource PivotTitleFontFamily}">
 
     <TextBlock>
-            <Run Text="Lovcode "/>
-            <Run>v</Run>
-            <Run Text="{x:Bind VersionStr}"/>
-            <Run Text="Beta"/>
+        <Run Text="Lovcode "/>
+        <Run>v</Run>
+        <Run Text="{x:Bind VersionStr}"/>
+        <Run Text="Beta"/>
         <Run>（2020/05/09发布公测）</Run>
     </TextBlock>
 </UserControl>
