@@ -42,7 +42,7 @@
                 <Run>开发者不会收集任何密码信息</Run>
             </Paragraph>
 
-            <Paragraph Margin="20 0 0 0">
+            <Paragraph Margin="0 10 0 0">
                 <Bold>使用费用</Bold>
                 <LineBreak/>
                 <Run Text="    "/>
@@ -68,7 +68,7 @@
                 </InlineUIContainer>
             </Paragraph>
 
-            <Paragraph Margin="20 0 0 0">
+            <Paragraph Margin="0 10 0 0">
                 <InlineUIContainer>
                     <HyperlinkButton Content="更多帮助"
                                      Click="MoreHelp_Click"/>
