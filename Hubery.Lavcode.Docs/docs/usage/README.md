@@ -36,10 +36,10 @@ Lavcode 是开源软件，所有代码公开透明。因此你无需担心密码
 
 上几张截图
 
-![截图1](./screenshots/1.png)
-![截图2](./screenshots/2.png)
-![截图3](./screenshots/3.png)
-![截图4](./screenshots/4.png)
+![截图1](/screenshots/1.png)
+![截图2](/screenshots/2.png)
+![截图3](/screenshots/3.png)
+![截图4](/screenshots/4.png)
 
 ## 备份
 

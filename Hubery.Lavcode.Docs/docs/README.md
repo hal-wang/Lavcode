@@ -13,3 +13,7 @@ features:
   - title: 功能丰富
     details: 文件夹管理；复杂密码生成器；字体、图片、svg图标；多窗口运行......给你想要的自定义。
 ---
+
+<!--
+tcb hosting deploy ./.vuepress/dist/ -e lavcode-3gq7jxpzdadbb5f5
+-->
