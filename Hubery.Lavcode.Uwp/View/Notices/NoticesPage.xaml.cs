@@ -20,7 +20,7 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             await VM.Init();
         }
 
-        public string NoticesUrl { get; } = $"{Global.ReposUrl}/issues/{Global.NoticeIssueId}";
+        public string NoticesUrl { get; } = $"{Global.ReposUrl}/issues/{Global.NoticeIssueNumber}";
         private async void Git_Click(object sender, RoutedEventArgs e)
         {
             try

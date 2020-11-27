@@ -1,9 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Helpers.Api;
-using Hubery.Lavcode.Uwp.Model.Api;
 using Hubery.Tools.Uwp.Helpers;
-using Hubery.Yt.Uwp.Helpers;
+using Octokit;
 using System;
 using System.Threading.Tasks;
 
@@ -39,7 +37,7 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             set { Set(ref _remember, value); }
         }
 
-        public Comment CommentResult { get; private set; } = null;
+        public IssueComment CommentResult { get; private set; } = null;
 
         public async Task<bool> Feedback()
         {
@@ -48,25 +46,10 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
                 return false;
             }
 
+            GitHubClient client = GitHubHelper.GetAuthClient(Account, Password);
             try
             {
-                var accessToken = await ApiExtendHelper.GetAccessToken(Account, Password);
-                if (string.IsNullOrEmpty(accessToken))
-                {
-                    return false;
-                }
-
-                var res = await ApiHelper.Repos.Post($"{Global.GiteeReposApiUrl}/issues/{Global.FeedbackIssueId}/comments", new
-                {
-                    access_token = accessToken,
-                    body = Content
-                });
-                if (!await res.IsSuccess())
-                {
-                    return false;
-                }
-
-                CommentResult = await res.GetContent<Comment>();
+                CommentResult = await client.Issue.Comment.Create(Global.GitAccount, Global.Repos, Global.FeedbackIssueNumber, Content);
                 SettingHelper.Instance.GitAccount = Account;
                 SettingHelper.Instance.GitPassword = Remember ? Password : null;
             }
@@ -94,12 +77,12 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             }
             if (string.IsNullOrEmpty(Account))
             {
-                MessageHelper.ShowWarning("请输入Gitee账号");
+                MessageHelper.ShowWarning("请输入GitHub账号");
                 return false;
             }
             if (string.IsNullOrEmpty(Password))
             {
-                MessageHelper.ShowWarning("请输入Gitee密码");
+                MessageHelper.ShowWarning("请输入GitHub密码");
                 return false;
             }
 

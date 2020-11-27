@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Octokit;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -12,17 +13,14 @@ namespace Hubery.Lavcode.Uwp.Controls.Comment
         }
 
 
-
-        public IEnumerable<Model.Api.Comment> Comments
+        public IEnumerable<IssueComment> Comments
         {
-            get { return (IEnumerable<Model.Api.Comment>)GetValue(CommentsProperty); }
+            get { return (IEnumerable<IssueComment>)GetValue(CommentsProperty); }
             set { SetValue(CommentsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Comments.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommentsProperty =
-            DependencyProperty.Register("Comments", typeof(IEnumerable<Model.Api.Comment>), typeof(CommentList), new PropertyMetadata(null));
-
-
+            DependencyProperty.Register("Comments", typeof(IEnumerable<IssueComment>), typeof(CommentList), new PropertyMetadata(null));
     }
 }

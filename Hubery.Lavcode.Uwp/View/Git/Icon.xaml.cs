@@ -4,7 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Hubery.Lavcode.Uwp.View.Gitee
+namespace Hubery.Lavcode.Uwp.View.Git
 {
     public sealed partial class Icon : UserControl
     {

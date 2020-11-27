@@ -53,7 +53,7 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             }
         }
 
-        public string FeedbackUrl { get; } = $"{Global.ReposUrl}/issues/{Global.FeedbackIssueId}";
+        public string FeedbackUrl { get; } = $"{Global.ReposUrl}/issues/{Global.FeedbackIssueNumber}";
         private async void Git_Click(object sender, RoutedEventArgs e)
         {
             try

@@ -1,4 +1,5 @@
-﻿using Windows.ApplicationModel;
+﻿using System;
+using Windows.ApplicationModel;
 
 namespace Hubery.Lavcode.Uwp
 {
@@ -12,5 +13,7 @@ namespace Hubery.Lavcode.Uwp
 
         public static string DragPasswordHeader { get; } = "Lavcode_P";
         public static string PpUrl { get; } = $"{HomeUrl}/pp/zh/";
+
+        public static DateTime PublishTime = DateTime.Parse("2020-05-09");
     }
 }

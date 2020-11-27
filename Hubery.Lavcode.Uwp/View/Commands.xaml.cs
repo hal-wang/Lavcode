@@ -31,7 +31,7 @@ namespace Hubery.Lavcode.Uwp.View
 
         private void GitFlyout_Opened(object sender, object e)
         {
-            FindName(nameof(GiteeInfo));
+            FindName(nameof(GitInfo));
         }
 
         private void NoticeBtn_Click(object sender, RoutedEventArgs e)

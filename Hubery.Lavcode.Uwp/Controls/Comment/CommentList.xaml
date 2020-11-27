@@ -8,14 +8,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:mapi="using:Hubery.Lavcode.Uwp.Model.Api"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:octokit="using:Octokit"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
     <ListView ItemsSource="{x:Bind Comments,Mode=OneWay}"
-              IsItemClickEnabled="True"
+              IsItemClickEnabled="False"
               SelectionMode="None"
               BorderThickness="0 1 0 0">
         <ListView.BorderBrush>
@@ -38,7 +37,7 @@
         </ListView.ItemContainerStyle>
 
         <ListView.ItemTemplate>
-            <DataTemplate x:DataType="mapi:Comment">
+            <DataTemplate x:DataType="octokit:IssueComment">
                 <ScrollViewer MaxHeight="600">
                     <StackPanel Margin="10 10 16 4">
                         <Grid>
@@ -50,10 +49,10 @@
                                     Margin="0 0 6 0">
                                     <Image Source="{x:Bind User.AvatarUrl}"/>
                                 </Border>
-                                <TextBlock Text="{x:Bind User.Name}"
+                                <TextBlock Text="{x:Bind User.Login}"
                                            VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Text="{x:Bind CreatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
+                            <TextBlock Text="{x:Bind UpdatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
                                    HorizontalAlignment="Right"/>
                         </Grid>
                         <controls:MarkdownTextBlock x:Name="MarkdownText"

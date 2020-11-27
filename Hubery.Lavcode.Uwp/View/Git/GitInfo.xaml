@@ -1,15 +1,15 @@
 ﻿<UserControl
-    x:Class="Hubery.Lavcode.Uwp.View.Gitee.GiteeInfo"
+    x:Class="Hubery.Lavcode.Uwp.View.Git.GitInfo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hlucg="using:Hubery.Lavcode.Uwp.View.Gitee"
+    xmlns:hlucg="using:Hubery.Lavcode.Uwp.View.Git"
     xmlns:htucl="using:Hubery.Tools.Uwp.Controls.Loading"
     mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <hlucg:GiteeInfoViewModel x:Name="Model"/>
+        <hlucg:GitInfoViewModel x:Name="Model"/>
     </UserControl.DataContext>
 
     <Grid MinHeight="120"
@@ -43,7 +43,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <hlucg:Icon Count="{x:Bind Model.Repository.WatchersCount,Mode=OneWay}"
+                <hlucg:Icon Count="{x:Bind Model.Repository.SubscribersCount,Mode=OneWay}"
                             Data="M512.515746 217.984686c-292.146756 0-445.309088 249.7696-445.309088 293.998941 0 44.25083 153.162332 294.031687 445.309088 294.031687 292.13243 0 445.304995-249.780857 445.304995-294.031687C957.820742 467.754287 804.648177 217.984686 512.515746 217.984686zM512.515746 713.128787c-109.310591 0-197.921745-63.809281-197.921745-201.14516 0-137.307226 88.611154-201.116507 197.921745-201.116507S710.430328 374.676401 710.430328 511.983627C710.430328 649.319505 621.826338 713.128787 512.515746 713.128787zM512.515746 511.983627c-18.126846-25.778106 35.698037-113.345488 6.16235-113.345488-54.651714 0-118.677936 44.713364-118.677936 113.345488 0 68.664869 57.864896 115.803469 112.515586 115.803469 54.637388 0 111.283526-47.139623 111.283526-115.803469C623.799272 480.446353 527.928784 533.903869 512.515746 511.983627z"/>
                 <hlucg:Icon Count="{x:Bind Model.Repository.StargazersCount,Mode=OneWay}"
                             Grid.Column="1"
@@ -60,7 +60,7 @@
                                          Opacity="0.6"/>
                     </Paragraph.Foreground>
                     喜欢本项目就在
-                    <Hyperlink Click="{x:Bind HandleViewSourceCode}">Gitee</Hyperlink>
+                    <Hyperlink Click="{x:Bind HandleViewSourceCode}">GitHub</Hyperlink>
                     点个小星星吧！
                 </Paragraph>
             </RichTextBlock>

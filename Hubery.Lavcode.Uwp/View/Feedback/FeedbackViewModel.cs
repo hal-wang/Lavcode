@@ -1,10 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Controls.Comment;
-using Hubery.Lavcode.Uwp.Model.Api;
+using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
-using Hubery.Yt.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
+using Octokit;
 using System;
 using System.Threading.Tasks;
 
@@ -15,12 +15,20 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
         private Issue _issue = null;
         public Issue Issue
         {
-            get { return _issue; }
-            set { Set(ref _issue, value); }
+            get => _issue;
+            set
+            {
+                Set(ref _issue, value);
+                _addedCount = 0;
+                RaisePropertyChanged(nameof(Count));
+            }
         }
 
-        private IncrementalLoadingCollection<CommentSource, Comment> _feedbacks = null;
-        public IncrementalLoadingCollection<CommentSource, Comment> Feedbacks
+        private int _addedCount = 0;
+        public int Count => (Issue == null ? 0 : Issue.Comments) + _addedCount;
+
+        private IncrementalLoadingCollection<CommentSource, IssueComment> _feedbacks = null;
+        public IncrementalLoadingCollection<CommentSource, IssueComment> Feedbacks
         {
             get { return _feedbacks; }
             set { Set(ref _feedbacks, value); }
@@ -45,7 +53,7 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             {
                 await GetIssueInfo();
 
-                Feedbacks = new IncrementalLoadingCollection<CommentSource, Comment>(new CommentSource(Global.FeedbackIssueId));
+                Feedbacks = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(Global.FeedbackIssueNumber, Issue.Comments));
                 Feedbacks.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -60,7 +68,8 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
 
         private async Task GetIssueInfo()
         {
-            Issue = await ApiExtendHelper.GetIssue(Global.FeedbackIssueId);
+            GitHubClient _client = GitHubHelper.GetBaseClient();
+            Issue = await _client.Issue.Get(Global.GitAccount, Global.Repos, Global.FeedbackIssueNumber);
         }
 
         public async void HandleFeedback()
@@ -77,8 +86,8 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             }
 
             Feedbacks.Insert(0, fbDialog.CommentResult);
-            Issue.Comments++;
-            RaisePropertyChanged(nameof(Issue));
+            _addedCount++;
+            RaisePropertyChanged(nameof(Count));
         }
     }
 }

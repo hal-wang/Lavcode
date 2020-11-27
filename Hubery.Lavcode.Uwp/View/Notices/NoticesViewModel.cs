@@ -1,10 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using Hubery.Lavcode.Uwp.Controls.Comment;
-using Hubery.Lavcode.Uwp.Model.Api;
+using Hubery.Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
-using Hubery.Yt.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
+using Octokit;
 using System;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace Hubery.Lavcode.Uwp.View.Notices
 {
     public class NoticesViewModel : ViewModelBase
     {
-        public string Author => Global.GiteeAccount;
+        public string Author => Global.GitAccount;
 
         private Issue _issue = null;
         public Issue Issue
@@ -21,8 +21,8 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             set { Set(ref _issue, value); }
         }
 
-        private IncrementalLoadingCollection<CommentSource, Comment> _notices = null;
-        public IncrementalLoadingCollection<CommentSource, Comment> Notices
+        private IncrementalLoadingCollection<CommentSource, IssueComment> _notices = null;
+        public IncrementalLoadingCollection<CommentSource, IssueComment> Notices
         {
             get { return _notices; }
             set { Set(ref _notices, value); }
@@ -47,7 +47,7 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             {
                 await GetIssueInfo();
 
-                Notices = new IncrementalLoadingCollection<CommentSource, Comment>(new CommentSource(Global.NoticeIssueId));
+                Notices = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(Global.NoticeIssueNumber, Issue.Comments));
                 Notices.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -55,17 +55,15 @@ namespace Hubery.Lavcode.Uwp.View.Notices
             }
             catch (Exception ex)
             {
-                MessageHelper.ShowError(ex, 0);
-            }
-            finally
-            {
                 LoadingHelper.Hide();
+                MessageHelper.ShowError(ex, 0);
             }
         }
 
         private async Task GetIssueInfo()
         {
-            Issue = await ApiExtendHelper.GetIssue(Global.NoticeIssueId);
+            GitHubClient _client = GitHubHelper.GetBaseClient();
+            Issue = await _client.Issue.Get(Global.GitAccount, Global.Repos, Global.NoticeIssueNumber);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Hubery.Lavcode.Uwp.Model.Api;
-using Hubery.Tools.Uwp.Controls.Dialog;
+﻿using Hubery.Tools.Uwp.Controls.Dialog;
+using Octokit;
 using System;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
@@ -33,9 +33,9 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
 
         private async void Signup_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri(Global.GiteeUrl, UriKind.Absolute));
+            await Launcher.LaunchUriAsync(new Uri(Global.GitUrl, UriKind.Absolute));
         }
 
-        public Comment CommentResult => VM.CommentResult;
+        public IssueComment CommentResult => VM.CommentResult;
     }
 }
