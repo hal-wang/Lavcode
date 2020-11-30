@@ -207,13 +207,13 @@ Messenger.Default.Send(password.Id, "PasswordDeleted");
 
 这部分就是控件的堆叠，包含大量 View 与 ViewModel 的绑定。键值对部分是`ListView`，具体查看相关代码
 
-## Gitee
+## GitHub
 
-所在目录：`View/Gitee/`
+所在目录：`View/Git/`
 
-上方菜单点击 Gitee 图标，弹出的内容。
+上方菜单点击 GitHub 图标，弹出的内容。
 
-![Gitee](./gitee.png)
+![GitHub](./github.png)
 
 这里的三个图标，都被封装成了 Icon 子组件，在同一目录下。
 
