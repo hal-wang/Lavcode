@@ -169,6 +169,9 @@
     <Compile Include="View\FirstUseDialog.xaml.cs">
       <DependentUpon>FirstUseDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GitHubLoginDialog.xaml.cs">
+      <DependentUpon>GitHubLoginDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Git\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -404,6 +407,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FirstUseDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GitHubLoginDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

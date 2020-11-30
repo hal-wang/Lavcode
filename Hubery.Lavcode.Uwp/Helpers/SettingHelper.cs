@@ -112,23 +112,5 @@ namespace Hubery.Lavcode.Uwp.Helpers
             }
         }
         public Action<bool> IsBgVisibleChanged;
-
-        #region Git
-
-        public string GitAccount
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        /// <summary>
-        /// 记住密码才存储
-        /// </summary>
-        public string GitPassword
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-        #endregion
     }
 }

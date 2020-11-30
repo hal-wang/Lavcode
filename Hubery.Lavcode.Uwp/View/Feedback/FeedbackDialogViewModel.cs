@@ -9,20 +9,6 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
 {
     class FeedbackDialogViewModel : ViewModelBase
     {
-        private string _account = SettingHelper.Instance.GitAccount;
-        public string Account
-        {
-            get { return _account; }
-            set { Set(ref _account, value); }
-        }
-
-        private string _password = SettingHelper.Instance.GitPassword;
-        public string Password
-        {
-            get { return _password; }
-            set { Set(ref _password, value); }
-        }
-
         private string _content = string.Empty;
         public string Content
         {
@@ -30,32 +16,33 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             set { Set(ref _content, value); }
         }
 
-        private bool _remember = !string.IsNullOrEmpty(SettingHelper.Instance.GitPassword);
-        public bool Remember
-        {
-            get { return _remember; }
-            set { Set(ref _remember, value); }
-        }
-
         public IssueComment CommentResult { get; private set; } = null;
 
         public async Task<bool> Feedback()
         {
-            if (!IsValid())
+            if (string.IsNullOrEmpty(Content))
             {
+                MessageHelper.ShowWarning("请输入反馈内容");
                 return false;
             }
 
-            GitHubClient client = GitHubHelper.GetAuthClient(Account, Password);
+            var url = await GitHubHelper.GetLoginUrl();
+            if (string.IsNullOrEmpty(url))
+            {
+                MessageHelper.Show("认证信息获取失败");
+                return false;
+            };
+            var ghld = new GitHubLoginDialog(new Uri(url));
+            if (await ghld.ShowAsync() != Windows.UI.Xaml.Controls.ContentDialogResult.Primary) return false;
+
+            GitHubClient client = GitHubHelper.GetAuthClient(ghld.Token);
             try
             {
                 CommentResult = await client.Issue.Comment.Create(Global.GitAccount, Global.Repos, Global.FeedbackIssueNumber, Content);
-                SettingHelper.Instance.GitAccount = Account;
-                SettingHelper.Instance.GitPassword = Remember ? Password : null;
             }
             catch (System.Net.Http.HttpRequestException)
             {
-                MessageHelper.ShowDanger("提交失败，请检查密码，或网络设置。");
+                MessageHelper.ShowDanger("提交失败");
                 return false;
             }
             catch (Exception ex)
@@ -65,27 +52,6 @@ namespace Hubery.Lavcode.Uwp.View.Feedback
             }
 
             MessageHelper.ShowPrimary("反馈成功");
-            return true;
-        }
-
-        private bool IsValid()
-        {
-            if (string.IsNullOrEmpty(Content))
-            {
-                MessageHelper.ShowWarning("请输入反馈内容");
-                return false;
-            }
-            if (string.IsNullOrEmpty(Account))
-            {
-                MessageHelper.ShowWarning("请输入GitHub账号");
-                return false;
-            }
-            if (string.IsNullOrEmpty(Password))
-            {
-                MessageHelper.ShowWarning("请输入GitHub密码");
-                return false;
-            }
-
             return true;
         }
     }

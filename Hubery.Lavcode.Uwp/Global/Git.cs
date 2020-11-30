@@ -12,5 +12,6 @@
         public static string GitUrl { get; } = "https://github.com";
         public static string GitBaseApi { get; } = "https://api.github.com";
         public static string ReposUrl { get; } = $"{GitUrl}/{GitAccount}/{Repos}";
+        public static string AuthTitleKey { get; } = "lavcode_github_token";
     }
 }
