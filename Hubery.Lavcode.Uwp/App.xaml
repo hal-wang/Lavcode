@@ -8,8 +8,6 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <HbrUwpResources xmlns="using:Hubery.Tools.Uwp"/>
 
-                <ResourceDictionary Source="ms-appx:///Hubery.Tools.Uwp/Themes/Generic.xaml"/>
-
                 <ResourceDictionary Source="Resources/Colors.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Resources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
