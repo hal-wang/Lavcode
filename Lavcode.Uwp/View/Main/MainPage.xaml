@@ -11,7 +11,7 @@
     xmlns:hluvpd="using:Lavcode.Uwp.View.PasswordDetail"
     xmlns:hluvpl="using:Lavcode.Uwp.View.PasswordList"
     xmlns:hlucs="using:Lavcode.Uwp.View.Sync"
-    xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
+    xmlns:htuc="using:HTools.Uwp.Controls"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"

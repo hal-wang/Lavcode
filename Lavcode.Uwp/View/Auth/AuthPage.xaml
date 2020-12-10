@@ -11,7 +11,7 @@
     xmlns:hluc="using:Lavcode.Uwp.Controls"
     xmlns:hluv="using:Lavcode.Uwp.View"
     xmlns:hluva="using:Lavcode.Uwp.View.Auth"
-    xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
+    xmlns:htuc="using:HTools.Uwp.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"

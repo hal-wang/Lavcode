@@ -2,8 +2,8 @@
 using Lavcode.Uwp.Helpers.Sqlite;
 using Lavcode.Uwp.Model;
 using Lavcode.Uwp.View.Sync.SyncHelper;
-using Hubery.Tools;
-using Hubery.Tools.Uwp.Helpers;
+using HTools;
+using HTools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

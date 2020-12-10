@@ -8,7 +8,7 @@
       xmlns:hluc="using:Lavcode.Uwp.Controls"
       xmlns:hlucc="using:Lavcode.Uwp.Controls.Comment"
       xmlns:local="using:Lavcode.Uwp.View.Notices"
-      xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
+      xmlns:htuc="using:HTools.Uwp.Controls"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       NavigationCacheMode="Enabled">
 

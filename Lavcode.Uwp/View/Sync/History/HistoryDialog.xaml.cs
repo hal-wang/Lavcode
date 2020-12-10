@@ -1,6 +1,6 @@
-﻿using Hubery.Tools.Uwp.Controls.Dialog;
-using Hubery.Tools.Uwp.Controls.Message;
-using Hubery.Tools.Uwp.Helpers;
+﻿using HTools.Uwp.Controls.Dialog;
+using HTools.Uwp.Controls.Message;
+using HTools.Uwp.Helpers;
 using Windows.UI.Xaml;
 
 namespace Lavcode.Uwp.View.Sync.History

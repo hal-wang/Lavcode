@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Lavcode.Uwp.Helpers;
-using Hubery.Tools;
-using Hubery.Tools.Uwp.Helpers;
+using HTools;
+using HTools.Uwp.Helpers;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Core.Preview;

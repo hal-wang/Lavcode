@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using Lavcode.Uwp.Controls.Comment;
 using Lavcode.Uwp.Helpers;
-using Hubery.Tools;
-using Hubery.Tools.Uwp.Helpers;
+using HTools;
+using HTools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
 using Octokit;
 using System;

@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hluv="using:Lavcode.Uwp.View"
     xmlns:hluvg="using:Lavcode.Uwp.View.Git"
-    xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
+    xmlns:htuc="using:HTools.Uwp.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">

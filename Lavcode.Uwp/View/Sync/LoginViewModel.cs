@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Lavcode.Uwp.Helpers;
-using Hubery.Tools.Uwp;
-using Hubery.Tools.Uwp.Helpers;
+using HTools.Uwp;
+using HTools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

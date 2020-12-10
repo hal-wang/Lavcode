@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hluci="using:Lavcode.Uwp.Controls.IconControl"
     xmlns:hlum="using:Lavcode.Uwp.Model"
-    xmlns:hcucl="using:Hubery.Tools.Uwp.Controls.Dialog"
+    xmlns:hcucl="using:HTools.Uwp.Controls.Dialog"
     xmlns:hluvp="using:Lavcode.Uwp.View.PasswordList"
     mc:Ignorable="d"
     Title="移动至"

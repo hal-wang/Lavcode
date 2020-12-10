@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Lavcode.Uwp.Helpers;
-using Hubery.Tools;
-using Hubery.Tools.Uwp.Helpers;
+using HTools;
+using HTools.Uwp.Helpers;
 using Octokit;
 using System;
 using System.Threading.Tasks;

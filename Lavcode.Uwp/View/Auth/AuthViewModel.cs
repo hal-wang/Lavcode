@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using Lavcode.Uwp.View.Main;
-using Hubery.Tools.Uwp.Helpers;
+using HTools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;

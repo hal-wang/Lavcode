@@ -1,5 +1,5 @@
 ﻿using Lavcode.Uwp.Helpers;
-using Hubery.Tools.Uwp.Helpers;
+using HTools.Uwp.Helpers;
 using Microsoft.Toolkit.Collections;
 using Octokit;
 using System;

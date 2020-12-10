@@ -1,5 +1,5 @@
-﻿using Hubery.Tools.Uwp.Controls.Dialog;
-using Hubery.Tools.Uwp.Helpers;
+﻿using HTools.Uwp.Controls.Dialog;
+using HTools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;

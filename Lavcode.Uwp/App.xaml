@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <HbrUwpResources xmlns="using:Hubery.Tools.Uwp"/>
+                <HbrUwpResources xmlns="using:HTools.Uwp"/>
 
                 <ResourceDictionary Source="Resources/Colors.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Resources.xaml"/>

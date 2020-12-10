@@ -1,4 +1,4 @@
-﻿using Hubery.Tools.Uwp.Controls.Dialog;
+﻿using HTools.Uwp.Controls.Dialog;
 
 namespace Lavcode.Uwp.View.Setting
 {

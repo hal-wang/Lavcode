@@ -1,5 +1,5 @@
 ﻿using Lavcode.Uwp.View.Sync;
-using Hubery.Tools.Uwp.Helpers;
+using HTools.Uwp.Helpers;
 using System;
 
 namespace Lavcode.Uwp.Helpers

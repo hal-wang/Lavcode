@@ -1,7 +1,7 @@
 ﻿using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.History;
-using Hubery.Tools.Uwp.Controls.Dialog;
-using Hubery.Tools.Uwp.Helpers;
+using HTools.Uwp.Controls.Dialog;
+using HTools.Uwp.Helpers;
 using System;
 using Windows.Storage;
 
