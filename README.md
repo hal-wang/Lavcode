@@ -2,19 +2,19 @@
 
 **[主页](https://lavcode.hubery.wang) 查看更多详情**
 
-本项目遵循 MIT 开源许可协议，您可以在自己的项目中自由使用，但需注明[来源](https://github.com/hbrwang)
+本项目遵循 MIT 开源许可协议，您可以在自己的项目中自由使用，但需注明[来源](https://github.com/hal-wang)
 
 ## 获取代码
 
 ### Gitee
 
-- git clone https://gitee.com/hbrwang/Lavcode.git
-- 转至[Gitee](https://gitee.com/hbrwang/Lavcode)
+- git clone https://gitee.com/hal-wang/Lavcode.git
+- 转至[Gitee](https://gitee.com/hal-wang/Lavcode)
 
 ### GitHub
 
-- git clone https://github.com/hbrwang/Lavcode.git
-- 转至[GitHub](https://github.com/hbrwang/Lavcode)
+- git clone https://github.com/hal-wang/Lavcode.git
+- 转至[GitHub](https://github.com/hal-wang/Lavcode)
 
 ## 更多
 

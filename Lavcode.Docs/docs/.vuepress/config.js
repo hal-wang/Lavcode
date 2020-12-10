@@ -13,9 +13,7 @@ module.exports = {
     logo: "/logo.png",
     lastUpdated: "lastUpdate", // string | boolean
     sidebarDepth: 2,
-    repo: "hbrwang/Lavcode",
-    // 如果你的文档不在仓库的根部
-    docsDir: "Hubery.Sqless.Docs",
+    repo: "hal-wang/Lavcode",
     // 可选，默认为 master
     docsBranch: "master",
     // 默认为 true，设置为 false 来禁用

@@ -9,6 +9,6 @@
     "deploy": "npm run build && tcb hosting deploy ./docs/.vuepress/dist/ -e lavcode-3gq7jxpzdadbb5f5"
   },
   "keywords": [],
-  "author": "hubery.wang",
+  "author": "hal-wang",
   "license": "ISC"
 }

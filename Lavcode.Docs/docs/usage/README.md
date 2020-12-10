@@ -11,7 +11,7 @@ title: 快速开始
 Lavcode 是开源软件，所有代码公开透明。因此你无需担心密码被窃取的危险。
 
 ::: tip
-如果你想查看源码，请访问 [Gitee](https://github.com/hbrwang/Lavcode)
+如果你想查看源码，请访问 [Gitee](https://github.com/hal-wang/Lavcode)
 :::
 
 ### 云同步
@@ -206,7 +206,7 @@ Lavcode 即可以帮你记密码，又可以帮你“创造”密码。
 
 **免费图什么？**
 
-当然是图你的小星星了，喜欢本软件就[给个 Star 吧](https://github.com/hbrwang/Lavcode)
+当然是图你的小星星了，喜欢本软件就[给个 Star 吧](https://github.com/hal-wang/Lavcode)
 
 如果可以的话，也希望能收到[捐赠](/pages/donate)
 

@@ -21,4 +21,4 @@ _This policy was last modified on 06/23/2020_
 
 ## Contacting Us
 
-If there are any questions regarding this privacy policy you may contact us by email: [support@hubery.wang](mailto:support@hubery.wang)
+If there are any questions regarding this privacy policy you may contact us by email: <support@hal.wang>

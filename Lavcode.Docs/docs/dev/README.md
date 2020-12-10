@@ -2,21 +2,21 @@
 title: 源码说明
 ---
 
-本项目遵循 MIT 开源许可协议，您可以在自己的项目中自由使用部分或全部功能，但需注明[来源](https://github.com/hbrwang/Lavcode)
+本项目遵循 MIT 开源许可协议，您可以在自己的项目中自由使用部分或全部功能，但需注明[来源](https://github.com/hal-wang/Lavcode)
 
 ## 获取代码
 
 ### GitHub
 
-- git clone https://github.com/hbrwang/Lavcode.git
-- 转至[GitHub](https://github.com/hbrwang/Lavcode)
+- git clone https://github.com/hal-wang/Lavcode.git
+- 转至[GitHub](https://github.com/hal-wang/Lavcode)
 
 ### 码云
 
 国内用户推荐使用码云，速度更快
 
-- git clone https://gitee.com/hbrwang/Lavcode.git
-- 转至[Gitee](https://gitee.com/hbrwang/Lavcode)
+- git clone https://gitee.com/hal-wang/Lavcode.git
+- 转至[Gitee](https://gitee.com/hal-wang/Lavcode)
 
 ## 运行环境
 
@@ -25,7 +25,7 @@ title: 源码说明
 
 ## 跑起来
 
-下载本项目后，使用 vs 2019 打开 `Hubery.Lavcode.Uwp.sln` 文件，编译并运行。
+下载本项目后，使用 vs 2019 打开 `Lavcode.Uwp.sln` 文件，编译并运行。
 
 ## 目录结构
 
@@ -333,7 +333,7 @@ APP 的 logo，是 Path 形式，可任意控制颜色和大小。在以下几�
 
 所在目录：`View/Feedback`
 
-反馈页面，列表使用了 7.1 的 `Comment`，点“反馈”会跳转的网页，在网页中使用了 GitTalk。也可在 本项目的 [Issues](https://github.com/hbrwang/Lavcode/issues/3) 看到。
+反馈页面，列表使用了 7.1 的 `Comment`，点“反馈”会跳转的网页，在网页中使用了 GitTalk。也可在 本项目的 [Issues](https://github.com/hal-wang/Lavcode/issues/3) 看到。
 这里的反馈列表，就是这条 Issue 中的 Comments
 
 ## FolderList

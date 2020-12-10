@@ -30,4 +30,4 @@ title: 隐私政策
 
 ## 联系我们
 
-如果对此隐私政策有任何疑问，请联系[support@hubery.wang](mailto:support@hubery.wang)。
+如果对此隐私政策有任何疑问，请联系<support@hal.wang>。
