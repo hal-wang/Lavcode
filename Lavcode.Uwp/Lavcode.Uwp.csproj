@@ -7,8 +7,8 @@
     <ProjectGuid>{6A58D9D3-2DA7-43A0-AB3F-98819E0CF729}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hubery.Lavcode.Uwp</RootNamespace>
-    <AssemblyName>Hubery.Lavcode.Uwp</AssemblyName>
+    <RootNamespace>Lavcode.Uwp</RootNamespace>
+    <AssemblyName>Lavcode.Uwp</AssemblyName>
     <DefaultLanguage>zh-cn</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>

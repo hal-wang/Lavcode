@@ -8,7 +8,7 @@ namespace Lavcode.Uwp
         public static string HomeUrl { get; } = "https://lavcode.hubery.wang";
         public static string ToolsApiUrl { get; } = "https://cb-api.hubery.wang/tools";
 
-        public static string Email { get; } = "support@hubery.wang";
+        public static string Email { get; } = "support@hal.wang";
 
         public static string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}";
 
