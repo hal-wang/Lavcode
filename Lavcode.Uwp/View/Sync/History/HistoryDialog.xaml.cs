@@ -3,7 +3,7 @@ using Hubery.Tools.Uwp.Controls.Message;
 using Hubery.Tools.Uwp.Helpers;
 using Windows.UI.Xaml;
 
-namespace Hubery.Lavcode.Uwp.View.Sync.History
+namespace Lavcode.Uwp.View.Sync.History
 {
     public sealed partial class HistoryDialog : LayoutDialog
     {

@@ -2,12 +2,12 @@
     通知页面
     -->
 
-<Page x:Class="Hubery.Lavcode.Uwp.View.Notices.NoticesPage"
+<Page x:Class="Lavcode.Uwp.View.Notices.NoticesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:hluc="using:Hubery.Lavcode.Uwp.Controls"
-      xmlns:hlucc="using:Hubery.Lavcode.Uwp.Controls.Comment"
-      xmlns:local="using:Hubery.Lavcode.Uwp.View.Notices"
+      xmlns:hluc="using:Lavcode.Uwp.Controls"
+      xmlns:hlucc="using:Lavcode.Uwp.Controls.Comment"
+      xmlns:local="using:Lavcode.Uwp.View.Notices"
       xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       NavigationCacheMode="Enabled">

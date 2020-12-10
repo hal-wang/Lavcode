@@ -1,6 +1,6 @@
 ﻿using Hubery.Tools.Uwp.Controls.Dialog;
 
-namespace Hubery.Lavcode.Uwp.View.Setting
+namespace Lavcode.Uwp.View.Setting
 {
     public sealed partial class SettingDialog : LayoutDialog
     {

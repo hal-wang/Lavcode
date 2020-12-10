@@ -3,13 +3,13 @@
     -->
     
 <UserControl
-    x:Class="Hubery.Lavcode.Uwp.View.Commands"
+    x:Class="Lavcode.Uwp.View.Commands"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hluv="using:Hubery.Lavcode.Uwp.View"
-    xmlns:hluvg="using:Hubery.Lavcode.Uwp.View.Git"
+    xmlns:hluv="using:Lavcode.Uwp.View"
+    xmlns:hluvg="using:Lavcode.Uwp.View.Git"
     xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"

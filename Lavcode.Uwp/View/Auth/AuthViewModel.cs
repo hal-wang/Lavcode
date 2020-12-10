@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.View.Main;
+using Lavcode.Uwp.View.Main;
 using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
@@ -8,7 +8,7 @@ using Windows.Security.Credentials;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.Auth
+namespace Lavcode.Uwp.View.Auth
 {
     public class AuthViewModel : ViewModelBase
     {

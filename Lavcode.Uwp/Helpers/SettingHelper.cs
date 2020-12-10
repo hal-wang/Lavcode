@@ -1,8 +1,8 @@
-﻿using Hubery.Lavcode.Uwp.View.Sync;
+﻿using Lavcode.Uwp.View.Sync;
 using Hubery.Tools.Uwp.Helpers;
 using System;
 
-namespace Hubery.Lavcode.Uwp.Helpers
+namespace Lavcode.Uwp.Helpers
 {
     public class SettingHelper : SettingConfigBase
     {

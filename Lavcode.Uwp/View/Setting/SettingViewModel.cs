@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 
-namespace Hubery.Lavcode.Uwp.View.Setting
+namespace Lavcode.Uwp.View.Setting
 {
     class SettingViewModel : ViewModelBase
     {

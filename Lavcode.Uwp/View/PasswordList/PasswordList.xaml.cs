@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.Model;
+using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
 using Hubery.Tools.Uwp.Helpers;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.PasswordList
+namespace Lavcode.Uwp.View.PasswordList
 {
     public sealed partial class PasswordList : UserControl
     {

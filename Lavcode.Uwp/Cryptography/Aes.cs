@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Hubery.Lavcode.Uwp.Cryptography
+namespace Lavcode.Uwp.Cryptography
 {
     public class Aes
     {

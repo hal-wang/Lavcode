@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.PasswordList
+namespace Lavcode.Uwp.View.PasswordList
 {
     public sealed partial class MoveToDialog : LayoutDialog
     {

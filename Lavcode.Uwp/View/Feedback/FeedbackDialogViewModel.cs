@@ -1,11 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Hubery.Tools.Uwp.Helpers;
 using Octokit;
 using System;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.View.Feedback
+namespace Lavcode.Uwp.View.Feedback
 {
     class FeedbackDialogViewModel : ViewModelBase
     {

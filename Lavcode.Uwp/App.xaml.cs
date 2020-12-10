@@ -1,6 +1,6 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.View.Auth;
-using Hubery.Lavcode.Uwp.View.Main;
+﻿using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.View.Auth;
+using Lavcode.Uwp.View.Main;
 using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
@@ -13,7 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Hubery.Lavcode.Uwp
+namespace Lavcode.Uwp
 {
     sealed partial class App : Application
     {

@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.Controls
+namespace Lavcode.Uwp.Controls
 {
     public sealed partial class Header : ContentControl
     {

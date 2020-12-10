@@ -1,8 +1,8 @@
-﻿using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Model;
 using SQLite;
 using System;
 
-namespace Hubery.Lavcode.Uwp.Helpers.Sqlite
+namespace Lavcode.Uwp.Helpers.Sqlite
 {
     public partial class SqliteHelper : SQLiteConnection
     {

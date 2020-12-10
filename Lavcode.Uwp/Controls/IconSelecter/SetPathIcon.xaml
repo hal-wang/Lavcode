@@ -1,5 +1,5 @@
 ﻿<hcucl:LayoutDialog
-    x:Class="Hubery.Lavcode.Uwp.Controls.IconSelecter.SetPathIcon"
+    x:Class="Lavcode.Uwp.Controls.IconSelecter.SetPathIcon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

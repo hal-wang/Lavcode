@@ -1,8 +1,8 @@
 ﻿<hcucl:LayoutDialog
-    x:Class="Hubery.Lavcode.Uwp.View.Sync.History.HistoryDialog"
+    x:Class="Lavcode.Uwp.View.Sync.History.HistoryDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Hubery.Lavcode.Uwp.View.Sync.History"
+    xmlns:local="using:Lavcode.Uwp.View.Sync.History"
     xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
     xmlns:hcucl="using:Hubery.Tools.Uwp.Controls.Dialog"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"

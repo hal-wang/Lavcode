@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.Controls.Comment
+namespace Lavcode.Uwp.Controls.Comment
 {
     public sealed partial class CommentList : UserControl
     {

@@ -1,6 +1,6 @@
 ﻿using Hubery.Tools.Uwp.Controls.Dialog;
 
-namespace Hubery.Lavcode.Uwp.View.Sync
+namespace Lavcode.Uwp.View.Sync
 {
     public sealed partial class LoginDialog : LayoutDialog
     {

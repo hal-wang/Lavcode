@@ -1,4 +1,4 @@
-﻿namespace Hubery.Lavcode.Uwp.View.Sync
+﻿namespace Lavcode.Uwp.View.Sync
 {
     public enum CloudType
     {

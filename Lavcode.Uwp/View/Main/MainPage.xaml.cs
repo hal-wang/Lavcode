@@ -1,4 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using System;
@@ -8,7 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Hubery.Lavcode.Uwp.View.Main
+namespace Lavcode.Uwp.View.Main
 {
     public sealed partial class MainPage : Page
     {

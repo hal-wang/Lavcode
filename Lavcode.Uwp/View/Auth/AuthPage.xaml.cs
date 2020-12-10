@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Hubery.Lavcode.Uwp.View.Auth
+namespace Lavcode.Uwp.View.Auth
 {
     public sealed partial class AuthPage : Page
     {

@@ -1,4 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Controls.Dialog;
 using Hubery.Tools.Uwp.Helpers;
@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Windows.UI.Xaml;
 
-namespace Hubery.Lavcode.Uwp.View.Sync
+namespace Lavcode.Uwp.View.Sync
 {
     /// <summary>
     /// 1、使用MD5转换输入的密码

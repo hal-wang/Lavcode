@@ -1,5 +1,5 @@
-﻿using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.View.Sync.SyncHelper;
+﻿using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.View.Sync.SyncHelper;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
 using System;
@@ -10,7 +10,7 @@ using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.Sync
+namespace Lavcode.Uwp.View.Sync
 {
     public sealed partial class SyncFileHandler : UserControl
     {

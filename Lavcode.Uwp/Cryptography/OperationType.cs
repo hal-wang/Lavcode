@@ -1,4 +1,4 @@
-﻿namespace Hubery.Lavcode.Uwp.Cryptography
+﻿namespace Lavcode.Uwp.Cryptography
 {
     public enum OperationType
     {

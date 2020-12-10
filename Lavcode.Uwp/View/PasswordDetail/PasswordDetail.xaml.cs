@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Hubery.Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
 using Windows.System;
@@ -8,7 +8,7 @@ using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.Uwp.View.PasswordDetail
 {
     public sealed partial class PasswordDetail : UserControl
     {

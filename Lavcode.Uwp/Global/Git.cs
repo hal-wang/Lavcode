@@ -1,4 +1,4 @@
-﻿namespace Hubery.Lavcode.Uwp
+﻿namespace Lavcode.Uwp
 {
     /*
      * GitHub相关

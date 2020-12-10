@@ -1,11 +1,11 @@
 ﻿<hcucl:LayoutDialog
-    x:Class="Hubery.Lavcode.Uwp.View.FolderList.EditFolder"
+    x:Class="Lavcode.Uwp.View.FolderList.EditFolder"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hcucl="using:Hubery.Tools.Uwp.Controls.Dialog"
-    xmlns:hluci="using:Hubery.Lavcode.Uwp.Controls.IconSelecter"
+    xmlns:hluci="using:Lavcode.Uwp.Controls.IconSelecter"
     mc:Ignorable="d"
     PrimaryButtonText="确定"
     SecondaryButtonText="取消"

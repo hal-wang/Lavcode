@@ -2,7 +2,7 @@
 using SQLite;
 using System;
 
-namespace Hubery.Lavcode.Uwp.Model
+namespace Lavcode.Uwp.Model
 {
     public class Folder : UniqueItem, ICloneable<Folder>
     {

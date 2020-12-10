@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.Model;
-using Hubery.Lavcode.Uwp.View.Sync.SyncHelper;
+using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
+using Lavcode.Uwp.View.Sync.SyncHelper;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
 using System;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using Windows.Storage;
 
-namespace Hubery.Lavcode.Uwp.View.Sync.History
+namespace Lavcode.Uwp.View.Sync.History
 {
     public class HistoryViewModel : ViewModelBase
     {

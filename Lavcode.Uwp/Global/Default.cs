@@ -1,6 +1,6 @@
-﻿using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Model;
 
-namespace Hubery.Lavcode.Uwp
+namespace Lavcode.Uwp
 {
     /*
      * 默认值

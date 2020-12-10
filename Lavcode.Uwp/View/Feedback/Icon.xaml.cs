@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Hubery.Lavcode.Uwp.View.Feedback
+namespace Lavcode.Uwp.View.Feedback
 {
     public sealed partial class Icon : ContentControl
     {

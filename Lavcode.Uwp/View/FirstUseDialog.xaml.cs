@@ -4,7 +4,7 @@ using System;
 using Windows.System;
 using Windows.UI.Xaml;
 
-namespace Hubery.Lavcode.Uwp.View
+namespace Lavcode.Uwp.View
 {
     public sealed partial class FirstUseDialog : LayoutDialog
     {

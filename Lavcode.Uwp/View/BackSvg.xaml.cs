@@ -1,8 +1,8 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View
+namespace Lavcode.Uwp.View
 {
     public sealed partial class BackSvg : UserControl
     {

@@ -1,4 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Model;
 using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
 using System;
@@ -7,7 +7,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Uwp.Controls.IconSelecter
 {
     public sealed partial class IconSelecter : UserControl
     {

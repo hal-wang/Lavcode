@@ -1,11 +1,11 @@
-﻿using Hubery.Lavcode.Uwp.View.Feedback;
-using Hubery.Lavcode.Uwp.View.Notices;
-using Hubery.Lavcode.Uwp.View.Setting;
-using Hubery.Lavcode.Uwp.View.Sync;
+﻿using Lavcode.Uwp.View.Feedback;
+using Lavcode.Uwp.View.Notices;
+using Lavcode.Uwp.View.Setting;
+using Lavcode.Uwp.View.Sync;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View
+namespace Lavcode.Uwp.View
 {
     public sealed partial class Commands : UserControl
     {

@@ -2,7 +2,7 @@
 using System;
 using Windows.System;
 
-namespace Hubery.Lavcode.Uwp.View.Feedback
+namespace Lavcode.Uwp.View.Feedback
 {
     public sealed partial class MarkdownPreview : LayoutDialog
     {

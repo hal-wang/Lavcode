@@ -1,4 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Hubery.Tools.Uwp.Controls.Dialog;
 using Hubery.Tools.Uwp.Helpers;
 using System;
@@ -6,7 +6,7 @@ using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-namespace Hubery.Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Uwp.Controls.IconSelecter
 {
     public sealed partial class SetPathIcon : LayoutDialog
     {

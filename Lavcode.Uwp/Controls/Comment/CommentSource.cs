@@ -1,4 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Collections;
 using Octokit;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.Controls.Comment
+namespace Lavcode.Uwp.Controls.Comment
 {
     /// <summary>
     /// 自动加载更多 Comments

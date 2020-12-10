@@ -1,12 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
 using Octokit;
 using System;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.View.Git
+namespace Lavcode.Uwp.View.Git
 {
     public class GitInfoViewModel : ViewModelBase
     {

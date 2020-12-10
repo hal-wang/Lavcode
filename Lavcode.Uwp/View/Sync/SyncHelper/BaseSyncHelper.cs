@@ -1,4 +1,4 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
 
-namespace Hubery.Lavcode.Uwp.View.Sync.SyncHelper
+namespace Lavcode.Uwp.View.Sync.SyncHelper
 {
     internal abstract class BaseSyncHelper
     {

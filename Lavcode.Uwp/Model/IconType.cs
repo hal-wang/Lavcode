@@ -1,4 +1,4 @@
-﻿namespace Hubery.Lavcode.Uwp.Model
+﻿namespace Lavcode.Uwp.Model
 {
     public enum IconType
     {

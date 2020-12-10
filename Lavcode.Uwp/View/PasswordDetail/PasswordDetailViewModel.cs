@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.Model;
+using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Controls.Message;
 using Hubery.Tools.Uwp.Helpers;
@@ -14,7 +14,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.Uwp.View.PasswordDetail
 {
     public class PasswordDetailViewModel : ViewModelBase
     {

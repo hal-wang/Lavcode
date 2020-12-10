@@ -1,11 +1,11 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.View.Sync.History;
+﻿using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.View.Sync.History;
 using Hubery.Tools.Uwp.Controls.Dialog;
 using Hubery.Tools.Uwp.Helpers;
 using System;
 using Windows.Storage;
 
-namespace Hubery.Lavcode.Uwp.View.Sync
+namespace Lavcode.Uwp.View.Sync
 {
     public sealed partial class SyncDialog : LayoutDialog
     {

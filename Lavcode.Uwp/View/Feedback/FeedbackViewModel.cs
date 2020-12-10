@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Controls.Comment;
-using Hubery.Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Controls.Comment;
+using Lavcode.Uwp.Helpers;
 using Hubery.Tools;
 using Hubery.Tools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
@@ -8,7 +8,7 @@ using Octokit;
 using System;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.View.Feedback
+namespace Lavcode.Uwp.View.Feedback
 {
     class FeedbackViewModel : ViewModelBase
     {

@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.Model;
-using Hubery.Lavcode.Uwp.View.FolderList;
+using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
+using Lavcode.Uwp.View.FolderList;
 using Hubery.Tools.Uwp.Helpers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.View.PasswordList
+namespace Lavcode.Uwp.View.PasswordList
 {
     class MoveToViewModel : ViewModelBase
     {

@@ -1,11 +1,11 @@
-﻿using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hubery.Lavcode.Uwp.View.Sync
+namespace Lavcode.Uwp.View.Sync
 {
     public class Merge : IDisposable
     {

@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Hubery.Lavcode.Uwp.Model
+namespace Lavcode.Uwp.Model
 {
     public class KeyValuePair
     {

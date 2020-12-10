@@ -1,10 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Helpers.Sqlite;
 using System;
 using System.Diagnostics;
 using Windows.UI.Core;
 
-namespace Hubery.Lavcode.Uwp.Model
+namespace Lavcode.Uwp.Model
 {
     public abstract class IconItem : ObservableObject
     {

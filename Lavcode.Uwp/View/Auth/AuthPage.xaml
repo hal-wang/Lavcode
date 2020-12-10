@@ -3,14 +3,14 @@
     -->
    
 <Page
-    x:Class="Hubery.Lavcode.Uwp.View.Auth.AuthPage"
+    x:Class="Lavcode.Uwp.View.Auth.AuthPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hluc="using:Hubery.Lavcode.Uwp.Controls"
-    xmlns:hluv="using:Hubery.Lavcode.Uwp.View"
-    xmlns:hluva="using:Hubery.Lavcode.Uwp.View.Auth"
+    xmlns:hluc="using:Lavcode.Uwp.Controls"
+    xmlns:hluv="using:Lavcode.Uwp.View"
+    xmlns:hluva="using:Lavcode.Uwp.View.Auth"
     xmlns:htuc="using:Hubery.Tools.Uwp.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"

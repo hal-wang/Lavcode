@@ -4,7 +4,7 @@ using System;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.Feedback
+namespace Lavcode.Uwp.View.Feedback
 {
     public sealed partial class FeedbackDialog : LayoutDialog
     {

@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
-using Hubery.Lavcode.Uwp.Model;
+using Lavcode.Uwp.Model;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.Uwp.View.PasswordDetail
 {
     public class KeyValuePairItem : ObservableObject
     {

@@ -1,9 +1,9 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Model;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.Controls.IconControl
+namespace Lavcode.Uwp.Controls.IconControl
 {
     public sealed partial class IconControl : UserControl
     {

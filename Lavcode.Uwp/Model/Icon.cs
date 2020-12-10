@@ -1,7 +1,7 @@
 ﻿using Hubery.Tools;
 using SQLite;
 
-namespace Hubery.Lavcode.Uwp.Model
+namespace Lavcode.Uwp.Model
 {
     public class Icon : ICloneable<Icon>
     {

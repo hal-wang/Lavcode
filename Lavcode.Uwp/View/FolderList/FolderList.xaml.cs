@@ -1,11 +1,11 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Model;
 using Hubery.Tools.Uwp.Helpers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Hubery.Lavcode.Uwp.View.FolderList
+namespace Lavcode.Uwp.View.FolderList
 {
     public sealed partial class FolderList : UserControl
     {

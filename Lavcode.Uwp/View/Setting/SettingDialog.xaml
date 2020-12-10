@@ -1,7 +1,7 @@
 ﻿<dialog:LayoutDialog
-    xmlns:local="using:Hubery.Lavcode.Uwp.View.Setting"
+    xmlns:local="using:Lavcode.Uwp.View.Setting"
     xmlns:dialog="using:Hubery.Tools.Uwp.Controls.Dialog"
-    x:Class="Hubery.Lavcode.Uwp.View.Setting.SettingDialog"
+    x:Class="Lavcode.Uwp.View.Setting.SettingDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

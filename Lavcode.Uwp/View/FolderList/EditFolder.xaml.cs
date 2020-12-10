@@ -1,6 +1,6 @@
-﻿using Hubery.Lavcode.Uwp.Helpers;
-using Hubery.Lavcode.Uwp.Helpers.Sqlite;
-using Hubery.Lavcode.Uwp.Model;
+﻿using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
 using Hubery.Tools.Uwp.Controls.Dialog;
 using Hubery.Tools.Uwp.Controls.Message;
 using Hubery.Tools.Uwp.Helpers;
@@ -8,7 +8,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
-namespace Hubery.Lavcode.Uwp.View.FolderList
+namespace Lavcode.Uwp.View.FolderList
 {
     public sealed partial class EditFolder : LayoutDialog
     {

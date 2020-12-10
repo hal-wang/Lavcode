@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel;
 
-namespace Hubery.Lavcode.Uwp
+namespace Lavcode.Uwp
 {
     public static partial class Global
     {
