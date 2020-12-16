@@ -1,12 +1,12 @@
 {
   "name": "lavcode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "lavcode",
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "deploy": "npm run build && tcb hosting deploy ./docs/.vuepress/dist/ -e lavcode-3gq7jxpzdadbb5f5"
+    "deploy": "vuepress build docs && bash deploy.sh"
   },
   "keywords": [],
   "author": "hal-wang",
