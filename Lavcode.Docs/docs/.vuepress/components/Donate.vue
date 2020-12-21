@@ -1,7 +1,7 @@
 <template>
   <div class="imgs">
-    <img src="https://blog.hubery.wang/imgs/qr/alipay.jpg" alt="支付宝打赏二维码">
-    <img src="https://blog.hubery.wang/imgs/qr/wxpay.jpg" alt="微信打赏二维码">
+    <img src="https://blog.hal.wang/imgs/qr/alipay.jpg" alt="支付宝打赏二维码">
+    <img src="https://blog.hal.wang/imgs/qr/wxpay.jpg" alt="微信打赏二维码">
   </div>
 </template>
 

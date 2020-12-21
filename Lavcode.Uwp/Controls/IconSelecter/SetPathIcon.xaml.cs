@@ -86,7 +86,7 @@ namespace Lavcode.Uwp.Controls.IconSelecter
         {
             try
             {
-                var uriBing = new Uri("https://blog.hubery.wang/aa87f3dc");
+                var uriBing = new Uri("https://blog.hal.wang/aa87f3dc");
                 var success = await Launcher.LaunchUriAsync(uriBing);
             }
             catch (Exception ex)
