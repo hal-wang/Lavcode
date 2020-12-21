@@ -26,6 +26,10 @@ namespace Lavcode.Uwp.Helpers
             {
                 Timeout = TimeSpan.FromSeconds(20)
             };
+            httpClient.DefaultRequestHeaders.Add("version", Global.Version);
+            httpClient.DefaultRequestHeaders.Add("app", "lavcode");
+            httpClient.DefaultRequestHeaders.Add("platform", "uwp");
+
             var res = await httpClient.PostAsync($"{Global.ToolsApiUrl}/github/getOAuthLoginUrl", new StringContent(JsonConvert.SerializeObject(new
             {
                 login = "lavcode",
