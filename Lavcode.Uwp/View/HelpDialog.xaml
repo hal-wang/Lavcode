@@ -1,16 +1,16 @@
-﻿<muxcl:LayoutDialog
+﻿<huc:LayoutDialog
     x:Class="Lavcode.Uwp.View.HelpDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxcl="using:HTools.Uwp.Controls.Dialog"
+    xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:hluv="using:Lavcode.Uwp.View"
     mc:Ignorable="d"
     Title="帮助"
     IsExitButtonVisible="True">
 
-    <muxcl:LayoutDialog.TitleExtension>
+    <huc:LayoutDialog.TitleExtension>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Image Source="/Assets/Images/qq_group.jpg"
@@ -22,7 +22,7 @@
                 <TextBlock Text="欢迎加入QQ群"/>
             </StackPanel>
         </StackPanel>
-    </muxcl:LayoutDialog.TitleExtension>
+    </huc:LayoutDialog.TitleExtension>
 
     <StackPanel Width="340">
         <RichTextBlock>
@@ -76,4 +76,4 @@
             </Paragraph>
         </RichTextBlock>
     </StackPanel>
-</muxcl:LayoutDialog>
+</huc:LayoutDialog>

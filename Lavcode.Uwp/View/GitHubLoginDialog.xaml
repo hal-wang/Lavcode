@@ -1,10 +1,10 @@
-﻿<dialog:LayoutDialog
+﻿<huc:LayoutDialog
     x:Class="Lavcode.Uwp.View.GitHubLoginDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:dialog="using:HTools.Uwp.Controls.Dialog"
+    xmlns:huc="using:HTools.Uwp.Controls"
     mc:Ignorable="d"
     Title="登录 GitHub"
     IsExitButtonVisible="True">
@@ -15,4 +15,4 @@
                  Width="400"
                  Height="400"/>
     </Grid>
-</dialog:LayoutDialog>
+</huc:LayoutDialog>

@@ -11,7 +11,7 @@
     xmlns:hluc="using:Lavcode.Uwp.Controls"
     xmlns:hlucc="using:Lavcode.Uwp.Controls.Comment"
     xmlns:local="using:Lavcode.Uwp.View.Feedback"
-    xmlns:htuc="using:HTools.Uwp.Controls"
+    xmlns:huc="using:HTools.Uwp.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Enabled">
@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <htuc:TitleBar Margin="-100 0 0 0"/>
+                <huc:TitleBar Margin="-100 0 0 0"/>
 
                 <StackPanel Orientation="Horizontal"
                             Margin="0 4 200 0"

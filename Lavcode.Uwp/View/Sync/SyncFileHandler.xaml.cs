@@ -69,7 +69,7 @@ namespace Lavcode.Uwp.View.Sync
 
             try
             {
-                var cdr = await PopupHelper.ShowDialog("当前备份文件已经被编辑，但未保存，确认退出？", "文件未保存", "保存并退出", "不保存退出", null, "点错了");
+                var cdr = await PopupHelper.ShowDialog("当前备份文件已经被编辑，但未保存，确认退出？", "文件未保存", "保存并退出", "不保存退出", null, true, "点错了");
                 if ((cdr == ContentDialogResult.Primary && await UpdateToFile()) || cdr == ContentDialogResult.Secondary)
                 {
                     await CleanUp();

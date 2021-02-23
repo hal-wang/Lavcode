@@ -11,7 +11,7 @@
     xmlns:hluvpd="using:Lavcode.Uwp.View.PasswordDetail"
     xmlns:hluvpl="using:Lavcode.Uwp.View.PasswordList"
     xmlns:hlucs="using:Lavcode.Uwp.View.Sync"
-    xmlns:htuc="using:HTools.Uwp.Controls"
+    xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -39,7 +39,7 @@
             
             <hluc:Logo />
             
-            <htuc:TitleBar Grid.Column="1">
+            <huc:TitleBar Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -60,7 +60,7 @@
                                    Visibility="{x:Bind Model.OpenedFile,Mode=OneWay,Converter={StaticResource IsNullConverter},ConverterParameter=true}"/>
                     </Grid>
                 </Grid>
-            </htuc:TitleBar>
+            </huc:TitleBar>
             <StackPanel Grid.Column="2"
                         Orientation="Horizontal">
                 <hlucs:SyncFileHandler  x:Name="SyncFileHandler"

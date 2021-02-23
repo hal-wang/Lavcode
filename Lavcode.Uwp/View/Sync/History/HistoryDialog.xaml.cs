@@ -1,4 +1,4 @@
-﻿using HTools.Uwp.Controls.Dialog;
+﻿using HTools.Uwp.Controls;
 using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Windows.UI.Xaml;

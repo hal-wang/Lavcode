@@ -511,7 +511,7 @@ namespace Lavcode.Uwp.View.PasswordDetail
 
         public async Task OnCloseRequest()
         {
-            var cdr = await PopupHelper.ShowDialog("当前内容已修改但未保存，是否保存？", "编辑未保存", "保存并退出", "不保存退出", null, "点错了");
+            var cdr = await PopupHelper.ShowDialog("当前内容已修改但未保存，是否保存？", "编辑未保存", "保存并退出", "不保存退出", null, true, "点错了");
             if ((cdr == ContentDialogResult.Primary && await Save()) || cdr == ContentDialogResult.Secondary)
             {
                 if (Global.OpenedFile == null)

@@ -1,6 +1,6 @@
-﻿<dialog:LayoutDialog
+﻿<huc:LayoutDialog
     xmlns:local="using:Lavcode.Uwp.View.Setting"
-    xmlns:dialog="using:HTools.Uwp.Controls.Dialog"
+    xmlns:huc="using:HTools.Uwp.Controls"
     x:Class="Lavcode.Uwp.View.Setting.SettingDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,9 +11,9 @@
     Title="设置"
     IsExitButtonVisible="True">
 
-    <dialog:LayoutDialog.DataContext>
+    <huc:LayoutDialog.DataContext>
         <local:SettingViewModel x:Name="Model"/>
-    </dialog:LayoutDialog.DataContext>
+    </huc:LayoutDialog.DataContext>
 
     <StackPanel>
         <htucs:SwitchSettingCell Label="登录验证"
@@ -22,4 +22,4 @@
         <htucs:SwitchSettingCell Label="背景图片"
                                  Value="{x:Bind Model.IsBgVisible,Mode=TwoWay}"/>
     </StackPanel>
-</dialog:LayoutDialog>
+</huc:LayoutDialog>

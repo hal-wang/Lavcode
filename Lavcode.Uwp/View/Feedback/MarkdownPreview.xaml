@@ -1,5 +1,5 @@
-﻿<dialog:LayoutDialog
-    xmlns:dialog="using:HTools.Uwp.Controls.Dialog"
+﻿<huc:LayoutDialog
+    xmlns:huc="using:HTools.Uwp.Controls"
     x:Class="Lavcode.Uwp.View.Feedback.MarkdownPreview"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,4 +20,4 @@
                                     Background="Transparent"
                                     LinkClicked="MarkdownTextBlock_LinkClicked"/>
     </Grid>
-</dialog:LayoutDialog>
+</huc:LayoutDialog>

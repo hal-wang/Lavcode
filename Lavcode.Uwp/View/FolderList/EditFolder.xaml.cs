@@ -1,7 +1,7 @@
 ﻿using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Helpers.Sqlite;
 using Lavcode.Uwp.Model;
-using HTools.Uwp.Controls.Dialog;
+using HTools.Uwp.Controls;
 using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using System;

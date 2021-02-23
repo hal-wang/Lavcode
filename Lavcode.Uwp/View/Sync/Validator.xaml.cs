@@ -1,6 +1,6 @@
 ﻿using Lavcode.Uwp.Helpers;
 using HTools;
-using HTools.Uwp.Controls.Dialog;
+using HTools.Uwp.Controls;
 using HTools.Uwp.Helpers;
 using System.Security.Cryptography;
 using System.Text;

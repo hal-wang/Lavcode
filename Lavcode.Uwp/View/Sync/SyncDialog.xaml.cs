@@ -1,6 +1,6 @@
 ﻿using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.History;
-using HTools.Uwp.Controls.Dialog;
+using HTools.Uwp.Controls;
 using HTools.Uwp.Helpers;
 using System;
 using Windows.Storage;

@@ -1,4 +1,4 @@
-﻿using HTools.Uwp.Controls.Dialog;
+﻿using HTools.Uwp.Controls;
 using HTools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
