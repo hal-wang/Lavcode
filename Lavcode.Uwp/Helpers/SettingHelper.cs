@@ -112,5 +112,11 @@ namespace Lavcode.Uwp.Helpers
             }
         }
         public Action<bool> IsBgVisibleChanged;
+
+        public string GitHubToken
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
     }
 }

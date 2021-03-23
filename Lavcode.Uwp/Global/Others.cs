@@ -6,7 +6,7 @@ namespace Lavcode.Uwp
     public static partial class Global
     {
         public static string HomeUrl { get; } = "https://lavcode.hal.wang";
-        public static string ToolsApiUrl { get; } = "https://cb-api.hal.wang/tools";
+        public static string ToolsApiUrl { get; } = "https://tool.hal.wang/v2";
 
         public static string Email { get; } = "support@hal.wang";
 

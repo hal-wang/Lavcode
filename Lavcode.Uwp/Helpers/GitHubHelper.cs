@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using HTools;
+using Lavcode.Uwp.Model;
+using Newtonsoft.Json.Linq;
 using Octokit;
 using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Helpers
@@ -20,23 +21,19 @@ namespace Lavcode.Uwp.Helpers
             return new GitHubClient(new ProductHeaderValue(Global.Repos)) { Credentials = credentials };
         }
 
-        public static async Task<string> GetLoginUrl()
+        public static HttpClient HttpClient
         {
-            HttpClient httpClient = new HttpClient()
+            get
             {
-                Timeout = TimeSpan.FromSeconds(20)
-            };
-            httpClient.DefaultRequestHeaders.Add("version", Global.Version);
-            httpClient.DefaultRequestHeaders.Add("app", "lavcode");
-            httpClient.DefaultRequestHeaders.Add("platform", "uwp");
-
-            var res = await httpClient.PostAsync($"{Global.ToolsApiUrl}/github/getOAuthLoginUrl", new StringContent(JsonConvert.SerializeObject(new
-            {
-                login = "lavcode",
-                scopes = new string[0]
-            }), Encoding.UTF8, "application/json"));
-            if (!res.IsSuccessStatusCode) return null;
-            return await res.Content.ReadAsStringAsync();
+                HttpClient httpClient = new HttpClient()
+                {
+                    Timeout = TimeSpan.FromSeconds(20)
+                };
+                httpClient.DefaultRequestHeaders.Add("version", Global.Version);
+                httpClient.DefaultRequestHeaders.Add("app", "lavcode");
+                httpClient.DefaultRequestHeaders.Add("platform", "uwp");
+                return httpClient;
+            }
         }
     }
 }
