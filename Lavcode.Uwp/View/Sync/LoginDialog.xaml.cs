@@ -1,8 +1,8 @@
-﻿using HTools.Uwp.Controls;
+﻿using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View.Sync
 {
-    public sealed partial class LoginDialog : LayoutDialog
+    public sealed partial class LoginDialog : ContentDialog
     {
         public LoginDialog()
         {
@@ -11,7 +11,7 @@ namespace Lavcode.Uwp.View.Sync
             Model.View = this;
         }
 
-        private void LayoutDialog_PrimaryButtonClick(LayoutDialog sender, LayoutDialogButtonClickEventArgs args)
+        private void LayoutDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             args.Cancel = !Model.Finish();
         }

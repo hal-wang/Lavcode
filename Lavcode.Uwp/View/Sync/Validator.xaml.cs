@@ -1,10 +1,10 @@
-﻿using Lavcode.Uwp.Helpers;
-using HTools;
-using HTools.Uwp.Controls;
+﻿using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using System.Security.Cryptography;
 using System.Text;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View.Sync
 {
@@ -16,7 +16,7 @@ namespace Lavcode.Uwp.View.Sync
     /// 
     /// 传入shaPassword将是验证状态，验证通过才返回 ContentDialogResult.Primary
     /// </summary>
-    public sealed partial class Validator : LayoutDialog
+    public sealed partial class Validator : ContentDialog
     {
         #region Static
         /// <summary>
@@ -59,8 +59,8 @@ namespace Lavcode.Uwp.View.Sync
 
         public string InputPassword
         {
-            get { return (string)GetValue(InputPasswordProperty); }
-            set { SetValue(InputPasswordProperty, value); }
+            get => (string)GetValue(InputPasswordProperty);
+            set => SetValue(InputPasswordProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for InputPassword.  This enables animation, styling, binding, etc...
@@ -68,7 +68,7 @@ namespace Lavcode.Uwp.View.Sync
             DependencyProperty.Register("InputPassword", typeof(string), typeof(Validator), new PropertyMetadata(string.Empty));
 
 
-        private void LayoutDialog_PrimaryButtonClick(LayoutDialog sender, LayoutDialogButtonClickEventArgs args)
+        private void LayoutDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             if (string.IsNullOrEmpty(InputPassword))
             {

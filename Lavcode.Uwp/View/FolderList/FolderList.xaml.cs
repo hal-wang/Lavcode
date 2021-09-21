@@ -21,7 +21,7 @@ namespace Lavcode.Uwp.View.FolderList
         {
             if (!SettingHelper.Instance.AddFolderTaught)
             {
-                await PopupHelper.ShowTeachingTip(AddButtonPosition, "开始添加（新建文件夹 1/3）", "点击 + 开始添加文件夹，对密码进行分类管理", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.BottomRight);
+                await PopupHelper.ShowTeachingTipAsync(AddButtonPosition, "开始添加（新建文件夹 1/3）", "点击 + 开始添加文件夹，对密码进行分类管理", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.BottomRight);
                 Model.HandleAddFolder();
             }
         }

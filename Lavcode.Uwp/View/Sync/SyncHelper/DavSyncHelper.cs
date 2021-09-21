@@ -58,7 +58,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
             }
 
 
-            var cdr = await new LoginDialog().ShowAsync();
+            var cdr = await new LoginDialog().QueueAsync();
             if (cdr != Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
             {
                 return false;

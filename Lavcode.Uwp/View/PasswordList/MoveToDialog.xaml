@@ -1,31 +1,35 @@
-﻿<huc:LayoutDialog
+﻿<ContentDialog
     x:Class="Lavcode.Uwp.View.PasswordList.MoveToDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:luc="using:Lavcode.Uwp.Controls"
     xmlns:hluci="using:Lavcode.Uwp.Controls.IconControl"
     xmlns:hlum="using:Lavcode.Uwp.Model"
-    xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:hluvp="using:Lavcode.Uwp.View.PasswordList"
     mc:Ignorable="d"
-    Title="移动至"
     PrimaryButtonText="确定"
     SecondaryButtonText="取消"
     DefaultButton="Primary"
-    PrimaryButtonClick="LayoutDialog_PrimaryButtonClick">
+    PrimaryButtonClick="LayoutDialog_PrimaryButtonClick"
+    Style="{ThemeResource DefaultContentDialogStyle}">
 
-    <huc:LayoutDialog.DataContext>
+    <ContentDialog.DataContext>
         <hluvp:MoveToViewModel x:Name="Model"/>
-    </huc:LayoutDialog.DataContext>
+    </ContentDialog.DataContext>
 
-    <huc:LayoutDialog.TitleExtension>
-        <TextBlock Text="请选择目标文件夹"
+    <ContentDialog.Title>
+        <luc:DialogTitle Title="移动至" Closable="True" Dialog="{x:Bind}">
+            <luc:DialogTitle.TitleExtension>
+                <TextBlock Text="请选择目标文件夹"
                    FontSize="11"
                    Opacity="0.6"
                    VerticalAlignment="Bottom"
                    Margin="10 0 0 0"/>
-    </huc:LayoutDialog.TitleExtension>
+            </luc:DialogTitle.TitleExtension>
+        </luc:DialogTitle>
+    </ContentDialog.Title>
 
     <Grid Width="280">
         <ListView ItemsSource="{x:Bind Model.FolderItems}"
@@ -55,4 +59,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
-</huc:LayoutDialog>
+</ContentDialog>

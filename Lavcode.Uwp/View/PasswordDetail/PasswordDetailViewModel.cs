@@ -176,7 +176,7 @@ namespace Lavcode.Uwp.View.PasswordDetail
             {
                 Key = keyValuePairItem.Key
             };
-            if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+            if (await dialog.QueueAsync() != ContentDialogResult.Primary)
             {
                 return;
             }

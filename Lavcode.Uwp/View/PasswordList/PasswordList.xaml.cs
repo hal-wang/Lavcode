@@ -29,7 +29,7 @@ namespace Lavcode.Uwp.View.PasswordList
                 return;
             }
 
-            await PopupHelper.ShowTeachingTip(AddButton, "开始添加（添加记录 1/6）", "点击 + 可新建一条记录，点击右侧中央“添加”按钮也行");
+            await PopupHelper.ShowTeachingTipAsync(AddButton, "开始添加（添加记录 1/6）", "点击 + 可新建一条记录，点击右侧中央“添加”按钮也行");
             Model.HandleAddNew();
         }
 
@@ -40,12 +40,12 @@ namespace Lavcode.Uwp.View.PasswordList
                 return;
             }
 
-            await PopupHelper.ShowTeachingTip(EditBtnPosition, "批量操作（列表管理 1/4）", "点击此处能批量操作，可以删除或移动密码", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
+            await PopupHelper.ShowTeachingTipAsync(EditBtnPosition, "批量操作（列表管理 1/4）", "点击此处能批量操作，可以删除或移动密码", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
             Model.IsMultiSelect = true;
-            await PopupHelper.ShowTeachingTip(EditBtnPosition, "完成编辑（列表管理 2/4）", "再次点击即编辑完成或取消编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
+            await PopupHelper.ShowTeachingTipAsync(EditBtnPosition, "完成编辑（列表管理 2/4）", "再次点击即编辑完成或取消编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
             Model.IsMultiSelect = false;
-            await PopupHelper.ShowTeachingTip(PasswordItemPosition, "右键菜单（列表管理 3/4）", "右键单击密码项，可单独对该密码进行删除或移动", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
-            await PopupHelper.ShowTeachingTip(PasswordItemPosition, "查看详情（列表管理 4/4）", "点击密码记录项即可查看或编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
+            await PopupHelper.ShowTeachingTipAsync(PasswordItemPosition, "右键菜单（列表管理 3/4）", "右键单击密码项，可单独对该密码进行删除或移动", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
+            await PopupHelper.ShowTeachingTipAsync(PasswordItemPosition, "查看详情（列表管理 4/4）", "点击密码记录项即可查看或编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
             SettingHelper.Instance.PasswordListTaught = true;
         }
 

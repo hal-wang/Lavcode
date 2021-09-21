@@ -1,5 +1,5 @@
-﻿using Lavcode.Uwp.Model;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Model;
 using Microsoft.Toolkit.Uwp;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -80,7 +80,7 @@ namespace Lavcode.Uwp.Controls.IconSelecter
         public async void HandlePathIcon()
         {
             var setPathIcon = new SetPathIcon();
-            if (await setPathIcon.ShowAsync() != ContentDialogResult.Primary)
+            if (await setPathIcon.QueueAsync() != ContentDialogResult.Primary)
             {
                 return;
             }

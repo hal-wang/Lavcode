@@ -75,15 +75,9 @@ namespace Lavcode.Uwp.View.Feedback
         public async void HandleFeedback()
         {
             var fbDialog = new FeedbackDialog();
-            if (await fbDialog.ShowAsync() != Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
-            {
-                return;
-            }
+            if (!await fbDialog.QueueAsync<bool>()) return;
 
-            if (Feedbacks == null || Feedbacks.HasMoreItems)
-            {
-                return;
-            }
+            if (Feedbacks == null || Feedbacks.HasMoreItems) return;
 
             Feedbacks.Insert(0, fbDialog.CommentResult);
             _addedCount++;

@@ -1,4 +1,4 @@
-﻿<huc:LayoutDialog
+﻿<ContentDialog
     x:Class="Lavcode.Uwp.View.FolderList.EditFolder"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -38,4 +38,4 @@
             </Grid>
         </StackPanel>
     </Border>
-</huc:LayoutDialog>
+</ContentDialog>

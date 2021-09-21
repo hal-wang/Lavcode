@@ -1,7 +1,7 @@
-﻿using Lavcode.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Auth;
 using Lavcode.Uwp.View.Main;
-using HTools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;
@@ -44,7 +44,7 @@ namespace Lavcode.Uwp
             {
                 if (Frame.Content == null)
                 {
-                    if (SystemInformation.IsFirstRun || !SettingHelper.Instance.IsAuthOpen)
+                    if (SystemInformation.Instance.IsFirstRun || !SettingHelper.Instance.IsAuthOpen)
                     {
                         Frame.Navigate(typeof(MainPage), e.Arguments);
                     }
@@ -90,7 +90,6 @@ namespace Lavcode.Uwp
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             MessageHelper.ShowDanger("跳转失败" + e.SourcePageType.FullName);
-            LogHelper.Instance.Log(e.Exception);
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 

@@ -32,7 +32,7 @@ namespace Lavcode.Uwp.View.Main
 
             if (SettingHelper.Instance.IsFirstUse)
             {
-                await new FirstUseDialog().ShowAsync();
+                await new FirstUseDialog().QueueAsync();
                 SettingHelper.Instance.IsFirstUse = false;
             }
 

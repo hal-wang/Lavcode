@@ -32,18 +32,18 @@ namespace Lavcode.Uwp.View.PasswordDetail
             {
                 return;
             }
-            await PopupHelper.ShowTeachingTip(TitleTextBox, "密码标题（添加记录 2/6）", "标题作为密码项的标识，应输入具有代表性且便于识别的内容，在密码列表中容易查找");
+            await PopupHelper.ShowTeachingTipAsync(TitleTextBox, "密码标题（添加记录 2/6）", "标题作为密码项的标识，应输入具有代表性且便于识别的内容，在密码列表中容易查找");
 
             Model.Title = "测试标题";
             Model.Remark = "这条记录是用来教学的，完成后可以自行删除";
-            await PopupHelper.ShowTeachingTip(PasswordGeneratorBtn, "生成密码（添加记录 3/6）", "点击此按钮能随机生成复杂密码，当创建账号或修改密码时，能够使用复杂密码");
+            await PopupHelper.ShowTeachingTipAsync(PasswordGeneratorBtn, "生成密码（添加记录 3/6）", "点击此按钮能随机生成复杂密码，当创建账号或修改密码时，能够使用复杂密码");
             PasswordGeneratorTip.IsOpen = true;
             await TaskExtend.SleepAsync();
-            await PopupHelper.ShowTeachingTip(PasswordGenerator, "生成完成（添加记录 4/6）", "配置完成后，点击 生成 按钮即可");
+            await PopupHelper.ShowTeachingTipAsync(PasswordGenerator, "生成完成（添加记录 4/6）", "配置完成后，点击 生成 按钮即可");
             PasswordGeneratorTip.IsOpen = false;
             Model.Value = "Lavcode";
-            await PopupHelper.ShowTeachingTip(AddKvpBtn, "关联内容（添加记录 5/6）", "可以无限制添加多条内容，每项内容都可自定义名称，便于管理与账号相关的信息");
-            await PopupHelper.ShowTeachingTip(SaveBtn, "编辑完成（添加记录 6/6）", "编辑完成，别忘记保存哦！（虽然有退出提醒，但手动保存是个好习惯）");
+            await PopupHelper.ShowTeachingTipAsync(AddKvpBtn, "关联内容（添加记录 5/6）", "可以无限制添加多条内容，每项内容都可自定义名称，便于管理与账号相关的信息");
+            await PopupHelper.ShowTeachingTipAsync(SaveBtn, "编辑完成（添加记录 6/6）", "编辑完成，别忘记保存哦！（虽然有退出提醒，但手动保存是个好习惯）");
             SettingHelper.Instance.AddPasswordTaught = true;
             Model.HandleSave();
         }

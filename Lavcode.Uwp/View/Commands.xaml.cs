@@ -1,4 +1,5 @@
-﻿using Lavcode.Uwp.View.Feedback;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.View.Feedback;
 using Lavcode.Uwp.View.Notices;
 using Lavcode.Uwp.View.Setting;
 using Lavcode.Uwp.View.Sync;
@@ -46,17 +47,17 @@ namespace Lavcode.Uwp.View
 
         private async void Sync_Click(object sender, RoutedEventArgs e)
         {
-            await new SyncDialog().ShowAsync();
+            await new SyncDialog().QueueAsync();
         }
 
         private async void HelpBtn_Click(object sender, RoutedEventArgs e)
         {
-            await new HelpDialog().ShowAsync();
+            await new HelpDialog().QueueAsync();
         }
 
         private async void SettingBtn_Click(object sender, RoutedEventArgs e)
         {
-            await new SettingDialog().ShowAsync();
+            await new SettingDialog().QueueAsync();
         }
     }
 }

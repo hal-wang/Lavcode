@@ -1,11 +1,11 @@
-﻿using HTools.Uwp.Controls;
-using HTools.Uwp.Controls.Message;
+﻿using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View.Sync.History
 {
-    public sealed partial class HistoryDialog : LayoutDialog
+    public sealed partial class HistoryDialog : ContentDialog
     {
         public HistoryDialog()
         {

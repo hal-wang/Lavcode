@@ -1,11 +1,11 @@
-﻿using HTools.Uwp.Controls;
-using System;
+﻿using System;
 using Windows.System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View
 {
-    public sealed partial class HelpDialog : LayoutDialog
+    public sealed partial class HelpDialog : ContentDialog
     {
         public HelpDialog()
         {

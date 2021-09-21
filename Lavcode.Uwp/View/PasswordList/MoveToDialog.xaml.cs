@@ -1,12 +1,11 @@
-﻿using HTools.Uwp.Controls;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View.PasswordList
 {
-    public sealed partial class MoveToDialog : LayoutDialog
+    public sealed partial class MoveToDialog : ContentDialog, IResultDialog<bool>
     {
         public MoveToDialog(Model.Folder curFolder, IReadOnlyList<Model.Password> passwords)
         {
@@ -15,7 +14,9 @@ namespace Lavcode.Uwp.View.PasswordList
             Model.Init(curFolder, passwords);
         }
 
-        private async void LayoutDialog_PrimaryButtonClick(LayoutDialog sender, LayoutDialogButtonClickEventArgs args)
+        public bool Result { get; private set; } = false;
+
+        private async void LayoutDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             args.Cancel = true;
 
@@ -23,8 +24,7 @@ namespace Lavcode.Uwp.View.PasswordList
             {
                 if (await Model.MoveTo())
                 {
-                    this.Result = ContentDialogResult.Primary;
-                    this.IsOpen = false;
+                    this.Hide(true);
                 }
             }
             catch (Exception ex)

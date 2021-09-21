@@ -1,14 +1,14 @@
-﻿using Lavcode.Uwp.Helpers;
-using HTools.Uwp.Controls;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace Lavcode.Uwp.Controls.IconSelecter
 {
-    public sealed partial class SetPathIcon : LayoutDialog
+    public sealed partial class SetPathIcon : ContentDialog
     {
         public SetPathIcon()
         {
@@ -24,8 +24,8 @@ namespace Lavcode.Uwp.Controls.IconSelecter
                 return;
             }
 
-            await PopupHelper.ShowTeachingTip(ResultBorder, "路径图结果（路径图 1/2）", "这里显示路径图的结果");
-            await PopupHelper.ShowTeachingTip(TextBoxElement, "路径图内容（路径图 2/2）", "在这里输入路径图内容，推荐在 www.iconfont.cn 网站找到图标，复制SVG文本内容，粘贴到此处。");
+            await PopupHelper.ShowTeachingTipAsync(ResultBorder, "路径图结果（路径图 1/2）", "这里显示路径图的结果");
+            await PopupHelper.ShowTeachingTipAsync(TextBoxElement, "路径图内容（路径图 2/2）", "在这里输入路径图内容，推荐在 www.iconfont.cn 网站找到图标，复制SVG文本内容，粘贴到此处。");
             SettingHelper.Instance.SvgTaught = true;
         }
 
@@ -65,7 +65,7 @@ namespace Lavcode.Uwp.Controls.IconSelecter
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.Register("Data", typeof(Geometry), typeof(SetPathIcon), new PropertyMetadata(null));
 
-        private void LayoutDialog_PrimaryButtonClick(LayoutDialog sender, LayoutDialogButtonClickEventArgs args)
+        private void LayoutDialog_PrimaryButtonClick(Windows.UI.Xaml.Controls.ContentDialog sender, Windows.UI.Xaml.Controls.ContentDialogButtonClickEventArgs args)
         {
             if (string.IsNullOrEmpty(PathStr))
             {

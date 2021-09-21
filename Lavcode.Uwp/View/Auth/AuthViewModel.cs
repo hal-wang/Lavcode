@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.View.Main;
 using HTools.Uwp.Helpers;
+using Lavcode.Uwp.View.Main;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -66,7 +66,7 @@ namespace Lavcode.Uwp.View.Auth
             {
                 if (await KeyCredentialManager.IsSupportedAsync())
                 {
-                    KeyCredentialRetrievalResult keyCreationResult = await KeyCredentialManager.RequestCreateAsync(SystemInformation.ApplicationName, KeyCredentialCreationOption.ReplaceExisting);
+                    KeyCredentialRetrievalResult keyCreationResult = await KeyCredentialManager.RequestCreateAsync(SystemInformation.Instance.ApplicationName, KeyCredentialCreationOption.ReplaceExisting);
                     if (keyCreationResult.Status != KeyCredentialStatus.Success)
                     {
                         return;

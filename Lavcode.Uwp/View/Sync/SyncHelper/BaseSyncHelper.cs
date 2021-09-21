@@ -111,7 +111,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 return true;
             }
 
-            return await new Validator().ShowAsync() == Windows.UI.Xaml.Controls.ContentDialogResult.Primary;
+            return await new Validator().QueueAsync() == Windows.UI.Xaml.Controls.ContentDialogResult.Primary;
         }
 
         private async Task<bool> Verify(string password)
@@ -128,7 +128,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 MessageHelper.ShowDanger("密码错误");
             }
 
-            return await new Validator(password).ShowAsync() == Windows.UI.Xaml.Controls.ContentDialogResult.Primary;
+            return await new Validator(password).QueueAsync() == Windows.UI.Xaml.Controls.ContentDialogResult.Primary;
         }
         #endregion
         #endregion

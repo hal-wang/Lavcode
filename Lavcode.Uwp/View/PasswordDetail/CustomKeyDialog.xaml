@@ -10,7 +10,8 @@
     PrimaryButtonText="确定"
     SecondaryButtonText="取消"
     DefaultButton="Primary"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    Style="{ThemeResource DefaultContentDialogStyle}">
 
     <StackPanel>
         <muxc:TextBox HorizontalAlignment="Stretch"

@@ -1,14 +1,14 @@
-﻿using HTools.Uwp.Controls;
-using System;
+﻿using System;
 using Windows.System;
+using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View.Feedback
 {
-    public sealed partial class MarkdownPreview : LayoutDialog
+    public sealed partial class MarkdownPreview : ContentDialog
     {
         public MarkdownPreview(string markdown)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             Markdown = markdown;
         }

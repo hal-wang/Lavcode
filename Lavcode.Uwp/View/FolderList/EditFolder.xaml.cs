@@ -1,16 +1,16 @@
-﻿using Lavcode.Uwp.Helpers;
+﻿using HTools.Uwp.Controls.Message;
+using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Helpers.Sqlite;
 using Lavcode.Uwp.Model;
-using HTools.Uwp.Controls;
-using HTools.Uwp.Controls.Message;
-using HTools.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View.FolderList
 {
-    public sealed partial class EditFolder : LayoutDialog
+    public sealed partial class EditFolder : ContentDialog, IResultDialog<bool>
     {
         public EditFolder(Folder folder = null)
         {
@@ -43,7 +43,7 @@ namespace Lavcode.Uwp.View.FolderList
             DependencyProperty.Register("Icon", typeof(Icon), typeof(EditFolder), new PropertyMetadata(null));
 
 
-        public Model.Folder Folder { get; private set; }
+        public Folder Folder { get; private set; }
 
         private async void AddOrEditFolderDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -67,6 +67,8 @@ namespace Lavcode.Uwp.View.FolderList
             }
         }
 
+        public bool Result { get; private set; }
+
         private async void Teach()
         {
             if (SettingHelper.Instance.AddFolderTaught)
@@ -74,17 +76,16 @@ namespace Lavcode.Uwp.View.FolderList
                 return;
             }
 
-            await PopupHelper.ShowTeachingTip(FolderNameTextBox, "文件夹名称（新建文件夹 2/3）", "输入容易辨识的文件夹名称，易于管理密码");
+            await PopupHelper.ShowTeachingTipAsync(FolderNameTextBox, "文件夹名称（新建文件夹 2/3）", "输入容易辨识的文件夹名称，易于管理密码");
             FolderName = "默认文件夹";
-            await PopupHelper.ShowTeachingTip(IconSelecter, "文件夹图标（新建文件夹 3/3）", "选择文件夹图标，可以选择内置图标、图片、路径图");
+            await PopupHelper.ShowTeachingTipAsync(IconSelecter, "文件夹图标（新建文件夹 3/3）", "选择文件夹图标，可以选择内置图标、图片、路径图");
             SettingHelper.Instance.AddFolderTaught = true;
 
             await Save();
-            Result = Windows.UI.Xaml.Controls.ContentDialogResult.Primary;
-            IsOpen = false;
+            this.Hide(true);
         }
 
-        private async void LayoutDialog_PrimaryButtonClick(LayoutDialog sender, LayoutDialogButtonClickEventArgs args)
+        private async void LayoutDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             args.Cancel = true;
 
@@ -92,8 +93,7 @@ namespace Lavcode.Uwp.View.FolderList
             {
                 if (await Save())
                 {
-                    Result = Windows.UI.Xaml.Controls.ContentDialogResult.Primary;
-                    IsOpen = false;
+                    this.Hide(true);
                 }
             }
             catch (Exception ex)

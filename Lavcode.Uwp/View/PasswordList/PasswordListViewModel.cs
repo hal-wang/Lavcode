@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers.Sqlite;
+using Lavcode.Uwp.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -240,7 +240,7 @@ namespace Lavcode.Uwp.View.PasswordList
                 return;
             }
 
-            if (await new MoveToDialog(_curFolder.Folder, SelectedItems.Select((item) => item.Password).ToList()).ShowAsync() != Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
+            if (await new MoveToDialog(_curFolder.Folder, SelectedItems.Select((item) => item.Password).ToList()).QueueAsync<bool>())
             {
                 return;
             }
@@ -264,7 +264,7 @@ namespace Lavcode.Uwp.View.PasswordList
                     return;
                 }
 
-                if (await new MoveToDialog(_curFolder.Folder, new List<Password>() { item.Password }).ShowAsync() != Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
+                if (await new MoveToDialog(_curFolder.Folder, new List<Password>() { item.Password }).QueueAsync<bool>())
                 {
                     return;
                 }

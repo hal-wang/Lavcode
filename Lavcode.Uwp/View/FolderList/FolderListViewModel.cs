@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Helpers.Sqlite;
 using Lavcode.Uwp.Model;
-using HTools.Uwp.Helpers;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -89,20 +89,19 @@ namespace Lavcode.Uwp.View.FolderList
         public async void HandleAddFolder()
         {
             var editFolder = new EditFolder();
-            if (await editFolder.ShowAsync() == ContentDialogResult.Primary)
-            {
-                var newFolderItem = new FolderItem(editFolder.Folder, editFolder.Icon);
-                FolderItems.Add(newFolderItem);
-                var index = FolderItems.IndexOf(newFolderItem);
+            if (!await editFolder.QueueAsync<bool>()) return;
 
-                if (SelectedIndex != index)
-                {
-                    SelectedIndex = index;
-                }
-                else
-                {
-                    Messenger.Default.Send(newFolderItem, "FolderSelected");
-                }
+            var newFolderItem = new FolderItem(editFolder.Folder, editFolder.Icon);
+            FolderItems.Add(newFolderItem);
+            var index = FolderItems.IndexOf(newFolderItem);
+
+            if (SelectedIndex != index)
+            {
+                SelectedIndex = index;
+            }
+            else
+            {
+                Messenger.Default.Send(newFolderItem, "FolderSelected");
             }
         }
 
@@ -138,7 +137,7 @@ namespace Lavcode.Uwp.View.FolderList
         public async Task EditFolder(FolderItem folderItem)
         {
             var editFolder = new EditFolder(folderItem.Folder);
-            if (await editFolder.ShowAsync() == ContentDialogResult.Primary)
+            if (await editFolder.QueueAsync<bool>())
             {
                 folderItem.Set(editFolder.Folder, editFolder.Icon);
             }
