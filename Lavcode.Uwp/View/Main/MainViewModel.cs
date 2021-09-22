@@ -8,8 +8,8 @@ namespace Lavcode.Uwp.View.Main
         private StorageFile _openedFile = null;
         public StorageFile OpenedFile
         {
-            get { return _openedFile; }
-            set { Set(ref _openedFile, value); }
+            get => _openedFile;
+            set => Set(ref _openedFile, value);
         }
     }
 }

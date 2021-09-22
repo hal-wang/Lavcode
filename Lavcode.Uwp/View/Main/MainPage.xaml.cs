@@ -1,8 +1,7 @@
-﻿using Lavcode.Uwp.Helpers;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using System;
-using Windows.Security.Authentication.Web;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
@@ -13,10 +12,10 @@ namespace Lavcode.Uwp.View.Main
     public sealed partial class MainPage : Page
     {
         private bool _inited = false;
-        private readonly ThemeListener _themeListener = new ThemeListener();
+        private readonly ThemeListener _themeListener = new();
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             TitleBarHelper.SetTitleBar();
             _themeListener.ThemeChanged += ThemeListener_ThemeChanged;
             Loaded += MainPage_Loaded;
@@ -36,7 +35,7 @@ namespace Lavcode.Uwp.View.Main
                 SettingHelper.Instance.IsFirstUse = false;
             }
 
-            if (param != null && param is StorageFile file)
+            if (param is not null and StorageFile file)
             {
                 Global.OpenedFile = file;
                 FindName(nameof(SyncFileHandler));
@@ -67,6 +66,9 @@ namespace Lavcode.Uwp.View.Main
             param = e.Parameter;
         }
 
+        /// <summary>
+        /// lazy load
+        /// </summary>
         public void LoadUI()
         {
             FindName(nameof(PasswordDetail));
