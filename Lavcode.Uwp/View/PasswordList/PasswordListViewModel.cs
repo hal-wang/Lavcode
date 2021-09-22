@@ -240,7 +240,7 @@ namespace Lavcode.Uwp.View.PasswordList
                 return;
             }
 
-            if (await new MoveToDialog(_curFolder.Folder, SelectedItems.Select((item) => item.Password).ToList()).QueueAsync<bool>())
+            if (!await new MoveToDialog(_curFolder.Folder, SelectedItems.Select((item) => item.Password).ToList()).QueueAsync<bool>())
             {
                 return;
             }
@@ -264,7 +264,7 @@ namespace Lavcode.Uwp.View.PasswordList
                     return;
                 }
 
-                if (await new MoveToDialog(_curFolder.Folder, new List<Password>() { item.Password }).QueueAsync<bool>())
+                if (!await new MoveToDialog(_curFolder.Folder, new List<Password>() { item.Password }).QueueAsync<bool>())
                 {
                     return;
                 }
