@@ -1,8 +1,8 @@
-﻿using Lavcode.Uwp.Model;
+﻿using Lavcode.Model;
 using SQLite;
 using System;
 
-namespace Lavcode.Uwp.Helpers.Sqlite
+namespace Lavcode.DAL
 {
     public partial class SqliteHelper : SQLiteConnection
     {

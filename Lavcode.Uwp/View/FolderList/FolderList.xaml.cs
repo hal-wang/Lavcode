@@ -1,11 +1,11 @@
-﻿using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Model;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.Helpers;
+using Lavcode.ViewModel;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.FolderList
+namespace Lavcode.View.FolderList
 {
     public sealed partial class FolderList : UserControl
     {

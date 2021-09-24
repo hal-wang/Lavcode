@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Lavcode.Uwp.View.Sync.SyncHelper
+namespace Lavcode.View.Sync.SyncHelper
 {
     internal class FileSyncHelper : BaseSyncHelper, ISyncHelper
     {

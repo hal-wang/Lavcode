@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
-using Lavcode.Uwp.View.Sync.SyncHelper;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.DAL;
+using Lavcode.Model;
+using Lavcode.View.Sync.SyncHelper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using Windows.Storage;
 
-namespace Lavcode.Uwp.View.Sync.History
+namespace Lavcode.View.Sync.History
 {
     public class HistoryViewModel : ViewModelBase
     {

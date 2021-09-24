@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.PasswordList
+namespace Lavcode.View.PasswordList
 {
     public sealed partial class MoveToDialog : ContentDialog, IResultDialog<bool>
     {

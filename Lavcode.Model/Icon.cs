@@ -1,7 +1,7 @@
 ﻿using HTools;
 using SQLite;
 
-namespace Lavcode.Uwp.Model
+namespace Lavcode.Model
 {
     public class Icon : ICloneable<Icon>
     {

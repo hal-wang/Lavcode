@@ -1,8 +1,8 @@
-﻿using Lavcode.Uwp.Model;
+﻿using Lavcode.Model;
 using HTools;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.Helpers.Sqlite
+namespace Lavcode.DAL
 {
     public partial class SqliteHelper
     {

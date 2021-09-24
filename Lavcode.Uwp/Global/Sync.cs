@@ -1,12 +1,12 @@
-﻿using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.View.Sync;
+﻿using Lavcode.Helpers;
+using Lavcode.View.Sync;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Windows.Storage;
 
-namespace Lavcode.Uwp
+namespace Lavcode
 {
     /*
      * 同步相关

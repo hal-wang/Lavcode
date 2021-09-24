@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Lavcode.Uwp.View.Sync.SyncHelper;
+using Lavcode.View.Sync.SyncHelper;
 using HTools;
 using HTools.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Lavcode.Uwp.View.Sync
+namespace Lavcode.View.Sync
 {
     public class SyncViewModel : ViewModelBase
     {

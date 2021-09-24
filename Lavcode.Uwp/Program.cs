@@ -3,7 +3,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 
-namespace Lavcode.Uwp
+namespace Lavcode
 {
     class Program
     {

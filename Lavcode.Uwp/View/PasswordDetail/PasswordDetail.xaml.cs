@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 using HTools;
 using HTools.Uwp.Helpers;
 using Windows.System;
@@ -8,7 +8,7 @@ using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.View.PasswordDetail
 {
     public sealed partial class PasswordDetail : UserControl
     {

@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Lavcode.Uwp.Model
+namespace Lavcode.Model
 {
     public class Config
     {

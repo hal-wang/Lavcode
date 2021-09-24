@@ -1,4 +1,4 @@
-﻿namespace Lavcode.Uwp.Model
+﻿namespace Lavcode.Model
 {
     public enum StorageType
     {

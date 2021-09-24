@@ -1,8 +1,8 @@
-﻿using Lavcode.Uwp.View.Sync;
+﻿using Lavcode.View.Sync;
 using HTools.Uwp.Helpers;
 using System;
 
-namespace Lavcode.Uwp.Helpers
+namespace Lavcode.Helpers
 {
     public class SettingHelper : SettingConfigBase
     {

@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Windows.UI.Xaml.Media;
 
-namespace Lavcode.Uwp.Controls.IconControl
+namespace Lavcode.Controls.IconControl
 {
     internal class IconViewModel : ViewModelBase
     {

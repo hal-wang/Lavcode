@@ -1,13 +1,13 @@
 ﻿<ContentDialog
-    x:Class="Lavcode.Uwp.View.PasswordList.MoveToDialog"
+    x:Class="Lavcode.View.PasswordList.MoveToDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:luc="using:Lavcode.Uwp.Controls"
-    xmlns:hluci="using:Lavcode.Uwp.Controls.IconControl"
-    xmlns:hlum="using:Lavcode.Uwp.Model"
-    xmlns:hluvp="using:Lavcode.Uwp.View.PasswordList"
+    xmlns:luc="using:Lavcode.Controls"
+    xmlns:hluci="using:Lavcode.Controls.IconControl"
+    xmlns:lvm="using:Lavcode.ViewModel"
+    xmlns:hluvp="using:Lavcode.View.PasswordList"
     mc:Ignorable="d"
     PrimaryButtonText="确定"
     SecondaryButtonText="取消"
@@ -37,7 +37,7 @@
                   SelectionMode="Single"
                   IsItemClickEnabled="True">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="hlum:FolderItem">
+                <DataTemplate x:DataType="lvm:FolderItem">
                     <Grid Height="40">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>

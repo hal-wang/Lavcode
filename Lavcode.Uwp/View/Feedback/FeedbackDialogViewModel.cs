@@ -1,15 +1,15 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 using HTools.Uwp.Helpers;
 using Octokit;
 using System;
 using System.Threading.Tasks;
 using HTools;
-using Lavcode.Uwp.Model;
+using Lavcode.Model;
 using Windows.System;
 using Newtonsoft.Json.Linq;
 
-namespace Lavcode.Uwp.View.Feedback
+namespace Lavcode.View.Feedback
 {
     class FeedbackDialogViewModel : ViewModelBase
     {

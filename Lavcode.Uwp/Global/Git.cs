@@ -1,4 +1,4 @@
-﻿namespace Lavcode.Uwp
+﻿namespace Lavcode
 {
     /*
      * GitHub相关

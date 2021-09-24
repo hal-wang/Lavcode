@@ -1,12 +1,12 @@
 ﻿using HTools;
-using Lavcode.Uwp.Model;
+using Lavcode.Model;
 using Newtonsoft.Json.Linq;
 using Octokit;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.Helpers
+namespace Lavcode.Helpers
 {
     public static class GitHubHelper
     {

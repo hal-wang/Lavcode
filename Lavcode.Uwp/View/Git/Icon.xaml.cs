@@ -4,7 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Lavcode.Uwp.View.Git
+namespace Lavcode.View.Git
 {
     public sealed partial class Icon : UserControl
     {

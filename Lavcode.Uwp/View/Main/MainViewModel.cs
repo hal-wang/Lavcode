@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Windows.Storage;
 
-namespace Lavcode.Uwp.View.Main
+namespace Lavcode.View.Main
 {
     public class MainViewModel : ViewModelBase
     {

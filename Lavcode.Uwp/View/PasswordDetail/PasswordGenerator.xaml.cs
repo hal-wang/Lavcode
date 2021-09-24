@@ -1,7 +1,7 @@
 ﻿using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.View.PasswordDetail
 {
     public sealed partial class PasswordGenerator : UserControl
     {

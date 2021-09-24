@@ -1,7 +1,7 @@
-﻿using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.View.Sync.SyncHelper;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.DAL;
+using Lavcode.View.Sync.SyncHelper;
 using System;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -10,7 +10,7 @@ using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Sync
+namespace Lavcode.View.Sync
 {
     public sealed partial class SyncFileHandler : UserControl
     {

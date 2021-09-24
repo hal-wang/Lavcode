@@ -1,12 +1,12 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Controls.IconSelecter
 {
     public sealed partial class SetPathIcon : ContentDialog
     {

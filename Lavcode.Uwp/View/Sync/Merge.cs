@@ -1,11 +1,11 @@
-﻿using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
+﻿using Lavcode.DAL;
+using Lavcode.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.View.Sync
+namespace Lavcode.View.Sync
 {
     public class Merge : IDisposable
     {

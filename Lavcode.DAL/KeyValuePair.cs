@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.Helpers.Sqlite
+namespace Lavcode.DAL
 {
     public partial class SqliteHelper
     {

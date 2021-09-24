@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
-namespace Lavcode.Uwp.Controls
+namespace Lavcode.Controls
 {
     public sealed partial class Logo : UserControl
     {

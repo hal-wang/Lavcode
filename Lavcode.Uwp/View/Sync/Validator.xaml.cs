@@ -1,12 +1,12 @@
 ﻿using HTools;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 using System.Security.Cryptography;
 using System.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Sync
+namespace Lavcode.View.Sync
 {
     /// <summary>
     /// 1、使用MD5转换输入的密码

@@ -1,7 +1,7 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.View.Auth;
-using Lavcode.Uwp.View.Main;
+using Lavcode.Helpers;
+using Lavcode.View.Auth;
+using Lavcode.View.Main;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;
@@ -13,7 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Lavcode.Uwp
+namespace Lavcode
 {
     sealed partial class App : Application
     {

@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 
-namespace Lavcode.Uwp.View.Setting
+namespace Lavcode.View.Setting
 {
     class SettingViewModel : ViewModelBase
     {

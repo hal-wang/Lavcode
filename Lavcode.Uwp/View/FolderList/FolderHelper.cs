@@ -1,9 +1,9 @@
-﻿using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
-using HTools;
+﻿using HTools;
+using Lavcode.DAL;
+using Lavcode.ViewModel;
 using System.Collections.Generic;
 
-namespace Lavcode.Uwp.View.FolderList
+namespace Lavcode.View.FolderList
 {
     public static class FolderHelper
     {

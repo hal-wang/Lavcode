@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.View.PasswordDetail
 {
     public class PasswordGeneratorViewModel : ViewModelBase
     {

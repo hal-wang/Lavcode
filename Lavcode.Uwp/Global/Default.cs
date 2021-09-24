@@ -1,6 +1,6 @@
-﻿using Lavcode.Uwp.Model;
+﻿using Lavcode.Model;
 
-namespace Lavcode.Uwp
+namespace Lavcode
 {
     /*
      * 默认值

@@ -1,9 +1,9 @@
-﻿using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Model;
+﻿using Lavcode.Helpers;
+using Lavcode.Model;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.Controls.IconControl
+namespace Lavcode.Controls.IconControl
 {
     public sealed partial class IconControl : UserControl
     {

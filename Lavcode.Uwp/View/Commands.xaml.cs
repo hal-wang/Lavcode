@@ -1,12 +1,12 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.View.Feedback;
-using Lavcode.Uwp.View.Notices;
-using Lavcode.Uwp.View.Setting;
-using Lavcode.Uwp.View.Sync;
+using Lavcode.View.Feedback;
+using Lavcode.View.Notices;
+using Lavcode.View.Setting;
+using Lavcode.View.Sync;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View
+namespace Lavcode.View
 {
     public sealed partial class Commands : UserControl
     {

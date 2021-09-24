@@ -1,4 +1,4 @@
-﻿namespace Lavcode.Uwp.Cryptography
+﻿namespace Lavcode.Cryptography
 {
     public enum OperationType
     {

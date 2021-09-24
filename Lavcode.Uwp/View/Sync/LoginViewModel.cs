@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 using HTools.Uwp;
 using HTools.Uwp.Helpers;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 
-namespace Lavcode.Uwp.View.Sync
+namespace Lavcode.View.Sync
 {
     public class LoginViewModel : ViewModelBase, IElementViewModel
     {

@@ -4,7 +4,7 @@ using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Feedback
+namespace Lavcode.View.Feedback
 {
     public sealed partial class FeedbackPage : Page
     {

@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using System;
 
-namespace Lavcode.Uwp.Model
+namespace Lavcode.Model
 {
     public abstract class UniqueItem
     {

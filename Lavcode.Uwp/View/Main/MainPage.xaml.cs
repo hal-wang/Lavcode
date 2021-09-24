@@ -1,5 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using System;
 using Windows.Storage;
@@ -7,7 +7,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Lavcode.Uwp.View.Main
+namespace Lavcode.View.Main
 {
     public sealed partial class MainPage : Page
     {

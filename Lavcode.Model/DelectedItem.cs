@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Lavcode.Uwp.Model
+namespace Lavcode.Model
 {
     /// <summary>
     /// 记录已删除的文件夹或密码，用于备份恢复

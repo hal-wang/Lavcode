@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Model;
+using Lavcode.Model;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.View.PasswordDetail
 {
     public class KeyValuePairItem : ObservableObject
     {

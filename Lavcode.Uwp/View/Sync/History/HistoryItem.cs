@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 
-namespace Lavcode.Uwp.View.Sync.History
+namespace Lavcode.View.Sync.History
 {
     public class HistoryItem : ObservableObject
     {

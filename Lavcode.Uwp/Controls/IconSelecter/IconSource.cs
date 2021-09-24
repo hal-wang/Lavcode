@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Controls.IconSelecter
 {
     public class IconSource : IIncrementalSource<string>
     {

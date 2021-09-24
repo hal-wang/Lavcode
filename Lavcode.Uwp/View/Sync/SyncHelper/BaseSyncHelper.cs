@@ -1,4 +1,4 @@
-﻿using Lavcode.Uwp.Helpers;
+﻿using Lavcode.Helpers;
 using HTools;
 using HTools.Uwp.Helpers;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
 
-namespace Lavcode.Uwp.View.Sync.SyncHelper
+namespace Lavcode.View.Sync.SyncHelper
 {
     internal abstract class BaseSyncHelper
     {

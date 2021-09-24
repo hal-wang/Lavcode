@@ -142,12 +142,15 @@
     <Compile Include="Controls\IconSelecter\SetPathIcon.xaml.cs">
       <DependentUpon>SetPathIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\FolderItem.cs" />
     <Compile Include="Global\Db.cs" />
     <Compile Include="Global\Default.cs" />
     <Compile Include="Global\Git.cs" />
     <Compile Include="Global\Sync.cs" />
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\HttpClientExtend.cs" />
+    <Compile Include="ViewModel\IconItem.cs" />
+    <Compile Include="ViewModel\PasswordItem.cs" />
     <Compile Include="View\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>
     </Compile>
@@ -548,10 +551,6 @@
     <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj">
       <Project>{64572e81-ba90-4bf4-9b30-2fbdad533665}</Project>
       <Name>Lavcode.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lavcode.Uwp.ViewModel\Lavcode.ViewModel.csproj">
-      <Project>{c2c61d67-6ff3-4e13-a488-adf1acc6a352}</Project>
-      <Name>Lavcode.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

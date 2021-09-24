@@ -3,7 +3,7 @@ using HTools.Uwp.Helpers;
 using System;
 using System.Net.Http;
 
-namespace Lavcode.Uwp.Helpers
+namespace Lavcode.Helpers
 {
     public static class HttpClientExtend
     {

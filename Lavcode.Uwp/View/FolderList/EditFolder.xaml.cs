@@ -1,14 +1,14 @@
 ﻿using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
+using Lavcode.DAL;
+using Lavcode.Helpers;
+using Lavcode.Model;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.FolderList
+namespace Lavcode.View.FolderList
 {
     public sealed partial class EditFolder : ContentDialog, IResultDialog<bool>
     {

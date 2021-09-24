@@ -3,7 +3,7 @@ using HTools.Uwp.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Sync.History
+namespace Lavcode.View.Sync.History
 {
     public sealed partial class HistoryDialog : ContentDialog
     {

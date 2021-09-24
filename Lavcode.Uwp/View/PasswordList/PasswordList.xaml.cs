@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
 using HTools.Uwp.Helpers;
+using Lavcode.DAL;
+using Lavcode.Helpers;
+using Lavcode.Model;
+using Lavcode.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.PasswordList
+namespace Lavcode.View.PasswordList
 {
     public sealed partial class PasswordList : UserControl
     {

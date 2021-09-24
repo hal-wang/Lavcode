@@ -2,7 +2,7 @@
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Git
+namespace Lavcode.View.Git
 {
     public sealed partial class GitInfo : UserControl
     {

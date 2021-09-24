@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Lavcode.Uwp.View.Sync.SyncHelper
+namespace Lavcode.View.Sync.SyncHelper
 {
     internal interface ISyncHelper
     {

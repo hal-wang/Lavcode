@@ -2,8 +2,9 @@
 using GalaSoft.MvvmLight.Messaging;
 using HTools;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
+using Lavcode.DAL;
+using Lavcode.Model;
+using Lavcode.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,7 +13,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.View.PasswordList
+namespace Lavcode.View.PasswordList
 {
     public class PasswordListViewModel : ViewModelBase
     {

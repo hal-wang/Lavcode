@@ -1,10 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
 using HTools;
 using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
+using Lavcode.DAL;
+using Lavcode.Model;
+using Lavcode.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +15,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.PasswordDetail
+namespace Lavcode.View.PasswordDetail
 {
     public class PasswordDetailViewModel : ViewModelBase
     {

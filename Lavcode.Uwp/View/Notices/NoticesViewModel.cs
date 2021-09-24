@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Controls.Comment;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Controls.Comment;
+using Lavcode.Helpers;
 using HTools;
 using HTools.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
@@ -8,7 +8,7 @@ using Octokit;
 using System;
 using System.Threading.Tasks;
 
-namespace Lavcode.Uwp.View.Notices
+namespace Lavcode.View.Notices
 {
     public class NoticesViewModel : ViewModelBase
     {

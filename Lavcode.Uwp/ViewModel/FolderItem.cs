@@ -1,4 +1,6 @@
-﻿namespace Lavcode.Uwp.Model
+﻿using Lavcode.Model;
+
+namespace Lavcode.ViewModel
 {
     public class FolderItem : IconItem
     {

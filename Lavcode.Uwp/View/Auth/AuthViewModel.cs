@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.View.Main;
+using Lavcode.View.Main;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Windows.Security.Credentials;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Auth
+namespace Lavcode.View.Auth
 {
     public class AuthViewModel : ViewModelBase
     {

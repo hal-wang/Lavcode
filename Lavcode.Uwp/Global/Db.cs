@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Windows.Storage;
 
-namespace Lavcode.Uwp
+namespace Lavcode
 {
     /*
      * 数据库相关

@@ -1,5 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Model;
+using Lavcode.Model;
 using Microsoft.Toolkit.Uwp;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,7 +7,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Controls.IconSelecter
 {
     public sealed partial class IconSelecter : UserControl
     {

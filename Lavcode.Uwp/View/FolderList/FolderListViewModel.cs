@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
+using Lavcode.DAL;
+using Lavcode.Helpers;
+using Lavcode.ViewModel;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.FolderList
+namespace Lavcode.View.FolderList
 {
     public class FolderListViewModel : ViewModelBase
     {

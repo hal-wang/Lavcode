@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View
+namespace Lavcode.View
 {
     public sealed partial class Version : UserControl
     {

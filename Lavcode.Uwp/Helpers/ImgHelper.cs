@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
-namespace Lavcode.Uwp.Helpers
+namespace Lavcode.Helpers
 {
     public static class ImgHelper
     {

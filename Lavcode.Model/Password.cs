@@ -2,7 +2,7 @@
 using SQLite;
 using System;
 
-namespace Lavcode.Uwp.Model
+namespace Lavcode.Model
 {
     public class Password : UniqueItem, ICloneable<Password>
     {

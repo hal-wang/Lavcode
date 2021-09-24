@@ -1,12 +1,12 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.View.Sync.History;
+using Lavcode.Helpers;
+using Lavcode.View.Sync.History;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Sync
+namespace Lavcode.View.Sync
 {
     public sealed partial class SyncDialog : ContentDialog
     {

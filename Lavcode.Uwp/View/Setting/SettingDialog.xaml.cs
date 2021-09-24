@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Setting
+namespace Lavcode.View.Setting
 {
     public sealed partial class SettingDialog : ContentDialog
     {

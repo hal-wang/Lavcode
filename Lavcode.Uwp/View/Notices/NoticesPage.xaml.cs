@@ -4,7 +4,7 @@ using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.View.Notices
+namespace Lavcode.View.Notices
 {
     public sealed partial class NoticesPage : Page
     {
