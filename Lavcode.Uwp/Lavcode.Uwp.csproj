@@ -148,7 +148,6 @@
     <Compile Include="Global\Sync.cs" />
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\HttpClientExtend.cs" />
-    <Compile Include="Model\GitHubOauth.cs" />
     <Compile Include="View\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>
     </Compile>
@@ -209,16 +208,6 @@
     <Compile Include="Cryptography\Aes.cs" />
     <Compile Include="Cryptography\OperationType.cs" />
     <Compile Include="Helpers\ImgHelper.cs" />
-    <Compile Include="Helpers\Sqlite\Config.cs" />
-    <Compile Include="Helpers\Sqlite\DelectedItem.cs" />
-    <Compile Include="Helpers\Sqlite\Folder.cs" />
-    <Compile Include="Helpers\Sqlite\Icon.cs" />
-    <Compile Include="Helpers\Sqlite\KeyValuePair.cs" />
-    <Compile Include="Helpers\Sqlite\Password.cs" />
-    <Compile Include="Model\Config.cs" />
-    <Compile Include="Model\IconItem.cs" />
-    <Compile Include="Model\StorageType.cs" />
-    <Compile Include="Model\UniqueItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="View\FolderList\EditFolder.xaml.cs">
       <DependentUpon>EditFolder.xaml</DependentUpon>
@@ -236,15 +225,8 @@
     <Compile Include="View\FolderList\FolderHelper.cs" />
     <Compile Include="View\Sync\Merge.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
-    <Compile Include="Helpers\Sqlite\SqliteHelper.cs" />
     <Compile Include="View\Sync\CloudItem.cs" />
     <Compile Include="View\Sync\CloudType.cs" />
-    <Compile Include="Model\DelectedItem.cs" />
-    <Compile Include="Model\Folder.cs" />
-    <Compile Include="Model\IconType.cs" />
-    <Compile Include="Model\KeyValuePair.cs" />
-    <Compile Include="Model\Password.cs" />
-    <Compile Include="Model\Icon.cs" />
     <Compile Include="View\Sync\SyncViewModel.cs" />
     <Compile Include="View\Feedback\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
@@ -258,9 +240,7 @@
     <Compile Include="View\FolderList\FolderListViewModel.cs" />
     <Compile Include="View\Git\GitInfoViewModel.cs" />
     <Compile Include="View\Auth\AuthViewModel.cs" />
-    <Compile Include="Model\FolderItem.cs" />
     <Compile Include="View\PasswordDetail\KeyValuePairItem.cs" />
-    <Compile Include="Model\PasswordItem.cs" />
     <Compile Include="View\PasswordDetail\PasswordDetailViewModel.cs" />
     <Compile Include="View\PasswordDetail\PasswordGeneratorViewModel.cs" />
     <Compile Include="View\PasswordList\PasswordListViewModel.cs" />
@@ -559,6 +539,20 @@
     <SDKReference Include="Microsoft.VCLibs.Desktop, Version=14.0">
       <Name>Visual C++ 2015 UWP Desktop Runtime for native apps</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lavcode.DAL\Lavcode.DAL.csproj">
+      <Project>{f17678ca-7704-46ab-8552-f790c2c4814d}</Project>
+      <Name>Lavcode.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj">
+      <Project>{64572e81-ba90-4bf4-9b30-2fbdad533665}</Project>
+      <Name>Lavcode.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Uwp.ViewModel\Lavcode.ViewModel.csproj">
+      <Project>{c2c61d67-6ff3-4e13-a488-adf1acc6a352}</Project>
+      <Name>Lavcode.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -16,7 +16,8 @@ namespace Lavcode.Uwp.Helpers.Sqlite
 
         private static bool _inited = false;
         public SqliteHelper() :
-            base(Global.DbFilePath)
+#warning TODO
+            base("")
         {
             if (_inited)
             {
