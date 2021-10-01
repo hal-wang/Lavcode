@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavcode", "Lavcode.csproj", "{6A58D9D3-2DA7-43A0-AB3F-98819E0CF729}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavcode", ".\Lavcode\Lavcode.csproj", "{6A58D9D3-2DA7-43A0-AB3F-98819E0CF729}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lavcode.Model", "..\Lavcode.Model\Lavcode.Model.csproj", "{64572E81-BA90-4BF4-9B30-2FBDAD533665}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lavcode.Model", ".\Lavcode.Model\Lavcode.Model.csproj", "{64572E81-BA90-4BF4-9B30-2FBDAD533665}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lavcode.DAL", "..\Lavcode.DAL\Lavcode.DAL.csproj", "{F17678CA-7704-46AB-8552-F790C2C4814D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lavcode.DAL", ".\Lavcode.DAL\Lavcode.DAL.csproj", "{F17678CA-7704-46AB-8552-F790C2C4814D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lavcode.BLL", "..\Lavcode.BLL\Lavcode.BLL.csproj", "{69E605FC-0037-477B-BC33-B6D3499A911E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lavcode.BLL", ".\Lavcode.BLL\Lavcode.BLL.csproj", "{69E605FC-0037-477B-BC33-B6D3499A911E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
