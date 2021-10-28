@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lavcode.IBLL\Lavcode.IService.csproj" />
+    <ProjectReference Include="..\Lavcode.IService\Lavcode.IService.csproj" />
   </ItemGroup>
 
 </Project>
