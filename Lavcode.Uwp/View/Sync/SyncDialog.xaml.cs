@@ -1,6 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.View.Sync.History;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;

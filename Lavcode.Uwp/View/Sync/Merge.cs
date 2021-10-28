@@ -1,5 +1,5 @@
-﻿using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.Model;
+﻿using Lavcode.IService;
+using Lavcode.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +9,21 @@ namespace Lavcode.Uwp.View.Sync
 {
     public class Merge : IDisposable
     {
-        private readonly SqliteHelper _localDb = null;
-        private readonly SqliteHelper _remoteDb = null;
+        private Service.Sqlite.SqliteHelper _localSqliteHelper;
+        private Service.Sqlite.SqliteHelper _remoteSqliteHelper;
+
+        private Merge() { }
 
         /// <summary>
         /// 自动合并，更新localDb
         /// </summary>
-        public Merge(string localDbPath, string remoteDbPath)
+        public static async Task<Merge> OpenAsync(string localDbPath, string remoteDbPath)
         {
-            _localDb = new SqliteHelper(localDbPath);
-            _remoteDb = new SqliteHelper(remoteDbPath);
+            var result = new Merge();
+            result._localSqliteHelper = await Service.Sqlite.SqliteHelper.OpenAsync(localDbPath);
+            result._remoteSqliteHelper = await Service.Sqlite.SqliteHelper.OpenAsync(remoteDbPath);
+            
+            return result;
         }
 
         /// <summary>
@@ -37,13 +42,13 @@ namespace Lavcode.Uwp.View.Sync
             await DeletePasswordItems(delectedItems);
 
             // 更新文件夹
-            var remoteFolders = await _remoteDb.GetFolders();
-            var localFolders = await _localDb.GetFolders();
+            var remoteFolders = await _remoteSqliteHelper.FolderService.GetFolders();
+            var localFolders = await _localSqliteHelper.FolderService.GetFolders();
             await UpdateFolders(localFolders, remoteFolders);
 
             // 更新密码
-            var remotePasswords = await _remoteDb.GetPasswords();
-            var localPasswords = await _localDb.GetPasswords();
+            var remotePasswords = await _remoteSqliteHelper.PasswordService.GetPasswords();
+            var localPasswords = await _localSqliteHelper.PasswordService.GetPasswords();
             await UpdatePasswords(localPasswords, remotePasswords);
 
             // 添加
@@ -64,8 +69,8 @@ namespace Lavcode.Uwp.View.Sync
                     continue;
                 }
 
-                var remoteIcon = await _remoteDb.GetIcon(remoteFolder.Id);
-                await _localDb.AddFolder(remoteFolder, remoteIcon);
+                var remoteIcon = await _remoteSqliteHelper.IconService.GetIcon(remoteFolder.Id);
+                await _localSqliteHelper.FolderService.AddFolder(remoteFolder, remoteIcon);
             }
         }
 
@@ -79,9 +84,9 @@ namespace Lavcode.Uwp.View.Sync
                     continue;
                 }
 
-                var remoteIcon = await _remoteDb.GetIcon(remotePassword.Id);
-                var remoteKvp = await _remoteDb.GetKeyValuePairs(remotePassword.Id);
-                await _localDb.UpdatePassword(remotePassword, remoteIcon, remoteKvp);
+                var remoteIcon = await _remoteSqliteHelper.IconService.GetIcon(remotePassword.Id);
+                var remoteKvp = await _remoteSqliteHelper.KeyValuePairService.GetKeyValuePairs(remotePassword.Id);
+                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, remoteIcon, remoteKvp);
             }
         }
 
@@ -95,8 +100,8 @@ namespace Lavcode.Uwp.View.Sync
                     continue;
                 }
 
-                var remoteIcon = await _remoteDb.GetIcon(remoteFolder.Id);
-                await _localDb.UpdateFolder(remoteFolder, remoteIcon);
+                var remoteIcon = await _remoteSqliteHelper.IconService.GetIcon(remoteFolder.Id);
+                await _localSqliteHelper.FolderService.UpdateFolder(remoteFolder, remoteIcon);
             }
         }
 
@@ -110,9 +115,9 @@ namespace Lavcode.Uwp.View.Sync
                     continue;
                 }
 
-                var remoteIcon = await _remoteDb.GetIcon(remotePassword.Id);
-                var remoteKvp = await _remoteDb.GetKeyValuePairs(remotePassword.Id);
-                await _localDb.UpdatePassword(remotePassword, remoteIcon, remoteKvp);
+                var remoteIcon = await _remoteSqliteHelper.IconService.GetIcon(remotePassword.Id);
+                var remoteKvp = await _remoteSqliteHelper.KeyValuePairService.GetKeyValuePairs(remotePassword.Id);
+                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, remoteIcon, remoteKvp);
             }
         }
 
@@ -120,8 +125,8 @@ namespace Lavcode.Uwp.View.Sync
         {
             foreach (var delectedPassword in delectedItems.Where((item) => item.StorageType == StorageType.Password))
             {
-                await _localDb.DeletePassword(delectedPassword.Id, false);
-                await _remoteDb.DeletePassword(delectedPassword.Id, false);
+                await _localSqliteHelper.PasswordService.DeletePassword(delectedPassword.Id, false);
+                await _remoteSqliteHelper.PasswordService.DeletePassword(delectedPassword.Id, false);
             }
         }
 
@@ -129,8 +134,8 @@ namespace Lavcode.Uwp.View.Sync
         {
             foreach (var delectedFolder in delectedItems.Where((item) => item.StorageType == StorageType.Folder))
             {
-                await _localDb.DeleteFolder(delectedFolder.Id, false);
-                await _remoteDb.DeleteFolder(delectedFolder.Id, false);
+                await _localSqliteHelper.FolderService.DeleteFolder(delectedFolder.Id, false);
+                await _remoteSqliteHelper.FolderService.DeleteFolder(delectedFolder.Id, false);
             }
         }
 
@@ -141,20 +146,18 @@ namespace Lavcode.Uwp.View.Sync
         private async Task<List<DelectedItem>> MergeDelectedItems()
         {
             var result = new List<DelectedItem>();
-            var localDelectedItems = await _localDb.GetDelectedItems();
-            var remoteDelectedItems = await _remoteDb.GetDelectedItems();
+            var localDelectedItems = await _localSqliteHelper.DeletedService.GetDelectedItems();
+            var remoteDelectedItems = await _remoteSqliteHelper.DeletedService.GetDelectedItems();
 
             var appendedItems = remoteDelectedItems.Where(
                 (remoteDelectedItem) => localDelectedItems.Where(
-                    (localDelectedItem) => localDelectedItem.Id == remoteDelectedItem.Id && localDelectedItem.StorageType == remoteDelectedItem.StorageType).Count() == 0);
+                    (localDelectedItem) => localDelectedItem.Id == remoteDelectedItem.Id && localDelectedItem.StorageType == remoteDelectedItem.StorageType).Count() == 0)
+                .ToList();
 
             result.AddRange(localDelectedItems);
             result.AddRange(appendedItems);
 
-            foreach (var item in appendedItems)
-            {
-                _localDb.Insert(item);
-            }
+            await _localSqliteHelper.DeletedService.Add(appendedItems);
 
             return result;
         }
@@ -166,8 +169,8 @@ namespace Lavcode.Uwp.View.Sync
 
         public void Dispose()
         {
-            _localDb?.Dispose();
-            _remoteDb?.Dispose();
+            _localSqliteHelper?.Dispose();
+            _remoteSqliteHelper?.Dispose();
         }
     }
 }

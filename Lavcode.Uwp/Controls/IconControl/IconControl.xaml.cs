@@ -1,5 +1,5 @@
-﻿using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Model;
+﻿using Lavcode.Model;
+using Lavcode.Uwp.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

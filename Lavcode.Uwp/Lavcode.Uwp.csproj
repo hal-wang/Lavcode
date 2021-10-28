@@ -21,7 +21,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>81A00110C907377948080CEC6A0CAB77BDBBF05C</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>096F2638A9D64C103F1DF53916EAC9D8CFFB2425</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
@@ -148,7 +148,7 @@
     <Compile Include="Global\Sync.cs" />
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\HttpClientExtend.cs" />
-    <Compile Include="Model\GitHubOauth.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>
     </Compile>
@@ -190,11 +190,11 @@
     </Compile>
     <Compile Include="View\Setting\SettingViewModel.cs" />
     <Compile Include="View\Sync\SyncHelper\BaseSyncHelper.cs" />
-    <Compile Include="View\Sync\History\HistoryDialog.xaml.cs">
+    <Compile Include="View\Sync\HistoryDialog.xaml.cs">
       <DependentUpon>HistoryDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sync\History\HistoryItem.cs" />
-    <Compile Include="View\Sync\History\HistoryViewModel.cs" />
+    <Compile Include="ViewModel\SyncHistoryItem.cs" />
+    <Compile Include="ViewModel\SyncHistoryViewModel.cs" />
     <Compile Include="View\Sync\SyncFileHandler.xaml.cs">
       <DependentUpon>SyncFileHandler.xaml</DependentUpon>
     </Compile>
@@ -209,42 +209,25 @@
     <Compile Include="Cryptography\Aes.cs" />
     <Compile Include="Cryptography\OperationType.cs" />
     <Compile Include="Helpers\ImgHelper.cs" />
-    <Compile Include="Helpers\Sqlite\Config.cs" />
-    <Compile Include="Helpers\Sqlite\DelectedItem.cs" />
-    <Compile Include="Helpers\Sqlite\Folder.cs" />
-    <Compile Include="Helpers\Sqlite\Icon.cs" />
-    <Compile Include="Helpers\Sqlite\KeyValuePair.cs" />
-    <Compile Include="Helpers\Sqlite\Password.cs" />
-    <Compile Include="Model\Config.cs" />
-    <Compile Include="Model\IconItem.cs" />
-    <Compile Include="Model\StorageType.cs" />
-    <Compile Include="Model\UniqueItem.cs" />
+    <Compile Include="ViewModel\IconItem.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="View\FolderList\EditFolder.xaml.cs">
+    <Compile Include="View\EditFolder.xaml.cs">
       <DependentUpon>EditFolder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Main\MainPage.xaml.cs">
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Main\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\Notices\NoticesPage.xaml.cs">
       <DependentUpon>NoticesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Notices\NoticesViewModel.cs" />
     <Compile Include="Global\Others.cs" />
     <Compile Include="View\Sync\SyncHelper\DavSyncHelper.cs" />
-    <Compile Include="View\FolderList\FolderHelper.cs" />
     <Compile Include="View\Sync\Merge.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
-    <Compile Include="Helpers\Sqlite\SqliteHelper.cs" />
     <Compile Include="View\Sync\CloudItem.cs" />
     <Compile Include="View\Sync\CloudType.cs" />
-    <Compile Include="Model\DelectedItem.cs" />
-    <Compile Include="Model\Folder.cs" />
-    <Compile Include="Model\IconType.cs" />
-    <Compile Include="Model\KeyValuePair.cs" />
-    <Compile Include="Model\Password.cs" />
-    <Compile Include="Model\Icon.cs" />
     <Compile Include="View\Sync\SyncViewModel.cs" />
     <Compile Include="View\Feedback\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
@@ -254,16 +237,16 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sync\LoginViewModel.cs" />
-    <Compile Include="View\PasswordList\MoveToViewModel.cs" />
-    <Compile Include="View\FolderList\FolderListViewModel.cs" />
+    <Compile Include="ViewModel\PasswordMoveToViewModel.cs" />
+    <Compile Include="ViewModel\FolderListViewModel.cs" />
     <Compile Include="View\Git\GitInfoViewModel.cs" />
-    <Compile Include="View\Auth\AuthViewModel.cs" />
-    <Compile Include="Model\FolderItem.cs" />
-    <Compile Include="View\PasswordDetail\KeyValuePairItem.cs" />
-    <Compile Include="Model\PasswordItem.cs" />
-    <Compile Include="View\PasswordDetail\PasswordDetailViewModel.cs" />
+    <Compile Include="ViewModel\AuthViewModel.cs" />
+    <Compile Include="ViewModel\FolderItem.cs" />
+    <Compile Include="ViewModel\KeyValuePairItem.cs" />
+    <Compile Include="ViewModel\PasswordItem.cs" />
+    <Compile Include="ViewModel\PasswordDetailViewModel.cs" />
     <Compile Include="View\PasswordDetail\PasswordGeneratorViewModel.cs" />
-    <Compile Include="View\PasswordList\PasswordListViewModel.cs" />
+    <Compile Include="ViewModel\PasswordListViewModel.cs" />
     <Compile Include="View\Sync\SyncDialog.xaml.cs">
       <DependentUpon>SyncDialog.xaml</DependentUpon>
     </Compile>
@@ -276,17 +259,17 @@
     <Compile Include="View\Sync\LoginDialog.xaml.cs">
       <DependentUpon>LoginDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordList\MoveToDialog.xaml.cs">
-      <DependentUpon>MoveToDialog.xaml</DependentUpon>
+    <Compile Include="View\PasswordMoveToDialog.xaml.cs">
+      <DependentUpon>PasswordMoveToDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FolderList\FolderList.xaml.cs">
+    <Compile Include="View\FolderList.xaml.cs">
       <DependentUpon>FolderList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Git\GitInfo.xaml.cs">
       <DependentUpon>GitInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Auth\AuthPage.xaml.cs">
+    <Compile Include="View\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PasswordDetail\PasswordDetail.xaml.cs">
@@ -295,7 +278,7 @@
     <Compile Include="View\PasswordDetail\PasswordGenerator.xaml.cs">
       <DependentUpon>PasswordGenerator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordList\PasswordList.xaml.cs">
+    <Compile Include="View\PasswordList.xaml.cs">
       <DependentUpon>PasswordList.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -436,7 +419,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sync\History\HistoryDialog.xaml">
+    <Page Include="View\Sync\HistoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -476,11 +459,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FolderList\EditFolder.xaml">
+    <Page Include="View\EditFolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Main\MainPage.xaml">
+    <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -500,11 +483,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordList\MoveToDialog.xaml">
+    <Page Include="View\PasswordMoveToDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FolderList\FolderList.xaml">
+    <Page Include="View\FolderList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -512,7 +495,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Auth\AuthPage.xaml">
+    <Page Include="View\AuthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -524,23 +507,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordList\PasswordList.xaml">
+    <Page Include="View\PasswordList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HTools">
-      <Version>1.5.18</Version>
+      <Version>1.6.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.12</Version>
+      <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Services.Store.Engagement">
       <Version>10.1901.28001</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <Version>7.0.2</Version>
+      <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
@@ -560,6 +543,21 @@
       <Name>Visual C++ 2015 UWP Desktop Runtime for native apps</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lavcode.Service.Sqlite\Lavcode.Service.Sqlite.csproj">
+      <Project>{9b3d36d0-d0f8-4889-83f2-8730a72c61fa}</Project>
+      <Name>Lavcode.Service.Sqlite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.IService\Lavcode.IService.csproj">
+      <Project>{461CE031-21FF-4516-BC6A-0F79A2096EC5}</Project>
+      <Name>Lavcode.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj">
+      <Project>{BA98ED11-034C-4EC0-ABE0-2B81BD5ABCFB}</Project>
+      <Name>Lavcode.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

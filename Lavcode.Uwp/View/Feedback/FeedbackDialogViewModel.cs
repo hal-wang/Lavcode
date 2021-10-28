@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
+using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Model;
+using Lavcode.Uwp.Helpers;
+using Newtonsoft.Json.Linq;
 using Octokit;
 using System;
 using System.Threading.Tasks;
-using HTools;
-using Lavcode.Uwp.Model;
 using Windows.System;
-using Newtonsoft.Json.Linq;
 
 namespace Lavcode.Uwp.View.Feedback
 {

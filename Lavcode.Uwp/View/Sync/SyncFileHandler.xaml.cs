@@ -1,7 +1,8 @@
-﻿using Lavcode.Uwp.Helpers.Sqlite;
-using Lavcode.Uwp.View.Sync.SyncHelper;
+﻿using GalaSoft.MvvmLight.Ioc;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.IService;
+using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -20,7 +21,8 @@ namespace Lavcode.Uwp.View.Sync
         public SyncFileHandler()
         {
             this.InitializeComponent();
-            SqliteHelper.OnDbChanged += () => IsDbChanged = true;
+            (SimpleIoc.Default.GetInstance<IConService>() as Lavcode.Service.Sqlite.ConService).Connection.TableChanged += (ss, ee) => IsDbChanged = true;
+
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
             Global.UnsaveDialogAction += this.ShowUnsaveDialog;
             Init();

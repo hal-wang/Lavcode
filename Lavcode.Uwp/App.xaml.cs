@@ -1,7 +1,6 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.View.Auth;
-using Lavcode.Uwp.View.Main;
+using Lavcode.Uwp.View;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;

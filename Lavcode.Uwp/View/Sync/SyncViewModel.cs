@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Lavcode.Uwp.View.Sync.SyncHelper;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -121,10 +121,8 @@ namespace Lavcode.Uwp.View.Sync
 
                 LoadingHelper.Show("正在整理");
                 var localDbFile = await syncHelper.GetTempLocalFile();
-                using (Merge merge = new Merge(localDbFile.Path, remoteDbFile.Path))
-                {
-                    await merge.AutoMerge();
-                }
+                using var merge = await Sync.Merge.OpenAsync(localDbFile.Path, remoteDbFile.Path);
+                await merge.AutoMerge();
 
                 LoadingHelper.Show($"正在{(isRemote ? "上传" : "导出")}");
                 if (!await syncHelper.SetFile(localDbFile))

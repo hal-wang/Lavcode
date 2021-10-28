@@ -1,5 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Model;
+using Lavcode.Model;
 using Microsoft.Toolkit.Uwp;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;

@@ -1,6 +1,7 @@
 ﻿using Lavcode.Uwp.View.Sync;
 using HTools.Uwp.Helpers;
 using System;
+using Lavcode.Model;
 
 namespace Lavcode.Uwp.Helpers
 {
@@ -117,6 +118,12 @@ namespace Lavcode.Uwp.Helpers
         {
             get { return Get<string>(); }
             set { Set(value); }
+        }
+
+        public Provider Provider
+        {
+            get => (Provider)Get((int)Provider.Sqlite);
+            set => Set((int)value);
         }
     }
 }
