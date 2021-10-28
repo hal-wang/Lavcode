@@ -1,5 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.View;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;

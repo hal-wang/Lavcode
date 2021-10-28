@@ -1,8 +1,8 @@
 ﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.SqliteSync.View;
 using Lavcode.Uwp.View.Feedback;
 using Lavcode.Uwp.View.Notices;
 using Lavcode.Uwp.View.Setting;
-using Lavcode.Uwp.View.Sync;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

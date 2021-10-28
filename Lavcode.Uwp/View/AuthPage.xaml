@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hluc="using:Lavcode.Uwp.Controls"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
     xmlns:hluv="using:Lavcode.Uwp.View"
     xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
@@ -27,8 +27,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            
-            <hluc:Logo />
+
+            <lucv:Logo />
             
             <huc:TitleBar Grid.Column="1">
                 <hluv:Version/>

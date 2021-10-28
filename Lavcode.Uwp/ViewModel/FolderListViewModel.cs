@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.View;
 using Microsoft.UI.Xaml.Controls;
 using System;

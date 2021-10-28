@@ -4,14 +4,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:luc="using:Lavcode.Uwp.Controls"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
     xmlns:hluv="using:Lavcode.Uwp.View"
     mc:Ignorable="d"
     Style="{ThemeResource DefaultContentDialogStyle}">
 
     <ContentDialog.Title>
-        <luc:DialogTitle Title="帮助" Closable="True" Dialog="{x:Bind}">
-            <luc:DialogTitle.TitleExtension>
+        <lucv:DialogTitle Title="帮助" Closable="True" Dialog="{x:Bind}">
+            <lucv:DialogTitle.TitleExtension>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right">
                     <Image Source="/Assets/Images/qq_group.jpg"
@@ -23,8 +23,8 @@
                         <TextBlock Text="欢迎加入QQ群"/>
                     </StackPanel>
                 </StackPanel>
-            </luc:DialogTitle.TitleExtension>
-        </luc:DialogTitle>
+            </lucv:DialogTitle.TitleExtension>
+        </lucv:DialogTitle>
     </ContentDialog.Title>
 
     <StackPanel Width="340">

@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Common;
 
 namespace Lavcode.Uwp.View.Setting
 {

@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Controls.Comment;
-using Lavcode.Uwp.Helpers;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Common.View.Comment;
+using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
 using Octokit;
 using System;

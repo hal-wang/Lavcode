@@ -8,8 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hluc="using:Lavcode.Uwp.Controls"
-    xmlns:hlucc="using:Lavcode.Uwp.Controls.Comment"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
+    xmlns:lucvc="using:Lavcode.Uwp.Common.View.Comment"
     xmlns:local="using:Lavcode.Uwp.View.Feedback"
     xmlns:huc="using:HTools.Uwp.Controls"
     mc:Ignorable="d"
@@ -27,7 +27,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <hluc:Header Text="反馈">
+        <lucv:Header Text="反馈">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -88,7 +88,7 @@
                     </local:Icon>
                 </StackPanel>
             </Grid>
-        </hluc:Header>
+        </lucv:Header>
 
         <Grid Grid.Row="1"
               Margin="0 20">
@@ -126,7 +126,7 @@
             </StackPanel>
         </Grid>
 
-        <hlucc:CommentList Grid.Row="2"
+        <lucvc:CommentList Grid.Row="2"
                            Comments="{x:Bind VM.Feedbacks,Mode=OneWay}"/>
     </Grid>
 </Page>

@@ -4,14 +4,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:luc="using:Lavcode.Uwp.Controls"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
     <ContentDialog.Title>
-        <luc:DialogTitle Title="Markdown 预览" Closable="True" Dialog="{x:Bind}"/>
+        <lucv:DialogTitle Title="Markdown 预览" Closable="True" Dialog="{x:Bind}"/>
     </ContentDialog.Title>
 
     <Grid BorderBrush="{ThemeResource SystemBaseLowColor}"

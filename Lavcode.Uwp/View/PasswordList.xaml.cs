@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.ViewModel;
 using Newtonsoft.Json;
 using System;

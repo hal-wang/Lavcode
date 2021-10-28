@@ -1,0 +1,67 @@
+﻿<!--
+    某个 Issue 下的Comments
+    -->
+
+<UserControl
+    x:Class="Lavcode.Uwp.Common.View.Comment.CommentList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:octokit="using:Octokit"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <ListView ItemsSource="{x:Bind Comments,Mode=OneWay}"
+              IsItemClickEnabled="False"
+              SelectionMode="None"
+              BorderThickness="0 1 0 0">
+        <ListView.BorderBrush>
+            <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}" Opacity="0.2"/>
+        </ListView.BorderBrush>
+
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="BorderThickness" Value="0 0 0 1" />
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}" Opacity="0.2"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+        </ListView.ItemContainerStyle>
+
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="octokit:IssueComment">
+                <ScrollViewer MaxHeight="600">
+                    <StackPanel Margin="10 10 16 4">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Border VerticalAlignment="Center"
+                                    Width="24"
+                                    Height="24"
+                                    CornerRadius="12"
+                                    Margin="0 0 6 0">
+                                    <Image Source="{x:Bind User.AvatarUrl}"/>
+                                </Border>
+                                <TextBlock Text="{x:Bind User.Login}"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <TextBlock Text="{x:Bind UpdatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
+                                   HorizontalAlignment="Right"/>
+                        </Grid>
+                        <controls:MarkdownTextBlock x:Name="MarkdownText"
+                                                Margin="6"
+                                                Text="{x:Bind Body}"
+                                                Background="Transparent"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</UserControl>

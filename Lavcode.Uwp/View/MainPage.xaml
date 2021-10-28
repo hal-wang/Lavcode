@@ -5,10 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:huc="using:HTools.Uwp.Controls"
-    xmlns:hluc="using:Lavcode.Uwp.Controls"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
     xmlns:hluv="using:Lavcode.Uwp.View"
     xmlns:hluvpd="using:Lavcode.Uwp.View.PasswordDetail"
-    xmlns:hlucs="using:Lavcode.Uwp.View.Sync"
+    xmlns:lusv="using:Lavcode.Uwp.SqliteSync.View"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
@@ -30,8 +30,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            
-            <hluc:Logo />
+
+            <lucv:Logo />
             
             <huc:TitleBar Grid.Column="1">
                 <Grid>
@@ -57,7 +57,7 @@
             </huc:TitleBar>
             <StackPanel Grid.Column="2"
                         Orientation="Horizontal">
-                <hlucs:SyncFileHandler  x:Name="SyncFileHandler"
+                <lusv:SyncFileHandler  x:Name="SyncFileHandler"
                                         x:DeferLoadStrategy="Lazy"
                                         OpenedFile="{x:Bind VM.OpenedFile,Mode=TwoWay}"
                                         OnLoaded="{x:Bind LoadUI}"/>

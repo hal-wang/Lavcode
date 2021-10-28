@@ -1,7 +1,7 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Lavcode.IService;
-using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Common;
 
 namespace Lavcode.Uwp.ViewModel
 {
@@ -50,7 +50,6 @@ namespace Lavcode.Uwp.ViewModel
             SimpleIoc.Default.Register<PasswordDetailViewModel>();
             SimpleIoc.Default.Register<PasswordMoveToViewModel>();
             SimpleIoc.Default.Register<PasswordListViewModel>();
-            SimpleIoc.Default.Register<SyncHistoryViewModel>();
         }
     }
 }

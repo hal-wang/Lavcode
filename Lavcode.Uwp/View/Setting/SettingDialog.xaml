@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:htucs="using:HTools.Uwp.Controls.Setting"
-    xmlns:luc="using:Lavcode.Uwp.Controls"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
     xmlns:local="using:Lavcode.Uwp.View.Setting"
     Style="{ThemeResource DefaultContentDialogStyle}"
     mc:Ignorable="d">
@@ -15,7 +15,7 @@
     </ContentDialog.DataContext>
 
     <ContentDialog.Title>
-        <luc:DialogTitle Title="设置" Closable="True" Dialog="{x:Bind}"/>
+        <lucv:DialogTitle Title="设置" Closable="True" Dialog="{x:Bind}"/>
     </ContentDialog.Title>
 
     <StackPanel>

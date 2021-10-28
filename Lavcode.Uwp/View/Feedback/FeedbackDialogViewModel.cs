@@ -2,6 +2,7 @@
 using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Helpers;
 using Newtonsoft.Json.Linq;
 using Octokit;

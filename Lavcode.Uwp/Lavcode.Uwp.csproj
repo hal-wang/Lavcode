@@ -21,7 +21,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>096F2638A9D64C103F1DF53916EAC9D8CFFB2425</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>81A00110C907377948080CEC6A0CAB77BDBBF05C</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
@@ -132,22 +132,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DialogTitle.xaml.cs">
-      <DependentUpon>DialogTitle.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IconSelecter\IconSelecter.xaml.cs">
-      <DependentUpon>IconSelecter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IconSelecter\IconSource.cs" />
-    <Compile Include="Controls\IconSelecter\SetPathIcon.xaml.cs">
-      <DependentUpon>SetPathIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Global\Db.cs" />
-    <Compile Include="Global\Default.cs" />
-    <Compile Include="Global\Git.cs" />
-    <Compile Include="Global\Sync.cs" />
-    <Compile Include="Helpers\GitHubHelper.cs" />
-    <Compile Include="Helpers\HttpClientExtend.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>
@@ -155,10 +139,6 @@
     <Compile Include="View\Commands.xaml.cs">
       <DependentUpon>Commands.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Comment\CommentList.xaml.cs">
-      <DependentUpon>CommentList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Comment\CommentSource.cs" />
     <Compile Include="View\Feedback\FeedbackDialog.xaml.cs">
       <DependentUpon>FeedbackDialog.xaml</DependentUpon>
     </Compile>
@@ -172,16 +152,6 @@
     <Compile Include="View\Git\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Header.xaml.cs">
-      <DependentUpon>Header.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IconControl\IconControl.xaml.cs">
-      <DependentUpon>IconControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IconControl\IconViewModel.cs" />
-    <Compile Include="Controls\Logo.xaml.cs">
-      <DependentUpon>Logo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
     </Compile>
@@ -189,30 +159,13 @@
       <DependentUpon>SettingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Setting\SettingViewModel.cs" />
-    <Compile Include="View\Sync\SyncHelper\BaseSyncHelper.cs" />
-    <Compile Include="View\Sync\HistoryDialog.xaml.cs">
-      <DependentUpon>HistoryDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\SyncHistoryItem.cs" />
-    <Compile Include="ViewModel\SyncHistoryViewModel.cs" />
-    <Compile Include="View\Sync\SyncFileHandler.xaml.cs">
-      <DependentUpon>SyncFileHandler.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Sync\SyncHelper\FileSyncHelper.cs" />
-    <Compile Include="View\Sync\SyncHelper\ISyncHelper.cs" />
-    <Compile Include="View\Sync\Validator.xaml.cs">
-      <DependentUpon>Validator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Version.xaml.cs">
       <DependentUpon>Version.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cryptography\Aes.cs" />
-    <Compile Include="Cryptography\OperationType.cs" />
-    <Compile Include="Helpers\ImgHelper.cs" />
     <Compile Include="ViewModel\IconItem.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="View\EditFolder.xaml.cs">
-      <DependentUpon>EditFolder.xaml</DependentUpon>
+    <Compile Include="View\EditFolderDialog.xaml.cs">
+      <DependentUpon>EditFolderDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -222,13 +175,6 @@
       <DependentUpon>NoticesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Notices\NoticesViewModel.cs" />
-    <Compile Include="Global\Others.cs" />
-    <Compile Include="View\Sync\SyncHelper\DavSyncHelper.cs" />
-    <Compile Include="View\Sync\Merge.cs" />
-    <Compile Include="Helpers\SettingHelper.cs" />
-    <Compile Include="View\Sync\CloudItem.cs" />
-    <Compile Include="View\Sync\CloudType.cs" />
-    <Compile Include="View\Sync\SyncViewModel.cs" />
     <Compile Include="View\Feedback\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
     </Compile>
@@ -236,7 +182,6 @@
     <Compile Include="View\Feedback\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sync\LoginViewModel.cs" />
     <Compile Include="ViewModel\PasswordMoveToViewModel.cs" />
     <Compile Include="ViewModel\FolderListViewModel.cs" />
     <Compile Include="View\Git\GitInfoViewModel.cs" />
@@ -247,17 +192,11 @@
     <Compile Include="ViewModel\PasswordDetailViewModel.cs" />
     <Compile Include="View\PasswordDetail\PasswordGeneratorViewModel.cs" />
     <Compile Include="ViewModel\PasswordListViewModel.cs" />
-    <Compile Include="View\Sync\SyncDialog.xaml.cs">
-      <DependentUpon>SyncDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PasswordDetail\CustomKeyDialog.xaml.cs">
       <DependentUpon>CustomKeyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HelpDialog.xaml.cs">
       <DependentUpon>HelpDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Sync\LoginDialog.xaml.cs">
-      <DependentUpon>LoginDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PasswordMoveToDialog.xaml.cs">
       <DependentUpon>PasswordMoveToDialog.xaml</DependentUpon>
@@ -359,27 +298,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\DialogTitle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\IconSelecter\IconSelecter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\IconSelecter\SetPathIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\BackSvg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Commands.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Comment\CommentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,35 +322,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Header.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\IconControl\IconControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Logo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Rating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Setting\SettingDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Sync\HistoryDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Sync\SyncFileHandler.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Sync\Validator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,10 +337,6 @@
     <Page Include="Resources\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Sync\SyncDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Resources.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -459,7 +354,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditFolder.xaml">
+    <Page Include="View\EditFolderDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -476,10 +371,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HelpDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Sync\LoginDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -544,6 +435,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lavcode.Service.GitHub\Lavcode.Service.GitHub.csproj">
+      <Project>{49ab6388-db31-44dc-b731-a1435b040e7a}</Project>
+      <Name>Lavcode.Service.GitHub</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lavcode.Service.Sqlite\Lavcode.Service.Sqlite.csproj">
       <Project>{9b3d36d0-d0f8-4889-83f2-8730a72c61fa}</Project>
       <Name>Lavcode.Service.Sqlite</Name>
@@ -555,6 +450,14 @@
     <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj">
       <Project>{BA98ED11-034C-4EC0-ABE0-2B81BD5ABCFB}</Project>
       <Name>Lavcode.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Uwp.Common\Lavcode.Uwp.Common.csproj">
+      <Project>{6705ca51-5971-4796-b916-394c1851c550}</Project>
+      <Name>Lavcode.Uwp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Uwp.SqliteSync\Lavcode.Uwp.SqliteSync.csproj">
+      <Project>{3bb2b023-18d4-4825-91b8-8606bdb085f7}</Project>
+      <Name>Lavcode.Uwp.SqliteSync</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

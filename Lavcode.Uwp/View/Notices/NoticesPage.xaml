@@ -5,8 +5,8 @@
 <Page x:Class="Lavcode.Uwp.View.Notices.NoticesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:hluc="using:Lavcode.Uwp.Controls"
-      xmlns:hlucc="using:Lavcode.Uwp.Controls.Comment"
+      xmlns:lucv="using:Lavcode.Uwp.Common.View"
+      xmlns:lucvc="using:Lavcode.Uwp.Common.View.Comment"
       xmlns:local="using:Lavcode.Uwp.View.Notices"
       xmlns:huc="using:HTools.Uwp.Controls"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -22,7 +22,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <hluc:Header Text="通知">
+        <lucv:Header Text="通知">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -61,9 +61,9 @@
                     </Button>
                 </StackPanel>
             </Grid>
-        </hluc:Header>
+        </lucv:Header>
 
-        <hlucc:CommentList Comments="{x:Bind VM.Notices,Mode=OneWay}"
+        <lucvc:CommentList Comments="{x:Bind VM.Notices,Mode=OneWay}"
                            Grid.Row="1"
                            Margin="0 20 0 0"/>
     </Grid>
