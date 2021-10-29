@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Text;
-using Windows.Storage;
 
-namespace Lavcode.Uwp
+namespace Lavcode.Uwp.SqliteSync
 {
-    /*
-     * 同步相关
-     */
-    public static partial class Global
+    internal class Constant
     {
         /// <summary>
         /// 同步时，临时文件存放的文件夹名称
@@ -63,12 +59,5 @@ namespace Lavcode.Uwp
         /// 云盘中的数据库文件名称
         /// </summary>
         public static string RemoteFileName { get; } = "sync1.lc";
-
-        /// <summary>
-        /// 编辑备份文件时，未保存退出确认对话框（目前在显示编辑密码未保存提示框后，弹出次未保存对话框）
-        /// </summary>
-        public static Action UnsaveDialogAction { get; set; }
-
-        public static StorageFile OpenedFile { get; set; } = null;
     }
 }

@@ -18,7 +18,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         protected const int EachSize = 1024 * 128; // 128KB
 
         protected async Task<StorageFolder> GetTempFolder() =>
-            await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
+            await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Constant.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
 
         protected string Password => string.IsNullOrEmpty(SettingHelper.Instance.SyncFilePassword) ? null : MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(SettingHelper.Instance.SyncFilePassword)).ToX2().ToUpper();
 
@@ -32,27 +32,27 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         /// <returns></returns>
         protected async Task<StorageFile> DecryptFile(StorageFile encryptedFile)
         {
-            var tempFile = await (await GetTempFolder()).CreateFileAsync(Global.SyncTempUnencryptedFileName, CreationCollisionOption.ReplaceExisting);
+            var tempFile = await (await GetTempFolder()).CreateFileAsync(Constant.SyncTempUnencryptedFileName, CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream readStream = await encryptedFile.OpenReadAsync(), writeStream = await tempFile.OpenAsync(FileAccessMode.ReadWrite))
             {
                 #region 验证密码
                 using (IInputStream stream = readStream.GetInputStreamAt(0))
                 {
                     using DataReader reader = new DataReader(stream);
-                    if (readStream.Size <= (uint)(Global.SyncFileHeaderLength))
+                    if (readStream.Size <= (uint)(Constant.SyncFileHeaderLength))
                     {
                         MessageHelper.ShowDanger("未能正确解析文件");
                         return null;
                     }
-                    await reader.LoadAsync((uint)(Global.SyncFileHeaderLength));
-                    var header = reader.ReadString((uint)Global.SyncFileHeaderLength);
-                    if (!Regex.IsMatch(header, $"^{Global.SyncFileHeader}[0-9A-F]{{{Global.Sha2ByteLength}}}$"))
+                    await reader.LoadAsync((uint)(Constant.SyncFileHeaderLength));
+                    var header = reader.ReadString((uint)Constant.SyncFileHeaderLength);
+                    if (!Regex.IsMatch(header, $"^{Constant.SyncFileHeader}[0-9A-F]{{{Constant.Sha2ByteLength}}}$"))
                     {
                         MessageHelper.ShowDanger("未能正确解析文件");
                         return null;
                     }
 
-                    if (!await Verify(header.Substring(Global.SyncFileHeader.Length, Global.Sha2ByteLength)))
+                    if (!await Verify(header.Substring(Constant.SyncFileHeader.Length, Constant.Sha2ByteLength)))
                     {
                         return null;
                     }
@@ -60,10 +60,10 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 #endregion
 
                 using IOutputStream outputStream = writeStream.GetOutputStreamAt(0);
-                using IInputStream inputStream = readStream.GetInputStreamAt((uint)Global.SyncFileHeaderLength);
+                using IInputStream inputStream = readStream.GetInputStreamAt((uint)Constant.SyncFileHeaderLength);
 
                 using CryptoStream cryptoStream = new CryptoStream(inputStream.AsStreamForRead(), GetCryptoTransform(SqliteSync.Crypto.OperationType.Decrypt), CryptoStreamMode.Read, false);
-                await cryptoStream.CopyToAsync(outputStream.AsStreamForWrite(), (int)readStream.Size - Global.SyncFileHeaderLength);
+                await cryptoStream.CopyToAsync(outputStream.AsStreamForWrite(), (int)readStream.Size - Constant.SyncFileHeaderLength);
             }
             return tempFile;
         }
@@ -80,19 +80,19 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 return null;
             }
 
-            var encryptedFile = await (await GetTempFolder()).CreateFileAsync(Global.SyncTempEncryptedFileName, CreationCollisionOption.ReplaceExisting);
+            var encryptedFile = await (await GetTempFolder()).CreateFileAsync(Constant.SyncTempEncryptedFileName, CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream writeStream = await encryptedFile.OpenAsync(FileAccessMode.ReadWrite), readStream = await tempFile.OpenReadAsync())
             {
                 //写入头部
                 using (IOutputStream stream = writeStream.GetOutputStreamAt(0))
                 {
                     using DataWriter dataWriter = new DataWriter(stream);
-                    dataWriter.WriteString(Global.SyncFileHeader);
+                    dataWriter.WriteString(Constant.SyncFileHeader);
                     dataWriter.WriteString(SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(Password)).ToX2().ToUpper());
                     await dataWriter.StoreAsync();
                 }
 
-                using IOutputStream outputStream = writeStream.GetOutputStreamAt((uint)Global.SyncFileHeaderLength);
+                using IOutputStream outputStream = writeStream.GetOutputStreamAt((uint)Constant.SyncFileHeaderLength);
                 using IInputStream inputStream = readStream.GetInputStreamAt(0);
 
                 using CryptoStream cryptoStream = new CryptoStream(outputStream.AsStreamForWrite(), GetCryptoTransform(SqliteSync.Crypto.OperationType.Encrypt), CryptoStreamMode.Write, false);
@@ -102,7 +102,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         }
 
         private ICryptoTransform GetCryptoTransform(SqliteSync.Crypto.OperationType operationType)
-            => SqliteSync.Crypto.Aes.GetCryptoTransform(Encoding.UTF8.GetBytes(Password), Global.AesIv, operationType);
+            => SqliteSync.Crypto.Aes.GetCryptoTransform(Encoding.UTF8.GetBytes(Password), Constant.AesIv, operationType);
 
         #region 密码
         private async Task<bool> SetPassword()
@@ -141,9 +141,9 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         /// <returns></returns>
         public async Task<StorageFile> GetTempLocalFile()
         {
-            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(Global.DbFileName);
+            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(Global.SqliteFileName);
             var tempFolder = await GetTempFolder();
-            return await dbFile.CopyAsync(tempFolder, Global.SyncTempLocalFileName, NameCollisionOption.ReplaceExisting);
+            return await dbFile.CopyAsync(tempFolder, Constant.SyncTempLocalFileName, NameCollisionOption.ReplaceExisting);
         }
 
         /// <summary>
@@ -153,8 +153,8 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         /// <returns></returns>
         public async Task ReplaceDbFile(StorageFile storageFile)
         {
-            var historyFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Global.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
-            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(Global.DbFileName);
+            var historyFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Constant.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
+            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(Global.SqliteFileName);
 
             // 将数据库文件复制到历史记录
             await dbFile.CopyAsync(historyFolder, DateTime.Now.ToString("yyMMddHHmmssff"), NameCollisionOption.FailIfExists);

@@ -25,7 +25,7 @@ namespace Lavcode.Uwp.ViewModel
             {
                 case Lavcode.Model.Provider.Sqlite:
                     SimpleIoc.Default.Register<IConService, Service.Sqlite.ConService>();
-                    await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Global.DbFilePath });
+                    await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Global.SqliteFilePath });
 
                     SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
                     SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();

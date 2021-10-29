@@ -41,7 +41,7 @@ namespace Lavcode.Uwp.ViewModel
             Messenger.Default.Unregister(this);
         }
 
-        private void KeyValuePairs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void KeyValuePairs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs _)
         {
             RaisePropertyChanged(nameof(IsKeyValuePairsVisible));
         }
@@ -148,7 +148,7 @@ namespace Lavcode.Uwp.ViewModel
         }
 
         #region 键值对
-        private readonly List<string> _defaultKeys = new List<string>()
+        private readonly List<string> _defaultKeys = new ()
         {
             "账号",
             "邮箱",
@@ -238,7 +238,7 @@ namespace Lavcode.Uwp.ViewModel
             SetKeysLength();
         }
 
-        private void SetKeyValuePairs(List<Lavcode.Model.KeyValuePair> keyValuePairs)
+        private void SetKeyValuePairs(List<Model.KeyValuePair> keyValuePairs)
         {
             _oldKeyValuePairs.Clear();
             KeyValuePairs.Clear();
@@ -274,7 +274,7 @@ namespace Lavcode.Uwp.ViewModel
         #region 编辑
         private Password _oldPassword = null;
         private Icon _oldIcon = null;
-        private List<Lavcode.Model.KeyValuePair> _oldKeyValuePairs = new List<Lavcode.Model.KeyValuePair>();
+        private List<Model.KeyValuePair> _oldKeyValuePairs = new ();
 
         /// <summary>
         /// 初始化详情页
@@ -500,14 +500,14 @@ namespace Lavcode.Uwp.ViewModel
         /// <summary>
         /// 当前编辑的键值对
         /// </summary>
-        private List<Lavcode.Model.KeyValuePair> CurKeyValuePairs
+        private List<Model.KeyValuePair> CurKeyValuePairs
         {
             get
             {
-                List<Lavcode.Model.KeyValuePair> result = new List<Lavcode.Model.KeyValuePair>();
+                List<Model.KeyValuePair> result = new ();
                 foreach (var kvp in KeyValuePairs.Where((item) => !string.IsNullOrEmpty(item.Value)))
                 {
-                    result.Add(new Lavcode.Model.KeyValuePair()
+                    result.Add(new Model.KeyValuePair()
                     {
                         Key = kvp.Key,
                         Value = kvp.Value,
@@ -520,7 +520,7 @@ namespace Lavcode.Uwp.ViewModel
         public async Task OnCloseRequest()
         {
             var cdr = await PopupHelper.ShowDialog("当前内容已修改但未保存，是否保存？", "编辑未保存", "保存并退出", "不保存退出", null, true, "点错了");
-            if ((cdr == ContentDialogResult.Primary && await Save()) || cdr == ContentDialogResult.Secondary)
+            if (cdr == ContentDialogResult.Secondary || (cdr == ContentDialogResult.Primary && await Save()))
             {
                 if (Global.OpenedFile == null)
                 {
@@ -563,19 +563,19 @@ namespace Lavcode.Uwp.ViewModel
                 return;
             }
 
-            DataPackage dataPackage = new DataPackage();
+            var dataPackage = new DataPackage();
             dataPackage.SetText(value);
             Clipboard.SetContent(dataPackage);
 
             MessageHelper.ShowSticky(button, $"已复制 {key}\n受限于UWP，请在关闭软件前粘贴", MessageType.Primary);
         }
 
-        public void CopyPswd(object sender, RoutedEventArgs e)
+        public void CopyPswd(object sender, RoutedEventArgs _)
         {
             CopyStr("密码", Value, sender as Button);
         }
 
-        public void CopyRemark(object sender, RoutedEventArgs e)
+        public void CopyRemark(object sender, RoutedEventArgs _)
         {
             CopyStr("备注", Remark, sender as Button);
         }

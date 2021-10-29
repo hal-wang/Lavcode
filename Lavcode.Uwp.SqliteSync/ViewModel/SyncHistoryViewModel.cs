@@ -33,7 +33,7 @@ namespace Lavcode.Uwp.SqliteSync.ViewModel
 
             try
             {
-                _folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Global.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
+                _folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Constant.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
                 await foreach (var historyItem in GetHistoryItems())
                 {
                     HistoryItems.Add(historyItem);
@@ -58,7 +58,7 @@ namespace Lavcode.Uwp.SqliteSync.ViewModel
                 await TaskExtend.Run(async () =>
                 {
                     using var sqliteHelper = await SqliteHelper.OpenAsync(file.Path);
-                    FileInfo fileInfo = new FileInfo(file.Path);
+                    var fileInfo = new FileInfo(file.Path);
                     item = new SyncHistoryItem()
                     {
                         FileName = file.Name,

@@ -79,20 +79,20 @@ namespace Lavcode.Uwp.View.Feedback
 
         private async Task<GitHubOauth> GetGitHubOauth()
         {
-            var res = await GitHubHelper.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/url");
+            var res = await Helpers.HttpClientExtend.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/url");
             if (res.IsResErr()) return null;
             return await res.GetContent<GitHubOauth>();
         }
 
         private async Task<string> GetToken(string id)
         {
-            var res = await GitHubHelper.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/{id}");
+            var res = await Helpers.HttpClientExtend.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/{id}");
             if (res.IsResErr()) return null;
             var obj = await res.GetContent<JObject>();
             var tokenField = "token";
             if (!obj.ContainsKey(tokenField) && !string.IsNullOrEmpty(obj.Value<string>(tokenField)))
             {
-                MessageHelper.ShowDanger("GitHub登录失败");
+                MessageHelper.ShowDanger("GitHub 登录失败");
                 return null;
             }
             var token = obj.Value<string>(tokenField);
@@ -105,13 +105,13 @@ namespace Lavcode.Uwp.View.Feedback
             var token = SettingHelper.Instance.GitHubToken;
             if (string.IsNullOrEmpty(token)) return false;
 
-            var res = await GitHubHelper.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/{token}/valid");
+            var res = await Helpers.HttpClientExtend.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/{token}/valid");
             if (res.IsResErr()) return null;
             var obj = await res.GetContent<JObject>();
             var validField = "valid";
             if (!obj.ContainsKey(validField))
             {
-                MessageHelper.ShowDanger("GitHub登录失败");
+                MessageHelper.ShowDanger("GitHub 登录失败");
                 return null;
             }
             return obj.Value<bool>(validField);

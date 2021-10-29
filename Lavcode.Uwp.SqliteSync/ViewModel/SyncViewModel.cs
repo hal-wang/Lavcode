@@ -163,7 +163,7 @@ namespace Lavcode.Uwp.SqliteSync.ViewModel
         {
             try
             {
-                var tempFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.SyncTempFolderName);
+                var tempFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Constant.SyncTempFolderName);
                 await tempFolder.DeleteAsync();
             }
             catch { }

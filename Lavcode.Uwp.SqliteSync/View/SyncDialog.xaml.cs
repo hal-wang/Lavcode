@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.SqliteSync.ViewModel;
 using System;
 using System.Threading.Tasks;
@@ -27,7 +26,7 @@ namespace Lavcode.Uwp.SqliteSync.View
         {
             try
             {
-                var historyFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
+                var historyFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Constant.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
                 await historyFolder.DeleteAsync();
             }
             catch { }

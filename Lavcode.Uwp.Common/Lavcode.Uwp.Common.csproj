@@ -124,11 +124,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GitHubHelper.cs" />
-    <Compile Include="Global\Db.cs" />
-    <Compile Include="Global\Default.cs" />
+    <Compile Include="Global\Sqlite.cs" />
     <Compile Include="Global\Git.cs" />
     <Compile Include="Global\Others.cs" />
-    <Compile Include="Global\Sync.cs" />
     <Compile Include="HttpClientExtend.cs" />
     <Compile Include="ImgHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

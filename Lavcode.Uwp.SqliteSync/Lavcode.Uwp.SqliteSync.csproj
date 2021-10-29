@@ -123,6 +123,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constant.cs" />
     <Compile Include="Crypto\Aes.cs" />
     <Compile Include="Crypto\OperationType.cs" />
     <Compile Include="Model\CloudItem.cs" />
