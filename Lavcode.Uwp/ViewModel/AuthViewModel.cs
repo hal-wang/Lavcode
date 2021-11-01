@@ -62,7 +62,6 @@ namespace Lavcode.Uwp.ViewModel
             }
 
             await ViewModelLocator.Register();
-            (Window.Current.Content as Frame)?.Navigate(typeof(MainPage));
 
             IsLogin = true;
             try

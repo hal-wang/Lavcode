@@ -2,32 +2,40 @@
 using Lavcode.IService;
 using Lavcode.Model;
 using SQLite;
-using System.Collections.Generic;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Lavcode.Service.Sqlite
 {
     public class ConService : IConService
     {
-        public SQLiteConnection Connection { get; set; }
+        public SQLiteConnection Connection { get; private set; }
 
-        public async Task Connect(object args)
+        public async Task<bool> Connect(object args)
         {
-            Connection = new SQLiteConnection(DynamicHelper.ToExpandoObject(args).FilePath as string);
-            await TaskExtend.Run(() =>
+            var filePath = DynamicHelper.ToExpandoObject(args).FilePath as string;
+            if (!File.Exists(filePath))
             {
-                CreateTables();
-            });
-        }
+                return false;
+            }
 
-        public async Task Reconnect(object args)
-        {
-            Connection?.Dispose();
-            Connection = new SQLiteConnection(DynamicHelper.ToExpandoObject(args).FilePath as string);
-            await TaskExtend.Run(() =>
+            try
             {
-                CreateTables();
-            });
+                Connection?.Dispose();
+                Connection = new SQLiteConnection(filePath);
+                await TaskExtend.Run(() =>
+                {
+                    CreateTables();
+                });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.Write(ex);
+                return false;
+            }
         }
 
         private void CreateTables()

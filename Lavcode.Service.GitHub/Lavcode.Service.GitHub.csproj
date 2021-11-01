@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="HTools" Version="1.6.5" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lavcode.IService\Lavcode.IService.csproj" />
   </ItemGroup>
 
 </Project>

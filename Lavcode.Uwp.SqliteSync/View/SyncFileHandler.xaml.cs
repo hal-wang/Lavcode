@@ -121,7 +121,7 @@ namespace Lavcode.Uwp.SqliteSync.View
             _syncHelper = await FileSyncHelper.Create(OpenedFile);
             if (_syncHelper == null)
             {
-                DispatcherTimer dispatcherTimer = new DispatcherTimer()
+                var dispatcherTimer = new DispatcherTimer()
                 {
                     Interval = new TimeSpan(0, 0, 5)
                 };

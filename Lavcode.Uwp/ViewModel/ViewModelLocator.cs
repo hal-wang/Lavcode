@@ -23,9 +23,8 @@ namespace Lavcode.Uwp.ViewModel
         {
             switch (SettingHelper.Instance.Provider)
             {
-                case Lavcode.Model.Provider.Sqlite:
+                case Model.Provider.Sqlite:
                     SimpleIoc.Default.Register<IConService, Service.Sqlite.ConService>();
-                    await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Global.SqliteFilePath });
 
                     SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
                     SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();
@@ -34,12 +33,18 @@ namespace Lavcode.Uwp.ViewModel
                     SimpleIoc.Default.Register<IDelectedService, Service.Sqlite.DelectedService>();
                     SimpleIoc.Default.Register<IConfigService, Service.Sqlite.ConfigService>();
                     break;
-                case Lavcode.Model.Provider.GitHub:
+                case Model.Provider.GitHub:
+                    //SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
+                    //SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
+                    //SimpleIoc.Default.Register<IKeyValuePairService, Service.GitHub.KeyValuePairService>();
+                    //SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
+                    SimpleIoc.Default.Register<IDelectedService, Service.GitHub.DelectedService>();
+                    SimpleIoc.Default.Register<IConfigService, Service.GitHub.ConfigService>();
                     break;
-                case Lavcode.Model.Provider.Gitee:
+                case Model.Provider.Gitee:
                     break;
-
             }
+            await SimpleIoc.Default.GetInstance<IConService>()?.Connect(new { FilePath = Global.SqliteFilePath });
         }
 
         private static void RegisterViewModel()
@@ -50,6 +55,17 @@ namespace Lavcode.Uwp.ViewModel
             SimpleIoc.Default.Register<PasswordDetailViewModel>();
             SimpleIoc.Default.Register<PasswordMoveToViewModel>();
             SimpleIoc.Default.Register<PasswordListViewModel>();
+
+            switch (SettingHelper.Instance.Provider)
+            {
+                case Model.Provider.Sqlite:
+                    SqliteSync.ViewModel.ViewModelLocator.Register();
+                    break;
+                case Model.Provider.GitHub:
+                    break;
+                case Model.Provider.Gitee:
+                    break;
+            }
         }
     }
 }
