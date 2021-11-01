@@ -30,6 +30,7 @@
             <muxc:TabView.TabStripFooter>
                 <Button Margin="0 4 0 -4"
                         HorizontalAlignment="Left"
+                        Height="48"
                         Style="{ThemeResource EllipsisButton}"
                         Click="{x:Bind VM.HandleAddFolder}">
                     <SymbolIcon Symbol="Add"/>
