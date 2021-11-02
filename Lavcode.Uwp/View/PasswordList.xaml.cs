@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View
@@ -151,6 +152,11 @@ namespace Lavcode.Uwp.View
         private void PasswordListView_DragOver(object sender, Windows.UI.Xaml.DragEventArgs e)
         {
             e.AcceptedOperation = DataPackageOperation.Copy;
+        }
+
+        private void MultipleButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            
         }
     }
 }
