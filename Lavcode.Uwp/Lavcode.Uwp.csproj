@@ -21,7 +21,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>096F2638A9D64C103F1DF53916EAC9D8CFFB2425</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>81A00110C907377948080CEC6A0CAB77BDBBF05C</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
@@ -151,6 +151,9 @@
     </Compile>
     <Compile Include="View\Git\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordListCommandBar.xaml.cs">
+      <DependentUpon>PasswordListCommandBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
@@ -319,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Git\Icon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordListCommandBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

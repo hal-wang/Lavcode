@@ -117,7 +117,7 @@ namespace Lavcode.Uwp.ViewModel
             SelectedPasswordItem = PasswordItems.Where((item) => item.Password == password).First();
         }
 
-        public void HandleAddNew()
+        public void OnAddNew()
         {
             Messenger.Default.Send<object>(null, "AddNewPassword");
         }
@@ -163,13 +163,6 @@ namespace Lavcode.Uwp.ViewModel
             }
         }
 
-        private bool _isMultiSelect = false;
-        public bool IsMultiSelect
-        {
-            get { return _isMultiSelect; }
-            set { Set(ref _isMultiSelect, value); }
-        }
-
         public bool IsSelectAll
         {
             get
@@ -181,7 +174,7 @@ namespace Lavcode.Uwp.ViewModel
 
 
         #region 删除
-        public async void HandleDeleteItems()
+        public async void OnDeleteItems()
         {
             if (SelectedItems.Count == 0)
             {
@@ -236,7 +229,7 @@ namespace Lavcode.Uwp.ViewModel
 
 
         #region 移动
-        public async void HandleMoveTo()
+        public async void OnMoveTo()
         {
             if (_curFolder == null)
             {

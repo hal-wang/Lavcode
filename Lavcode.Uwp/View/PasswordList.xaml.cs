@@ -4,6 +4,7 @@ using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Common;
 using Lavcode.Uwp.ViewModel;
+using Microsoft.Xaml.Interactivity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,8 @@ namespace Lavcode.Uwp.View
                 return;
             }
 
-            await PopupHelper.ShowTeachingTipAsync(AddButton, "开始添加（添加记录 1/6）", "点击 + 可新建一条记录，点击右侧中央“添加”按钮也行");
-            VM.HandleAddNew();
+            await PopupHelper.ShowTeachingTipAsync(PasswordListCommandBar, "开始添加（添加记录 1/6）", "点击 + 可新建一条记录，点击右侧中央“添加”按钮也行");
+            VM.OnAddNew();
         }
 
         private async void PasswordAddOrEdited()
@@ -46,9 +47,9 @@ namespace Lavcode.Uwp.View
             }
 
             await PopupHelper.ShowTeachingTipAsync(EditBtnPosition, "批量操作（列表管理 1/4）", "点击此处能批量操作，可以删除或移动密码", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
-            VM.IsMultiSelect = true;
+            PasswordListCommandBar.IsMultiSelect = true;
             await PopupHelper.ShowTeachingTipAsync(EditBtnPosition, "完成编辑（列表管理 2/4）", "再次点击即编辑完成或取消编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
-            VM.IsMultiSelect = false;
+            PasswordListCommandBar.IsMultiSelect = false;
             await PopupHelper.ShowTeachingTipAsync(PasswordItemPosition, "右键菜单（列表管理 3/4）", "右键单击密码项，可单独对该密码进行删除或移动", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
             await PopupHelper.ShowTeachingTipAsync(PasswordItemPosition, "查看详情（列表管理 4/4）", "点击密码记录项即可查看或编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
             SettingHelper.Instance.PasswordListTaught = true;
@@ -73,18 +74,6 @@ namespace Lavcode.Uwp.View
             catch (Exception ex)
             {
                 MessageHelper.ShowError(ex);
-            }
-        }
-
-        private void SelectAll_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (VM.IsSelectAll)
-            {
-                PasswordListView.SelectedItems.Clear();
-            }
-            else
-            {
-                PasswordListView.SelectAll();
             }
         }
 
@@ -154,9 +143,16 @@ namespace Lavcode.Uwp.View
             e.AcceptedOperation = DataPackageOperation.Copy;
         }
 
-        private void MultipleButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void CB_OnSelectAll(Button sender, object args)
         {
-            
+            if (VM.IsSelectAll)
+            {
+                PasswordListView.SelectedItems.Clear();
+            }
+            else
+            {
+                PasswordListView.SelectAll();
+            }
         }
     }
 }
