@@ -21,13 +21,11 @@ namespace Lavcode.Uwp.ViewModel
     {
         private readonly IPasswordService _passwordService;
         private readonly IIconService _iconService;
-        private readonly IKeyValuePairService _keyValuePairService;
 
-        public PasswordDetailViewModel(IPasswordService passwordService, IIconService iconService, IKeyValuePairService keyValuePairService)
+        public PasswordDetailViewModel(IPasswordService passwordService, IIconService iconService)
         {
             _passwordService = passwordService;
             _iconService = iconService;
-            _keyValuePairService = keyValuePairService;
 
             Messenger.Default.Register<PasswordItem>(this, "PasswordSelectedChanged", async (item) => await InitEdit(item?.Password));
             Messenger.Default.Register<object>(this, "AddNewPassword", (obj) => HandleAddNew());
@@ -148,7 +146,7 @@ namespace Lavcode.Uwp.ViewModel
         }
 
         #region 键值对
-        private readonly List<string> _defaultKeys = new ()
+        private readonly List<string> _defaultKeys = new()
         {
             "账号",
             "邮箱",
@@ -274,7 +272,7 @@ namespace Lavcode.Uwp.ViewModel
         #region 编辑
         private Password _oldPassword = null;
         private Icon _oldIcon = null;
-        private List<Model.KeyValuePair> _oldKeyValuePairs = new ();
+        private List<Model.KeyValuePair> _oldKeyValuePairs = new();
 
         /// <summary>
         /// 初始化详情页
@@ -316,7 +314,7 @@ namespace Lavcode.Uwp.ViewModel
                 Value = password.Value;
                 Remark = password.Remark;
 
-                SetKeyValuePairs(await _keyValuePairService.GetKeyValuePairs(password.Id));
+                SetKeyValuePairs(await _passwordService.GetKeyValuePairs(password.Id));
                 Icon = await _iconService.GetIcon(_oldPassword.Id);
                 _oldIcon = Icon;
             }
@@ -504,7 +502,7 @@ namespace Lavcode.Uwp.ViewModel
         {
             get
             {
-                List<Model.KeyValuePair> result = new ();
+                List<Model.KeyValuePair> result = new();
                 foreach (var kvp in KeyValuePairs.Where((item) => !string.IsNullOrEmpty(item.Value)))
                 {
                     result.Add(new Model.KeyValuePair()

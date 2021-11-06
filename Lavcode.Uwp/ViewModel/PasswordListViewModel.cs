@@ -40,12 +40,10 @@ namespace Lavcode.Uwp.ViewModel
 
         #region Init
         private readonly IPasswordService _passwordService;
-        private readonly IKeyValuePairService _keyValuePairService;
 
-        public PasswordListViewModel(IPasswordService passwordService, IKeyValuePairService keyValuePairService)
+        public PasswordListViewModel(IPasswordService passwordService)
         {
             _passwordService = passwordService;
-            _keyValuePairService = keyValuePairService;
 
             Messenger.Default.Register<FolderItem>(this, "FolderSelected", async (item) => await Init(item));
             Messenger.Default.Register<Password>(this, "PasswordAddOrEdited", (item) => PasswordAddOrEdited(item));
@@ -319,7 +317,7 @@ namespace Lavcode.Uwp.ViewModel
                 {
                     passwordItem.Password,
                     passwordItem.Icon,
-                    KeyValuePairs = (await _keyValuePairService.GetKeyValuePairs(passwordItem.Password.Id)).ToArray()
+                    KeyValuePairs = (await _passwordService.GetKeyValuePairs(passwordItem.Password.Id)).ToArray()
                 });
             }
             return items;
