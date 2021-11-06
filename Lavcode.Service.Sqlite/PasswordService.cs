@@ -73,11 +73,14 @@ namespace Lavcode.Service.Sqlite
             {
                 _con.RunInTransaction(() =>
                 {
-                    _con.Insert(new DelectedItem(passwordId, StorageType.Password));
                     _con.Table<Password>().Where((item) => item.Id == passwordId).Delete();
                     _con.Table<Icon>().Where((item) => item.Id == passwordId).Delete();
                     _con.Table<KeyValuePair>().Where(item => item.SourceId == passwordId).Delete();
 
+                    if (record)
+                    {
+                        _con.Insert(new DelectedItem(passwordId, StorageType.Password));
+                    }
                 });
             });
         }

@@ -35,9 +35,9 @@ namespace Lavcode.Service.Sqlite
                             order = maxOrder + 1;
                         }
                         folder.Order = order;
-                        _con.Insert(folder);
                     }
 
+                    _con.Insert(folder);
                     icon.Id = folder.Id;
                     _con.Insert(icon);
                 });
@@ -55,11 +55,6 @@ namespace Lavcode.Service.Sqlite
             {
                 _con.RunInTransaction(() =>
                 {
-                    if (_con.Table<Folder>().Where((item) => item.Id == folderId).Count() == 0)
-                    {
-                        return;
-                    }
-
                     var delectedPwds = _con
                         .Table<Password>()
                         .Where((item) => item.FolderId == folderId)

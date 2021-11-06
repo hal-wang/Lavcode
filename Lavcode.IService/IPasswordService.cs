@@ -11,6 +11,6 @@ namespace Lavcode.IService
         public Task UpdatePassword(Password password, Icon icon = null, List<KeyValuePair> keyValuePairs = null);
         public Task<List<Password>> GetPasswords(string folderId);
         public Task<List<Password>> GetPasswords();
-        public Task<List<Model.KeyValuePair>> GetKeyValuePairs(string passwordId);
+        public Task<List<KeyValuePair>> GetKeyValuePairs(string passwordId);
     }
 }

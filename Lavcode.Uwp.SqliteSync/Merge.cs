@@ -1,5 +1,4 @@
-﻿using Lavcode.IService;
-using Lavcode.Model;
+﻿using Lavcode.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +18,12 @@ namespace Lavcode.Uwp.SqliteSync
         /// </summary>
         public static async Task<Merge> OpenAsync(string localDbPath, string remoteDbPath)
         {
-            var result = new Merge();
-            result._localSqliteHelper = await Service.Sqlite.SqliteHelper.OpenAsync(localDbPath);
-            result._remoteSqliteHelper = await Service.Sqlite.SqliteHelper.OpenAsync(remoteDbPath);
-            
+            var result = new Merge
+            {
+                _localSqliteHelper = await Service.Sqlite.SqliteHelper.OpenAsync(localDbPath),
+                _remoteSqliteHelper = await Service.Sqlite.SqliteHelper.OpenAsync(remoteDbPath)
+            };
+
             return result;
         }
 
@@ -85,7 +86,7 @@ namespace Lavcode.Uwp.SqliteSync
                 }
 
                 var remoteIcon = await _remoteSqliteHelper.IconService.GetIcon(remotePassword.Id);
-                var remoteKvp = await _remoteSqliteHelper.KeyValuePairService.GetKeyValuePairs(remotePassword.Id);
+                var remoteKvp = await _remoteSqliteHelper.PasswordService.GetKeyValuePairs(remotePassword.Id);
                 await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, remoteIcon, remoteKvp);
             }
         }
@@ -116,7 +117,7 @@ namespace Lavcode.Uwp.SqliteSync
                 }
 
                 var remoteIcon = await _remoteSqliteHelper.IconService.GetIcon(remotePassword.Id);
-                var remoteKvp = await _remoteSqliteHelper.KeyValuePairService.GetKeyValuePairs(remotePassword.Id);
+                var remoteKvp = await _remoteSqliteHelper.PasswordService.GetKeyValuePairs(remotePassword.Id);
                 await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, remoteIcon, remoteKvp);
             }
         }

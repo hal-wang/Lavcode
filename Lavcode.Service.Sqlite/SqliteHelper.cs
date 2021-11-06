@@ -11,7 +11,6 @@ namespace Lavcode.Service.Sqlite
         public IPasswordService PasswordService { get; private set; }
         public IIconService IconService { get; private set; }
         public IDelectedService DeletedService { get; private set; }
-        public IKeyValuePairService KeyValuePairService { get; private set; }
         public IConfigService ConfigService { get; private set; }
 
         private SqliteHelper() { }
@@ -27,7 +26,6 @@ namespace Lavcode.Service.Sqlite
             result.PasswordService = new PasswordService(result.ConService);
             result.IconService = new IconService(result.ConService);
             result.DeletedService = new DelectedService(result.ConService);
-            result.KeyValuePairService = new KeyValuePairService(result.ConService);
             result.ConfigService = new ConfigService(result.ConService);
 
             return result;

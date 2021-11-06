@@ -28,16 +28,14 @@ namespace Lavcode.Uwp.ViewModel
 
                     SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
                     SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();
-                    SimpleIoc.Default.Register<IKeyValuePairService, Service.Sqlite.KeyValuePairService>();
                     SimpleIoc.Default.Register<IIconService, Service.Sqlite.IconService>();
                     SimpleIoc.Default.Register<IDelectedService, Service.Sqlite.DelectedService>();
                     SimpleIoc.Default.Register<IConfigService, Service.Sqlite.ConfigService>();
                     break;
                 case Model.Provider.GitHub:
-                    //SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
-                    //SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
-                    //SimpleIoc.Default.Register<IKeyValuePairService, Service.GitHub.KeyValuePairService>();
-                    //SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
+                    SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
+                    SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
+                    SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
                     SimpleIoc.Default.Register<IDelectedService, Service.GitHub.DelectedService>();
                     SimpleIoc.Default.Register<IConfigService, Service.GitHub.ConfigService>();
                     break;

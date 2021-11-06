@@ -1,7 +1,7 @@
 ﻿using Lavcode.IService;
 using Lavcode.Model;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lavcode.Service.GitHub
@@ -17,17 +17,21 @@ namespace Lavcode.Service.GitHub
 
         public Task<List<DelectedItem>> GetDelectedItems()
         {
-            throw new NotImplementedException();
+            var result = _con.DelectedItemIssue.Comments.Select(item => item.Value).ToList();
+            return Task.FromResult(result);
         }
 
-        public Task Add(DelectedItem delectedItem)
+        public async Task Add(DelectedItem delectedItem)
         {
-            throw new NotImplementedException();
+            await _con.CreateComment(delectedItem);
         }
 
-        public Task Add(IList<DelectedItem> delectedItems)
+        public async Task Add(IList<DelectedItem> delectedItems)
         {
-            throw new NotImplementedException();
+            foreach (var item in delectedItems)
+            {
+                await Add(item);
+            }
         }
     }
 }

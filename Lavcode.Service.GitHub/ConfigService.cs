@@ -1,33 +1,43 @@
 ﻿using HTools.Config;
 using Lavcode.IService;
+using Lavcode.Model;
 using System;
+using System.Linq;
 
 namespace Lavcode.Service.GitHub
 {
     public class ConfigService : ConfigBase<string>, IConfigService
     {
+        private readonly ConService _con;
+
         public ConfigService(IConService cs)
         {
+            _con = cs as ConService;
         }
 
         public override bool ContainsKey(string key)
         {
-            throw new NotImplementedException();
+            return _con.ConfigIssue.Comments.Any(cfg => cfg.Value.Key == key);
         }
 
-        public override void Remove(string key)
+        public override async void Remove(string key)
         {
-            throw new NotImplementedException();
+            await _con.DeleteComment<Config, string>(key, (item1, item2) => item1.Key == key);
         }
 
         protected override string GetValue(string key)
         {
-            throw new NotImplementedException();
+            return _con.ConfigIssue.Comments.FirstOrDefault(cfg => cfg.Value.Key == key)?.Value?.Value;
         }
 
         protected override void SetValue(string value, string key)
         {
-            throw new NotImplementedException();
+            var task = _con.UpsertComment(new Config()
+            {
+                Key = key,
+                Value = value
+            }, (item1, item2) => item1.Key == item2.Key);
+            task.Wait();
         }
 
         public DateTime LastEditTime
