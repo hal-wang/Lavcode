@@ -25,6 +25,7 @@ namespace Lavcode.Uwp.ViewModel
             {
                 case Model.Provider.Sqlite:
                     SimpleIoc.Default.Register<IConService, Service.Sqlite.ConService>();
+                    await SimpleIoc.Default.GetInstance<IConService>()?.Connect(new { FilePath = Global.SqliteFilePath });
 
                     SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
                     SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();
@@ -33,6 +34,9 @@ namespace Lavcode.Uwp.ViewModel
                     SimpleIoc.Default.Register<IConfigService, Service.Sqlite.ConfigService>();
                     break;
                 case Model.Provider.GitHub:
+                    SimpleIoc.Default.Register<IConService, Service.GitHub.ConService>();
+                    await SimpleIoc.Default.GetInstance<IConService>()?.Connect(new { });
+
                     SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
                     SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
                     SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
@@ -42,7 +46,6 @@ namespace Lavcode.Uwp.ViewModel
                 case Model.Provider.Gitee:
                     break;
             }
-            await SimpleIoc.Default.GetInstance<IConService>()?.Connect(new { FilePath = Global.SqliteFilePath });
         }
 
         private static void RegisterViewModel()
@@ -53,6 +56,7 @@ namespace Lavcode.Uwp.ViewModel
             SimpleIoc.Default.Register<PasswordDetailViewModel>();
             SimpleIoc.Default.Register<PasswordMoveToViewModel>();
             SimpleIoc.Default.Register<PasswordListViewModel>();
+            SimpleIoc.Default.Register<SettingViewModel>();
 
             switch (SettingHelper.Instance.Provider)
             {

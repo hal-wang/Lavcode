@@ -4,13 +4,11 @@ using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Common;
 using Lavcode.Uwp.ViewModel;
-using Microsoft.Xaml.Interactivity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.View

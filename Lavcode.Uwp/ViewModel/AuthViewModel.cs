@@ -61,8 +61,6 @@ namespace Lavcode.Uwp.ViewModel
                 return;
             }
 
-            await ViewModelLocator.Register();
-
             IsLogin = true;
             try
             {

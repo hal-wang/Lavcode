@@ -158,10 +158,10 @@
     <Compile Include="View\Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Setting\SettingDialog.xaml.cs">
+    <Compile Include="View\SettingDialog.xaml.cs">
       <DependentUpon>SettingDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Setting\SettingViewModel.cs" />
+    <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="View\Version.xaml.cs">
       <DependentUpon>Version.xaml</DependentUpon>
     </Compile>
@@ -333,7 +333,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Setting\SettingDialog.xaml">
+    <Page Include="View\SettingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -412,7 +412,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HTools">
-      <Version>1.6.5</Version>
+      <Version>1.6.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.13</Version>
