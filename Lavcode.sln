@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavcode.Uwp.SqliteSync", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavcode.Uwp.Common", "Lavcode.Uwp.Common\Lavcode.Uwp.Common.csproj", "{6705CA51-5971-4796-B916-394C1851C550}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavcode.GitTools", "Lavcode.GitTools\Lavcode.GitTools.csproj", "{D22612FF-7448-4C42-A871-E329C69DA057}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,26 @@ Global
 		{6705CA51-5971-4796-B916-394C1851C550}.Release|x64.Build.0 = Release|x64
 		{6705CA51-5971-4796-B916-394C1851C550}.Release|x86.ActiveCfg = Release|x86
 		{6705CA51-5971-4796-B916-394C1851C550}.Release|x86.Build.0 = Release|x86
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|x64.Build.0 = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Debug|x86.Build.0 = Debug|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|ARM.Build.0 = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|ARM64.Build.0 = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|x64.ActiveCfg = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|x64.Build.0 = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|x86.ActiveCfg = Release|Any CPU
+		{D22612FF-7448-4C42-A871-E329C69DA057}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

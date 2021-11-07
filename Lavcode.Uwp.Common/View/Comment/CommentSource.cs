@@ -1,5 +1,5 @@
-﻿using Lavcode.Uwp.Helpers;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
+using Lavcode.GitTools;
 using Microsoft.Toolkit.Collections;
 using Octokit;
 using System;
@@ -24,7 +24,7 @@ namespace Lavcode.Uwp.Common.View.Comment
             _total = total;
         }
 
-        private readonly GitHubClient _client = GitHubHelper.GetBaseClient();
+        private readonly GitHubClient _client = GitHubHelper.GetBaseClient(Global.Repos);
         public async Task<IEnumerable<IssueComment>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default)
         {
             try

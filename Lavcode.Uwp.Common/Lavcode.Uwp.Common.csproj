@@ -123,7 +123,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GitHubHelper.cs" />
+    <Compile Include="GitHubLogin.cs" />
     <Compile Include="Global\Sqlite.cs" />
     <Compile Include="Global\Git.cs" />
     <Compile Include="Global\Others.cs" />
@@ -169,6 +169,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lavcode.GitTools\Lavcode.GitTools.csproj">
+      <Project>{D22612FF-7448-4C42-A871-E329C69DA057}</Project>
+      <Name>Lavcode.GitTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj">
       <Project>{BA98ED11-034C-4EC0-ABE0-2B81BD5ABCFB}</Project>
       <Name>Lavcode.Model</Name>

@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.GitTools;
 using Octokit;
 using System;
 using System.Threading.Tasks;
@@ -36,7 +36,7 @@ namespace Lavcode.Uwp.View.Git
 
             try
             {
-                var github = GitHubHelper.GetBaseClient();
+                var github = GitHubHelper.GetBaseClient(Global.Repos);
                 Repository = await github.Repository.Get(Global.GitAccount, Global.Repos);
             }
             catch (Exception ex)

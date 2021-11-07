@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.GitTools;
 using Lavcode.Uwp.Common.View.Comment;
-using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
 using Octokit;
 using System;
@@ -68,7 +68,7 @@ namespace Lavcode.Uwp.View.Feedback
 
         private async Task GetIssueInfo()
         {
-            GitHubClient _client = GitHubHelper.GetBaseClient();
+            var _client = GitHubHelper.GetBaseClient(Global.Repos);
             Issue = await _client.Issue.Get(Global.GitAccount, Global.Repos, Global.FeedbackIssueNumber);
         }
 
