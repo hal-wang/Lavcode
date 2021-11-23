@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HTools" Version="1.6.7" />
+    <PackageReference Include="HTools" Version="1.6.8" />
     <PackageReference Include="Octokit" Version="0.50.0" />
   </ItemGroup>
 

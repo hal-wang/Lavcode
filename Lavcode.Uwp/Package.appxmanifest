@@ -9,7 +9,7 @@
 
   <Identity
     Name="524473F72DB2F.Lavcode"
-    Publisher="CN=72C1148F-5C2B-4F28-9B8C-891A63D2777E"
+    Publisher="CN=524473F72DB2F.Lavcode"
     Version="0.2.4.0" />
 
   <mp:PhoneIdentity PhoneProductId="98738b8b-3d2e-4a2d-82f9-9ab36a5dd60c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
