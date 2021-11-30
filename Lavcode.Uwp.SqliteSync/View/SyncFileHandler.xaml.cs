@@ -4,9 +4,11 @@ using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,7 +23,6 @@ namespace Lavcode.Uwp.SqliteSync.View
         public SyncFileHandler()
         {
             this.InitializeComponent();
-            (SimpleIoc.Default.GetInstance<IConService>() as Lavcode.Service.Sqlite.ConService).Connection.TableChanged += (ss, ee) => IsDbChanged = true;
 
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
             Global.UnsaveDialogAction += this.ShowUnsaveDialog;
@@ -130,6 +131,12 @@ namespace Lavcode.Uwp.SqliteSync.View
                 dispatcherTimer.Start();
                 return;
             }
+
+
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, Global.FileLaunchFileName) });
+            (SimpleIoc.Default.GetInstance<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
+                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => IsDbChanged = true);
 
             if (_syncHelper.IsAutoVerified)
             {

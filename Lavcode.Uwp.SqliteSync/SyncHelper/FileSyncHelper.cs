@@ -13,7 +13,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         /// 本地文件导入的文件。如果是合并，则需要使用这个文件作为导出。
         /// 如果是打开文件，则此引用为打开的文件。
         /// </summary>
-        private StorageFile _pickedFile = null;
+        public StorageFile PickedFile { get; private set; }
 
         /// <summary>
         /// 通过文件初始化
@@ -37,8 +37,8 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
 
         private async Task<bool> LoadFromFile(StorageFile storageFile)
         {
-            _pickedFile = storageFile;
-            var file = await DecryptFile(_pickedFile);
+            PickedFile = storageFile;
+            var file = await DecryptFile(PickedFile);
             if (file == null)
             {
                 return false;
@@ -62,13 +62,13 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary
             };
             picker.FileTypeFilter.Add(".lc");
-            _pickedFile = await picker.PickSingleFileAsync();
-            if (_pickedFile == null)
+            PickedFile = await picker.PickSingleFileAsync();
+            if (PickedFile == null)
             {
                 return null;
             }
 
-            return await DecryptFile(_pickedFile);
+            return await DecryptFile(PickedFile);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         /// <returns></returns>
         public async Task<bool> SetFile(StorageFile source, Action<StorageFile> repickFileCallback = null)
         {
-            StorageFile pickFile = repickFileCallback == null ? _pickedFile : null;
+            StorageFile pickFile = repickFileCallback == null ? PickedFile : null;
 
             var encryptedFile = await EncryptFile(source);
             if (encryptedFile == null)
@@ -101,10 +101,10 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                     return false;
                 }
             }
-            _pickedFile = pickFile;
+            PickedFile = pickFile;
 
-            await encryptedFile.CopyAndReplaceAsync(_pickedFile);
-            repickFileCallback?.Invoke(_pickedFile);
+            await encryptedFile.CopyAndReplaceAsync(PickedFile);
+            repickFileCallback?.Invoke(PickedFile);
             return true;
         }
     }

@@ -1,8 +1,6 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.Shell;
-using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;
 using Windows.ApplicationModel;
@@ -44,26 +42,20 @@ namespace Lavcode.Uwp
             {
                 if (Frame.Content == null)
                 {
-                    if (SystemInformation.Instance.IsFirstRun || !SettingHelper.Instance.IsAuthOpen)
-                    {
-                        Frame.Navigate(typeof(ShellPage), e.Arguments);
-                    }
-                    else
-                    {
-                        Frame.Navigate(typeof(WindowsHelloAuth), e.Arguments);
-                    }
+                    Frame.Navigate(typeof(AuthPage), e.Arguments);
                 }
                 Window.Current.Activate();
             }
         }
 
-        protected override void OnFileActivated(FileActivatedEventArgs e)
+        protected override async void OnFileActivated(FileActivatedEventArgs e)
         {
             CreateFrame();
 
             StorageFile file = e.Files.FirstOrDefault() as StorageFile;
             if (Frame.Content == null)
             {
+                ViewModelLocator.Register<Service.Sqlite.ConService>();
                 Frame.Navigate(typeof(ShellPage), file);
             }
             Window.Current.Activate();

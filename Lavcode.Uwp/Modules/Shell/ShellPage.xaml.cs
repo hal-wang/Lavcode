@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Common;
-using Lavcode.Uwp.Modules.PasswordCore;
-using Lavcode.Uwp.SqliteSync.View;
 using Lavcode.Uwp.ViewModel;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using System;

@@ -132,10 +132,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="Modules\Auth\WindowsHelloAuth.xaml.cs">
-      <DependentUpon>WindowsHelloAuth.xaml</DependentUpon>
+    <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
+      <DependentUpon>WindowsHelloDisabled.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Feedback\GitHubLogin.cs" />
+    <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Modules\Shell\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>
     </Compile>
@@ -191,7 +192,7 @@
     <Compile Include="Modules\PasswordCore\PasswordMoveToViewModel.cs" />
     <Compile Include="Modules\PasswordCore\FolderListViewModel.cs" />
     <Compile Include="Modules\Git\GitInfoViewModel.cs" />
-    <Compile Include="Modules\Auth\WindowsHelloAuthViewModel.cs" />
+    <Compile Include="Modules\Auth\AuthViewModel.cs" />
     <Compile Include="Modules\PasswordCore\FolderItem.cs" />
     <Compile Include="Modules\PasswordCore\KeyValuePairItem.cs" />
     <Compile Include="Modules\PasswordCore\PasswordItem.cs" />
@@ -305,7 +306,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Modules\Auth\WindowsHelloAuth.xaml">
+    <Page Include="Modules\Auth\WindowsHelloDisabled.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

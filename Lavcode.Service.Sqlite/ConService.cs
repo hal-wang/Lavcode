@@ -4,7 +4,6 @@ using Lavcode.Model;
 using SQLite;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Lavcode.Service.Sqlite
@@ -16,11 +15,6 @@ namespace Lavcode.Service.Sqlite
         public async Task<bool> Connect(object args)
         {
             var filePath = DynamicHelper.ToExpandoObject(args).FilePath as string;
-            if (!File.Exists(filePath))
-            {
-                return false;
-            }
-
             try
             {
                 Connection?.Dispose();

@@ -1,13 +1,14 @@
 ﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Helpers;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 using Windows.System;
 
-namespace Lavcode.Uwp.Common
+namespace Lavcode.Uwp.Modules.Feedback
 {
     public class GitHubLogin
     {
@@ -22,7 +23,7 @@ namespace Lavcode.Uwp.Common
 
             if (!await Launcher.LaunchUriAsync(new Uri(oauth.Url)))
             {
-                MessageHelper.ShowDanger("GitHub登录失败");
+                MessageHelper.ShowDanger("GitHub 登录失败");
                 return null;
             }
             await TaskExtend.SleepAsync(300);

@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Ioc;
 using Lavcode.IService;
 using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Modules;
-using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.PasswordCore;
@@ -24,23 +23,29 @@ namespace Lavcode.Uwp
         {
             SimpleIoc.Default.Register<IConService, T>();
 
-            RegisterBaseServices();
-            RegisterViewModel();
-        }
+            if(typeof(T) ==typeof(Service.Sqlite.ConService))
+            {
+                SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
+                SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();
+                SimpleIoc.Default.Register<IIconService, Service.Sqlite.IconService>();
+                SimpleIoc.Default.Register<IDelectedService, Service.Sqlite.DelectedService>();
+                SimpleIoc.Default.Register<IConfigService, Service.Sqlite.ConfigService>();
+            }
+            else if (typeof(T) == typeof(Service.GitHub.ConService))
+            {
+                SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
+                SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
+                SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
+                SimpleIoc.Default.Register<IDelectedService, Service.GitHub.DelectedService>();
+                SimpleIoc.Default.Register<IConfigService, Service.GitHub.ConfigService>();
+            }
 
-        private static void RegisterBaseServices()
-        {
-            SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
-            SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
-            SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
-            SimpleIoc.Default.Register<IDelectedService, Service.GitHub.DelectedService>();
-            SimpleIoc.Default.Register<IConfigService, Service.GitHub.ConfigService>();
+            RegisterViewModel();
         }
 
         private static void RegisterViewModel()
         {
             SimpleIoc.Default.Register<ShellPageViewModel>();
-            SimpleIoc.Default.Register<WindowsHelloAuthViewModel>();
             SimpleIoc.Default.Register<FolderListViewModel>();
             SimpleIoc.Default.Register<PasswordDetailViewModel>();
             SimpleIoc.Default.Register<PasswordMoveToViewModel>();

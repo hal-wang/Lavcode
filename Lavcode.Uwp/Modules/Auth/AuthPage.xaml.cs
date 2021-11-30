@@ -1,7 +1,8 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.Uwp.ViewModel;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Lavcode.Uwp.Modules.Auth
 {
@@ -9,7 +10,6 @@ namespace Lavcode.Uwp.Modules.Auth
     {
         public AuthPage()
         {
-            DataContext = VM;
             this.InitializeComponent();
             TitleBarHelper.SetTitleBar();
 
@@ -21,11 +21,16 @@ namespace Lavcode.Uwp.Modules.Auth
             await VM.Init();
         }
 
-        public WindowsHelloAuthViewModel VM { get; } = new WindowsHelloAuthViewModel();
-
-        private void ReferenceBtn_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ReferenceTip.IsOpen = true;
+            base.OnNavigatedTo(e);
+
+            if(e.Parameter is IStorageFile)
+            {
+
+            }
         }
+
+        public AuthViewModel VM { get; } = new AuthViewModel();
     }
 }
