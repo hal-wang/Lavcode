@@ -132,98 +132,98 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Auth\WindowsHelloAuth.xaml.cs">
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="Modules\Auth\WindowsHelloAuth.xaml.cs">
       <DependentUpon>WindowsHelloAuth.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BackSvg.xaml.cs">
+    <Compile Include="Modules\Shell\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Commands.xaml.cs">
+    <Compile Include="Modules\Shell\Commands.xaml.cs">
       <DependentUpon>Commands.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Feedback\FeedbackDialog.xaml.cs">
+    <Compile Include="Modules\Feedback\FeedbackDialog.xaml.cs">
       <DependentUpon>FeedbackDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Feedback\FeedbackDialogViewModel.cs" />
-    <Compile Include="View\Feedback\MarkdownPreview.xaml.cs">
+    <Compile Include="Modules\Feedback\FeedbackDialogViewModel.cs" />
+    <Compile Include="Modules\Feedback\MarkdownPreview.xaml.cs">
       <DependentUpon>MarkdownPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FirstUseDialog.xaml.cs">
+    <Compile Include="Modules\FirstUseDialog.xaml.cs">
       <DependentUpon>FirstUseDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Git\Icon.xaml.cs">
+    <Compile Include="Modules\Git\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordListCommandBar.xaml.cs">
+    <Compile Include="Modules\PasswordCore\PasswordListCommandBar.xaml.cs">
       <DependentUpon>PasswordListCommandBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Rating.xaml.cs">
+    <Compile Include="Modules\Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SettingDialog.xaml.cs">
+    <Compile Include="Modules\Setting\SettingDialog.xaml.cs">
       <DependentUpon>SettingDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\SettingViewModel.cs" />
-    <Compile Include="View\Version.xaml.cs">
+    <Compile Include="Modules\Setting\SettingViewModel.cs" />
+    <Compile Include="Modules\Shell\Version.xaml.cs">
       <DependentUpon>Version.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\IconItem.cs" />
+    <Compile Include="Modules\PasswordCore\IconItem.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="View\EditFolderDialog.xaml.cs">
+    <Compile Include="Modules\PasswordCore\EditFolderDialog.xaml.cs">
       <DependentUpon>EditFolderDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Modules\Shell\ShellPage.xaml.cs">
+      <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\Notices\NoticesPage.xaml.cs">
+    <Compile Include="Modules\Shell\ShellPageViewModel.cs" />
+    <Compile Include="Modules\Notices\NoticesPage.xaml.cs">
       <DependentUpon>NoticesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Notices\NoticesViewModel.cs" />
-    <Compile Include="View\Feedback\FeedbackPage.xaml.cs">
+    <Compile Include="Modules\Notices\NoticesViewModel.cs" />
+    <Compile Include="Modules\Feedback\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Feedback\FeedbackViewModel.cs" />
-    <Compile Include="View\Feedback\Icon.xaml.cs">
+    <Compile Include="Modules\Feedback\FeedbackViewModel.cs" />
+    <Compile Include="Modules\Feedback\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\PasswordMoveToViewModel.cs" />
-    <Compile Include="ViewModel\FolderListViewModel.cs" />
-    <Compile Include="View\Git\GitInfoViewModel.cs" />
-    <Compile Include="ViewModel\WindowsHelloAuthViewModel.cs" />
-    <Compile Include="ViewModel\FolderItem.cs" />
-    <Compile Include="ViewModel\KeyValuePairItem.cs" />
-    <Compile Include="ViewModel\PasswordItem.cs" />
-    <Compile Include="ViewModel\PasswordDetailViewModel.cs" />
-    <Compile Include="View\PasswordDetail\PasswordGeneratorViewModel.cs" />
-    <Compile Include="ViewModel\PasswordListViewModel.cs" />
-    <Compile Include="View\PasswordDetail\CustomKeyDialog.xaml.cs">
+    <Compile Include="Modules\PasswordCore\PasswordMoveToViewModel.cs" />
+    <Compile Include="Modules\PasswordCore\FolderListViewModel.cs" />
+    <Compile Include="Modules\Git\GitInfoViewModel.cs" />
+    <Compile Include="Modules\Auth\WindowsHelloAuthViewModel.cs" />
+    <Compile Include="Modules\PasswordCore\FolderItem.cs" />
+    <Compile Include="Modules\PasswordCore\KeyValuePairItem.cs" />
+    <Compile Include="Modules\PasswordCore\PasswordItem.cs" />
+    <Compile Include="Modules\PasswordCore\PasswordDetailViewModel.cs" />
+    <Compile Include="Modules\PasswordCore\PasswordGeneratorViewModel.cs" />
+    <Compile Include="Modules\PasswordCore\PasswordListViewModel.cs" />
+    <Compile Include="Modules\PasswordCore\CustomKeyDialog.xaml.cs">
       <DependentUpon>CustomKeyDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HelpDialog.xaml.cs">
+    <Compile Include="Modules\HelpDialog.xaml.cs">
       <DependentUpon>HelpDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordMoveToDialog.xaml.cs">
+    <Compile Include="Modules\PasswordCore\PasswordMoveToDialog.xaml.cs">
       <DependentUpon>PasswordMoveToDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FolderList.xaml.cs">
+    <Compile Include="Modules\PasswordCore\FolderList.xaml.cs">
       <DependentUpon>FolderList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Git\GitInfo.xaml.cs">
+    <Compile Include="Modules\Git\GitInfo.xaml.cs">
       <DependentUpon>GitInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Auth\AuthPage.xaml.cs">
+    <Compile Include="Modules\Auth\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordDetail\PasswordDetail.xaml.cs">
+    <Compile Include="Modules\PasswordCore\PasswordDetail.xaml.cs">
       <DependentUpon>PasswordDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordDetail\PasswordGenerator.xaml.cs">
+    <Compile Include="Modules\PasswordCore\PasswordGenerator.xaml.cs">
       <DependentUpon>PasswordGenerator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PasswordList.xaml.cs">
+    <Compile Include="Modules\PasswordCore\PasswordList.xaml.cs">
       <DependentUpon>PasswordList.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -305,47 +305,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\Auth\WindowsHelloAuth.xaml">
+    <Page Include="Modules\Auth\WindowsHelloAuth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BackSvg.xaml">
+    <Page Include="Modules\Shell\BackSvg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Commands.xaml">
+    <Page Include="Modules\Shell\Commands.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Feedback\FeedbackDialog.xaml">
+    <Page Include="Modules\Feedback\FeedbackDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Feedback\MarkdownPreview.xaml">
+    <Page Include="Modules\Feedback\MarkdownPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FirstUseDialog.xaml">
+    <Page Include="Modules\FirstUseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Git\Icon.xaml">
+    <Page Include="Modules\Git\Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordListCommandBar.xaml">
+    <Page Include="Modules\PasswordCore\PasswordListCommandBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Rating.xaml">
+    <Page Include="Modules\Rating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SettingDialog.xaml">
+    <Page Include="Modules\Setting\SettingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Version.xaml">
+    <Page Include="Modules\Shell\Version.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -361,59 +361,59 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Feedback\FeedbackPage.xaml">
+    <Page Include="Modules\Feedback\FeedbackPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Feedback\Icon.xaml">
+    <Page Include="Modules\Feedback\Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditFolderDialog.xaml">
+    <Page Include="Modules\PasswordCore\EditFolderDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainPage.xaml">
+    <Page Include="Modules\Shell\ShellPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Notices\NoticesPage.xaml">
+    <Page Include="Modules\Notices\NoticesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordDetail\CustomKeyDialog.xaml">
+    <Page Include="Modules\PasswordCore\CustomKeyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HelpDialog.xaml">
+    <Page Include="Modules\HelpDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordMoveToDialog.xaml">
+    <Page Include="Modules\PasswordCore\PasswordMoveToDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FolderList.xaml">
+    <Page Include="Modules\PasswordCore\FolderList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Git\GitInfo.xaml">
+    <Page Include="Modules\Git\GitInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Auth\AuthPage.xaml">
+    <Page Include="Modules\Auth\AuthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordDetail\PasswordDetail.xaml">
+    <Page Include="Modules\PasswordCore\PasswordDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordDetail\PasswordGenerator.xaml">
+    <Page Include="Modules\PasswordCore\PasswordGenerator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PasswordList.xaml">
+    <Page Include="Modules\PasswordCore\PasswordList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

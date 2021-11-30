@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="Lavcode.Uwp.Modules.Rating"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lavcode.Uwp.Modules"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="400">
+
+    <StackPanel Width="400">
+        <TextBlock FontSize="{ThemeResource TextStyleLargeFontSize}"
+                   Text="开源不易，感谢支持！"
+                   HorizontalAlignment="Center"/>
+        <Button Content="打分"
+                Margin="0 20 0 0"
+                HorizontalAlignment="Stretch"
+                Style="{ThemeResource AccentButtonStyle}"
+                Click="Rating_Click"/>
+
+        <Grid Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Assets/Images/wxpay.jpg"
+                   Stretch="Uniform"/>
+            <Image Source="/Assets/Images/alipay.jpg"
+                   Stretch="Uniform"
+                   Grid.Column="2"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

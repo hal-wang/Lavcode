@@ -1,0 +1,39 @@
+﻿<ContentDialog
+    x:Class="Lavcode.Uwp.Modules.PasswordCore.EditFolderDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lucvi="using:Lavcode.Uwp.Common.View.IconSelecter"
+    mc:Ignorable="d"
+    PrimaryButtonText="确定"
+    SecondaryButtonText="取消"
+    DefaultButton="Primary"
+    PrimaryButtonClick="LayoutDialog_PrimaryButtonClick"
+    Style="{ThemeResource DefaultContentDialogStyle}">
+
+    <Border Width="300"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <StackPanel>
+            <lucvi:IconSelecter Icon="{x:Bind Icon,Mode=TwoWay}"
+                                x:Name="IconSelecter"/>
+
+            <Grid Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="名称"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1"
+                         x:Name="FolderNameTextBox"
+                     MaxLength="100"
+                     Text="{x:Bind FolderName,Mode=TwoWay}"
+                     Margin="10 0 0 0"
+                         HorizontalAlignment="Stretch"
+                         PlaceholderText="文件夹名称"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</ContentDialog>

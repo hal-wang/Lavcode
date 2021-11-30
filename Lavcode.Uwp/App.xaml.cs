@@ -1,7 +1,7 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Common;
-using Lavcode.Uwp.View;
-using Lavcode.Uwp.View.Auth;
+using Lavcode.Uwp.Modules.Auth;
+using Lavcode.Uwp.Modules.Shell;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;
@@ -46,7 +46,7 @@ namespace Lavcode.Uwp
                 {
                     if (SystemInformation.Instance.IsFirstRun || !SettingHelper.Instance.IsAuthOpen)
                     {
-                        Frame.Navigate(typeof(MainPage), e.Arguments);
+                        Frame.Navigate(typeof(ShellPage), e.Arguments);
                     }
                     else
                     {
@@ -64,7 +64,7 @@ namespace Lavcode.Uwp
             StorageFile file = e.Files.FirstOrDefault() as StorageFile;
             if (Frame.Content == null)
             {
-                Frame.Navigate(typeof(MainPage), file);
+                Frame.Navigate(typeof(ShellPage), file);
             }
             Window.Current.Activate();
         }

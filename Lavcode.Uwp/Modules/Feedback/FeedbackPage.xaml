@@ -1,0 +1,128 @@
+﻿<!--
+    反馈页面
+    -->
+
+<Page
+    x:Class="Lavcode.Uwp.Modules.Feedback.FeedbackPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
+    xmlns:lucvc="using:Lavcode.Uwp.Common.View.Comment"
+    xmlns:local="using:Lavcode.Uwp.Modules.Feedback"
+    xmlns:huc="using:HTools.Uwp.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Enabled">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <lucv:Header Text="反馈">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <huc:TitleBar Margin="-100 0 0 0"/>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 4 200 0"
+                            Grid.Column="1">
+                    <local:Icon Data="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"
+                                ToolTipService.ToolTip="GitHub">
+                        <StackPanel>
+                            <TextBlock Text="在GitHub中反馈"
+                                   FontSize="16"
+                                   FontWeight="Bold"/>
+                            <HyperlinkButton Content="{x:Bind FeedbackUrl}"
+                                     VerticalAlignment="Center"
+                                     Click="Git_Click"/>
+                        </StackPanel>
+                    </local:Icon>
+                    <local:Icon Data="M1297.068715 145.954133v758.442667c0 37.751467-30.72 68.4032-67.925334 68.4032H67.927381A67.857067 67.857067 0 0 1 0.002048 904.3968V145.954133l597.8112 537.941334c28.194133 25.463467 73.454933 25.258667 101.444267 0L1297.068715 146.0224zM50.860715 44.509867C22.803115 19.933867 30.790315 0 67.927381 0h1161.216c37.546667 0 44.8512 20.206933 17.066667 44.509867L699.257515 522.922667a79.735467 79.735467 0 0 1-101.7856 0L50.860715 44.509867z"
+                                ToolTipService.ToolTip="邮箱"
+                                Margin="20 0 0 0">
+                        <StackPanel>
+                            <TextBlock Text="邮箱"
+                                   FontSize="16"
+                                   FontWeight="Bold"/>
+                            <HyperlinkButton Content="{x:Bind Email}"
+                                     VerticalAlignment="Center"
+                                     Click="Email_Click"/>
+                        </StackPanel>
+                    </local:Icon>
+                    <local:Icon Data="M693.216 347.328c11.744 0 23.36 0.864 34.896 2.144-31.36-146.016-187.488-254.512-365.68-254.512C163.2 94.96 0 230.752 0 403.184 0 502.72 54.304 584.448 145.024 647.84l-36.24 109.024 126.688-63.552c45.328 8.992 81.712 18.208 126.96 18.208 11.376 0 22.656-0.56 33.84-1.44-7.088-24.24-11.184-49.616-11.184-75.936C385.072 475.808 521.056 347.328 693.216 347.328L693.216 347.328zM498.336 249.056c27.296 0 45.376 17.952 45.376 45.216 0 27.168-18.08 45.376-45.376 45.376-27.168 0-54.416-18.208-54.416-45.376C443.92 267.008 471.168 249.056 498.336 249.056L498.336 249.056zM244.688 339.648c-27.152 0-54.576-18.192-54.576-45.36 0-27.264 27.408-45.216 54.576-45.216s45.248 17.952 45.248 45.216C289.936 321.456 271.856 339.648 244.688 339.648L244.688 339.648zM1024 629.792c0-144.896-145.008-263.008-307.84-263.008-172.448 0-308.272 118.112-308.272 263.008 0 145.136 135.824 263.008 308.272 263.008 36.08 0 72.48-9.088 108.736-18.192l99.424 54.432-27.264-90.56C969.792 783.904 1024 711.536 1024 629.792L1024 629.792zM616.208 584.448c-18.048 0-36.256-17.952-36.256-36.272 0-18.064 18.208-36.256 36.256-36.256 27.408 0 45.376 18.192 45.376 36.256C661.584 566.496 643.616 584.448 616.208 584.448L616.208 584.448zM815.568 584.448c-17.92 0-36-17.952-36-36.272 0-18.064 18.08-36.256 36-36.256 27.152 0 45.36 18.192 45.36 36.256C860.928 566.496 842.72 584.448 815.568 584.448L815.568 584.448z"
+                                ToolTipService.ToolTip="微信"
+                                Margin="20 0 0 0">
+                        <StackPanel>
+                            <Image Source="/Assets/Images/wechat_qr.png"
+                               Width="80"
+                               Height="80"/>
+                            <TextBlock Text="微信扫一扫"
+                                       FontSize="14"
+                                   HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </local:Icon>
+                    <local:Icon Data="M620.544 793.088c33.28-30.208 56.832-67.584 66.048-109.568 23.552 38.4 49.152 59.392 65.024 50.176 23.552-13.312 18.944-84.48-10.752-158.72-23.04-58.368-54.272-101.376-77.824-111.104 0.512-3.584 0.512-7.68 0.512-11.264 0-22.528-5.632-43.52-15.872-60.416 0.512-1.536 0.512-2.56 0.512-4.096 0-10.24-2.56-19.968-6.144-28.672-6.144-152.064-97.792-272.896-245.76-272.896s-240.128 120.832-245.76 272.896c-4.096 8.704-6.144 18.432-6.144 28.672v4.096c-9.728 16.896-15.872 37.888-15.872 60.416 0 3.584 0 7.68 0.512 11.264-23.552 9.728-54.784 52.736-77.824 111.104-29.184 74.752-33.792 145.408-10.752 158.72 16.384 9.216 41.472-11.776 65.536-50.176 9.216 41.984 32.768 79.36 66.048 109.568-34.816 13.824-57.856 36.864-57.856 62.464 0 42.496 61.44 76.8 137.728 76.8 68.608 0 125.44-27.648 136.192-64.512H404.48c10.752 36.864 67.584 64.512 136.192 64.512 76.288 0 137.728-34.304 137.728-76.8-0.512-25.6-23.04-48.128-57.856-62.464z m357.376-146.944c-18.432-46.592-43.52-81.408-62.464-89.088 0-3.072 0.512-6.144 0.512-9.216 0-17.92-4.608-34.816-12.8-48.64v-3.072c0-8.192-2.048-16.384-5.12-23.04-4.608-121.344-77.824-218.112-196.608-218.112-12.288 0-23.552 1.024-34.816 3.072 4.608 22.528 7.168 46.08 8.192 70.656 4.608 10.24 7.68 21.504 7.68 34.304 0 1.536 0 3.072-0.512 4.608 11.776 20.48 18.944 45.568 18.944 72.704 0 4.608-0.512 9.216-0.512 13.312 28.672 11.776 66.048 63.488 93.696 133.632 10.24 25.6 17.92 51.2 23.04 74.752 1.024 5.12 6.144 39.424 0 54.784-6.656 16.384-0.512 9.728-6.656 16.384-6.144 6.656-15.36 22.016-23.04 25.6-7.68 4.096-43.52 12.8-49.152 9.728-5.632-2.56-9.216-2.56-16.896-8.704-7.68-6.144-23.552-15.872-23.552-15.872l-17.92 25.088-12.8 17.92s27.648 17.408 30.72 25.6c3.072 8.704 9.216 19.968 8.192 27.648-0.512 7.68-6.144 30.208-6.144 30.208-2.56 4.096-3.584 7.68-1.536 9.216h9.728c8.704 29.184 53.76 51.712 109.056 51.712 60.928 0 110.08-27.136 110.08-61.44 0-20.48-18.432-38.912-46.08-50.176 26.624-24.064 45.056-54.272 52.736-87.552 18.944 30.72 38.912 47.104 52.224 39.936 18.944-9.216 15.36-66.048-8.192-125.952z"
+                                ToolTipService.ToolTip="QQ群"
+                                Margin="20 0 0 0">
+                        <StackPanel>
+                            <Image Source="/Assets/Images/qq_group.jpg"
+                               Width="80"
+                               Height="80"/>
+                            <TextBlock Text="欢迎加入QQ群"
+                                       FontSize="14"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </local:Icon>
+                </StackPanel>
+            </Grid>
+        </lucv:Header>
+
+        <Grid Grid.Row="1"
+              Margin="0 20">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{ThemeResource AccentButtonStyle}"
+                        Content="反馈"
+                        Width="120"
+                        Margin="80 0 0 0"
+                        Click="{x:Bind VM.HandleFeedback}"/>
+                <Button Style="{ThemeResource AccentButtonStyle}"
+                        Content="打分与评价"
+                        Width="120"
+                        Margin="40 0 0 0"
+                        Click="Rating_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <TextBlock Text="总数："
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind VM.Count,Mode=OneWay}"
+                           Visibility="{x:Bind VM.Issue,Mode=OneWay,Converter={StaticResource IsNullConverter},ConverterParameter=T}"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="未获取"
+                           FontSize="11"
+                           Opacity="0.7"
+                           Visibility="{x:Bind VM.Issue,Mode=OneWay,Converter={StaticResource IsNullConverter}}"
+                           VerticalAlignment="Center"/>
+                <Button Style="{ThemeResource LightButtonStyle}"
+                        ToolTipService.ToolTip="刷新"
+                        Margin="20 0"
+                        Click="{x:Bind VM.HandleRefresh}">
+                    <SymbolIcon Symbol="Refresh"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <lucvc:CommentList Grid.Row="2"
+                           Comments="{x:Bind VM.Feedbacks,Mode=OneWay}"/>
+    </Grid>
+</Page>

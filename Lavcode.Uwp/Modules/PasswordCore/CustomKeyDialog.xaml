@@ -1,0 +1,27 @@
+﻿<ContentDialog
+    x:Class="Lavcode.Uwp.Modules.PasswordCore.CustomKeyDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Windows.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Title="自定义"
+    PrimaryButtonText="确定"
+    SecondaryButtonText="取消"
+    DefaultButton="Primary"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    Style="{ThemeResource DefaultContentDialogStyle}">
+
+    <StackPanel>
+        <muxc:TextBox HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      PlaceholderText="请输入"
+                      MaxLength="100"
+                      Text="{x:Bind Key,Mode=TwoWay}"/>
+        <TextBlock Text="长度尽力短"
+                   FontSize="12"
+                   Margin="0 4 0 0"/>
+    </StackPanel>
+</ContentDialog>
+    

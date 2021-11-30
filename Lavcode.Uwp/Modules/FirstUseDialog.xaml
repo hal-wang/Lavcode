@@ -1,0 +1,39 @@
+﻿<ContentDialog
+    x:Class="Lavcode.Uwp.Modules.FirstUseDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Style="{ThemeResource DefaultContentDialogStyle}">
+
+    <ContentDialog.Title>
+        <lucv:DialogTitle Title="欢迎使用Lavcode！" Closable="True" Dialog="{x:Bind}" />
+    </ContentDialog.Title>
+    
+    <StackPanel>
+        <TextBlock Text="请跟随教程了解软件如何使用"
+                   Margin="0 10 0 0"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0 30 0 0">
+            <CheckBox VerticalAlignment="Center"
+                      IsChecked="{x:Bind IsPpChecked,Mode=TwoWay}"
+                      x:Name="PpCheckBox">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 -4 0 0">
+                    <TextBlock Text="已阅读并同意"
+                               FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <HyperlinkButton Content="隐私政策"
+                                     FontSize="12"
+                                     VerticalAlignment="Center"
+                                     Click="Pp_Click"/>
+                </StackPanel>
+            </CheckBox>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>
