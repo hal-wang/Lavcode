@@ -1,6 +1,7 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Common;
 using Lavcode.Uwp.View;
+using Lavcode.Uwp.View.Auth;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace Lavcode.Uwp
                     }
                     else
                     {
-                        Frame.Navigate(typeof(AuthPage), e.Arguments);
+                        Frame.Navigate(typeof(WindowsHelloAuth), e.Arguments);
                     }
                 }
                 Window.Current.Activate();
@@ -70,7 +71,7 @@ namespace Lavcode.Uwp
 
         private void CreateFrame()
         {
-            if (!(Window.Current.Content is Frame))
+            if (Window.Current.Content is not Windows.UI.Xaml.Controls.Frame)
             {
                 Frame = new Frame();
                 Frame.NavigationFailed += OnNavigationFailed;

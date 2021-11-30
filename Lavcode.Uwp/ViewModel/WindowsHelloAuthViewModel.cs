@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.ViewModel
 {
-    public class AuthViewModel : ViewModelBase
+    public class WindowsHelloAuthViewModel : ViewModelBase
     {
         private bool _isSupportLogin = true;
         public bool IsSupportLogin
@@ -73,7 +73,7 @@ namespace Lavcode.Uwp.ViewModel
                     }
                     else
                     {
-                        await ViewModelLocator.Register();
+                        await ViewModelLocator.RegisterSqlite(Global.SqliteFilePath);
                         (Window.Current.Content as Frame)?.Navigate(typeof(MainPage));
                     }
                 }

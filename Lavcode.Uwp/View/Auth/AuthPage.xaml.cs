@@ -2,9 +2,8 @@
 using Lavcode.Uwp.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
-namespace Lavcode.Uwp.View
+namespace Lavcode.Uwp.View.Auth
 {
     public sealed partial class AuthPage : Page
     {
@@ -13,18 +12,16 @@ namespace Lavcode.Uwp.View
             DataContext = VM;
             this.InitializeComponent();
             TitleBarHelper.SetTitleBar();
+
+            Loaded += AuthPage_Loaded;
         }
 
-        public AuthViewModel VM { get; } = new AuthViewModel();
-
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        private async void AuthPage_Loaded(object sender, RoutedEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            if (e.NavigationMode == NavigationMode.New)
-            {
-                await VM.Init();
-            }
+            await VM.Init();
         }
+
+        public WindowsHelloAuthViewModel VM { get; } = new WindowsHelloAuthViewModel();
 
         private void ReferenceBtn_Click(object sender, RoutedEventArgs e)
         {
