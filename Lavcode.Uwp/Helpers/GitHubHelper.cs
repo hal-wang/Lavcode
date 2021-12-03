@@ -1,6 +1,6 @@
 ﻿using Octokit;
 
-namespace Lavcode.GitTools
+namespace Lavcode.Uwp.Helpers
 {
     public static class GitHubHelper
     {

@@ -1,5 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
-using Lavcode.GitTools;
+using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Collections;
 using Octokit;
 using System;

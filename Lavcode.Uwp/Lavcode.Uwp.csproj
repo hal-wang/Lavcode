@@ -156,6 +156,7 @@
     <Compile Include="Controls\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
     <Compile Include="Modules\Auth\OAuthLoadingDialog.xaml.cs">
       <DependentUpon>OAuthLoadingDialog.xaml</DependentUpon>
@@ -576,10 +577,6 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lavcode.GitTools\Lavcode.GitTools.csproj">
-      <Project>{D22612FF-7448-4C42-A871-E329C69DA057}</Project>
-      <Name>Lavcode.GitTools</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lavcode.Service.GitHub\Lavcode.Service.GitHub.csproj">
       <Project>{49ab6388-db31-44dc-b731-a1435b040e7a}</Project>
       <Name>Lavcode.Service.GitHub</Name>
