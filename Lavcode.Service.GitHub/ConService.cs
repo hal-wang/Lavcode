@@ -16,6 +16,7 @@ namespace Lavcode.Service.GitHub
         private static readonly int _pageSize = 20;
 
         internal GitHubClient Client { get; private set; }
+        internal User User { get; private set; }
         internal Repository Repository { get; private set; }
 
         internal (Issue Issue, IList<CommentItem<Folder>> Comments) FolderIssue { get; private set; }
@@ -93,7 +94,7 @@ namespace Lavcode.Service.GitHub
         internal async Task CreateComment<T>(T value)
         {
             var issues = GetIssues<T>();
-            var newComment = await Client.Issue.Comment.Create(Repository.Id, issues.Issue.Id, JsonConvert.SerializeObject(value));
+            var newComment = await Client.Issue.Comment.Create(Repository.Id, issues.Issue.Number, JsonConvert.SerializeObject(value));
             issues.Comments.Add(new CommentItem<T>()
             {
                 Comment = newComment,
@@ -117,15 +118,16 @@ namespace Lavcode.Service.GitHub
         public async Task<bool> Connect(object args)
         {
             var token = DynamicHelper.ToExpandoObject(args).Token as string;
-            var repos = DynamicHelper.ToExpandoObject(args).Repos as string;
-            var account = DynamicHelper.ToExpandoObject(args).Account as string;
+            //var repos = DynamicHelper.ToExpandoObject(args).Repos as string;
+            //var account = DynamicHelper.ToExpandoObject(args).Account as string;
 
             var credentials = new Credentials(token, AuthenticationType.Oauth);
-            Client = new GitHubClient(new ProductHeaderValue(repos)) { Credentials = credentials };
+            Client = new GitHubClient(new ProductHeaderValue("Lavcode")) { Credentials = credentials };
 
             try
             {
-                Repository = await Client.Repository.Get(account, repos);
+                User = await Client.User.Current();
+                Repository = await GetRepository();
 
                 var issues = await CreateTable(await GetAllIssues());
                 FolderIssue = await GetIssueTableItems<Folder>(issues);
@@ -143,10 +145,33 @@ namespace Lavcode.Service.GitHub
             }
         }
 
+        private async Task<Repository> GetRepository()
+        {
+            Repository result;
+            try
+            {
+                result = await Client.Repository.Get(User.Login, "LavcodeStorate");
+            }
+            catch (NotFoundException)
+            {
+                result = await Client.Repository.Forks.Create("hal-wang", "Lavcode", new NewRepositoryFork() { });
+            }
+            return await EditRepos(result);
+        }
+
+        private async Task<Repository> EditRepos(Repository repository)
+        {
+            return await Client.Repository.Edit(repository.Id, new RepositoryUpdate("LavcodeStorate")
+            {
+                Private = repository.Private ? null : (bool?)true,
+                HasIssues = repository.HasIssues ? null : (bool?)true,
+            });
+        }
+
         private async Task<(Issue Issue, IList<CommentItem<T>> Comments)> GetIssueTableItems<T>(IList<Issue> issues)
         {
-            var issue = issues.First(item => item.Title == nameof(T));
-            var comments = await GetAllComments(issue.Id);
+            var issue = issues.First(item => item.Title == typeof(T).Name);
+            var comments = await GetAllComments(issue.Number);
             var items = comments.Select(item => new CommentItem<T>()
             {
                 Comment = item,
@@ -170,14 +195,14 @@ namespace Lavcode.Service.GitHub
         {
             if (!issues.Any(issue => issue.Title == name))
             {
-                var newIssue = await Client.Issue.Create(Repository.Owner.Name, Repository.Name, new NewIssue(name));
+                var newIssue = await Client.Issue.Create(User.Login, Repository.Name, new NewIssue(name));
                 issues.Add(newIssue);
             }
         }
 
         private async Task<IReadOnlyList<Issue>> GetIssues(int page)
         {
-            return await Client.Issue.GetAllForRepository(Repository.Owner.Login, Repository.Name, new ApiOptions()
+            return await Client.Issue.GetAllForRepository(User.Login, Repository.Name, new ApiOptions()
             {
                 PageCount = 1,
                 PageSize = _pageSize,
@@ -200,7 +225,7 @@ namespace Lavcode.Service.GitHub
 
         private async Task<IReadOnlyList<IssueComment>> GetCommments(int issueNumber, int page)
         {
-            return await Client.Issue.Comment.GetAllForIssue(Repository.Owner.Login, Repository.Name, issueNumber, new ApiOptions()
+            return await Client.Issue.Comment.GetAllForIssue(User.Login, Repository.Name, issueNumber, new ApiOptions()
             {
                 PageCount = 1,
                 PageSize = _pageSize,

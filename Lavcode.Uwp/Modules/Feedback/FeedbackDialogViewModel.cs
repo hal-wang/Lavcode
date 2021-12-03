@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools.Uwp.Helpers;
 using Lavcode.GitTools;
+using Lavcode.Uwp.Common;
 using Octokit;
 using System;
 using System.Threading.Tasks;

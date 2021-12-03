@@ -85,7 +85,7 @@ namespace Lavcode.Uwp.Common
 
         public Provider Provider
         {
-            get => (Provider)Get((int)Provider.Sqlite);
+            get => (Provider)Get((int)Provider.GitHub);
             set => Set((int)value);
         }
     }

@@ -63,6 +63,12 @@
             <uap:Logo>Assets/Images/circular_logo.png</uap:Logo>
           </uap:FileTypeAssociation>
         </uap:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="lavcode">
+            <uap:Logo>Assets/Images/circular_logo.png</uap:Logo>
+            <uap:DisplayName>Lavcode</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>

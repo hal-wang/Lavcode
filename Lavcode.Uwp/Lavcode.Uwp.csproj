@@ -135,7 +135,6 @@
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
       <DependentUpon>WindowsHelloDisabled.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Feedback\GitHubLogin.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Modules\Shell\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>

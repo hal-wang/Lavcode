@@ -79,12 +79,14 @@ namespace Lavcode.Uwp.Modules.Auth
                 switch (SettingHelper.Instance.Provider)
                 {
                     case Provider.GitHub:
+                        if (!SettingHelper.Instance.IsAuthOpen && !await WindowsHelloAuth()) return;
                         var githubToken = await new GitHubLogin().Login();
                         if (string.IsNullOrEmpty(githubToken)) return;
-                        ViewModelLocator.Register<Service.GitHub.ConService>();
                         loginData = new { Token = githubToken };
+                        ViewModelLocator.Register<Service.GitHub.ConService>();
                         break;
                     case Provider.Sqlite:
+                        if (SettingHelper.Instance.IsAuthOpen && !await WindowsHelloAuth()) return;
                         ViewModelLocator.Register<Service.Sqlite.ConService>();
                         loginData = new { FilePath = Global.SqliteFilePath };
                         break;

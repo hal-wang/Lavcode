@@ -1,77 +1,41 @@
-﻿using HTools;
-using HTools.Uwp.Helpers;
-using Lavcode.Model;
-using Lavcode.Uwp.Helpers;
-using Newtonsoft.Json.Linq;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Lavcode.Uwp.Common.View;
 using System;
 using System.Threading.Tasks;
+using System.Web;
 using Windows.System;
 
 namespace Lavcode.Uwp.Common
 {
     public class GitHubLogin
     {
+        ~GitHubLogin()
+        {
+            Messenger.Default.Unregister(this);
+        }
+
+        private Uri GetNavUrl()
+        {
+            var notify = HttpUtility.UrlEncode($"{Global.ToolsApiUrl}/github/oauth/notify?protocol=lavcode&app=Lavcode&platform=UWP&version={Global.Version}");
+            var state = Guid.NewGuid().ToString().Substring(0, 12);
+            var url = $"https://github.com/login/oauth/authorize?allow_signup=true&client_id=f3f682dda48d939fba2c&redirect_uri={notify}&state={state}";
+            return new Uri(url);
+        }
+
         public async Task<string> Login()
         {
-            var isLocalTokenValid = await IsLocalTokenValid();
-            if (isLocalTokenValid == null) return null;
-            if (isLocalTokenValid == true) return SettingHelper.Instance.GitHubToken;
-
-            var oauth = await GetGitHubOauth();
-            if (oauth == null) return null;
-
-            if (!await Launcher.LaunchUriAsync(new Uri(oauth.Url)))
-            {
-                MessageHelper.ShowDanger("GitHub登录失败");
-                return null;
-            }
-            await TaskExtend.SleepAsync(300);
-            if (await PopupHelper.ShowDialog("是否已在浏览器成功登录？", "GitHub登录", "是", "否", true, true) != Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
-            {
-                return null;
-            }
-
-            return await GetToken(oauth.Id);
-        }
-
-        private async Task<GitHubOauth> GetGitHubOauth()
-        {
-            var res = await Helpers.HttpClientExtend.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/url");
-            if (res.IsResErr()) return null;
-            return await res.GetContent<GitHubOauth>();
-        }
-
-        private async Task<string> GetToken(string id)
-        {
-            var res = await Helpers.HttpClientExtend.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/{id}");
-            if (res.IsResErr()) return null;
-            var obj = await res.GetContent<JObject>();
-            var tokenField = "token";
-            if (!obj.ContainsKey(tokenField) && !string.IsNullOrEmpty(obj.Value<string>(tokenField)))
-            {
-                MessageHelper.ShowDanger("GitHub 登录失败");
-                return null;
-            }
-            var token = obj.Value<string>(tokenField);
-            SettingHelper.Instance.GitHubToken = token;
-            return token;
-        }
-
-        private async Task<bool?> IsLocalTokenValid()
-        {
             var token = SettingHelper.Instance.GitHubToken;
-            if (string.IsNullOrEmpty(token)) return false;
-
-            var res = await Helpers.HttpClientExtend.HttpClient.GetAsync($"{Global.ToolsApiUrl}/github/oauth/{token}/valid");
-            if (res.IsResErr()) return null;
-            var obj = await res.GetContent<JObject>();
-            var validField = "valid";
-            if (!obj.ContainsKey(validField))
+            if (string.IsNullOrEmpty(token))
             {
-                MessageHelper.ShowDanger("GitHub 登录失败");
-                return null;
+                await Launcher.LaunchUriAsync(GetNavUrl());
+                var loadingDialog = new OAuthLoadingDialog("OnGithubNotify");
+                await loadingDialog.ShowAsync();
+                if (loadingDialog.Result == null) return null;
+
+                token = loadingDialog.Result["token"];
+                SettingHelper.Instance.GitHubToken = token;
             }
-            return obj.Value<bool>(validField);
+            return token;
         }
     }
 }

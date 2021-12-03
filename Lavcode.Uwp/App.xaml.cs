@@ -1,8 +1,11 @@
-﻿using HTools.Uwp.Helpers;
+﻿using GalaSoft.MvvmLight.Messaging;
+using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.Shell;
 using System;
 using System.Linq;
+using System.Web;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
@@ -48,7 +51,7 @@ namespace Lavcode.Uwp
             }
         }
 
-        protected override async void OnFileActivated(FileActivatedEventArgs e)
+        protected override void OnFileActivated(FileActivatedEventArgs e)
         {
             CreateFrame();
 
@@ -59,6 +62,22 @@ namespace Lavcode.Uwp
                 Frame.Navigate(typeof(ShellPage), file);
             }
             Window.Current.Activate();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                var eventArgs = args as ProtocolActivatedEventArgs;
+                var query = HttpUtility.ParseQueryString(eventArgs.Uri.Query);
+                if (!query.AllKeys.Contains("provider")) return;
+                switch (query["provider"])
+                {
+                    case "github":
+                        Messenger.Default.Send(query, "OnGithubNotify");
+                        break;
+                }
+            }
         }
 
         private void CreateFrame()
