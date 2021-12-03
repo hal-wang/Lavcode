@@ -1,6 +1,6 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Model;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using System;
 using Windows.System;

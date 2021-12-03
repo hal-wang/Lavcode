@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Shell;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;

@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:huc="using:HTools.Uwp.Controls"
-    xmlns:lucv="using:Lavcode.Uwp.Common.View"
+    xmlns:lucv="using:Lavcode.Uwp.Controls"
     xmlns:firstuse="using:Lavcode.Uwp.Modules.FirstUse"
     xmlns:lums="using:Lavcode.Uwp.Modules.Shell"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"

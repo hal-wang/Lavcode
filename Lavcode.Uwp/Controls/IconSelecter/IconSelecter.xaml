@@ -1,0 +1,88 @@
+﻿<UserControl
+    x:Class="Lavcode.Uwp.Controls.IconSelecter.IconSelecter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hluci="using:Lavcode.Uwp.Controls.IconControl"
+    mc:Ignorable="d"
+    CornerRadius="100"
+    Width="100"
+    Height="100"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Button Style="{ThemeResource ButtonRevealStyle}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                CornerRadius="{x:Bind CornerRadius}"
+                Padding="0">
+            <hluci:IconControl Icon="{x:Bind Icon,Mode=TwoWay}"/>
+            <Button.Flyout>
+                <Flyout x:Name="IconFlyout">
+                    <Flyout.FlyoutPresenterStyle>
+                        <Style TargetType="FlyoutPresenter">
+                            <Setter Property="Padding" Value="0" />
+                        </Style>
+                    </Flyout.FlyoutPresenterStyle>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="GridViewItem" x:Key="IconGridViewItemStyle">
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <Grid Margin="10 10 10 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Content="选择图片"
+                                    HorizontalAlignment="Stretch"
+                                    Click="{x:Bind HandleSelectImg}"
+                                    Margin="0 0 6 0"/>
+                            <Button Content="路径图"
+                                    Style="{ThemeResource AccentButtonStyle}"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    Click="{x:Bind HandlePathIcon}"
+                                    Margin="6 0 0 0"/>
+                        </Grid>
+
+                        <StackPanel Margin="20 0 0 0">
+                            <TextBlock Text="建议使用路径图或下方图标"
+                                       FontSize="12" />
+                            <TextBlock Text="不建议使用图片，会严重影响备份速度"
+                                       FontSize="12" />
+                        </StackPanel>
+
+                        <GridView ItemsSource="{x:Bind Icons}"
+                                  Height="300"
+                                  Width="412"
+                                  Margin="0 10 0 0"
+                                  Padding="0 0 15 0"
+                                  ItemContainerStyle="{StaticResource IconGridViewItemStyle}"
+                                  SelectionMode="None"
+                                  IsItemClickEnabled="True"
+                                  ItemClick="GridView_ItemClick">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center"
+                                          VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding}"
+                                                   FontSize="16"
+                                                   FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+    </Grid>
+</UserControl>

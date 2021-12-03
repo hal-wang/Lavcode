@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

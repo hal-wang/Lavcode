@@ -1,13 +1,13 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Lavcode.IService;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules;
 using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.PasswordCore;
 using Lavcode.Uwp.Modules.Setting;
-using Lavcode.Uwp.SqliteSync.ViewModel;
+using Lavcode.Uwp.Modules.SqliteSync.ViewModel;
 using Lavcode.Uwp.ViewModel;
 
 namespace Lavcode.Uwp
@@ -62,7 +62,7 @@ namespace Lavcode.Uwp
             switch (SettingHelper.Instance.Provider)
             {
                 case Model.Provider.Sqlite:
-                    SqliteSync.ViewModel.ViewModelLocator.Register();
+                    Modules.SqliteSync.ViewModel.ViewModelLocator.Register();
                     break;
                 case Model.Provider.GitHub:
                     break;

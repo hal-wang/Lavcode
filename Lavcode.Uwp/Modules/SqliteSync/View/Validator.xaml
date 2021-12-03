@@ -1,0 +1,33 @@
+﻿<ContentDialog
+    x:Class="Lavcode.Uwp.Modules.SqliteSync.View.Validator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    PrimaryButtonClick="LayoutDialog_PrimaryButtonClick"
+    Style="{ThemeResource DefaultContentDialogStyle}"
+    PrimaryButtonText="确定"
+    SecondaryButtonText="取消"
+    DefaultButton="Primary"
+    Title="备份密码">
+
+    <ContentDialog.Resources>
+        <Style TargetType="TextBlock" x:Key="Label"/>
+    </ContentDialog.Resources>
+
+    <StackPanel Width="200"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+        <PasswordBox Password="{x:Bind InputPassword,Mode=TwoWay}"
+                     PlaceholderText="请输入同步密码"
+                     x:Name="PasswordBox"/>
+        <TextBlock Text="加密文件的密码，防止同步文件泄露"
+                   FontSize="12"
+                   Margin="0 4 0 0"/>
+        <TextBlock Text="设置一次，自动验证"
+                   FontSize="12"/>
+    </StackPanel>
+</ContentDialog>

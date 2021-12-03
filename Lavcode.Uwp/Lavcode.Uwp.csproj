@@ -132,7 +132,40 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Comment\CommentList.xaml.cs">
+      <DependentUpon>CommentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Comment\CommentSource.cs" />
+    <Compile Include="Controls\DialogTitle.xaml.cs">
+      <DependentUpon>DialogTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconControl\IconControl.xaml.cs">
+      <DependentUpon>IconControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconControl\IconViewModel.cs" />
+    <Compile Include="Controls\IconSelecter\IconSelecter.xaml.cs">
+      <DependentUpon>IconSelecter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IconSelecter\IconSource.cs" />
+    <Compile Include="Controls\IconSelecter\SetPathIcon.xaml.cs">
+      <DependentUpon>SetPathIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Logo.xaml.cs">
+      <DependentUpon>Logo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SettingHelper.cs" />
+    <Compile Include="Modules\Auth\OAuthLoadingDialog.xaml.cs">
+      <DependentUpon>OAuthLoadingDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ProviderConverter.cs" />
+    <Compile Include="Global\Git.cs" />
+    <Compile Include="Global\Others.cs" />
+    <Compile Include="Global\Sqlite.cs" />
+    <Compile Include="Modules\Auth\GitHubLogin.cs" />
+    <Compile Include="Helpers\ImgHelper.cs" />
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
       <DependentUpon>WindowsHelloDisabled.xaml</DependentUpon>
     </Compile>
@@ -141,6 +174,36 @@
     </Compile>
     <Compile Include="Modules\FirstUse\ProviderSelectButton.xaml.cs">
       <DependentUpon>ProviderSelectButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SqliteSync\Constant.cs" />
+    <Compile Include="Modules\SqliteSync\Crypto\Aes.cs" />
+    <Compile Include="Modules\SqliteSync\Crypto\OperationType.cs" />
+    <Compile Include="Modules\SqliteSync\Merge.cs" />
+    <Compile Include="Modules\SqliteSync\Model\CloudItem.cs" />
+    <Compile Include="Modules\SqliteSync\Model\CloudType.cs" />
+    <Compile Include="Modules\SqliteSync\SyncHelper\BaseSyncHelper.cs" />
+    <Compile Include="Modules\SqliteSync\SyncHelper\DavSyncHelper.cs" />
+    <Compile Include="Modules\SqliteSync\SyncHelper\FileSyncHelper.cs" />
+    <Compile Include="Modules\SqliteSync\SyncHelper\ISyncHelper.cs" />
+    <Compile Include="Modules\SqliteSync\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Modules\SqliteSync\ViewModel\SyncHistoryItem.cs" />
+    <Compile Include="Modules\SqliteSync\ViewModel\SyncHistoryViewModel.cs" />
+    <Compile Include="Modules\SqliteSync\ViewModel\SyncViewModel.cs" />
+    <Compile Include="Modules\SqliteSync\ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Modules\SqliteSync\View\HistoryDialog.xaml.cs">
+      <DependentUpon>HistoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SqliteSync\View\LoginDialog.xaml.cs">
+      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SqliteSync\View\SyncDialog.xaml.cs">
+      <DependentUpon>SyncDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SqliteSync\View\SyncFileHandler.xaml.cs">
+      <DependentUpon>SyncFileHandler.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SqliteSync\View\Validator.xaml.cs">
+      <DependentUpon>Validator.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Modules\Shell\BackSvg.xaml.cs">
@@ -309,6 +372,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Comment\CommentList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DialogTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Header.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IconControl\IconControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IconSelecter\IconSelecter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IconSelecter\SetPathIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Logo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Auth\OAuthLoadingDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Auth\WindowsHelloDisabled.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -356,6 +451,26 @@
     <Page Include="Modules\Shell\Version.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SqliteSync\View\HistoryDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SqliteSync\View\LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SqliteSync\View\SyncDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SqliteSync\View\SyncFileHandler.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SqliteSync\View\Validator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -480,14 +595,6 @@
     <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj">
       <Project>{BA98ED11-034C-4EC0-ABE0-2B81BD5ABCFB}</Project>
       <Name>Lavcode.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lavcode.Uwp.Common\Lavcode.Uwp.Common.csproj">
-      <Project>{6705ca51-5971-4796-b916-394c1851c550}</Project>
-      <Name>Lavcode.Uwp.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lavcode.Uwp.SqliteSync\Lavcode.Uwp.SqliteSync.csproj">
-      <Project>{3bb2b023-18d4-4825-91b8-8606bdb085f7}</Project>
-      <Name>Lavcode.Uwp.SqliteSync</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

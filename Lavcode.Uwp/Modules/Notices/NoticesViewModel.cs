@@ -2,7 +2,7 @@
 using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.GitTools;
-using Lavcode.Uwp.Common.View.Comment;
+using Lavcode.Uwp.Controls.Comment;
 using Microsoft.Toolkit.Uwp;
 using Octokit;
 using System;

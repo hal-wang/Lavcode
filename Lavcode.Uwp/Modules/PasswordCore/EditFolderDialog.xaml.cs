@@ -3,7 +3,7 @@ using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;

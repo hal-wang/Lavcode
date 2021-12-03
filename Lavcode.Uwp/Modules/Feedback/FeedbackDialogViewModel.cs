@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools.Uwp.Helpers;
 using Lavcode.GitTools;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Modules.Auth;
 using Octokit;
 using System;
 using System.Threading.Tasks;

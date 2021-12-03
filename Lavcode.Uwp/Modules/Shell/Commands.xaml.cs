@@ -1,10 +1,10 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Model;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.Setting;
-using Lavcode.Uwp.SqliteSync.View;
+using Lavcode.Uwp.Modules.SqliteSync.View;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

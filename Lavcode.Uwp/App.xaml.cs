@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Common;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.FirstUse;
 using Lavcode.Uwp.Modules.Shell;
