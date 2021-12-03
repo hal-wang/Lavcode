@@ -70,7 +70,7 @@ namespace Lavcode.Uwp.Modules.Auth
             Loading = true;
             try
             {
-                if (SettingHelper.Instance.IsAuthOpen && !await WindowsHelloAuth())
+                if (ShouldAuthWindowsHello && !await WindowsHelloAuth())
                 {
                     return;
                 }
@@ -79,14 +79,12 @@ namespace Lavcode.Uwp.Modules.Auth
                 switch (SettingHelper.Instance.Provider)
                 {
                     case Provider.GitHub:
-                        if (!SettingHelper.Instance.IsAuthOpen && !await WindowsHelloAuth()) return;
                         var githubToken = await new GitHubLogin().Login();
                         if (string.IsNullOrEmpty(githubToken)) return;
                         loginData = new { Token = githubToken };
                         ViewModelLocator.Register<Service.GitHub.ConService>();
                         break;
                     case Provider.Sqlite:
-                        if (SettingHelper.Instance.IsAuthOpen && !await WindowsHelloAuth()) return;
                         ViewModelLocator.Register<Service.Sqlite.ConService>();
                         loginData = new { FilePath = Global.SqliteFilePath };
                         break;
@@ -94,10 +92,10 @@ namespace Lavcode.Uwp.Modules.Auth
 
                 if (loginData == null) return;
                 var conResult = await SimpleIoc.Default.GetInstance<IConService>().Connect(loginData);
-                if (conResult)
-                {
-                    (Window.Current.Content as Frame)?.Navigate(typeof(ShellPage));
-                }
+                if (!conResult) return;
+
+                (Window.Current.Content as Frame)?.Navigate(typeof(ShellPage));
+                SettingHelper.Instance.IsFirstInited = true;
             }
             catch (Exception ex)
             {
@@ -106,6 +104,22 @@ namespace Lavcode.Uwp.Modules.Auth
             finally
             {
                 Loading = false;
+            }
+        }
+
+        /// <summary>
+        /// 是否需要验证 WindowsHello
+        /// </summary>
+        /// <returns></returns>
+        private bool ShouldAuthWindowsHello
+        {
+            get
+            {
+                // 没有首次加载
+                if (!SettingHelper.Instance.IsFirstInited) return false;
+                if (SettingHelper.Instance.Provider == Provider.GitHub && string.IsNullOrEmpty(SettingHelper.Instance.GitHubToken)) return false;
+
+                return SettingHelper.Instance.IsAuthOpen;
             }
         }
 

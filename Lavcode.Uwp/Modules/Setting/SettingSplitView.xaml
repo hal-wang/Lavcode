@@ -1,0 +1,30 @@
+﻿<hucs:SettingSplitView
+    x:Class="Lavcode.Uwp.Modules.Setting.SettingSplitView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hucs="using:HTools.Uwp.Controls.Setting"
+    mc:Ignorable="d"
+    Header="设置">
+
+    <StackPanel>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+        <hucs:SwitchSettingCell Label="登录验证"
+                                Value="{x:Bind VM.IsAuthOpen,Mode=TwoWay}"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+        <hucs:SwitchSettingCell Label="背景图片"
+                                Value="{x:Bind VM.IsBgVisible,Mode=TwoWay}"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+
+        <Grid Margin="10 4 0 4" ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="存储类型" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="160" ItemsSource="{x:Bind VM.Providers}" SelectedItem="{x:Bind VM.Provider,Mode=TwoWay}" />
+        </Grid>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+    </StackPanel>
+</hucs:SettingSplitView>

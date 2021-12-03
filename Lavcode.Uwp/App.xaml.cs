@@ -82,6 +82,8 @@ namespace Lavcode.Uwp
 
         private void CreateFrame()
         {
+            SettingHelper.Instance.Provider = SettingHelper.Instance.SettingProvider;
+
             if (Window.Current.Content is not Windows.UI.Xaml.Controls.Frame)
             {
                 Frame = new Frame();

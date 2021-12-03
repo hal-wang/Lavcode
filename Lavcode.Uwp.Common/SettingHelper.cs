@@ -41,7 +41,6 @@ namespace Lavcode.Uwp.Common
         }
         #endregion
 
-
         /// <summary>
         /// 选中的文件夹ID
         /// </summary>
@@ -57,6 +56,12 @@ namespace Lavcode.Uwp.Common
         public bool IsFirstUse
         {
             get { return Get(true); }
+            set { Set(value); }
+        }
+
+        public bool IsFirstInited
+        {
+            get { return Get(false); }
             set { Set(value); }
         }
 
@@ -84,6 +89,12 @@ namespace Lavcode.Uwp.Common
         }
 
         public Provider Provider
+        {
+            get => (Provider)Get((int)Provider.GitHub);
+            set => Set((int)value);
+        }
+
+        public Provider SettingProvider
         {
             get => (Provider)Get((int)Provider.GitHub);
             set => Set((int)value);

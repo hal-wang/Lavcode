@@ -161,8 +161,8 @@
     <Compile Include="Modules\Rating.xaml.cs">
       <DependentUpon>Rating.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Setting\SettingDialog.xaml.cs">
-      <DependentUpon>SettingDialog.xaml</DependentUpon>
+    <Compile Include="Modules\Setting\SettingSplitView.xaml.cs">
+      <DependentUpon>SettingSplitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Setting\SettingViewModel.cs" />
     <Compile Include="Modules\Shell\Version.xaml.cs">
@@ -341,7 +341,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Setting\SettingDialog.xaml">
+    <Page Include="Modules\Setting\SettingSplitView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

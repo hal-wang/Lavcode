@@ -1,16 +1,14 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Lavcode.Model;
 using Lavcode.Uwp.Common;
-using Lavcode.Uwp.ViewModel;
 using System;
 using Windows.ApplicationModel.Core;
-using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.Setting
 {
-    public sealed partial class SettingDialog : ContentDialog
+    public sealed partial class SettingSplitView : HTools.Uwp.Controls.Setting.SettingSplitView
     {
-        public SettingDialog()
+        public SettingSplitView()
         {
             DataContext = VM;
             this.InitializeComponent();

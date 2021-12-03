@@ -7,6 +7,7 @@ using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.PasswordCore;
 using Lavcode.Uwp.Modules.Setting;
+using Lavcode.Uwp.SqliteSync.ViewModel;
 using Lavcode.Uwp.ViewModel;
 
 namespace Lavcode.Uwp
@@ -23,7 +24,7 @@ namespace Lavcode.Uwp
         {
             SimpleIoc.Default.Register<IConService, T>();
 
-            if(typeof(T) ==typeof(Service.Sqlite.ConService))
+            if (typeof(T) == typeof(Service.Sqlite.ConService))
             {
                 SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
                 SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();
@@ -45,6 +46,7 @@ namespace Lavcode.Uwp
 
         private static void RegisterViewModel()
         {
+            SimpleIoc.Default.Register<SyncViewModel>();
             SimpleIoc.Default.Register<ShellPageViewModel>();
             SimpleIoc.Default.Register<FolderListViewModel>();
             SimpleIoc.Default.Register<PasswordDetailViewModel>();

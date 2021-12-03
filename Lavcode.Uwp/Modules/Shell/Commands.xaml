@@ -59,10 +59,12 @@
             </huc:PathButton.Flyout>
         </huc:PathButton>
 
-        <huc:PathButton Data="M771.84 296.96a288 288 0 0 0-531.2 31.36 282.24 282.24 0 0 0 48 561.28h448a298.24 298.24 0 0 0 35.84-592zM416 478.08v276.48a22.4 22.4 0 0 1-44.8 0V478.08L297.6 551.68a21.76 21.76 0 1 1-30.72-30.72L384 407.68a18.56 18.56 0 0 1 27.52 0l109.44 113.28a21.76 21.76 0 1 1-30.72 30.72z m341.12 179.84L640 768a18.56 18.56 0 0 1-27.52 0l-109.44-110.72a21.76 21.76 0 1 1 30.72-30.72L608 704V424.32a22.4 22.4 0 1 1 44.8 0V704l74.24-74.24a21.76 21.76 0 1 1 30.72 30.72z"
+        <Grid Visibility="{x:Bind Provider,Mode=OneTime,Converter={StaticResource IsEqualConverter},ConverterParameter=Sqlite}">
+            <huc:PathButton Data="M771.84 296.96a288 288 0 0 0-531.2 31.36 282.24 282.24 0 0 0 48 561.28h448a298.24 298.24 0 0 0 35.84-592zM416 478.08v276.48a22.4 22.4 0 0 1-44.8 0V478.08L297.6 551.68a21.76 21.76 0 1 1-30.72-30.72L384 407.68a18.56 18.56 0 0 1 27.52 0l109.44 113.28a21.76 21.76 0 1 1-30.72 30.72z m341.12 179.84L640 768a18.56 18.56 0 0 1-27.52 0l-109.44-110.72a21.76 21.76 0 1 1 30.72-30.72L608 704V424.32a22.4 22.4 0 1 1 44.8 0V704l74.24-74.24a21.76 21.76 0 1 1 30.72 30.72z"
                          Visibility="{x:Bind HaveLogin,Mode=OneWay,Converter={StaticResource BooleanConverter}}"
                          Margin="16 0 0 0"
                          ToolTipService.ToolTip="云同步"
                          Click="Sync_Click"/>
+        </Grid>
     </StackPanel>
 </UserControl>

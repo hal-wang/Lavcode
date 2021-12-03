@@ -1,6 +1,7 @@
 ﻿using HTools.Uwp.Helpers;
+using Lavcode.Model;
+using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Modules.Feedback;
-using Lavcode.Uwp.Modules.Git;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.Setting;
 using Lavcode.Uwp.SqliteSync.View;
@@ -25,6 +26,8 @@ namespace Lavcode.Uwp.Modules.Shell
         // Using a DependencyProperty as the backing store for HaveLogin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HaveLoginProperty =
             DependencyProperty.Register("HaveLogin", typeof(bool), typeof(Commands), new PropertyMetadata(false));
+
+        public Provider Provider => SettingHelper.Instance.Provider;
 
         private void FeedbackBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -58,7 +61,7 @@ namespace Lavcode.Uwp.Modules.Shell
 
         private async void SettingBtn_Click(object sender, RoutedEventArgs e)
         {
-            await new SettingDialog().QueueAsync();
+            await new SettingSplitView().ShowAsync();
         }
     }
 }
