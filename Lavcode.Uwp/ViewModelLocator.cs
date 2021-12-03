@@ -7,6 +7,7 @@ using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.PasswordCore;
 using Lavcode.Uwp.Modules.Setting;
+using Lavcode.Uwp.Modules.SqliteSync;
 using Lavcode.Uwp.Modules.SqliteSync.ViewModel;
 using Lavcode.Uwp.ViewModel;
 
@@ -31,6 +32,7 @@ namespace Lavcode.Uwp
                 SimpleIoc.Default.Register<IIconService, Service.Sqlite.IconService>();
                 SimpleIoc.Default.Register<IDelectedService, Service.Sqlite.DelectedService>();
                 SimpleIoc.Default.Register<IConfigService, Service.Sqlite.ConfigService>();
+                SimpleIoc.Default.Register<SqliteFileService>();
             }
             else if (typeof(T) == typeof(Service.GitHub.ConService))
             {

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Modules.SqliteSync;
 using Lavcode.Uwp.ViewModel;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using Windows.Storage;
@@ -34,7 +35,7 @@ namespace Lavcode.Uwp.Modules.Shell
 
             if (param is not null and StorageFile file)
             {
-                Global.OpenedFile = file;
+                SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile = file;
                 FindName(nameof(SyncFileHandler));
             }
             else

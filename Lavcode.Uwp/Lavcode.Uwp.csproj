@@ -158,12 +158,10 @@
     </Compile>
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
-    <Compile Include="Helpers\SqliteConstant.cs" />
     <Compile Include="Modules\Auth\OAuthLoadingDialog.xaml.cs">
       <DependentUpon>OAuthLoadingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ProviderConverter.cs" />
-    <Compile Include="Global\Others.cs" />
     <Compile Include="Modules\Auth\GitHubLogin.cs" />
     <Compile Include="Helpers\ImgHelper.cs" />
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
@@ -205,6 +203,7 @@
     <Compile Include="Modules\SqliteSync\View\Validator.xaml.cs">
       <DependentUpon>Validator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\SqliteSync\SqliteFileService.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Modules\Shell\BackSvg.xaml.cs">
       <DependentUpon>BackSvg.xaml</DependentUpon>

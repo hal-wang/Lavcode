@@ -1,25 +1,27 @@
 ﻿using System.IO;
 using Windows.Storage;
 
-namespace Lavcode.Uwp.Helpers
+namespace Lavcode.Uwp.Modules.SqliteSync
 {
-    internal static class SqliteConstant
+    public class SqliteFileService
     {
         /// <summary>
         /// 数据库文件名称
         /// </summary>
-        public static string SqliteFileName { get; } = "localDb1.lc";
+        public string SqliteFileName { get; } = "localDb1.lc";
 
         /// <summary>
         /// 数据库文件路径
         /// </summary>
-        public static string SqliteFilePath =>
+        public string SqliteFilePath =>
             FileLaunchFileName == null
             ? Path.Combine(ApplicationData.Current.LocalFolder.Path, SqliteFileName)
             : Path.Combine(ApplicationData.Current.TemporaryFolder.Path, FileLaunchFolderName, FileLaunchFileName);
 
-        public static string FileLaunchFolderName { get; } = "FileLaunch";
+        public string FileLaunchFolderName { get; } = "FileLaunch";
 
-        public static string FileLaunchFileName { get; set; } = null;
+        public StorageFile OpenedFile { get; set; } = null;
+
+        public string FileLaunchFileName { get; set; } = null;
     }
 }

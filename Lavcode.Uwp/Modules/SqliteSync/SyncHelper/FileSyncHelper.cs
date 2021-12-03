@@ -1,4 +1,5 @@
-﻿using Lavcode.Uwp.Helpers;
+﻿using GalaSoft.MvvmLight.Ioc;
+using Lavcode.Uwp.Modules.SqliteSync;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -45,9 +46,10 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 return false;
             }
 
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteConstant.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
             await file.MoveAsync(launchFolder, DateTime.Now.ToString("yyMMddHHmmss"), NameCollisionOption.GenerateUniqueName);
-            SqliteConstant.FileLaunchFileName = file.Name;
+            sfs.FileLaunchFileName = file.Name;
             return true;
         }
 

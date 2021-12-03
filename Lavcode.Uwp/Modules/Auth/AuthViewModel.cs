@@ -5,6 +5,7 @@ using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Shell;
+using Lavcode.Uwp.Modules.SqliteSync;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -86,7 +87,10 @@ namespace Lavcode.Uwp.Modules.Auth
                         break;
                     case Provider.Sqlite:
                         ViewModelLocator.Register<Service.Sqlite.ConService>();
-                        loginData = new { FilePath = SqliteConstant.SqliteFilePath };
+                        loginData = new
+                        {
+                            FilePath = SimpleIoc.Default.GetInstance<SqliteFileService>().SqliteFilePath
+                        };
                         break;
                 }
 

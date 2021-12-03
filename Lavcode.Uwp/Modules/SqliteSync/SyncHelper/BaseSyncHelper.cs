@@ -1,4 +1,5 @@
-﻿using HTools;
+﻿using GalaSoft.MvvmLight.Ioc;
+using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.SqliteSync;
@@ -142,7 +143,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         /// <returns></returns>
         public async Task<StorageFile> GetTempLocalFile()
         {
-            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(SqliteConstant.SqliteFileName);
+            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(SimpleIoc.Default.GetInstance<SqliteFileService>().SqliteFileName);
             var tempFolder = await GetTempFolder();
             return await dbFile.CopyAsync(tempFolder, Constant.SyncTempLocalFileName, NameCollisionOption.ReplaceExisting);
         }
@@ -155,7 +156,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
         public async Task ReplaceDbFile(StorageFile storageFile)
         {
             var historyFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Constant.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
-            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(SqliteConstant.SqliteFileName);
+            var dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(SimpleIoc.Default.GetInstance<SqliteFileService>().SqliteFileName);
 
             // 将数据库文件复制到历史记录
             await dbFile.CopyAsync(historyFolder, DateTime.Now.ToString("yyMMddHHmmssff"), NameCollisionOption.FailIfExists);

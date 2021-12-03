@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
-using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
 using System.IO;
@@ -26,20 +26,21 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             this.InitializeComponent();
 
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
-            Global.UnsaveDialogAction += this.ShowUnsaveDialog;
+            Messenger.Default.Register<object>(this, "OnUnsaveCloseMsg", (_) => ShowUnsaveDialog());
             Init();
         }
 
         ~SyncFileHandler()
         {
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested -= this.OnCloseRequest;
-            Global.UnsaveDialogAction -= this.ShowUnsaveDialog;
+            Messenger.Default.Unregister<object>(this, "OnUnsaveCloseMsg");
         }
 
         private async Task<StorageFile> GetTempFile()
         {
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteConstant.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
-            return await launchFolder.GetFileAsync(SqliteConstant.FileLaunchFileName);
+            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            return await launchFolder.GetFileAsync(sfs.FileLaunchFileName);
         }
 
         private async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
@@ -119,7 +120,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         private async void Init()
         {
             await TaskExtend.SleepAsync(100);
-            OpenedFile = Global.OpenedFile;
+            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            OpenedFile = sfs.OpenedFile;
             _syncHelper = await FileSyncHelper.Create(OpenedFile);
             if (_syncHelper == null)
             {
@@ -133,9 +135,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
                 return;
             }
 
-
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteConstant.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
-            await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, SqliteConstant.FileLaunchFileName) });
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, sfs.FileLaunchFileName) });
             (SimpleIoc.Default.GetInstance<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
                  await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => IsDbChanged = true);
 

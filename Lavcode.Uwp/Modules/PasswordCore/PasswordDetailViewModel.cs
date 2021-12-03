@@ -1,10 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using HTools;
 using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
+using Lavcode.Uwp.Modules.SqliteSync;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -519,13 +521,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             var cdr = await PopupHelper.ShowDialog("当前内容已修改但未保存，是否保存？", "编辑未保存", "保存并退出", "不保存退出", null, true, "点错了");
             if (cdr == ContentDialogResult.Secondary || (cdr == ContentDialogResult.Primary && await Save()))
             {
-                if (Global.OpenedFile == null)
+                if (SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile == null)
                 {
                     Application.Current.Exit();
                 }
                 else
                 {
-                    Global.UnsaveDialogAction?.Invoke(); // 打开文件编辑的情况，双重确认
+                    // 编辑备份文件时，未保存退出确认对话框（目前在显示编辑密码未保存提示框后，弹出次未保存对话框），双重确认
+                    Messenger.Default.Send<object>(null, "OnUnsaveCloseMsg");
                 }
             }
         }
