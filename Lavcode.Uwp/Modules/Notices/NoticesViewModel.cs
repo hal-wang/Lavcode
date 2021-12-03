@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Uwp.Controls.Comment;
 using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
@@ -12,7 +13,7 @@ namespace Lavcode.Uwp.Modules.Notices
 {
     public class NoticesViewModel : ViewModelBase
     {
-        public string Author => Global.GitAccount;
+        public string Author => RepositoryConstant.GitAccount;
 
         private Issue _issue = null;
         public Issue Issue
@@ -47,7 +48,7 @@ namespace Lavcode.Uwp.Modules.Notices
             {
                 await GetIssueInfo();
 
-                Notices = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(Global.NoticeIssueNumber, Issue.Comments));
+                Notices = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(RepositoryConstant.NoticeIssueNumber, Issue.Comments));
                 Notices.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -62,8 +63,8 @@ namespace Lavcode.Uwp.Modules.Notices
 
         private async Task GetIssueInfo()
         {
-            var _client = GitHubHelper.GetBaseClient(Global.Repos);
-            Issue = await _client.Issue.Get(Global.GitAccount, Global.Repos, Global.NoticeIssueNumber);
+            var _client = GitHubHelper.GetBaseClient(RepositoryConstant.Repos);
+            Issue = await _client.Issue.Get(RepositoryConstant.GitAccount, RepositoryConstant.Repos, RepositoryConstant.NoticeIssueNumber);
         }
     }
 }

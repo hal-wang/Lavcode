@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using Lavcode.Common;
 using System;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
@@ -25,7 +26,7 @@ namespace Lavcode.Uwp.Modules.Git
 
         public async void HandleViewSourceCode()
         {
-            await Launcher.LaunchUriAsync(new Uri(Global.ReposUrl));
+            await Launcher.LaunchUriAsync(new Uri(RepositoryConstant.GitHubRepositoryUrl));
         }
     }
 }

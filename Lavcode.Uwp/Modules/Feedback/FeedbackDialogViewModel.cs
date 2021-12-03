@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using Octokit;
@@ -32,8 +33,8 @@ namespace Lavcode.Uwp.Modules.Feedback
                 var token = await new GitHubLogin().Login();
                 if (string.IsNullOrEmpty(token)) return false;
 
-                var client = GitHubHelper.GetAuthClient(Global.Repos, token);
-                CommentResult = await client.Issue.Comment.Create(Global.GitAccount, Global.Repos, Global.FeedbackIssueNumber, Content);
+                var client = GitHubHelper.GetAuthClient(RepositoryConstant.Repos, token);
+                CommentResult = await client.Issue.Comment.Create(RepositoryConstant.GitAccount, RepositoryConstant.Repos, RepositoryConstant.FeedbackIssueNumber, Content);
             }
             catch (System.Net.Http.HttpRequestException)
             {

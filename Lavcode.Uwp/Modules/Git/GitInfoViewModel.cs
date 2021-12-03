@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
 using Octokit;
 using System;
@@ -36,8 +37,8 @@ namespace Lavcode.Uwp.Modules
 
             try
             {
-                var github = GitHubHelper.GetBaseClient(Global.Repos);
-                Repository = await github.Repository.Get(Global.GitAccount, Global.Repos);
+                var github = GitHubHelper.GetBaseClient(RepositoryConstant.Repos);
+                Repository = await github.Repository.Get(RepositoryConstant.GitAccount, RepositoryConstant.Repos);
             }
             catch (Exception ex)
             {

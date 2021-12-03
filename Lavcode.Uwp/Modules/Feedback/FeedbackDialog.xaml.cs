@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Octokit;
 using System;
 using Windows.System;
@@ -46,9 +47,9 @@ namespace Lavcode.Uwp.Modules.Feedback
             await new MarkdownPreview(VM.Content).QueueAsync();
         }
 
-        private async void Signup_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void Signup_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri(Global.GitUrl, UriKind.Absolute));
+            await Launcher.LaunchUriAsync(new Uri(RepositoryConstant.GitHubUrl, UriKind.Absolute));
         }
 
         public IssueComment CommentResult => VM.CommentResult;

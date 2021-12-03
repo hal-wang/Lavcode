@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -24,7 +25,7 @@ namespace Lavcode.Uwp.Modules.Notices
             await VM.Init();
         }
 
-        public string NoticesUrl { get; } = $"{Global.ReposUrl}/issues/{Global.NoticeIssueNumber}";
+        public string NoticesUrl { get; } = $"{RepositoryConstant.GitHubRepositoryUrl}/issues/{RepositoryConstant.NoticeIssueNumber}";
         private async void Git_Click(object sender, RoutedEventArgs e)
         {
             try

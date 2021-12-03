@@ -86,7 +86,7 @@ namespace Lavcode.Uwp.Modules.Auth
                         break;
                     case Provider.Sqlite:
                         ViewModelLocator.Register<Service.Sqlite.ConService>();
-                        loginData = new { FilePath = Global.SqliteFilePath };
+                        loginData = new { FilePath = SqliteConstant.SqliteFilePath };
                         break;
                 }
 

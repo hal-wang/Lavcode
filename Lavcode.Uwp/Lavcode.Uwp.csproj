@@ -158,13 +158,12 @@
     </Compile>
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
+    <Compile Include="Helpers\SqliteConstant.cs" />
     <Compile Include="Modules\Auth\OAuthLoadingDialog.xaml.cs">
       <DependentUpon>OAuthLoadingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ProviderConverter.cs" />
-    <Compile Include="Global\Git.cs" />
     <Compile Include="Global\Others.cs" />
-    <Compile Include="Global\Sqlite.cs" />
     <Compile Include="Modules\Auth\GitHubLogin.cs" />
     <Compile Include="Helpers\ImgHelper.cs" />
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
@@ -577,6 +576,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lavcode.Common\Lavcode.Common.csproj">
+      <Project>{7813445b-901e-4099-8426-37a760524d79}</Project>
+      <Name>Lavcode.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lavcode.Service.GitHub\Lavcode.Service.GitHub.csproj">
       <Project>{49ab6388-db31-44dc-b731-a1435b040e7a}</Project>
       <Name>Lavcode.Service.GitHub</Name>

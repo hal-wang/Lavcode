@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Uwp.Controls.Comment;
 using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp;
@@ -53,7 +54,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             {
                 await GetIssueInfo();
 
-                Feedbacks = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(Global.FeedbackIssueNumber, Issue.Comments));
+                Feedbacks = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(RepositoryConstant.FeedbackIssueNumber, Issue.Comments));
                 Feedbacks.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -68,8 +69,8 @@ namespace Lavcode.Uwp.Modules.Feedback
 
         private async Task GetIssueInfo()
         {
-            var _client = GitHubHelper.GetBaseClient(Global.Repos);
-            Issue = await _client.Issue.Get(Global.GitAccount, Global.Repos, Global.FeedbackIssueNumber);
+            var _client = GitHubHelper.GetBaseClient(RepositoryConstant.Repos);
+            Issue = await _client.Issue.Get(RepositoryConstant.GitAccount, RepositoryConstant.Repos, RepositoryConstant.FeedbackIssueNumber);
         }
 
         public async void HandleFeedback()

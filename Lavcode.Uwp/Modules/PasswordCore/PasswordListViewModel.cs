@@ -2,9 +2,9 @@
 using GalaSoft.MvvmLight.Messaging;
 using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.IService;
 using Lavcode.Model;
-using Lavcode.Uwp.Modules;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -280,7 +280,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             try
             {
-                if (data.IndexOf(Global.DragPasswordHeader) != 0)
+                if (data.IndexOf(CommonConstant.DragPasswordHeader) != 0)
                 {
                     return;
                 }
@@ -291,7 +291,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                var content = data.Substring(Global.DragPasswordHeader.Length, data.Length - Global.DragPasswordHeader.Length);
+                var content = data.Substring(CommonConstant.DragPasswordHeader.Length, data.Length - CommonConstant.DragPasswordHeader.Length);
                 var items = JsonConvert.DeserializeObject<List<JObject>>(content);
                 foreach (JObject item in items)
                 {

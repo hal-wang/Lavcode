@@ -1,4 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
@@ -31,10 +32,10 @@ namespace Lavcode.Uwp.Modules.FirstUse
         {
             try
             {
-                var result = await Launcher.LaunchUriAsync(new Uri(Global.PpUrl));
+                var result = await Launcher.LaunchUriAsync(new Uri(CommonConstant.PpUrl));
                 if (!result)
                 {
-                    MessageHelper.ShowDanger($"打开失败,请使用浏览器打开\n{Global.PpUrl}", 0);
+                    MessageHelper.ShowDanger($"打开失败,请使用浏览器打开\n{CommonConstant.PpUrl}", 0);
                 }
             }
             catch (Exception ex)

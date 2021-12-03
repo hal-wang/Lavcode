@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lavcode.Common;
+using System;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,7 +36,7 @@ namespace Lavcode.Uwp.Modules.Git
 
         private async void PathButton_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri(Global.ReposUrl));
+            await Launcher.LaunchUriAsync(new Uri(RepositoryConstant.GitHubRepositoryUrl));
         }
     }
 }

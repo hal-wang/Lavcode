@@ -2,6 +2,7 @@
 using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
 using System.IO;
@@ -37,8 +38,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
 
         private async Task<StorageFile> GetTempFile()
         {
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
-            return await launchFolder.GetFileAsync(Global.FileLaunchFileName);
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteConstant.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            return await launchFolder.GetFileAsync(SqliteConstant.FileLaunchFileName);
         }
 
         private async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
@@ -133,8 +134,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             }
 
 
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
-            await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, Global.FileLaunchFileName) });
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteConstant.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, SqliteConstant.FileLaunchFileName) });
             (SimpleIoc.Default.GetInstance<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
                  await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => IsDbChanged = true);
 

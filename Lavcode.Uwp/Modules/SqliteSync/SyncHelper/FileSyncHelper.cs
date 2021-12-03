@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lavcode.Uwp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -44,9 +45,9 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 return false;
             }
 
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Global.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteConstant.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
             await file.MoveAsync(launchFolder, DateTime.Now.ToString("yyMMddHHmmss"), NameCollisionOption.GenerateUniqueName);
-            Global.FileLaunchFileName = file.Name;
+            SqliteConstant.FileLaunchFileName = file.Name;
             return true;
         }
 

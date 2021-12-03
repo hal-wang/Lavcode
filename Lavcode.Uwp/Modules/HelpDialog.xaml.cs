@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lavcode.Common;
+using System;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,7 +13,7 @@ namespace Lavcode.Uwp.Modules
             this.InitializeComponent();
         }
 
-        public string ReposUrl => Global.ReposUrl;
+        public string ReposUrl => RepositoryConstant.GitHubRepositoryUrl;
 
         public string AES256Url => "https://baike.baidu.com/item/高级加密标准";
 
@@ -24,7 +25,7 @@ namespace Lavcode.Uwp.Modules
 
         private async void MoreHelp_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri(Global.HomeUrl));
+            await Launcher.LaunchUriAsync(new Uri(CommonConstant.HomeUrl));
         }
     }
 }

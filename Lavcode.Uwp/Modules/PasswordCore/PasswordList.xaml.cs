@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Newtonsoft.Json;
@@ -122,7 +123,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            e.Data.SetText(Global.DragPasswordHeader + JsonConvert.SerializeObject(items.ToArray()));
+            e.Data.SetText(CommonConstant.DragPasswordHeader + JsonConvert.SerializeObject(items.ToArray()));
         }
 
         private async void PasswordListView_Drop(object sender, Windows.UI.Xaml.DragEventArgs e)

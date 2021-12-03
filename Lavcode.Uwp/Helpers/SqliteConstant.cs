@@ -1,12 +1,9 @@
 ﻿using System.IO;
 using Windows.Storage;
 
-namespace Lavcode.Uwp
+namespace Lavcode.Uwp.Helpers
 {
-    /*
-     * 数据库相关
-     */
-    public static partial class Global
+    internal static class SqliteConstant
     {
         /// <summary>
         /// 数据库文件名称

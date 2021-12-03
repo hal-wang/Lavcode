@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -24,7 +25,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             await this.VM.Init();
         }
 
-        public string Email { get; } = Global.Email;
+        public string Email { get; } = CommonConstant.Email;
 
         private async void Email_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +58,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             }
         }
 
-        public string FeedbackUrl { get; } = $"{Global.ReposUrl}/issues/{Global.FeedbackIssueNumber}";
+        public string FeedbackUrl { get; } = $"{RepositoryConstant.GitHubRepositoryUrl}/issues/{RepositoryConstant.FeedbackIssueNumber}";
         private async void Git_Click(object sender, RoutedEventArgs e)
         {
             try
