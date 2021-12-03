@@ -132,8 +132,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ProviderConverter.cs" />
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
       <DependentUpon>WindowsHelloDisabled.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FirstUse\FirstUsePage.xaml.cs">
+      <DependentUpon>FirstUsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FirstUse\ProviderSelectButton.xaml.cs">
+      <DependentUpon>ProviderSelectButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Modules\Shell\BackSvg.xaml.cs">
@@ -148,9 +155,6 @@
     <Compile Include="Modules\Feedback\FeedbackDialogViewModel.cs" />
     <Compile Include="Modules\Feedback\MarkdownPreview.xaml.cs">
       <DependentUpon>MarkdownPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\FirstUseDialog.xaml.cs">
-      <DependentUpon>FirstUseDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Git\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -309,6 +313,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\FirstUse\FirstUsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\FirstUse\ProviderSelectButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\Shell\BackSvg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,10 +334,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Feedback\MarkdownPreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\FirstUseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -432,6 +440,9 @@
       <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <Version>7.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Media">
       <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">

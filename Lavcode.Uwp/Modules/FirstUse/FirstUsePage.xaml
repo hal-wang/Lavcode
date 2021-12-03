@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="Lavcode.Uwp.Modules.FirstUse.FirstUsePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:huc="using:HTools.Uwp.Controls"
+    xmlns:lucv="using:Lavcode.Uwp.Common.View"
+    xmlns:firstuse="using:Lavcode.Uwp.Modules.FirstUse"
+    xmlns:lums="using:Lavcode.Uwp.Modules.Shell"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
+
+    <Grid>
+        <lums:BackSvg/>
+
+        <Grid VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <lucv:Logo />
+
+            <huc:TitleBar Grid.Column="1">
+                <lums:Version/>
+            </huc:TitleBar>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="选择你的密码存储位置" FontSize="30" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <firstuse:ProviderSelectButton IconData="M512 12.64c-282.752 0-512 229.216-512 512 0 226.208 146.72 418.144 350.144 485.824 25.6 4.736 35.008-11.104 35.008-24.64 0-12.192-0.48-52.544-0.704-95.328-142.464 30.976-172.512-60.416-172.512-60.416-23.296-59.168-56.832-74.912-56.832-74.912-46.464-31.776 3.52-31.136 3.52-31.136 51.392 3.616 78.464 52.768 78.464 52.768 45.664 78.272 119.776 55.648 148.992 42.56 4.576-33.088 17.856-55.68 32.512-68.48-113.728-12.928-233.28-56.864-233.28-253.024 0-55.904 20-101.568 52.768-137.44-5.312-12.896-22.848-64.96 4.96-135.488 0 0 43.008-13.76 140.832 52.48a491.296 491.296 0 0 1 128.16-17.248c43.488 0.192 87.328 5.888 128.256 17.248 97.728-66.24 140.64-52.48 140.64-52.48 27.872 70.528 10.336 122.592 5.024 135.488 32.832 35.84 52.704 81.536 52.704 137.44 0 196.64-119.776 239.936-233.792 252.64 18.368 15.904 34.72 47.04 34.72 94.816 0 68.512-0.608 123.648-0.608 140.512 0 13.632 9.216 29.6 35.168 24.576C877.472 942.624 1024 750.784 1024 524.64c0-282.784-229.248-512-512-512z"
+                                               Description="你需要有 github 账号，并且使用过程中必须能够联网，lavcode 将自动为你创建一个私有仓库，使用仓库的 issues 存储密码"
+                                               Provider="GitHub"
+                                               OnSelect="OnProviderSelect"/>
+                <firstuse:ProviderSelectButton IconData="M1015.808 790.528q5.12 30.72-12.8 55.296t-48.64 29.696l-122.88 19.456q-29.696 5.12-54.784-12.8t-30.208-48.64l-104.448-661.504q-2.048-15.36 1.536-29.184t11.776-25.6 20.992-19.456 28.16-10.752l121.856-19.456q30.72-5.12 55.296 13.312t29.696 49.152zM500.736 63.488q30.72 0 52.224 21.504t21.504 52.224l0 684.032q0 30.72-21.504 52.224t-52.224 21.504l-106.496 0q-30.72 0-52.224-21.504t-21.504-52.224l0-684.032q0-30.72 16.384-52.224t48.128-21.504l115.712 0zM500.736 579.584q10.24 0 17.408-9.728t7.168-23.04q0-14.336-7.168-23.552t-17.408-9.216l-106.496 0q-10.24 0-17.408 9.216t-7.168 23.552q0 13.312 7.168 23.04t17.408 9.728l106.496 0zM500.736 449.536q10.24 0 17.408-9.728t7.168-24.064-7.168-23.552-17.408-9.216l-106.496 0q-10.24 0-17.408 9.216t-7.168 23.552 7.168 24.064 17.408 9.728l106.496 0zM179.2 63.488q30.72 0 52.736 21.504t22.016 52.224l0 684.032q0 30.72-22.016 52.224t-52.736 21.504l-106.496 0q-30.72 0-52.736-21.504t-22.016-52.224l0-684.032q0-30.72 22.016-52.224t52.736-21.504l106.496 0zM76.8 319.488q-11.264 0-18.432 9.216t-7.168 23.552q0 13.312 7.168 23.04t18.432 9.728l98.304 0q11.264 0 17.92-9.728t6.656-23.04q0-14.336-6.656-23.552t-17.92-9.216l-98.304 0zM179.2 641.024q11.264 0 17.92-9.216t6.656-22.528q0-14.336-6.656-23.04t-17.92-8.704l-102.4 0q-11.264 0-18.432 8.704t-7.168 23.04q0 13.312 7.168 22.528t18.432 9.216l102.4 0zM179.2 515.072q11.264 0 17.92-9.216t6.656-23.552-6.656-23.552-17.92-9.216l-102.4 0q-11.264 0-18.432 9.216t-7.168 23.552 7.168 23.552 18.432 9.216l102.4 0z"
+                                               Description="你的密码只存储在本地，丢失电脑或重装系统等会丢失密码。但你可以导出以生成密码库文件，也可以使用任何支持 WebDav 的网盘备份密码。除备份功能外，无任何联网功能。"
+                                               Provider="Sqlite"
+                                               OnSelect="OnProviderSelect"/>
+            </StackPanel>
+
+            <CheckBox HorizontalAlignment="Center"
+                      Grid.Row="2"
+                      IsChecked="{x:Bind IsPpChecked,Mode=TwoWay}"
+                      x:Name="PpCheckBox">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 -4 0 0">
+                    <TextBlock Text="已阅读并同意"
+                               FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <HyperlinkButton Content="隐私政策"
+                                     FontSize="12"
+                                     VerticalAlignment="Center"
+                                     Padding="2 6"
+                                     Click="Pp_Click"/>
+                </StackPanel>
+            </CheckBox>
+
+            <TextBlock Grid.Row="3" Text="你可以随时修改存储位置，但以上各存储位置数据不互通。" 
+                       HorizontalAlignment="Center" Margin="0 10 0 40"
+                       Opacity="0.6" FontSize="16"/>
+        </Grid>
+    </Grid>
+</Page>

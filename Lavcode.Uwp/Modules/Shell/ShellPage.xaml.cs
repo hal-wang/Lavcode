@@ -1,9 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.Common;
 using Lavcode.Uwp.ViewModel;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
-using System;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
@@ -26,19 +24,13 @@ namespace Lavcode.Uwp.Modules.Shell
 
         public ShellPageViewModel VM { get; } = SimpleIoc.Default.GetInstance<ShellPageViewModel>();
 
-        private async void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (_inited)
             {
                 return;
             }
             _inited = true;
-
-            if (SettingHelper.Instance.IsFirstUse)
-            {
-                await new FirstUseDialog().QueueAsync();
-                SettingHelper.Instance.IsFirstUse = false;
-            }
 
             if (param is not null and StorageFile file)
             {

@@ -2,6 +2,7 @@
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Common;
 using Lavcode.Uwp.Modules.Auth;
+using Lavcode.Uwp.Modules.FirstUse;
 using Lavcode.Uwp.Modules.Shell;
 using System;
 using System.Linq;
@@ -43,11 +44,7 @@ namespace Lavcode.Uwp
 
             if (!e.PrelaunchActivated)
             {
-                if (Frame.Content == null)
-                {
-                    Frame.Navigate(typeof(AuthPage), e.Arguments);
-                }
-                Window.Current.Activate();
+                SimpleNavFirstPage();
             }
         }
 
@@ -55,8 +52,11 @@ namespace Lavcode.Uwp
         {
             CreateFrame();
 
-            StorageFile file = e.Files.FirstOrDefault() as StorageFile;
-            if (Frame.Content == null)
+            if (!SettingHelper.Instance.IsFirstInited || e.Files.FirstOrDefault() is not StorageFile file)
+            {
+                SimpleNavFirstPage();
+            }
+            else if (Frame.Content == null)
             {
                 ViewModelLocator.Register<Service.Sqlite.ConService>();
                 Frame.Navigate(typeof(ShellPage), file);
@@ -66,7 +66,13 @@ namespace Lavcode.Uwp
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            if (args.Kind == ActivationKind.Protocol)
+            var isOpened = Window.Current.Content is Frame;
+            CreateFrame();
+            if (!isOpened)
+            {
+                SimpleNavFirstPage();
+            }
+            else if (args.Kind == ActivationKind.Protocol)
             {
                 var eventArgs = args as ProtocolActivatedEventArgs;
                 var query = HttpUtility.ParseQueryString(eventArgs.Uri.Query);
@@ -75,9 +81,25 @@ namespace Lavcode.Uwp
                 {
                     case "github":
                         Messenger.Default.Send(query, "OnGithubNotify");
-                        break;
+                        return;
                 }
             }
+        }
+
+        private void SimpleNavFirstPage()
+        {
+            if (Frame.Content == null)
+            {
+                if (SettingHelper.Instance.IsFirstInited)
+                {
+                    Frame.Navigate(typeof(AuthPage));
+                }
+                else
+                {
+                    Frame.Navigate(typeof(FirstUsePage));
+                }
+            }
+            Window.Current.Activate();
         }
 
         private void CreateFrame()
