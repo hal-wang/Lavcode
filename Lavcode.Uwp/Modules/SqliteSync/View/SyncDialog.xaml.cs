@@ -27,7 +27,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         {
             try
             {
-                var historyFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(Constant.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
+                var historyFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteSyncConstant.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
                 await historyFolder.DeleteAsync();
             }
             catch { }

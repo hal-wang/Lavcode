@@ -173,7 +173,7 @@
     <Compile Include="Modules\FirstUse\ProviderSelectButton.xaml.cs">
       <DependentUpon>ProviderSelectButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\SqliteSync\Constant.cs" />
+    <Compile Include="Modules\SqliteSync\SqliteSyncConstant.cs" />
     <Compile Include="Modules\SqliteSync\Crypto\Aes.cs" />
     <Compile Include="Modules\SqliteSync\Crypto\OperationType.cs" />
     <Compile Include="Modules\SqliteSync\Merge.cs" />

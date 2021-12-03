@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Lavcode.Uwp.Modules.SqliteSync
 {
-    internal class Constant
+    internal class SqliteSyncConstant
     {
         /// <summary>
         /// 同步时，临时文件存放的文件夹名称

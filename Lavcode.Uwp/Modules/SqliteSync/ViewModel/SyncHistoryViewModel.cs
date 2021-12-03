@@ -33,7 +33,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
 
             try
             {
-                _folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Constant.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
+                _folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(SqliteSyncConstant.SyncHistoryFolder, CreationCollisionOption.OpenIfExists);
                 await foreach (var historyItem in GetHistoryItems())
                 {
                     HistoryItems.Add(historyItem);

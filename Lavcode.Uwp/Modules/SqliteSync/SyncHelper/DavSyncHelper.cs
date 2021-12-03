@@ -36,8 +36,8 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
 
         private const int _timeOut = 20 * 2000; // 20s
 
-        private readonly string _folderUrl = RemoteBaseUrl + "/" + Constant.RemoteRootFolder;
-        private readonly string _fileUrl = RemoteBaseUrl + "/" + Constant.RemoteRootFolder + "/" + Constant.RemoteFileName;
+        private readonly string _folderUrl = RemoteBaseUrl + "/" + SqliteSyncConstant.RemoteRootFolder;
+        private readonly string _fileUrl = RemoteBaseUrl + "/" + SqliteSyncConstant.RemoteRootFolder + "/" + SqliteSyncConstant.RemoteFileName;
 
 
         #region 初始化
@@ -156,7 +156,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
             }
 
             var remoteStream = res.GetResponseStream();
-            var tempFile = await (await GetTempFolder()).CreateFileAsync(Constant.SyncTempEncryptedFileName, CreationCollisionOption.ReplaceExisting);
+            var tempFile = await (await GetTempFolder()).CreateFileAsync(SqliteSyncConstant.SyncTempEncryptedFileName, CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream localStream = await tempFile.OpenAsync(FileAccessMode.ReadWrite))
             {
                 int length;
