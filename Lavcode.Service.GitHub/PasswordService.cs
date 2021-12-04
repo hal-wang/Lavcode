@@ -26,8 +26,7 @@ namespace Lavcode.Service.GitHub
                 if (password.Order == 0)
                 {
                     var order = _con
-                        .PasswordIssue.Comments
-                        .Select(item => item.Value)
+                        .GetItems<Password>()
                         .Where((item) => item.FolderId == password.FolderId)
                         .OrderByDescending((item) => item.Order)
                         .Take(1)
@@ -38,7 +37,7 @@ namespace Lavcode.Service.GitHub
                 }
 
                 // 如果有重复
-                if (_con.PasswordIssue.Comments.Where((item) => item.Value.Id == password.Id).Count() > 0)
+                if (_con.GetItems<Password>().Where((item) => item.Id == password.Id).Count() > 0)
                 {
                     password.SetNewId();
                 }
@@ -61,7 +60,7 @@ namespace Lavcode.Service.GitHub
 
         public async Task DeletePassword(string passwordId, bool record = true)
         {
-            if (_con.PasswordIssue.Comments.Where((item) => item.Value.Id == passwordId).Count() == 0)
+            if (_con.GetItems<Password>().Where((item) => item.Id == passwordId).Count() == 0)
             {
                 return;
             }
@@ -79,14 +78,14 @@ namespace Lavcode.Service.GitHub
 
         public Task<List<KeyValuePair>> GetKeyValuePairs(string passwordId)
         {
-            var result = _con.KeyValuePairIssue.Comments.Where(item => item.Value.SourceId == passwordId).Select(item => item.Value).ToList();
+            var result = _con.GetItems<KeyValuePair>().Where(item => item.SourceId == passwordId).ToList();
             return Task.FromResult(result);
         }
 
         public Task<List<Password>> GetPasswords(string folderId)
         {
             var result = _con
-                .GetComments<Password, string>(folderId, (item1, item2) => item1.FolderId == folderId)
+                .GetItems<Password>()
                 .Where(item => item.FolderId == folderId)
                 .OrderBy(item => item.Order)
                 .ToList();
@@ -96,17 +95,17 @@ namespace Lavcode.Service.GitHub
 
         public Task<List<Password>> GetPasswords()
         {
-            var result = _con.PasswordIssue.Comments.Select(item => item.Value).ToList();
+            var result = _con.GetItems<Password>().ToList();
             return Task.FromResult(result);
         }
 
         public async Task UpdatePassword(Password password, Icon icon = null, List<KeyValuePair> keyValuePairs = null)
         {
             password.LastEditTime = DateTime.Now;
-            await _con.UpdateComment(password, (item1, item2) => item1.Id == item2.Id);
+            await _con.UpdateGist(password, (item1, item2) => item1.Id == item2.Id);
             if (icon != null)
             {
-                await _con.UpdateComment(icon, (item1, item2) => item1.Id == item2.Id);
+                await _con.UpdateGist(icon, (item1, item2) => item1.Id == item2.Id);
             }
 
             if (keyValuePairs != null)

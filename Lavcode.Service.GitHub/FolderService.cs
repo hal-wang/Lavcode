@@ -79,12 +79,12 @@ namespace Lavcode.Service.GitHub
             if (folder != null)
             {
                 folder.LastEditTime = DateTime.Now;
-                await _con.UpdateComment(folder, (item1, item2) => item1.Id == item2.Id);
+                await _con.UpdateGist(folder, (item1, item2) => item1.Id == item2.Id);
             }
 
             if (icon != null)
             {
-                await _con.UpdateComment(icon, (item1, item2) => item1.Id == item2.Id);
+                await _con.UpdateGist(icon, (item1, item2) => item1.Id == item2.Id);
             }
         }
     }
