@@ -1,5 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
-using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -25,10 +25,8 @@ namespace Lavcode.Uwp.Modules.Auth
         {
             base.OnNavigatedTo(e);
 
-            if(e.Parameter is IStorageFile)
-            {
-
-            }
+            Frame.BackStack.Clear();
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         public AuthViewModel VM { get; } = new AuthViewModel();

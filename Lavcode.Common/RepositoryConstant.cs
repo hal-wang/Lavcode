@@ -10,5 +10,7 @@
         public static string GitHubRepositoryUrl { get; } = $"{GitHubUrl}/{GitAccount}/{Repos}";
         public static string GiteeUrl { get; } = "https://gitee.com";
         public static string GiteeRepositoryUrl { get; } = $"{GiteeUrl}/{GitAccount}/{Repos}";
+
+        public static string GitStorageRepos = "LavcodeStorage";
     }
 }

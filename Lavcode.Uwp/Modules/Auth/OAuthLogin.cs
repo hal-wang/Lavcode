@@ -19,8 +19,8 @@ namespace Lavcode.Uwp.Modules.Auth
 
             return provider switch
             {
-                Provider.GitHub => new Uri($"https://github.com/login/oauth/authorize?allow_signup=true&client_id=f3f682dda48d939fba2c&redirect_uri={notify}&state={state}"),
-                Provider.Gitee => new Uri($"https://gitee.com/oauth/authorize?client_id=ab5b9883b6444750ff708e47d98a04f57ffc033306ec89271325356e5b5d8312&response_type=code&redirect_uri={notify}&state={state}"),
+                Provider.GitHub => new Uri($"https://github.com/login/oauth/authorize?allow_signup=true&client_id=f3f682dda48d939fba2c&redirect_uri={notify}&state={state}&scope=repo%20read:user"),
+                Provider.Gitee => new Uri($"https://gitee.com/oauth/authorize?client_id=ab5b9883b6444750ff708e47d98a04f57ffc033306ec89271325356e5b5d8312&response_type=code&redirect_uri={notify}&state={state}&scope=projests%20issues"),
                 _ => throw new NotSupportedException(),
             };
         }

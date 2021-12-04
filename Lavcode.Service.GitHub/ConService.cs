@@ -1,4 +1,5 @@
 ﻿using HTools;
+using Lavcode.Common;
 using Lavcode.IService;
 using Lavcode.Model;
 using Newtonsoft.Json;
@@ -118,8 +119,6 @@ namespace Lavcode.Service.GitHub
         public async Task<bool> Connect(object args)
         {
             var token = DynamicHelper.ToExpandoObject(args).Token as string;
-            //var repos = DynamicHelper.ToExpandoObject(args).Repos as string;
-            //var account = DynamicHelper.ToExpandoObject(args).Account as string;
 
             var credentials = new Credentials(token, AuthenticationType.Oauth);
             Client = new GitHubClient(new ProductHeaderValue("Lavcode")) { Credentials = credentials };
@@ -147,25 +146,23 @@ namespace Lavcode.Service.GitHub
 
         private async Task<Repository> GetRepository()
         {
-            Repository result;
             try
             {
-                result = await Client.Repository.Get(User.Login, "LavcodeStorate");
+                return await Client.Repository.Get(User.Login, RepositoryConstant.GitStorageRepos);
             }
             catch (NotFoundException)
             {
-                result = await Client.Repository.Forks.Create("hal-wang", "Lavcode", new NewRepositoryFork() { });
+                return await Client.Repository.Create(new NewRepository(RepositoryConstant.GitStorageRepos)
+                {
+                    Private = true,
+                    Homepage = CommonConstant.HomeUrl,
+                    Description = "Lavcode 存储密码的仓库，请勿手动修改",
+                    HasIssues = true,
+                    HasDownloads = false,
+                    HasWiki = false,
+                    Visibility = RepositoryVisibility.Private,
+                });
             }
-            return await EditRepos(result);
-        }
-
-        private async Task<Repository> EditRepos(Repository repository)
-        {
-            return await Client.Repository.Edit(repository.Id, new RepositoryUpdate("LavcodeStorate")
-            {
-                Private = repository.Private ? null : (bool?)true,
-                HasIssues = repository.HasIssues ? null : (bool?)true,
-            });
         }
 
         private async Task<(Issue Issue, IList<CommentItem<T>> Comments)> GetIssueTableItems<T>(IList<Issue> issues)
