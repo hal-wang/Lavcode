@@ -124,6 +124,12 @@ namespace Lavcode.Uwp.Helpers
             set { Set(value); }
         }
 
+        public string GiteeRefreeToken
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
         public Provider Provider
         {
             get => (Provider)Get((int)Provider.GitHub);

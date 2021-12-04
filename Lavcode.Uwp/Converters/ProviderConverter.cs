@@ -13,6 +13,7 @@ namespace Lavcode.Uwp.Converters
             {
                 Provider.Sqlite => "本地",
                 Provider.GitHub => "GitHub",
+                Provider.Gitee => "Gitee",
                 _ => "",
             };
         }

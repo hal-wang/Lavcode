@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
+using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.FirstUse;
@@ -80,7 +81,10 @@ namespace Lavcode.Uwp
                 switch (query["provider"])
                 {
                     case "github":
-                        Messenger.Default.Send(query, "OnGithubNotify");
+                        Messenger.Default.Send(query, $"On{Provider.GitHub}Notify");
+                        return;
+                    case "gitee":
+                        Messenger.Default.Send(query, $"On{Provider.Gitee}Notify");
                         return;
                 }
             }

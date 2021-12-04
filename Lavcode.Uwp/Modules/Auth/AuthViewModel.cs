@@ -76,14 +76,25 @@ namespace Lavcode.Uwp.Modules.Auth
                     return;
                 }
 
+                var provider = SettingHelper.Instance.Provider;
                 object loginData = null;
-                switch (SettingHelper.Instance.Provider)
+                switch (provider)
                 {
                     case Provider.GitHub:
-                        var githubToken = await new GitHubLogin().Login();
-                        if (string.IsNullOrEmpty(githubToken)) return;
-                        loginData = new { Token = githubToken };
-                        ViewModelLocator.Register<Service.GitHub.ConService>();
+                    case Provider.Gitee:
+                        var gitToken = await OAuthLogin.Login(provider);
+                        if (string.IsNullOrEmpty(gitToken)) return;
+                        loginData = new { Token = gitToken };
+                        switch (provider)
+                        {
+                            case Provider.GitHub:
+                                ViewModelLocator.Register<Service.GitHub.ConService>();
+                                break;
+                            case Provider.Gitee:
+                                // TODO
+                                // ViewModelLocator.Register<Service.Gitee.ConService>();
+                                break;
+                        }
                         break;
                     case Provider.Sqlite:
                         ViewModelLocator.Register<Service.Sqlite.ConService>();

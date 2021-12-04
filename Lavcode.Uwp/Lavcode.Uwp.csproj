@@ -162,7 +162,7 @@
       <DependentUpon>OAuthLoadingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ProviderConverter.cs" />
-    <Compile Include="Modules\Auth\GitHubLogin.cs" />
+    <Compile Include="Modules\Auth\OAuthLogin.cs" />
     <Compile Include="Helpers\ImgHelper.cs" />
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
       <DependentUpon>WindowsHelloDisabled.xaml</DependentUpon>

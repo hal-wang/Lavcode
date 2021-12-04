@@ -4,5 +4,6 @@
     {
         Sqlite,
         GitHub,
+        Gitee,
     }
 }

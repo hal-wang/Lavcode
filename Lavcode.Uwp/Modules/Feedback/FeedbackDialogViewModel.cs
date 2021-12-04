@@ -30,7 +30,7 @@ namespace Lavcode.Uwp.Modules.Feedback
 
             try
             {
-                var token = await new GitHubLogin().Login();
+                var token = await OAuthLogin.Login(Model.Provider.GitHub);
                 if (string.IsNullOrEmpty(token)) return false;
 
                 var client = GitHubHelper.GetAuthClient(RepositoryConstant.Repos, token);
