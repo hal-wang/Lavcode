@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Lavcode.Service.Gitee
 {
@@ -29,7 +30,7 @@ namespace Lavcode.Service.Gitee
                 query: new
                 {
                     access_token = _token,
-                    body = JsonConvert.SerializeObject(value),
+                    body = HttpUtility.UrlEncode(JsonConvert.SerializeObject(value)),
                 },
                 param: new
                 {
@@ -146,7 +147,7 @@ namespace Lavcode.Service.Gitee
                 query: new
                 {
                     access_token = _token,
-                    body = JsonConvert.SerializeObject(value)
+                    body = HttpUtility.UrlEncode(JsonConvert.SerializeObject(value)),
                 },
                 param: new
                 {
