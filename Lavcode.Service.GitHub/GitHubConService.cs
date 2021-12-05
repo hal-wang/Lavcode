@@ -38,6 +38,7 @@ namespace Lavcode.Service.GitHub
                     HasDownloads = false,
                     HasWiki = false,
                     Visibility = RepositoryVisibility.Private,
+                    AutoInit = true,
                 });
             }
             return new RepositoryItem()
@@ -47,12 +48,12 @@ namespace Lavcode.Service.GitHub
             };
         }
 
-        public override async Task DeleteComment(int commentId)
+        protected override async Task DeleteComment(int commentId)
         {
             await Client.Issue.Comment.Delete(Repository.Id, commentId);
         }
 
-        public override async Task<CommentItem<T>> UpdateComment<T>(int commentId, T value)
+        protected override async Task<CommentItem<T>> UpdateComment<T>(int commentId, T value)
         {
             var newComment = await Client.Issue.Comment.Update(Repository.Id, commentId, JsonConvert.SerializeObject(value));
             return new CommentItem<T>()
@@ -62,7 +63,7 @@ namespace Lavcode.Service.GitHub
             };
         }
 
-        public override async Task<CommentItem<T>> CreateComment<T>(int issueNumber, T value)
+        protected override async Task<CommentItem<T>> CreateComment<T>(int issueNumber, T value)
         {
             var newComment = await Client.Issue.Comment.Create(Repository.Id, issueNumber, JsonConvert.SerializeObject(value));
             return new CommentItem<T>()
@@ -72,7 +73,7 @@ namespace Lavcode.Service.GitHub
             };
         }
 
-        public override async Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, int issueNumber)
+        protected override async Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, int issueNumber)
         {
             return (await Client.Issue.Comment.GetAllForIssue(UserLogin, Repository.Name, issueNumber, new ApiOptions()
             {
@@ -88,7 +89,7 @@ namespace Lavcode.Service.GitHub
             .ToList();
         }
 
-        public override async Task<IReadOnlyList<IssueItem>> GetPageIssues(int page)
+        protected override async Task<IReadOnlyList<IssueItem>> GetPageIssues(int page)
         {
             return (await Client.Issue.GetAllForRepository(UserLogin, Repository.Name, new ApiOptions()
             {
@@ -105,7 +106,7 @@ namespace Lavcode.Service.GitHub
             .ToList();
         }
 
-        public override async Task<IssueItem<T>> CreateIssue<T>(string name)
+        protected override async Task<IssueItem<T>> CreateIssue<T>(string name)
         {
             var issue = await Client.Issue.Create(UserLogin, Repository.Name, new NewIssue(name));
             return new IssueItem<T>()

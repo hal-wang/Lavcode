@@ -19,44 +19,41 @@ namespace Lavcode.Service.BaseGit
 
         public async Task AddPassword(Password password, Icon icon, List<KeyValuePair> keyValuePairs = null)
         {
-            await TaskExtend.Run(async () =>
+            password.LastEditTime = DateTime.Now;
+
+            if (password.Order == 0)
             {
-                password.LastEditTime = DateTime.Now;
+                var order = _con
+                    .PasswordIssue.Comments
+                    .Select(item => item.Value)
+                    .Where((item) => item.FolderId == password.FolderId)
+                    .OrderByDescending((item) => item.Order)
+                    .Take(1)
+                    .Select((item) => item.Order)
+                    .FirstOrDefault();
 
-                if (password.Order == 0)
+                password.Order = order + 1;
+            }
+
+            // 如果有重复
+            if (_con.PasswordIssue.Comments.Where((item) => item.Value.Id == password.Id).Count() > 0)
+            {
+                password.SetNewId();
+            }
+
+            await _con.CreateComment(password);
+
+            icon.Id = password.Id;
+            await _con.CreateComment(icon);
+            if (keyValuePairs != null)
+            {
+                foreach (var kvp in keyValuePairs)
                 {
-                    var order = _con
-                        .PasswordIssue.Comments
-                        .Select(item => item.Value)
-                        .Where((item) => item.FolderId == password.FolderId)
-                        .OrderByDescending((item) => item.Order)
-                        .Take(1)
-                        .Select((item) => item.Order)
-                        .FirstOrDefault();
-
-                    password.Order = order + 1;
+                    kvp.Id = default;
+                    kvp.SourceId = password.Id;
+                    await _con.CreateComment(kvp);
                 }
-
-                // 如果有重复
-                if (_con.PasswordIssue.Comments.Where((item) => item.Value.Id == password.Id).Count() > 0)
-                {
-                    password.SetNewId();
-                }
-
-                await _con.CreateComment(password);
-
-                icon.Id = password.Id;
-                await _con.CreateComment(icon);
-                if (keyValuePairs != null)
-                {
-                    foreach (var kvp in keyValuePairs)
-                    {
-                        kvp.Id = default;
-                        kvp.SourceId = password.Id;
-                        await _con.CreateComment(kvp);
-                    }
-                }
-            });
+            }
         }
 
         public async Task DeletePassword(string passwordId, bool record = true)

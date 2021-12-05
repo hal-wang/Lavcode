@@ -18,6 +18,7 @@ namespace Lavcode.Service.BaseGit
 
         public async Task AddFolder(Folder folder, Icon icon)
         {
+            folder.LastEditTime = DateTime.Now;
             if (folder.Order == 0)
             {
                 int order = 1;

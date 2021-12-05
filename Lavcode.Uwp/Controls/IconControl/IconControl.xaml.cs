@@ -26,7 +26,7 @@ namespace Lavcode.Uwp.Controls.IconControl
         private static async void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var iconControl = d as IconControl;
-            if (!(e.NewValue is Icon icon))
+            if (e.NewValue is not Icon icon)
             {
                 icon = new Icon()
                 {
@@ -41,13 +41,22 @@ namespace Lavcode.Uwp.Controls.IconControl
                     iconControl.Model.SegoeMDL2Icon = (icon.Value != null && icon.Value.Length > 0) ? icon.Value[0].ToString() : string.Empty;
                     break;
                 case IconType.Img:
-                    try
+                    if ((SettingHelper.Instance.Provider == Provider.Gitee || SettingHelper.Instance.Provider == Provider.GitHub)
+                        && icon.Value.Length > 60000)
                     {
-                        iconControl.Model.ImgIcon = await ImgHelper.GetImg(icon.Value);
-                    }
-                    catch
-                    {
+                        HTools.Uwp.Helpers.MessageHelper.ShowDanger("由于 Issues 限制，图片过大，建议使用预设图或 SVG");
                         iconControl.Model.ImgIcon = null;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            iconControl.Model.ImgIcon = await ImgHelper.GetImg(icon.Value);
+                        }
+                        catch
+                        {
+                            iconControl.Model.ImgIcon = null;
+                        }
                     }
                     break;
                 case IconType.Path:

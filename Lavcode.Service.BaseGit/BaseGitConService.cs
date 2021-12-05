@@ -163,7 +163,12 @@ namespace Lavcode.Service.BaseGit
             if (!issues.Any(issue => issue.Title == typeof(T).Name))
             {
                 var newIssue = await CreateIssue<T>(typeof(T).Name);
-                issues.Add(newIssue as IssueItem);
+                issues.Add(new IssueItem()
+                {
+                    IssueId = newIssue.IssueId,
+                    IssueNumber = newIssue.IssueNumber,
+                    Title = newIssue.Title,
+                });
             }
         }
 
@@ -188,7 +193,7 @@ namespace Lavcode.Service.BaseGit
             var page = 1;
             do
             {
-                comments = await GetPageComments<T>(issueNumber, page);
+                comments = await GetPageComments<T>(page, issueNumber);
                 result.AddRange(comments);
                 page++;
             } while (comments.Count >= PageSize);
@@ -205,11 +210,11 @@ namespace Lavcode.Service.BaseGit
         protected abstract Task<bool> BeforeConnect(object args);
         protected abstract Task<string> GetUserLogin();
         protected abstract Task<RepositoryItem> GetRepository();
-        public abstract Task DeleteComment(int commentId);
-        public abstract Task<CommentItem<T>> UpdateComment<T>(int commentId, T value);
-        public abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, int issueNumber);
-        public abstract Task<CommentItem<T>> CreateComment<T>(int issueNumber, T value);
-        public abstract Task<IReadOnlyList<IssueItem>> GetPageIssues(int page);
-        public abstract Task<IssueItem<T>> CreateIssue<T>(string name);
+        protected abstract Task DeleteComment(int commentId);
+        protected abstract Task<CommentItem<T>> UpdateComment<T>(int commentId, T value);
+        protected abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, int issueNumber);
+        protected abstract Task<CommentItem<T>> CreateComment<T>(int issueNumber, T value);
+        protected abstract Task<IReadOnlyList<IssueItem>> GetPageIssues(int page);
+        protected abstract Task<IssueItem<T>> CreateIssue<T>(string name);
     }
 }
