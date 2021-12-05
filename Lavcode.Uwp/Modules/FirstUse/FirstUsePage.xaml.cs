@@ -5,6 +5,7 @@ using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using System;
 using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,6 +17,15 @@ namespace Lavcode.Uwp.Modules.FirstUse
         {
             this.InitializeComponent();
             TitleBarHelper.SetTitleBar();
+
+            Loaded += FirstUsePage_Loaded;
+        }
+
+        private void FirstUsePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Logo.Visibility = SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility == AppViewBackButtonVisibility.Visible
+                ? Visibility.Collapsed
+                : Visibility.Visible;
         }
 
         public bool IsPpChecked

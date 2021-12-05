@@ -34,8 +34,7 @@
                 <lums:Version/>
             </huc:TitleBar>
 
-            <lums:Commands Grid.Column="2"
-                           HaveLogin="False"/>
+            <lums:Commands Grid.Column="2"/>
         </Grid>
 
         <Grid HorizontalAlignment="Center"

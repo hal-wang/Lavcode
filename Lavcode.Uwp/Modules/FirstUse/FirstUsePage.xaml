@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
-            <lucv:Logo />
+            <lucv:Logo x:Name="Logo" Visibility="Collapsed"/>
 
             <huc:TitleBar Grid.Column="1">
                 <lums:Version/>

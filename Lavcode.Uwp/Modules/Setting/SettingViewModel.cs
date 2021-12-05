@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
+using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using System;
@@ -16,6 +18,8 @@ namespace Lavcode.Uwp.Modules.Setting
             var arr = Enum.GetValues(typeof(Provider));
             foreach (Provider item in arr) Providers.Add(item);
         }
+
+        public bool Connected => SimpleIoc.Default.ContainsCreated<IConService>();
 
         public bool IsAuthOpen
         {

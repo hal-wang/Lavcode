@@ -1,8 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
-using Lavcode.Model;
-using Lavcode.Uwp.Helpers;
-using System;
-using Windows.ApplicationModel.Core;
 
 namespace Lavcode.Uwp.Modules.Setting
 {
@@ -14,12 +10,13 @@ namespace Lavcode.Uwp.Modules.Setting
             this.InitializeComponent();
         }
 
-        public SettingViewModel VM { get; } = SimpleIoc.Default.GetInstance<SettingViewModel>();
+        public SettingViewModel VM { get; } = new SettingViewModel();
 
-        private async void OnStorageTypeSelect(HTools.Uwp.Controls.Setting.SelectSettingCell sender, object args)
+
+        private void OnChangeProvider(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            SettingHelper.Instance.Provider = (Provider)args;
-            await CoreApplication.RequestRestartAsync("R");
+            App.Frame.Navigate(typeof(FirstUse.FirstUsePage));
+            IsPaneOpen = false;
         }
     }
 }

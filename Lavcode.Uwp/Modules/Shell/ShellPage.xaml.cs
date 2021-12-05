@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Modules.SqliteSync;
-using Lavcode.Uwp.ViewModel;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -16,14 +15,13 @@ namespace Lavcode.Uwp.Modules.Shell
         private readonly ThemeListener _themeListener = new();
         public ShellPage()
         {
-            DataContext = VM;
             InitializeComponent();
             TitleBarHelper.SetTitleBar();
             _themeListener.ThemeChanged += ThemeListener_ThemeChanged;
             Loaded += MainPage_Loaded;
         }
 
-        public ShellPageViewModel VM { get; } = SimpleIoc.Default.GetInstance<ShellPageViewModel>();
+        public StorageFile OpenedFile => SimpleIoc.Default.ContainsCreated<SqliteFileService>() ? SimpleIoc.Default.GetInstance<SqliteFileService>()?.OpenedFile : null;
 
         private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
-using Lavcode.Uwp.ViewModel;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;

@@ -86,24 +86,9 @@ namespace Lavcode.Uwp.Helpers
             set { Set(value); }
         }
 
-        /// <summary>
-        /// 首次使用
-        /// </summary>
-        public bool IsFirstUse
-        {
-            get { return Get(true); }
-            set { Set(value); }
-        }
-
         public bool IsFirstInited
         {
             get { return Get(false); }
-            set { Set(value); }
-        }
-
-        public bool IsAuthOpen
-        {
-            get { return Get(true); }
             set { Set(value); }
         }
 
@@ -146,6 +131,12 @@ namespace Lavcode.Uwp.Helpers
         {
             get => (Provider)Get((int)Provider.GitHub);
             set => Set((int)value);
+        }
+
+        public bool IsAuthOpen
+        {
+            get { return Get(true, $"Is{Provider}AuthOpen"); }
+            set { Set(value, $"Is{Provider}AuthOpen"); }
         }
     }
 }

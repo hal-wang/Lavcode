@@ -242,7 +242,6 @@
     <Compile Include="Modules\Shell\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Shell\ShellPageViewModel.cs" />
     <Compile Include="Modules\Notices\NoticesPage.xaml.cs">
       <DependentUpon>NoticesPage.xaml</DependentUpon>
     </Compile>

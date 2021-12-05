@@ -12,8 +12,7 @@
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
-    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
-    NavigationCacheMode="Required">
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -43,7 +42,7 @@
                     <local:Version/>
 
                     <Grid Grid.Column="1">
-                        <TextBlock Text="{x:Bind VM.OpenedFile.Name,Mode=OneWay}"
+                        <TextBlock Text="{x:Bind OpenedFile.Name,Mode=OneTime}"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
                                    FontSize="15"
@@ -51,7 +50,7 @@
                                    FontStyle="Italic"
                                    TextTrimming="CharacterEllipsis"
                                    Margin="0 0 10 0"
-                                   Visibility="{x:Bind VM.OpenedFile,Mode=OneWay,Converter={StaticResource IsNullConverter},ConverterParameter=true}"/>
+                                   Visibility="{x:Bind OpenedFile,Mode=OneTime,Converter={StaticResource IsNullConverter},ConverterParameter=true}"/>
                     </Grid>
                 </Grid>
             </huc:TitleBar>
@@ -59,10 +58,9 @@
                         Orientation="Horizontal">
                 <lusv:SyncFileHandler  x:Name="SyncFileHandler"
                                         x:DeferLoadStrategy="Lazy"
-                                        OpenedFile="{x:Bind VM.OpenedFile,Mode=TwoWay}"
                                         OnLoaded="{x:Bind LoadUI}"/>
 
-                <local:Commands HaveLogin="{x:Bind VM.OpenedFile,Mode=OneWay,Converter={StaticResource IsNullConverter}}"/>
+                <local:Commands />
             </StackPanel>
         </Grid>
 

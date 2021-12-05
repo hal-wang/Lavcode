@@ -1,9 +1,11 @@
-﻿using HTools.Uwp.Helpers;
+﻿using GalaSoft.MvvmLight.Ioc;
+using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.Setting;
+using Lavcode.Uwp.Modules.SqliteSync;
 using Lavcode.Uwp.Modules.SqliteSync.View;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,15 +19,9 @@ namespace Lavcode.Uwp.Modules.Shell
             this.InitializeComponent();
         }
 
-        public bool HaveLogin
-        {
-            get { return (bool)GetValue(HaveLoginProperty); }
-            set { SetValue(HaveLoginProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HaveLogin.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HaveLoginProperty =
-            DependencyProperty.Register("HaveLogin", typeof(bool), typeof(Commands), new PropertyMetadata(false));
+        public bool IsLaunchFile => SimpleIoc.Default.ContainsCreated<SqliteFileService>()
+                    && SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile != null;
+        public bool IsSyncVisible => SettingHelper.Instance.Provider == Provider.Sqlite && !IsLaunchFile;
 
         public Provider Provider => SettingHelper.Instance.Provider;
 
