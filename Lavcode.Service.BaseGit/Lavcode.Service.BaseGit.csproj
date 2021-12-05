@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OneOf" Version="3.0.203" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Lavcode.Common\Lavcode.Common.csproj" />
     <ProjectReference Include="..\Lavcode.IService\Lavcode.IService.csproj" />
     <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj" />

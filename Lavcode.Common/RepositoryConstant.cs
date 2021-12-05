@@ -11,6 +11,6 @@
         public static string GiteeUrl { get; } = "https://gitee.com";
         public static string GiteeRepositoryUrl { get; } = $"{GiteeUrl}/{GitAccount}/{Repos}";
 
-        public static string GitStorageRepos = "LavcodeStorage";
+        public static string GitStorageRepos { get; } = "LavcodeStorage";
     }
 }

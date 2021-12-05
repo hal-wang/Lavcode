@@ -4,6 +4,7 @@ using Lavcode.Service.BaseGit;
 using Lavcode.Service.BaseGit.Models;
 using Newtonsoft.Json;
 using Octokit;
+using OneOf;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -63,9 +64,9 @@ namespace Lavcode.Service.GitHub
             };
         }
 
-        protected override async Task<CommentItem<T>> CreateComment<T>(int issueNumber, T value)
+        protected override async Task<CommentItem<T>> CreateComment<T>(OneOf<int, string> issueNumber, T value)
         {
-            var newComment = await Client.Issue.Comment.Create(Repository.Id, issueNumber, JsonConvert.SerializeObject(value));
+            var newComment = await Client.Issue.Comment.Create(Repository.Id, issueNumber.AsT0, JsonConvert.SerializeObject(value));
             return new CommentItem<T>()
             {
                 Id = newComment.Id,
@@ -73,9 +74,9 @@ namespace Lavcode.Service.GitHub
             };
         }
 
-        protected override async Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, int issueNumber)
+        protected override async Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, OneOf<int, string> issueNumber)
         {
-            return (await Client.Issue.Comment.GetAllForIssue(UserLogin, Repository.Name, issueNumber, new ApiOptions()
+            return (await Client.Issue.Comment.GetAllForIssue(UserLogin, Repository.Name, issueNumber.AsT0, new ApiOptions()
             {
                 PageCount = 1,
                 PageSize = PageSize,

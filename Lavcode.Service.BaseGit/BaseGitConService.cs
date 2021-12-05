@@ -2,6 +2,7 @@
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Service.BaseGit.Models;
+using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -186,7 +187,7 @@ namespace Lavcode.Service.BaseGit
             return result;
         }
 
-        private async Task<IList<CommentItem<T>>> GetAllComments<T>(int issueNumber)
+        private async Task<IList<CommentItem<T>>> GetAllComments<T>(OneOf<int, string> issueNumber)
         {
             var result = new List<CommentItem<T>>();
             IReadOnlyList<CommentItem<T>> comments;
@@ -212,8 +213,8 @@ namespace Lavcode.Service.BaseGit
         protected abstract Task<RepositoryItem> GetRepository();
         protected abstract Task DeleteComment(int commentId);
         protected abstract Task<CommentItem<T>> UpdateComment<T>(int commentId, T value);
-        protected abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, int issueNumber);
-        protected abstract Task<CommentItem<T>> CreateComment<T>(int issueNumber, T value);
+        protected abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, OneOf<int, string> issueNumber);
+        protected abstract Task<CommentItem<T>> CreateComment<T>(OneOf<int, string> issueNumber, T value);
         protected abstract Task<IReadOnlyList<IssueItem>> GetPageIssues(int page);
         protected abstract Task<IssueItem<T>> CreateIssue<T>(string name);
     }
