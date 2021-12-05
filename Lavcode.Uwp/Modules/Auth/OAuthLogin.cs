@@ -2,10 +2,13 @@
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using Windows.ApplicationModel;
 using Windows.System;
+using HTools;
+using Newtonsoft.Json.Linq;
 
 namespace Lavcode.Uwp.Modules.Auth
 {
@@ -42,7 +45,25 @@ namespace Lavcode.Uwp.Modules.Auth
                     SettingHelper.Instance.GiteeRefreeToken = loadingDialog.Result["refresh_token"];
                 }
             }
+            else if (provider == Provider.Gitee)
+            {
+                await RefreshGiteeToken();
+                token = SettingHelper.Instance.GiteeToken;
+            }
             return token;
+        }
+
+        private static async Task RefreshGiteeToken()
+        {
+            var res = await new HttpClient().PostAsync("https://gitee.com/oauth/token", query: new
+            {
+                grant_type = "refresh_token",
+                refresh_token = SettingHelper.Instance.GiteeRefreeToken
+            });
+            res.EnsureSuccessStatusCode();
+            var data = await res.GetContent<JObject>();
+            SettingHelper.Instance.GiteeRefreeToken = data.Value<string>("refresh_token");
+            SettingHelper.Instance.GiteeToken = data.Value<string>("access_token");
         }
     }
 }
