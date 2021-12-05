@@ -25,7 +25,7 @@ namespace Lavcode.Uwp
         {
             SimpleIoc.Default.Register<IConService, T>();
 
-            if (typeof(T) == typeof(Service.Sqlite.ConService))
+            if (typeof(Service.Sqlite.ConService) == typeof(T))
             {
                 SimpleIoc.Default.Register<IFolderService, Service.Sqlite.FolderService>();
                 SimpleIoc.Default.Register<IPasswordService, Service.Sqlite.PasswordService>();
@@ -34,13 +34,13 @@ namespace Lavcode.Uwp
                 SimpleIoc.Default.Register<IConfigService, Service.Sqlite.ConfigService>();
                 SimpleIoc.Default.Register<SqliteFileService>();
             }
-            else if (typeof(T) == typeof(Service.GitHub.ConService))
+            else if (typeof(Service.BaseGit.BaseGitConService).IsAssignableFrom(typeof(T)))
             {
-                SimpleIoc.Default.Register<IFolderService, Service.GitHub.FolderService>();
-                SimpleIoc.Default.Register<IPasswordService, Service.GitHub.PasswordService>();
-                SimpleIoc.Default.Register<IIconService, Service.GitHub.IconService>();
-                SimpleIoc.Default.Register<IDelectedService, Service.GitHub.DelectedService>();
-                SimpleIoc.Default.Register<IConfigService, Service.GitHub.ConfigService>();
+                SimpleIoc.Default.Register<IFolderService, Service.BaseGit.FolderService>();
+                SimpleIoc.Default.Register<IPasswordService, Service.BaseGit.PasswordService>();
+                SimpleIoc.Default.Register<IIconService, Service.BaseGit.IconService>();
+                SimpleIoc.Default.Register<IDelectedService, Service.BaseGit.DelectedService>();
+                SimpleIoc.Default.Register<IConfigService, Service.BaseGit.ConfigService>();
             }
 
             RegisterViewModel();

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lavcode.Common\Lavcode.Common.csproj" />
     <ProjectReference Include="..\Lavcode.IService\Lavcode.IService.csproj" />
+    <ProjectReference Include="..\Lavcode.Service.BaseGit\Lavcode.Service.BaseGit.csproj" />
   </ItemGroup>
 
 </Project>

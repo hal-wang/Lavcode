@@ -3,15 +3,15 @@ using Lavcode.Model;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lavcode.Service.GitHub
+namespace Lavcode.Service.BaseGit
 {
     public class IconService : IIconService
     {
-        private readonly ConService _con;
+        private readonly BaseGitConService _con;
 
         public IconService(IConService cs)
         {
-            _con = cs as ConService;
+            _con = cs as BaseGitConService;
         }
 
         public Task<Icon> GetIcon(string sourceId)

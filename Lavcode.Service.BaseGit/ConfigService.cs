@@ -4,15 +4,15 @@ using Lavcode.Model;
 using System;
 using System.Linq;
 
-namespace Lavcode.Service.GitHub
+namespace Lavcode.Service.BaseGit
 {
     public class ConfigService : ConfigBase<string>, IConfigService
     {
-        private readonly ConService _con;
+        private readonly BaseGitConService _con;
 
         public ConfigService(IConService cs)
         {
-            _con = cs as ConService;
+            _con = cs as BaseGitConService;
         }
 
         public override bool ContainsKey(string key)

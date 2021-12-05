@@ -579,6 +579,14 @@
       <Project>{7813445b-901e-4099-8426-37a760524d79}</Project>
       <Name>Lavcode.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Service.BaseGit\Lavcode.Service.BaseGit.csproj">
+      <Project>{14c051d7-48f4-484c-8f9a-3e4c020b959c}</Project>
+      <Name>Lavcode.Service.BaseGit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Service.Gitee\Lavcode.Service.Gitee.csproj">
+      <Project>{e2ac72c5-9dae-434f-a325-0697da648de2}</Project>
+      <Name>Lavcode.Service.Gitee</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lavcode.Service.GitHub\Lavcode.Service.GitHub.csproj">
       <Project>{49ab6388-db31-44dc-b731-a1435b040e7a}</Project>
       <Name>Lavcode.Service.GitHub</Name>

@@ -88,11 +88,10 @@ namespace Lavcode.Uwp.Modules.Auth
                         switch (provider)
                         {
                             case Provider.GitHub:
-                                ViewModelLocator.Register<Service.GitHub.ConService>();
+                                ViewModelLocator.Register<Service.GitHub.GitHubConService>();
                                 break;
                             case Provider.Gitee:
-                                // TODO
-                                // ViewModelLocator.Register<Service.Gitee.ConService>();
+                                ViewModelLocator.Register<Service.Gitee.GiteeConService>();
                                 break;
                         }
                         break;
@@ -132,7 +131,12 @@ namespace Lavcode.Uwp.Modules.Auth
             {
                 // 没有首次加载
                 if (!SettingHelper.Instance.IsFirstInited) return false;
+
+                // GitHub 没有登录过
                 if (SettingHelper.Instance.Provider == Provider.GitHub && string.IsNullOrEmpty(SettingHelper.Instance.GitHubToken)) return false;
+
+                // Gitee 没有登录过
+                if (SettingHelper.Instance.Provider == Provider.Gitee && string.IsNullOrEmpty(SettingHelper.Instance.GiteeToken)) return false;
 
                 return SettingHelper.Instance.IsAuthOpen;
             }

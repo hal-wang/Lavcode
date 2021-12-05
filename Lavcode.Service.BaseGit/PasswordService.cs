@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lavcode.Service.GitHub
+namespace Lavcode.Service.BaseGit
 {
     public class PasswordService : IPasswordService
     {
-        private readonly ConService _con;
+        private readonly BaseGitConService _con;
 
         public PasswordService(IConService cs)
         {
-            _con = cs as ConService;
+            _con = cs as BaseGitConService;
         }
 
         public async Task AddPassword(Password password, Icon icon, List<KeyValuePair> keyValuePairs = null)
