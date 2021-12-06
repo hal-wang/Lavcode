@@ -19,7 +19,7 @@ namespace Lavcode.Uwp.Modules.Shell
             this.InitializeComponent();
         }
 
-        public bool IsLaunchFile => SimpleIoc.Default.ContainsCreated<SqliteFileService>()
+        public bool IsLaunchFile => SimpleIoc.Default.IsRegistered<SqliteFileService>()
                     && SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile != null;
         public bool IsSyncVisible => SettingHelper.Instance.Provider == Provider.Sqlite && !IsLaunchFile;
 

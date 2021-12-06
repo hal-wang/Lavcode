@@ -1,10 +1,12 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.FirstUse;
 using Lavcode.Uwp.Modules.Shell;
+using Lavcode.Uwp.Modules.SqliteSync;
 using System;
 using System.Linq;
 using System.Web;
@@ -60,6 +62,7 @@ namespace Lavcode.Uwp
             else if (Frame.Content == null)
             {
                 ViewModelLocator.Register<Service.Sqlite.ConService>();
+                SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile = file;
                 Frame.Navigate(typeof(ShellPage), file);
             }
             Window.Current.Activate();
@@ -118,7 +121,6 @@ namespace Lavcode.Uwp
             Frame.Navigated += OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
             Window.Current.Content = Frame;
-            ExitHandler.Instance.Register();
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)

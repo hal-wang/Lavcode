@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Windows.Storage;
 
 namespace Lavcode.Uwp.Modules.SqliteSync
@@ -20,7 +21,18 @@ namespace Lavcode.Uwp.Modules.SqliteSync
 
         public string FileLaunchFolderName { get; } = "FileLaunch";
 
-        public StorageFile OpenedFile { get; set; } = null;
+        private StorageFile _openedFile = null;
+        public StorageFile OpenedFile
+        {
+            get => _openedFile;
+            set
+            {
+                _openedFile = value;
+                OnOpenedFileChange?.Invoke();
+            }
+        }
+
+        public event Action OnOpenedFileChange;
 
         public string FileLaunchFileName { get; set; } = null;
     }

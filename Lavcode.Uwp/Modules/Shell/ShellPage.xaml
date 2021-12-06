@@ -42,7 +42,7 @@
                     <local:Version/>
 
                     <Grid Grid.Column="1">
-                        <TextBlock Text="{x:Bind OpenedFile.Name,Mode=OneTime}"
+                        <TextBlock Text="{x:Bind OpenedFile.Name,Mode=OneWay}"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
                                    FontSize="15"

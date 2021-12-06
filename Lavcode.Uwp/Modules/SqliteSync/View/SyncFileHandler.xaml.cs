@@ -167,7 +167,13 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         {
             var localTempFile = await GetTempFile();
 
-            var result = isAnother ? await _syncHelper.SetFile(localTempFile, file => OpenedFile = file) : await _syncHelper.SetFile(localTempFile);
+            var result = isAnother ? await _syncHelper.SetFile(localTempFile, file =>
+                {
+                    var oldFile = OpenedFile;
+                    SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile = file;
+                    OpenedFile = file;
+                })
+                : await _syncHelper.SetFile(localTempFile);
             if (result)
             {
                 IsDbChanged = false;

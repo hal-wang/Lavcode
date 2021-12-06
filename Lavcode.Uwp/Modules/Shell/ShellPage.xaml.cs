@@ -4,6 +4,7 @@ using Lavcode.Uwp.Modules.SqliteSync;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -19,9 +20,23 @@ namespace Lavcode.Uwp.Modules.Shell
             TitleBarHelper.SetTitleBar();
             _themeListener.ThemeChanged += ThemeListener_ThemeChanged;
             Loaded += MainPage_Loaded;
+            OpenedFile = SimpleIoc.Default.ContainsCreated<SqliteFileService>() ? SimpleIoc.Default.GetInstance<SqliteFileService>()?.OpenedFile : null;
+            if (SimpleIoc.Default.ContainsCreated<SqliteFileService>())
+            {
+                var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+                sfs.OnOpenedFileChange += () => OpenedFile = sfs.OpenedFile;
+            }
         }
 
-        public StorageFile OpenedFile => SimpleIoc.Default.ContainsCreated<SqliteFileService>() ? SimpleIoc.Default.GetInstance<SqliteFileService>()?.OpenedFile : null;
+        public StorageFile OpenedFile
+        {
+            get { return (StorageFile)GetValue(OpenedFileProperty); }
+            set { SetValue(OpenedFileProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for OpenedFile.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OpenedFileProperty =
+            DependencyProperty.Register("OpenedFile", typeof(StorageFile), typeof(ShellPage), new PropertyMetadata(null));
 
         private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -31,9 +46,8 @@ namespace Lavcode.Uwp.Modules.Shell
             }
             _inited = true;
 
-            if (param is not null and StorageFile file)
+            if (param is not null and StorageFile)
             {
-                SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile = file;
                 FindName(nameof(SyncFileHandler));
             }
             else

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
@@ -14,7 +15,7 @@ namespace Lavcode.Uwp
                 IStorageItem file = fileArgs.Files.FirstOrDefault();
                 if (file != default)
                 {
-                    var instance = AppInstance.FindOrRegisterInstanceForKey(file.Path);
+                    var instance = AppInstance.FindOrRegisterInstanceForKey(Guid.NewGuid().ToString());
                     if (instance.IsCurrentInstance)
                     {
                         Windows.UI.Xaml.Application.Start((p) => new App());
