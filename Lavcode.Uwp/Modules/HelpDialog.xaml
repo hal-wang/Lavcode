@@ -19,8 +19,8 @@
                            Height="80"/>
                     <StackPanel VerticalAlignment="Center"
                                 Margin="14 20 -30 0">
-                        <TextBlock Text="更多问题，"/>
-                        <TextBlock Text="欢迎加入QQ群"/>
+                        <TextBlock Text="更多问题，" FontSize="16"/>
+                        <TextBlock Text="欢迎加入QQ群" FontSize="16"/>
                     </StackPanel>
                 </StackPanel>
             </lucv:DialogTitle.TitleExtension>
@@ -33,16 +33,16 @@
                 <Bold>安全性</Bold>
                 <LineBreak/>
                 <Run Text="    "/>
-                <Hyperlink NavigateUri="{x:Bind ReposUrl}">开源</Hyperlink>
-                <Run>软件，大众监督</Run>
+                <Hyperlink NavigateUri="{x:Bind ReposUrl}">开源软件</Hyperlink>
+                <Run>，受大众监督</Run>
                 <LineBreak/>
                 <Run Text="    "/>
-                <Run>备份文件（包括云端）使用</Run>
+                <Run>本地模式备份文件均使用</Run>
                 <Hyperlink NavigateUri="{x:Bind AES256Url}">AES256</Hyperlink>
                 <Run>加密</Run>
                 <LineBreak/>
                 <Run Text="    "/>
-                <Run>开发者不会收集任何密码信息</Run>
+                <Run>GitHub/Gitee 使用私有仓库，开发者不会收集你的任何密码信息</Run>
             </Paragraph>
 
             <Paragraph Margin="0 10 0 0">
@@ -52,13 +52,16 @@
                 <Run>完全免费无广告，无附加收费产品</Run>
                 <LineBreak/>
                 <Run Text="    "/>
-                <Run>（不包括第三方收费网盘）</Run>
+                <Run>（不包括第三方付费网盘、付费 Git 服务等）</Run>
                 <LineBreak/>
-                <Run Text="    "/>
-                <Run>希望支持本软件的用户</Run>
+            </Paragraph>
+
+            <Paragraph>
+                <Run>开源不易，</Run>
                 <InlineUIContainer>
-                    <HyperlinkButton Content="慷慨解囊"
+                    <HyperlinkButton Content="感谢支持"
                                      Padding="0"
+                                     BorderThickness="0"
                                      Margin="0 0 0 -3"
                                      Click="Donate_Click">
                         <FlyoutBase.AttachedFlyout>
@@ -69,9 +72,10 @@
                         </FlyoutBase.AttachedFlyout>
                     </HyperlinkButton>
                 </InlineUIContainer>
+                <Run>！</Run>
             </Paragraph>
 
-            <Paragraph Margin="0 10 0 0">
+            <Paragraph TextAlignment="Right">
                 <InlineUIContainer>
                     <HyperlinkButton Content="更多帮助"
                                      Click="MoreHelp_Click"/>
