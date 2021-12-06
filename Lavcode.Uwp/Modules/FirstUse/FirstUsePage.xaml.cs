@@ -62,8 +62,10 @@ namespace Lavcode.Uwp.Modules.FirstUse
                 return;
             }
 
-            SettingHelper.Instance.Provider = SettingHelper.Instance.SettingProvider = args;
+            SettingHelper.Instance.Provider = args;
             Frame.Navigate(typeof(AuthPage));
         }
     }
 }
+
+

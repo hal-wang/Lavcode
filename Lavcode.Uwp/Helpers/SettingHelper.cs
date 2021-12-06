@@ -127,12 +127,6 @@ namespace Lavcode.Uwp.Helpers
             set => Set((int)value);
         }
 
-        public Provider SettingProvider
-        {
-            get => (Provider)Get((int)Provider.GitHub);
-            set => Set((int)value);
-        }
-
         public bool IsAuthOpen
         {
             get { return Get(true, $"Is{Provider}AuthOpen"); }
