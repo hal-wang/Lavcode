@@ -19,7 +19,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             _passwordService = passwordService;
         }
 
-        public ObservableCollection<FolderItem> FolderItems { get; } = new ObservableCollection<FolderItem>();
+        public ObservableCollection<FolderItem> FolderItems { get; } = new();
         public IReadOnlyList<Password> Passwords { get; private set; }
         private Folder _curFolder;
 
@@ -35,6 +35,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             Passwords = passwords;
             _curFolder = curFolder;
 
+            FolderItems.Clear();
             foreach (var folder in await _folderService.GetFolders())
             {
                 if (folder.Id != curFolder.Id)
@@ -52,10 +53,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return false;
             }
 
-            foreach (var password in Passwords)
+            LoadingHelper.Show("正在移动");
+            try
             {
-                password.FolderId = SelectedFolder.Folder.Id;
-                await _passwordService.UpdatePassword(password);
+                foreach (var password in Passwords)
+                {
+                    password.FolderId = SelectedFolder.Folder.Id;
+                    await _passwordService.UpdatePassword(password);
+                }
+            }
+            finally
+            {
+                LoadingHelper.Hide();
             }
 
             MessageHelper.ShowPrimary($"移动成功！\n{_curFolder.Name}\n  ->\n{SelectedFolder.Name}", 5000);

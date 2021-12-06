@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using HTools;
 using HTools.Uwp.Controls.Message;
@@ -7,7 +6,6 @@ using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Modules.SqliteSync;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -474,13 +472,21 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             newPassword.Value = Value;
             newPassword.Remark = Remark;
 
-            if (_oldPassword == null)
+            LoadingHelper.Show("正在保存");
+            try
             {
-                await _passwordService.AddPassword(newPassword, Icon, CurKeyValuePairs);
+                if (_oldPassword == null)
+                {
+                    await _passwordService.AddPassword(newPassword, Icon, CurKeyValuePairs);
+                }
+                else
+                {
+                    await _passwordService.UpdatePassword(newPassword, Icon, CurKeyValuePairs);
+                }
             }
-            else
+            finally
             {
-                await _passwordService.UpdatePassword(newPassword, Icon, CurKeyValuePairs);
+                LoadingHelper.Hide();
             }
 
             _oldKeyValuePairs = CurKeyValuePairs;
@@ -547,7 +553,15 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            await _passwordService.DeletePassword(_oldPassword.Id);
+            LoadingHelper.Show("正在删除");
+            try
+            {
+                await _passwordService.DeletePassword(_oldPassword.Id);
+            }
+            finally
+            {
+                LoadingHelper.Hide();
+            }
             Messenger.Default.Send(_oldPassword.Id, "PasswordDeleted");
             IsEmpty = true;
         }

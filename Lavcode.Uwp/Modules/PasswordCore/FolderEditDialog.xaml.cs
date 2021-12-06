@@ -111,23 +111,31 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return false;
             }
 
-            var folderService = SimpleIoc.Default.GetInstance<IFolderService>();
-            if (Folder == null) //添加
+            LoadingHelper.Show("正在保存");
+            try
             {
-                var folder = new Folder()
+                var folderService = SimpleIoc.Default.GetInstance<IFolderService>();
+                if (Folder == null) //添加
                 {
-                    Name = FolderName,
-                };
-                await folderService.AddFolder(folder, Icon);
-                Folder = folder;
-            }
-            else //编辑
-            {
-                var folder = Folder.DeepClone();
-                folder.Name = FolderName;
+                    var folder = new Folder()
+                    {
+                        Name = FolderName,
+                    };
+                    await folderService.AddFolder(folder, Icon);
+                    Folder = folder;
+                }
+                else //编辑
+                {
+                    var folder = Folder.DeepClone();
+                    folder.Name = FolderName;
 
-                await folderService.UpdateFolder(folder, Icon);
-                Folder = folder;
+                    await folderService.UpdateFolder(folder, Icon);
+                    Folder = folder;
+                }
+            }
+            finally
+            {
+                LoadingHelper.Hide();
             }
             return true;
         }

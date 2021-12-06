@@ -122,7 +122,16 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                await _folderService.DeleteFolder(folderItem.Folder.Id);
+                LoadingHelper.Show("正在删除");
+                try
+                {
+                    await _folderService.DeleteFolder(folderItem.Folder.Id);
+                }
+                finally
+                {
+                    LoadingHelper.Hide();
+                }
+
                 FolderItems.Remove(folderItem);
 
                 if (FolderItems.Count == 0) // 删完了
@@ -164,10 +173,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public async Task Sort()
         {
-            for (var i = 0; i < FolderItems.Count; i++)
+            LoadingHelper.Show("正在排序");
+            try
             {
-                FolderItems[i].Folder.Order = i;
-                await _folderService.UpdateFolder(FolderItems[i].Folder);
+                for (var i = 0; i < FolderItems.Count; i++)
+                {
+                    FolderItems[i].Folder.Order = i;
+                    await _folderService.UpdateFolder(FolderItems[i].Folder);
+                }
+            }
+            finally
+            {
+                LoadingHelper.Hide();
             }
         }
         #endregion

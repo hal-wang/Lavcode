@@ -141,10 +141,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public async Task Sort()
         {
-            for (var i = 0; i < PasswordItems.Count; i++)
+            LoadingHelper.Show("正在排序");
+            try
             {
-                PasswordItems[i].Password.Order = i;
-                await _passwordService.UpdatePassword(PasswordItems[i].Password);
+                for (var i = 0; i < PasswordItems.Count; i++)
+                {
+                    PasswordItems[i].Password.Order = i;
+                    await _passwordService.UpdatePassword(PasswordItems[i].Password);
+                }
+            }
+            finally
+            {
+                LoadingHelper.Hide();
             }
         }
 
@@ -184,23 +192,31 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            var count = PasswordItems.Count;
-            for (int i = 0, j = 0; i < count; i++)
+            LoadingHelper.Show("正在删除");
+            try
             {
-                if (SelectedItems.Contains(PasswordItems[j]))
+                var count = PasswordItems.Count;
+                for (int i = 0, j = 0; i < count; i++)
                 {
-                    if (SelectedPasswordItem == PasswordItems[j])
+                    if (SelectedItems.Contains(PasswordItems[j]))
                     {
-                        SelectedPasswordItem = null;
-                    }
+                        if (SelectedPasswordItem == PasswordItems[j])
+                        {
+                            SelectedPasswordItem = null;
+                        }
 
-                    await _passwordService.DeletePassword(PasswordItems[j].Password.Id);
-                    PasswordItems.RemoveAt(j);
+                        await _passwordService.DeletePassword(PasswordItems[j].Password.Id);
+                        PasswordItems.RemoveAt(j);
+                    }
+                    else
+                    {
+                        j++;
+                    }
                 }
-                else
-                {
-                    j++;
-                }
+            }
+            finally
+            {
+                LoadingHelper.Hide();
             }
         }
 
@@ -211,7 +227,15 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            await _passwordService.DeletePassword(passwordItem.Password.Id);
+            LoadingHelper.Show("正在删除");
+            try
+            {
+                await _passwordService.DeletePassword(passwordItem.Password.Id);
+            }
+            finally
+            {
+                LoadingHelper.Hide();
+            }
 
             if (PasswordItems.Contains(passwordItem))
             {
@@ -291,15 +315,23 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                var content = data.Substring(CommonConstant.DragPasswordHeader.Length, data.Length - CommonConstant.DragPasswordHeader.Length);
-                var items = JsonConvert.DeserializeObject<List<JObject>>(content);
-                foreach (JObject item in items)
+                LoadingHelper.Show("正在复制");
+                try
                 {
-                    var password = item["Password"].ToObject<Password>();
-                    password.FolderId = _curFolder.Folder.Id;
+                    var content = data.Substring(CommonConstant.DragPasswordHeader.Length, data.Length - CommonConstant.DragPasswordHeader.Length);
+                    var items = JsonConvert.DeserializeObject<List<JObject>>(content);
+                    foreach (JObject item in items)
+                    {
+                        var password = item["Password"].ToObject<Password>();
+                        password.FolderId = _curFolder.Folder.Id;
 
-                    await _passwordService.AddPassword(password, item["Icon"].ToObject<Icon>(), item["KeyValuePairs"].ToObject<List<Lavcode.Model.KeyValuePair>>());
-                    PasswordItems.Add(new PasswordItem(password));
+                        await _passwordService.AddPassword(password, item["Icon"].ToObject<Icon>(), item["KeyValuePairs"].ToObject<List<Lavcode.Model.KeyValuePair>>());
+                        PasswordItems.Add(new PasswordItem(password));
+                    }
+                }
+                finally
+                {
+                    LoadingHelper.Hide();
                 }
             }
             catch (Exception ex)
@@ -308,9 +340,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
 
-        public async Task<dynamic> CreateDragItems(PasswordItem[] passwordItems)
+        public async Task<List<object>> CreateDragItems(PasswordItem[] passwordItems)
         {
-            var items = new List<dynamic>();
+            var items = new List<object>();
             foreach (var passwordItem in passwordItems)
             {
                 items.Add(new

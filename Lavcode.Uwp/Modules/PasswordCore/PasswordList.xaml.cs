@@ -118,7 +118,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         private async void PasswordListView_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
             var items = await VM.CreateDragItems(e.Items.Where(item => item is PasswordItem).Select(item => item as PasswordItem).ToArray());
-            if (items.Length == 0)
+            if (items.Count == 0)
             {
                 return;
             }
