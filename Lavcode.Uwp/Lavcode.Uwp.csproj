@@ -142,15 +142,15 @@
     <Compile Include="Controls\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IconControl\IconControl.xaml.cs">
+    <Compile Include="Modules\PasswordCore\IconCtl\IconControl.xaml.cs">
       <DependentUpon>IconControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IconControl\IconViewModel.cs" />
-    <Compile Include="Controls\IconSelecter\IconSelecter.xaml.cs">
+    <Compile Include="Modules\PasswordCore\IconCtl\IconControlViewModel.cs" />
+    <Compile Include="Modules\PasswordCore\IconCtl\IconSelecter.xaml.cs">
       <DependentUpon>IconSelecter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IconSelecter\IconSource.cs" />
-    <Compile Include="Controls\IconSelecter\SetPathIcon.xaml.cs">
+    <Compile Include="Modules\PasswordCore\IconCtl\IconSource.cs" />
+    <Compile Include="Modules\PasswordCore\IconCtl\SetPathIcon.xaml.cs">
       <DependentUpon>SetPathIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Logo.xaml.cs">
@@ -383,15 +383,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\IconControl\IconControl.xaml">
+    <Page Include="Modules\PasswordCore\IconCtl\IconControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\IconSelecter\IconSelecter.xaml">
+    <Page Include="Modules\PasswordCore\IconCtl\IconSelecter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\IconSelecter\SetPathIcon.xaml">
+    <Page Include="Modules\PasswordCore\IconCtl\SetPathIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

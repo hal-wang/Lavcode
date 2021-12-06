@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:lucvi="using:Lavcode.Uwp.Controls.IconSelecter"
+    xmlns:lumpi="using:Lavcode.Uwp.Modules.PasswordCore.IconCtl"
     mc:Ignorable="d"
     PrimaryButtonText="确定"
     SecondaryButtonText="取消"
@@ -16,7 +16,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
         <StackPanel>
-            <lucvi:IconSelecter Icon="{x:Bind Icon,Mode=TwoWay}"
+            <lumpi:IconSelecter Icon="{x:Bind Icon,Mode=TwoWay}"
                                 x:Name="IconSelecter"/>
 
             <Grid Margin="0 20 0 0">

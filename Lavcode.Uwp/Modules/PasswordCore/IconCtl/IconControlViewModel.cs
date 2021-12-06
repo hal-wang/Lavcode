@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using Windows.UI.Xaml.Media;
 
-namespace Lavcode.Uwp.Controls.IconControl
+namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
 {
-    internal class IconViewModel : ViewModelBase
+    internal class IconControlViewModel : ViewModelBase
     {
         private Geometry _pathIcon = null;
         public Geometry PathIcon

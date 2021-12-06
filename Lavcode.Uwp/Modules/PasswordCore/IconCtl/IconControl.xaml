@@ -1,20 +1,20 @@
 ﻿<UserControl
-    x:Class="Lavcode.Uwp.Controls.IconControl.IconControl"
+    x:Class="Lavcode.Uwp.Modules.PasswordCore.IconCtl.IconControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="using:Lavcode.Uwp.Controls.IconControl"
+    xmlns:local="using:Lavcode.Uwp.Modules.PasswordCore.IconCtl"
     mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <local:IconViewModel x:Name="Model"/>
+        <local:IconControlViewModel x:Name="VM"/>
     </UserControl.DataContext>
 
     <Grid>
         <Border Visibility="{x:Bind Icon.IconType,Mode=OneWay,Converter={StaticResource IsEqualConverter},ConverterParameter=Img}" >
             <Border SizeChanged="Border_SizeChanged">
-                <Image Source="{x:Bind Model.ImgIcon,Mode=OneWay}"
+                <Image Source="{x:Bind VM.ImgIcon,Mode=OneWay}"
                        Stretch="UniformToFill"/>
             </Border>
         </Border>
@@ -34,9 +34,9 @@
                      Stretch="Uniform">
                 <Grid>
                     <TextBlock FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                       Text="{x:Bind Model.SegoeMDL2Icon,Mode=OneWay}"
+                                       Text="{x:Bind VM.SegoeMDL2Icon,Mode=OneWay}"
                                        Visibility="{x:Bind Icon.IconType,Mode=OneWay,Converter={StaticResource IsEqualConverter},ConverterParameter=SegoeMDL2}"/>
-                    <Path Data="{x:Bind Model.PathIcon,Mode=OneWay}"
+                    <Path Data="{x:Bind VM.PathIcon,Mode=OneWay}"
                                   Fill="{ThemeResource ApplicationForegroundThemeBrush}"
                                   Visibility="{x:Bind Icon.IconType,Mode=OneWay,Converter={StaticResource IsEqualConverter},ConverterParameter=Path}"/>
                 </Grid>

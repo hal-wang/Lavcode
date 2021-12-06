@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
 {
     public sealed partial class SetPathIcon : ContentDialog
     {

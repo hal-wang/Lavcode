@@ -7,7 +7,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Lavcode.Uwp.Controls.IconSelecter
+namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
 {
     public sealed partial class IconSelecter : UserControl
     {
