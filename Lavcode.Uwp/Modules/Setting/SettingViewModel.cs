@@ -20,5 +20,7 @@ namespace Lavcode.Uwp.Modules.Setting
             get => SettingHelper.Instance.IsBgVisible;
             set => SettingHelper.Instance.IsBgVisible = value;
         }
+
+        public bool IsSianoutEnable => Connected && (SettingHelper.Instance.Provider == Model.Provider.GitHub || SettingHelper.Instance.Provider == Model.Provider.Gitee);
     }
 }

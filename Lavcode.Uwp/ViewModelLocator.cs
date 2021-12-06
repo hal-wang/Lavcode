@@ -16,11 +16,11 @@ namespace Lavcode.Uwp
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
         }
 
         public static void Register<T>() where T : class, IConService
         {
+            ExitHandler.Instance.Register();
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<IConService, T>();
 

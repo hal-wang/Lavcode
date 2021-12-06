@@ -14,21 +14,24 @@ namespace Lavcode.Uwp.Helpers
 
         public void Register()
         {
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
-        }
-
-        public void Unregister()
-        {
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested -= this.OnCloseRequest;
             Requests.Clear();
+
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
         }
 
         private async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             e.Handled = true;
+
+            int level = -1;
             for (var i = 0; i < Requests.Count; i++)
             {
-                var level = Requests.Min(req => req.level);
+                if (!Requests.Any(req => req.level > level))
+                {
+                    break;
+                }
+                level = Requests.Where(req => req.level > level).Min(req => req.level);
                 var request = Requests.First(req => req.level == level);
                 if (!await request.Func())
                 {

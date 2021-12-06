@@ -23,5 +23,9 @@
 
         <hucs:ButtonSettingCell Label="切换存储类型" Tapped="OnChangeProvider"/>
         <Border Style="{ThemeResource SettingSeparator}"/>
+
+        <Button Style="{ThemeResource AccentButtonStyle}" Content="注销登录" Background="#EE3333" Margin="10 30 10 0"
+                Visibility="{x:Bind VM.IsSianoutEnable,Converter={StaticResource BooleanConverter}}"
+                Click="OnSignout"/>
     </StackPanel>
 </hucs:SettingSplitView>
