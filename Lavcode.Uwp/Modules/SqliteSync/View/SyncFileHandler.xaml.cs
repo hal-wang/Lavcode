@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
 using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
+using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
 using System.IO;
@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Core;
-using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -25,15 +24,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         {
             this.InitializeComponent();
 
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
-            Messenger.Default.Register<object>(this, "OnUnsaveCloseMsg", (_) => ShowUnsaveDialog());
+            ExitHandler.Instance.Requests.Add(new(OnCloseRequest, 1));
             Init();
-        }
-
-        ~SyncFileHandler()
-        {
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested -= this.OnCloseRequest;
-            Messenger.Default.Unregister<object>(this, "OnUnsaveCloseMsg");
         }
 
         private async Task<StorageFile> GetTempFile()
@@ -43,47 +35,43 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             return await launchFolder.GetFileAsync(sfs.FileLaunchFileName);
         }
 
-        private async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        private async Task<bool> OnCloseRequest()
         {
             if (OpenedFile == null)
             {
-                return;
+                return true;
             }
 
-            e.Handled = true;
             if (IsDbChanged)
             {
-                ShowUnsaveDialog();
+                try
+                {
+                    // 显显示编辑未保存对话框。如果未编辑，则关闭程序。
+                    var cdr = await PopupHelper.ShowDialog("当前备份文件已经被编辑，但未保存，确认退出？", "文件未保存", "保存并退出", "不保存退出", null, true, "点错了");
+                    if ((cdr == ContentDialogResult.Primary && await UpdateToFile()) || cdr == ContentDialogResult.Secondary)
+                    {
+                        await Clean();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageHelper.ShowError(ex);
+                    return false;
+                }
             }
             else
             {
-                await CleanUp();
+                await Clean();
+                return true;
             }
         }
 
-        /// <summary>
-        /// 显显示编辑未保存对话框。
-        /// 如果未编辑，则直接关闭程序。
-        /// </summary>
-        private async void ShowUnsaveDialog()
-        {
-            if (!IsDbChanged) // 如果能够调用到这个函数，但文件未编辑，则直接关闭程序
-            {
-                await CleanUp();
-            }
-
-            try
-            {
-                var cdr = await PopupHelper.ShowDialog("当前备份文件已经被编辑，但未保存，确认退出？", "文件未保存", "保存并退出", "不保存退出", null, true, "点错了");
-                if ((cdr == ContentDialogResult.Primary && await UpdateToFile()) || cdr == ContentDialogResult.Secondary)
-                {
-                    await CleanUp();
-                }
-            }
-            catch { }
-        }
-
-        private async Task CleanUp()
+        private async Task Clean()
         {
             LoadingHelper.Show("正在清理");
             await TaskExtend.SleepAsync();
@@ -93,7 +81,6 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
                 await localTempFile.DeleteAsync();
             }
             catch { }
-            Application.Current.Exit();
         }
 
         public bool IsDbChanged

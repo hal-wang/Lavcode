@@ -5,7 +5,6 @@ using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
 using Windows.System;
 using Windows.UI.Core;
-using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -19,7 +18,6 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             this.InitializeComponent();
             Messenger.Default.Register<object>(this, "AddNewPassword", (obj) => AddNewPassword());
 
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += this.OnCloseRequest;
             VM.CalcTextBlock = CalcTextBlock; // 用于计算Key宽度
         }
 
@@ -50,21 +48,6 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             await PopupHelper.ShowTeachingTipAsync(SaveBtn, "编辑完成（添加记录 6/6）", "编辑完成，别忘记保存哦！（虽然有退出提醒，但手动保存是个好习惯）");
             SettingHelper.Instance.AddPasswordTaught = true;
             VM.HandleSave();
-        }
-
-        private async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
-        {
-            if (!VM.IsEdited)
-            {
-                return;
-            }
-
-            e.Handled = true;
-            try
-            {
-                await VM.OnCloseRequest();
-            }
-            catch { }
         }
 
         private void SelectKey_Click(object sender, RoutedEventArgs e)

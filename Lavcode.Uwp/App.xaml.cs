@@ -108,15 +108,17 @@ namespace Lavcode.Uwp
 
         private void CreateFrame()
         {
-            if (Window.Current.Content is not Windows.UI.Xaml.Controls.Frame)
+            if (Window.Current.Content is Windows.UI.Xaml.Controls.Frame)
             {
-                Frame = new Frame();
-                Frame.NavigationFailed += OnNavigationFailed;
-                Frame.Navigated += OnNavigated;
-                SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
-
-                Window.Current.Content = Frame;
+                return;
             }
+
+            Frame = new Frame();
+            Frame.NavigationFailed += OnNavigationFailed;
+            Frame.Navigated += OnNavigated;
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+            Window.Current.Content = Frame;
+            ExitHandler.Instance.Register();
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)

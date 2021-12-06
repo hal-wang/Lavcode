@@ -156,6 +156,7 @@
     <Compile Include="Controls\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExitHandler.cs" />
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
     <Compile Include="Modules\Auth\OAuthLoadingDialog.xaml.cs">
