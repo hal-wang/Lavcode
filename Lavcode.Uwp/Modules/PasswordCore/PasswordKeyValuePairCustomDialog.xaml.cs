@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public sealed partial class CustomKeyDialog : ContentDialog
+    public sealed partial class PasswordKeyValuePairCustomDialog : ContentDialog
     {
-        public CustomKeyDialog()
+        public PasswordKeyValuePairCustomDialog()
         {
             this.InitializeComponent();
         }
@@ -20,7 +20,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         // Using a DependencyProperty as the backing store for Key.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty KeyProperty =
-            DependencyProperty.Register("Key", typeof(string), typeof(CustomKeyDialog), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Key", typeof(string), typeof(PasswordKeyValuePairCustomDialog), new PropertyMetadata(string.Empty));
 
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

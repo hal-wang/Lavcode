@@ -237,8 +237,8 @@
     </Compile>
     <Compile Include="Modules\PasswordCore\IconItem.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Modules\PasswordCore\EditFolderDialog.xaml.cs">
-      <DependentUpon>EditFolderDialog.xaml</DependentUpon>
+    <Compile Include="Modules\PasswordCore\FolderEditDialog.xaml.cs">
+      <DependentUpon>FolderEditDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Shell\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
@@ -259,13 +259,13 @@
     <Compile Include="Modules\Git\GitInfoViewModel.cs" />
     <Compile Include="Modules\Auth\AuthViewModel.cs" />
     <Compile Include="Modules\PasswordCore\FolderItem.cs" />
-    <Compile Include="Modules\PasswordCore\KeyValuePairItem.cs" />
+    <Compile Include="Modules\PasswordCore\PasswordKeyValuePairItem.cs" />
     <Compile Include="Modules\PasswordCore\PasswordItem.cs" />
     <Compile Include="Modules\PasswordCore\PasswordDetailViewModel.cs" />
     <Compile Include="Modules\PasswordCore\PasswordGeneratorViewModel.cs" />
     <Compile Include="Modules\PasswordCore\PasswordListViewModel.cs" />
-    <Compile Include="Modules\PasswordCore\CustomKeyDialog.xaml.cs">
-      <DependentUpon>CustomKeyDialog.xaml</DependentUpon>
+    <Compile Include="Modules\PasswordCore\PasswordKeyValuePairCustomDialog.xaml.cs">
+      <DependentUpon>PasswordKeyValuePairCustomDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\HelpDialog.xaml.cs">
       <DependentUpon>HelpDialog.xaml</DependentUpon>
@@ -491,7 +491,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\PasswordCore\EditFolderDialog.xaml">
+    <Page Include="Modules\PasswordCore\FolderEditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -503,7 +503,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\PasswordCore\CustomKeyDialog.xaml">
+    <Page Include="Modules\PasswordCore\PasswordKeyValuePairCustomDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

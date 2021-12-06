@@ -11,9 +11,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public sealed partial class EditFolderDialog : ContentDialog, IResultDialog<bool>
+    public sealed partial class FolderEditDialog : ContentDialog, IResultDialog<bool>
     {
-        public EditFolderDialog(Folder folder = null)
+        public FolderEditDialog(Folder folder = null)
         {
             Folder = folder;
             FolderName = folder == null ? string.Empty : folder.Name;
@@ -31,7 +31,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         // Using a DependencyProperty as the backing store for FolderName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FolderNameProperty =
-            DependencyProperty.Register("FolderName", typeof(string), typeof(EditFolderDialog), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("FolderName", typeof(string), typeof(FolderEditDialog), new PropertyMetadata(string.Empty));
 
         public Icon Icon
         {
@@ -41,7 +41,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Icon), typeof(EditFolderDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("Icon", typeof(Icon), typeof(FolderEditDialog), new PropertyMetadata(null));
 
 
         public Folder Folder { get; private set; }

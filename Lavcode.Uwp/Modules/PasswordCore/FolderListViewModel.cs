@@ -91,7 +91,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public async void HandleAddFolder()
         {
-            var editFolder = new EditFolderDialog();
+            var editFolder = new FolderEditDialog();
             if (!await editFolder.QueueAsync<bool>()) return;
 
             var newFolderItem = new FolderItem(editFolder.Folder, editFolder.Icon);
@@ -138,7 +138,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public async Task EditFolder(FolderItem folderItem)
         {
-            var editFolder = new EditFolderDialog(folderItem.Folder);
+            var editFolder = new FolderEditDialog(folderItem.Folder);
             if (await editFolder.QueueAsync<bool>())
             {
                 folderItem.Set(editFolder.Folder, editFolder.Icon);

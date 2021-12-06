@@ -60,7 +60,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         #endregion
 
         #region Password属性
-        public ObservableCollection<KeyValuePairItem> KeyValuePairs { get; } = new ObservableCollection<KeyValuePairItem>();
+        public ObservableCollection<PasswordKeyValuePairItem> KeyValuePairs { get; } = new ObservableCollection<PasswordKeyValuePairItem>();
 
         private string _title = string.Empty;
         public string Title
@@ -168,7 +168,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public void HandleAddKeyValuePair()
         {
-            KeyValuePairs.Add(new KeyValuePairItem(this)
+            KeyValuePairs.Add(new PasswordKeyValuePairItem(this)
             {
                 Key = GetDefaultKey()
             });
@@ -176,9 +176,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             SetKeysLength();
         }
 
-        public async Task CustomKey(KeyValuePairItem keyValuePairItem)
+        public async Task CustomKey(PasswordKeyValuePairItem keyValuePairItem)
         {
-            var dialog = new CustomKeyDialog()
+            var dialog = new PasswordKeyValuePairCustomDialog()
             {
                 Key = keyValuePairItem.Key
             };
@@ -192,7 +192,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             SetKeysLength();
         }
 
-        public async Task DeleteKey(KeyValuePairItem keyValuePairItem)
+        public async Task DeleteKey(PasswordKeyValuePairItem keyValuePairItem)
         {
             if (!string.IsNullOrEmpty(keyValuePairItem.Value) && await PopupHelper.ShowDialog($"确认删除{(string.IsNullOrEmpty(keyValuePairItem.Key) ? "该内容" : " " + keyValuePairItem.Key)}？", "确认删除", "确定", "点错了", false) != ContentDialogResult.Primary)
             {
@@ -226,7 +226,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             for (var i = 0; i < 3; i++)
             {
-                KeyValuePairs.Add(new KeyValuePairItem(this)
+                KeyValuePairs.Add(new PasswordKeyValuePairItem(this)
                 {
                     Key = GetDefaultKey()
                 });
@@ -243,7 +243,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             foreach (var item in keyValuePairs)
             {
                 _oldKeyValuePairs.Add(item);
-                KeyValuePairs.Add(new KeyValuePairItem(item, this));
+                KeyValuePairs.Add(new PasswordKeyValuePairItem(item, this));
             }
 
             SetKeysLength();
@@ -579,7 +579,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             CopyStr("备注", Remark, sender as Button);
         }
 
-        public void CopyKeyValue(KeyValuePairItem item, Button button)
+        public void CopyKeyValue(PasswordKeyValuePairItem item, Button button)
         {
             CopyStr(item.Key, item.Value, button);
         }

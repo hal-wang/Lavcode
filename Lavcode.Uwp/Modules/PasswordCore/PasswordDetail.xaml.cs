@@ -52,17 +52,17 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private void SelectKey_Click(object sender, RoutedEventArgs e)
         {
-            ((sender as MenuFlyoutItem).DataContext as KeyValuePairItem).Key = (sender as MenuFlyoutItem).Text;
+            ((sender as MenuFlyoutItem).DataContext as PasswordKeyValuePairItem).Key = (sender as MenuFlyoutItem).Text;
         }
 
         private async void CustomKey_Click(object sender, RoutedEventArgs e)
         {
-            await VM.CustomKey((sender as MenuFlyoutItem).DataContext as KeyValuePairItem);
+            await VM.CustomKey((sender as MenuFlyoutItem).DataContext as PasswordKeyValuePairItem);
         }
 
         private async void DeleteKey_Click(object sender, RoutedEventArgs e)
         {
-            await VM.DeleteKey((sender as MenuFlyoutItem).DataContext as KeyValuePairItem);
+            await VM.DeleteKey((sender as MenuFlyoutItem).DataContext as PasswordKeyValuePairItem);
         }
 
         private void PasswordGenerator_Click(object sender, RoutedEventArgs e)
@@ -80,7 +80,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private void CopyKeyValue_Click(object sender, RoutedEventArgs e)
         {
-            VM.CopyKeyValue((sender as Button).DataContext as KeyValuePairItem, sender as Button);
+            VM.CopyKeyValue((sender as Button).DataContext as PasswordKeyValuePairItem, sender as Button);
         }
 
         private void OnKeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
