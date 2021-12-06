@@ -85,7 +85,7 @@ namespace Lavcode.Service.BaseGit
             var result = _con
                 .GetComments<Password, string>(folderId, (item1, item2) => item1.FolderId == folderId)
                 .Where(item => item.FolderId == folderId)
-                .OrderBy(item => item.Order)
+                .OrderBy((item) => item.FolderId).ThenBy((item) => item.Order)
                 .ToList();
 
             return Task.FromResult(result);

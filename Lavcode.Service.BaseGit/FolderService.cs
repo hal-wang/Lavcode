@@ -71,7 +71,7 @@ namespace Lavcode.Service.BaseGit
 
         public Task<List<Folder>> GetFolders()
         {
-            var result = _con.FolderIssue.Comments.Select(item => item.Value).ToList();
+            var result = _con.FolderIssue.Comments.Select(item => item.Value).OrderBy(item => item.Order).ToList();
             return Task.FromResult(result);
         }
 
