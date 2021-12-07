@@ -60,6 +60,7 @@
         </lucv:Header>
 
         <lucvc:CommentList Comments="{x:Bind VM.Notices,Mode=OneWay}"
+                           IsAuthorVisible="False"
                            Grid.Row="1"
                            Margin="0 20 0 0"/>
     </Grid>

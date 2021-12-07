@@ -8,12 +8,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:octokit="using:Octokit"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:octokit="using:Octokit"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    DataContext="{x:Bind}">
 
     <ListView ItemsSource="{x:Bind Comments,Mode=OneWay}"
+              x:Name="lv"
               IsItemClickEnabled="False"
               SelectionMode="None"
               BorderThickness="0 1 0 0">
@@ -39,26 +42,32 @@
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="octokit:IssueComment">
                 <ScrollViewer MaxHeight="600">
-                    <StackPanel Margin="10 10 16 4">
-                        <Grid>
-                            <StackPanel Orientation="Horizontal">
-                                <Border VerticalAlignment="Center"
-                                    Width="24"
-                                    Height="24"
-                                    CornerRadius="12"
-                                    Margin="0 0 6 0">
-                                    <Image Source="{x:Bind User.AvatarUrl}"/>
-                                </Border>
-                                <TextBlock Text="{x:Bind User.Login}"
+                    <StackPanel Margin="20 12">
+                        <Grid Margin="0 0 0 10"
+                              Visibility="{Binding ElementName=lv,Path=DataContext.IsAuthorVisible,Mode=OneWay,Converter={StaticResource BooleanConverter}}">
+                            <Button Style="{StaticResource LightButtonStyle}" Padding="0" HorizontalAlignment="Left" Click="AuthorButton_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border VerticalAlignment="Center"
+                                            Width="24"
+                                            Height="24"
+                                            CornerRadius="12"
+                                            Margin="0 0 10 0">
+                                        <Image Source="{x:Bind User.AvatarUrl}"/>
+                                    </Border>
+                                    <TextBlock Text="{x:Bind User.Login}"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
+                                </StackPanel>
+                            </Button>
                             <TextBlock Text="{x:Bind UpdatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
-                                   HorizontalAlignment="Right"/>
+                                       HorizontalAlignment="Right" Opacity="0.7"/>
                         </Grid>
                         <controls:MarkdownTextBlock x:Name="MarkdownText"
-                                                Margin="6"
-                                                Text="{x:Bind Body}"
-                                                Background="Transparent"/>
+                                                    Text="{x:Bind Body}"
+                                                    Background="Transparent"
+                                                    LinkClicked="MarkdownText_LinkClicked"/>
+                        <TextBlock Text="{x:Bind UpdatedAt,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ssL}"
+                                   Margin="0 10 0 0" HorizontalAlignment="Right" Opacity="0.7"
+                                   Visibility="{Binding ElementName=lv,Path=DataContext.IsAuthorVisible,Mode=OneWay,Converter={StaticResource BooleanConverter},ConverterParameter=T}"/>
                     </StackPanel>
                 </ScrollViewer>
             </DataTemplate>
