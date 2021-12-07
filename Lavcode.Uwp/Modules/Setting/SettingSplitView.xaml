@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hucs="using:HTools.Uwp.Controls.Setting"
+    xmlns:lum="using:Lavcode.Uwp.Modules"
     mc:Ignorable="d"
     Header="设置">
 
@@ -20,8 +21,22 @@
                                 Visibility="{x:Bind VM.Connected,Mode=OneWay,Converter={StaticResource BooleanConverter}}"/>
         <Border Style="{ThemeResource SettingSeparator}"
                 Visibility="{x:Bind VM.Connected,Mode=OneWay,Converter={StaticResource BooleanConverter}}"/>
-
         <hucs:ButtonSettingCell Label="切换存储类型" Tapped="OnChangeProvider"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+
+        <Border Style="{ThemeResource SettingSeparator}" Margin="0 30 0 0"/>
+        <hucs:ButtonSettingCell Label="反馈" Tapped="OnFeedback"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+        <hucs:ButtonSettingCell Label="帮助" Tapped="OnHelp"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+        <hucs:ButtonSettingCell Label="支持一下" x:Name="RatingButton" Tapped="OnRating">
+            <hucs:BaseSettingCell.ContextFlyout>
+                <Flyout x:Name="RatingFlyout">
+                    <lum:Rating x:Name="Rating"
+                                x:DeferLoadStrategy="Lazy"/>
+                </Flyout>
+            </hucs:BaseSettingCell.ContextFlyout>
+        </hucs:ButtonSettingCell>
         <Border Style="{ThemeResource SettingSeparator}"/>
 
         <Button Style="{ThemeResource AccentButtonStyle}" Content="注销登录" Background="#EE3333" Margin="10 30 10 0"

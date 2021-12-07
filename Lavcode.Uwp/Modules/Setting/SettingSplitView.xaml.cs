@@ -1,5 +1,7 @@
-﻿using HTools.Uwp.Helpers;
+﻿using GalaSoft.MvvmLight.Ioc;
+using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Modules.Feedback;
 using System;
 using Windows.ApplicationModel.Core;
 
@@ -13,7 +15,7 @@ namespace Lavcode.Uwp.Modules.Setting
             this.InitializeComponent();
         }
 
-        public SettingViewModel VM { get; } = new SettingViewModel();
+        public SettingViewModel VM { get; } = SimpleIoc.Default.GetInstance<SettingViewModel>();
 
         private void OnChangeProvider(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
@@ -40,6 +42,23 @@ namespace Lavcode.Uwp.Modules.Setting
             SettingHelper.Instance.IsAuthOpen = true;
             SettingHelper.Instance.IsFirstInited = false;
             await CoreApplication.RequestRestartAsync("R");
+        }
+
+        private async void OnHelp(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            await new HelpDialog().QueueAsync();
+        }
+
+        private void OnFeedback(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            App.Frame.Navigate(typeof(FeedbackPage));
+            IsPaneOpen = false;
+        }
+
+        private void OnRating(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            FindName(nameof(Rating));
+            this.RatingFlyout.ShowAt(RatingButton);
         }
     }
 }

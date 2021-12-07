@@ -27,7 +27,11 @@ namespace Lavcode.Uwp.Helpers
 
         public static async Task Invoke(Func<Task> func, string loadingStr = "")
         {
-            await Invoke(async () => await func(), loadingStr);
+            await Invoke<object>(async () =>
+            {
+                await func();
+                return null;
+            }, loadingStr);
         }
     }
 }

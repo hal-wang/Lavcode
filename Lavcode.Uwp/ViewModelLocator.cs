@@ -6,6 +6,7 @@ using Lavcode.Uwp.Modules;
 using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.PasswordCore;
+using Lavcode.Uwp.Modules.Setting;
 using Lavcode.Uwp.Modules.SqliteSync;
 using Lavcode.Uwp.Modules.SqliteSync.ViewModel;
 
@@ -22,6 +23,7 @@ namespace Lavcode.Uwp
         {
             ExitHandler.Instance.Register();
             SimpleIoc.Default.Reset();
+            RegisterSimple();
             SimpleIoc.Default.Register<IConService, T>();
 
             if (typeof(Service.Sqlite.ConService) == typeof(T))
@@ -45,6 +47,15 @@ namespace Lavcode.Uwp
             RegisterViewModel();
         }
 
+        public static void RegisterSimple()
+        {
+            SimpleIoc.Default.Register<NoticesViewModel>();
+            SimpleIoc.Default.Register<FeedbackViewModel>();
+            SimpleIoc.Default.Register<FeedbackDialogViewModel>();
+            SimpleIoc.Default.Register<GitInfoViewModel>();
+            SimpleIoc.Default.Register<SettingViewModel>();
+        }
+
         private static void RegisterViewModel()
         {
             SimpleIoc.Default.Register<SyncViewModel>();
@@ -53,10 +64,6 @@ namespace Lavcode.Uwp
             SimpleIoc.Default.Register<PasswordMoveToViewModel>();
             SimpleIoc.Default.Register<PasswordListViewModel>();
             SimpleIoc.Default.Register<PasswordGeneratorViewModel>();
-            SimpleIoc.Default.Register<GitInfoViewModel>();
-            SimpleIoc.Default.Register<FeedbackViewModel>();
-            SimpleIoc.Default.Register<FeedbackDialogViewModel>();
-            SimpleIoc.Default.Register<NoticesViewModel>();
 
             switch (SettingHelper.Instance.Provider)
             {

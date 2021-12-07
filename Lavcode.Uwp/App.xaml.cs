@@ -29,6 +29,7 @@ namespace Lavcode.Uwp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
+            ViewModelLocator.RegisterSimple();
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)

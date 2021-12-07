@@ -25,11 +25,6 @@ namespace Lavcode.Uwp.Modules.Shell
 
         public Provider Provider => SettingHelper.Instance.Provider;
 
-        private void FeedbackBtn_Click(object sender, RoutedEventArgs e)
-        {
-            App.Frame.Navigate(typeof(FeedbackPage));
-        }
-
         private void GitFlyout_Opened(object sender, object e)
         {
             FindName(nameof(GitInfo));
@@ -40,19 +35,9 @@ namespace Lavcode.Uwp.Modules.Shell
             App.Frame.Navigate(typeof(NoticesPage));
         }
 
-        private void Rating_Opened(object sender, object e)
-        {
-            FindName(nameof(Rating));
-        }
-
         private async void Sync_Click(object sender, RoutedEventArgs e)
         {
             await new SyncDialog().QueueAsync();
-        }
-
-        private async void HelpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            await new HelpDialog().QueueAsync();
         }
 
         private async void SettingBtn_Click(object sender, RoutedEventArgs e)
