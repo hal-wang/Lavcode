@@ -32,7 +32,7 @@ namespace Lavcode.Model
         [MaxLength(1024 * 1024 * 10)]
         public string Value { get; set; }
 
-        [Ignore]
+        [Ignore, Newtonsoft.Json.JsonIgnore]
         public bool IsDefault
         {
             get

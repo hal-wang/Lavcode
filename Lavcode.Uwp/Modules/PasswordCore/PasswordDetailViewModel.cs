@@ -86,7 +86,10 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public Icon Icon
         {
             get { return _icon; }
-            set { Set(ref _icon, value); }
+            set {
+                _icon = value;
+                RaisePropertyChanged();
+            }
         }
 
         private bool _readOnly = true;
