@@ -142,6 +142,8 @@
     <Compile Include="Controls\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Helpers\NetLoadingHelper.cs" />
     <Compile Include="Modules\PasswordCore\IconCtl\IconControl.xaml.cs">
       <DependentUpon>IconControl.xaml</DependentUpon>
     </Compile>

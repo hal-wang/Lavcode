@@ -86,7 +86,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public Icon Icon
         {
             get { return _icon; }
-            set {
+            set
+            {
                 _icon = value;
                 RaisePropertyChanged();
             }
@@ -475,8 +476,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             newPassword.Value = Value;
             newPassword.Remark = Remark;
 
-            LoadingHelper.Show("正在保存");
-            try
+            await NetLoadingHelper.Invoke(async () =>
             {
                 if (_oldPassword == null)
                 {
@@ -486,11 +486,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 {
                     await _passwordService.UpdatePassword(newPassword, Icon, CurKeyValuePairs);
                 }
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+            }, "正在保存");
 
             _oldKeyValuePairs = CurKeyValuePairs;
             _oldPassword = newPassword;
@@ -556,15 +552,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            LoadingHelper.Show("正在删除");
-            try
-            {
-                await _passwordService.DeletePassword(_oldPassword.Id);
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+
+            await NetLoadingHelper.Invoke(() => _passwordService.DeletePassword(_oldPassword.Id), "正在删除");
             Messenger.Default.Send(_oldPassword.Id, "PasswordDeleted");
             IsEmpty = true;
         }

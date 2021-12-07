@@ -5,6 +5,7 @@ using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.IService;
 using Lavcode.Model;
+using Lavcode.Uwp.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -141,19 +142,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public async Task Sort()
         {
-            LoadingHelper.Show("正在排序");
-            try
+            await NetLoadingHelper.Invoke(async () =>
             {
                 for (var i = 0; i < PasswordItems.Count; i++)
                 {
                     PasswordItems[i].Password.Order = i;
                     await _passwordService.UpdatePassword(PasswordItems[i].Password);
                 }
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+            }, "正在排序");
         }
 
         #region 多选
@@ -192,8 +188,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            LoadingHelper.Show("正在删除");
-            try
+            await NetLoadingHelper.Invoke(async () =>
             {
                 var count = PasswordItems.Count;
                 for (int i = 0, j = 0; i < count; i++)
@@ -213,11 +208,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                         j++;
                     }
                 }
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+            }, "正在删除");
         }
 
         public async Task DeleteSingleItem(PasswordItem passwordItem)
@@ -227,15 +218,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            LoadingHelper.Show("正在删除");
-            try
-            {
-                await _passwordService.DeletePassword(passwordItem.Password.Id);
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+            await NetLoadingHelper.Invoke(() => _passwordService.DeletePassword(passwordItem.Password.Id), "正在删除");
 
             if (PasswordItems.Contains(passwordItem))
             {
@@ -315,8 +298,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                LoadingHelper.Show("正在复制");
-                try
+                await NetLoadingHelper.Invoke(async () =>
                 {
                     var content = data.Substring(CommonConstant.DragPasswordHeader.Length, data.Length - CommonConstant.DragPasswordHeader.Length);
                     var items = JsonConvert.DeserializeObject<List<JObject>>(content);
@@ -328,11 +310,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                         await _passwordService.AddPassword(password, item["Icon"].ToObject<Icon>(), item["KeyValuePairs"].ToObject<List<Lavcode.Model.KeyValuePair>>());
                         PasswordItems.Add(new PasswordItem(password));
                     }
-                }
-                finally
-                {
-                    LoadingHelper.Hide();
-                }
+                }, "正在复制");
             }
             catch (Exception ex)
             {

@@ -45,8 +45,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
                     VM.SegoeMDL2Icon = (icon.Value != null && icon.Value.Length > 0) ? icon.Value[0].ToString() : string.Empty;
                     break;
                 case IconType.Img:
-                    if ((SettingHelper.Instance.Provider == Provider.Gitee || SettingHelper.Instance.Provider == Provider.GitHub)
-                        && icon.Value.Length > 60000)
+                    if (Global.IsGit && icon.Value.Length > 60000)
                     {
                         HTools.Uwp.Helpers.MessageHelper.ShowDanger("由于 Issues 限制，图片过大，建议使用预设图或 SVG");
                         VM.ImgIcon = null;

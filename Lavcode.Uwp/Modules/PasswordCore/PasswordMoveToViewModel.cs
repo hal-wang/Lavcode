@@ -2,6 +2,7 @@
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
+using Lavcode.Uwp.Helpers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -53,19 +54,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return false;
             }
 
-            LoadingHelper.Show("正在移动");
-            try
+            await NetLoadingHelper.Invoke(async () =>
             {
                 foreach (var password in Passwords)
                 {
                     password.FolderId = SelectedFolder.Folder.Id;
                     await _passwordService.UpdatePassword(password);
                 }
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+            }, "正在移动");
 
             MessageHelper.ShowPrimary($"移动成功！\n{_curFolder.Name}\n  ->\n{SelectedFolder.Name}", 5000);
             return true;

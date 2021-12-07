@@ -98,13 +98,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             FolderItems.Add(newFolderItem);
             var index = FolderItems.IndexOf(newFolderItem);
 
-            if (SelectedIndex != index)
+            if (SelectedIndex == index)
             {
-                SelectedIndex = index;
+                RaisePropertyChanged(nameof(SelectedIndex));
+                Messenger.Default.Send(newFolderItem, "FolderSelected");
             }
             else
             {
-                Messenger.Default.Send(newFolderItem, "FolderSelected");
+                SelectedIndex = index;
             }
         }
 
@@ -122,15 +123,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                LoadingHelper.Show("正在删除");
-                try
-                {
-                    await _folderService.DeleteFolder(folderItem.Folder.Id);
-                }
-                finally
-                {
-                    LoadingHelper.Hide();
-                }
+                await NetLoadingHelper.Invoke(() => _folderService.DeleteFolder(folderItem.Folder.Id), "正在删除");
 
                 FolderItems.Remove(folderItem);
 
@@ -173,19 +166,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public async Task Sort()
         {
-            LoadingHelper.Show("正在排序");
-            try
+            await NetLoadingHelper.Invoke(async () =>
             {
                 for (var i = 0; i < FolderItems.Count; i++)
                 {
                     FolderItems[i].Folder.Order = i;
                     await _folderService.UpdateFolder(FolderItems[i].Folder);
                 }
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
+            }, "正在排序");
         }
         #endregion
     }

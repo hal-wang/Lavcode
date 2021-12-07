@@ -1,14 +1,13 @@
-﻿using Lavcode.Common;
+﻿using HTools;
+using Lavcode.Common;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using Windows.ApplicationModel;
 using Windows.System;
-using HTools;
-using Newtonsoft.Json.Linq;
 
 namespace Lavcode.Uwp.Modules.Auth
 {
@@ -16,8 +15,7 @@ namespace Lavcode.Uwp.Modules.Auth
     {
         private static Uri GetNavUrl(Provider provider)
         {
-            var version = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}";
-            var notify = HttpUtility.UrlEncode($"{CommonConstant.ToolsApiUrl}/oauth/notify/{provider.ToString().ToLower()}?protocol=lavcode&app=Lavcode&platform=UWP&version={version}");
+            var notify = HttpUtility.UrlEncode($"{CommonConstant.ToolsApiUrl}/oauth/notify/{provider.ToString().ToLower()}?protocol=lavcode&app=Lavcode&platform=UWP&version={Global.Version}");
             var state = Guid.NewGuid().ToString().Substring(0, 12);
 
             return provider switch
