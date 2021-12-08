@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using OneOf;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
@@ -12,6 +13,25 @@ namespace Lavcode.Uwp.Modules.Guide
 {
     public class GuideHandler
     {
+        private static readonly GuideSettingMapItem[] SettingMaps = new GuideSettingMapItem[]
+        {
+            new GuideSettingMapItem()
+            {
+                Field= nameof(SettingHelper.AddFolderTaught),
+                Children=new string[] {
+                    nameof(SettingHelper.AddPasswordTaught),
+                    nameof(SettingHelper.PasswordListTaught),
+                },
+            },
+            new GuideSettingMapItem()
+            {
+                Field=nameof(SettingHelper.AddPasswordTaught),
+                Children=new string[] {
+                    nameof(SettingHelper.PasswordListTaught),
+                },
+            },
+        };
+
         public int Total { get; set; }
         public string SettingField { get; set; }
         public string Type { get; set; }
@@ -42,6 +62,15 @@ namespace Lavcode.Uwp.Modules.Guide
                  teachingTip.ActionButtonClick += (ss, ee) =>
                  {
                      SettingHelper.Instance.Set(true, SettingField);
+
+                     if (SettingMaps.Any(map => map.Field == SettingField))
+                     {
+                         foreach (var field in SettingMaps.First(map => map.Field == SettingField).Children)
+                         {
+                             SettingHelper.Instance.Set(true, field);
+                         }
+                     }
+
                      teachingTip.IsOpen = false;
                  };
                  var result = await PopupHelper.ShowTeachingTipAsync(gi.Target, teachingTip);

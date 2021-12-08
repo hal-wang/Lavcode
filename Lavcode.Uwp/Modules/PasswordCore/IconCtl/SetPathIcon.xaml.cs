@@ -22,7 +22,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
         {
             await new GuideHandler()
             {
-                SettingField = nameof(SettingHelper.Instance.SvgTaught),
+                SettingField = nameof(SettingHelper.SvgTaught),
                 Total = 2,
                 Type = "路径图",
             }

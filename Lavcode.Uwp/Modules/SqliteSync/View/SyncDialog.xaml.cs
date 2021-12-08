@@ -25,7 +25,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         {
             await new GuideHandler()
             {
-                SettingField = nameof(SettingHelper.Instance.SyncTaught),
+                SettingField = nameof(SettingHelper.SyncTaught),
                 Total = 6,
                 Type = "备份",
             }

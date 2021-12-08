@@ -75,7 +75,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             await new GuideHandler()
             {
-                SettingField = nameof(SettingHelper.Instance.AddFolderTaught),
+                SettingField = nameof(SettingHelper.AddFolderTaught),
                 Total = 3,
                 Index = 2,
                 Type = "新建文件夹",

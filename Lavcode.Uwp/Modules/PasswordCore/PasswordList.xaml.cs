@@ -33,7 +33,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
             await new GuideHandler()
             {
-                SettingField = nameof(SettingHelper.Instance.AddPasswordTaught),
+                SettingField = nameof(SettingHelper.AddPasswordTaught),
                 Total = 6,
                 Type = "添加记录",
             }
@@ -54,7 +54,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             await new GuideHandler()
             {
-                SettingField = nameof(SettingHelper.Instance.PasswordListTaught),
+                SettingField = nameof(SettingHelper.PasswordListTaught),
                 Total = 4,
                 Type = "列表管理",
             }

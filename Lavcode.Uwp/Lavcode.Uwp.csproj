@@ -148,6 +148,7 @@
     <Compile Include="Helpers\NetLoadingHelper.cs" />
     <Compile Include="Modules\Guide\GuideHandler.cs" />
     <Compile Include="Modules\Guide\GuideItem.cs" />
+    <Compile Include="Modules\Guide\GuideSettingMapItem.cs" />
     <Compile Include="Modules\PasswordCore\IconCtl\IconControl.xaml.cs">
       <DependentUpon>IconControl.xaml</DependentUpon>
     </Compile>
