@@ -166,11 +166,10 @@
     <Compile Include="Helpers\ExitHandler.cs" />
     <Compile Include="Helpers\GitHubHelper.cs" />
     <Compile Include="Helpers\SettingHelper.cs" />
-    <Compile Include="Modules\Auth\OAuthLoadingDialog.xaml.cs">
-      <DependentUpon>OAuthLoadingDialog.xaml</DependentUpon>
+    <Compile Include="Modules\Auth\OAuthLoginDialog.xaml.cs">
+      <DependentUpon>OAuthLoginDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ProviderConverter.cs" />
-    <Compile Include="Modules\Auth\OAuthLogin.cs" />
     <Compile Include="Helpers\ImgHelper.cs" />
     <Compile Include="Modules\Auth\WindowsHelloDisabled.xaml.cs">
       <DependentUpon>WindowsHelloDisabled.xaml</DependentUpon>
@@ -405,7 +404,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modules\Auth\OAuthLoadingDialog.xaml">
+    <Page Include="Modules\Auth\OAuthLoginDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

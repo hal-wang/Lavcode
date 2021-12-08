@@ -82,7 +82,7 @@ namespace Lavcode.Uwp.Modules.Auth
                 {
                     case Provider.GitHub:
                     case Provider.Gitee:
-                        var gitToken = await OAuthLogin.Login(provider);
+                        var gitToken = await OAuthLoginDialog.Login(provider);
                         if (string.IsNullOrEmpty(gitToken)) return;
                         loginData = new { Token = gitToken };
                         switch (provider)
