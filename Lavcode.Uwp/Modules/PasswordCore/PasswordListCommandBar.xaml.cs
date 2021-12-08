@@ -1,4 +1,6 @@
-﻿using Microsoft.Xaml.Interactions.Core;
+﻿using Microsoft.Toolkit.Uwp.UI.Animations;
+using Microsoft.Toolkit.Uwp.UI.Behaviors;
+using Microsoft.Xaml.Interactions.Core;
 using Microsoft.Xaml.Interactivity;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -67,6 +69,11 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         private void MultipleButton_Click(object sender, RoutedEventArgs e)
         {
             IsMultiSelect = !IsMultiSelect;
+            OnIsMultipleSelectChange();
+        }
+
+        private void OnIsMultipleSelectChange()
+        {
             var behavior = Interaction.GetBehaviors(MultipleButton)[0] as EventTriggerBehavior;
             var anis = new DependencyObject[] { behavior.Actions[1], behavior.Actions[2] };
             behavior.Actions.RemoveAt(2);
@@ -74,6 +81,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             behavior.Actions.Add(_anis[0]);
             behavior.Actions.Add(_anis[1]);
             _anis = anis;
+        }
+
+        public void SwitchMultipleManual()
+        {
+            IsMultiSelect = !IsMultiSelect;
+            OnIsMultipleSelectChange();
+
+            var behavior = Interaction.GetBehaviors(MultipleButton)[0] as EventTriggerBehavior;
+            foreach (StartAnimationAction action in behavior.Actions)
+            {
+                action.Animation.Start();
+            }
         }
 
         public event TypedEventHandler<Button, object> OnSelectAll;

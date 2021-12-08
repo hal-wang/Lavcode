@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Modules.Guide;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,19 +15,33 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             DataContext = VM;
             this.InitializeComponent();
             Loaded += Folder_Loaded;
-
-            new Action(async () => await VM.Refresh()).Invoke();
         }
 
         public FolderListViewModel VM { get; } = SimpleIoc.Default.GetInstance<FolderListViewModel>();
 
         private async void Folder_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!SettingHelper.Instance.AddFolderTaught)
+            Loaded -= Folder_Loaded;
+            await VM.Refresh();
+
+            await new GuideHandler()
             {
-                await PopupHelper.ShowTeachingTipAsync(AddButtonPosition, "开始添加（新建文件夹 1/3）", "点击 + 开始添加文件夹，对密码进行分类管理", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.BottomRight);
-                VM.HandleAddFolder();
+                SettingField = nameof(SettingHelper.Instance.AddFolderTaught),
+                Total = 3,
+                Type = "新建文件夹",
             }
+            .Add(new GuideItem()
+            {
+                Title = "开始添加",
+                Content = "点击 + 开始添加文件夹，对密码进行分类管理",
+                Placement = Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.BottomRight,
+                Target = AddButtonPosition,
+            })
+            .Add(() =>
+            {
+                VM.HandleAddFolder();
+            })
+            .RunAsync(() => VM.FolderItems.Count == 0);
         }
 
         private async void EditMenu_Click(object sender, RoutedEventArgs e)

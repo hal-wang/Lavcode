@@ -1,5 +1,6 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Modules.Guide;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -19,14 +20,26 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
 
         private async void SetPathIcon_Loaded(object sender, RoutedEventArgs e)
         {
-            if (SettingHelper.Instance.SvgTaught)
+            await new GuideHandler()
             {
-                return;
+                SettingField = nameof(SettingHelper.Instance.SvgTaught),
+                Total = 2,
+                Type = "路径图",
             }
-
-            await PopupHelper.ShowTeachingTipAsync(ResultBorder, "路径图结果（路径图 1/2）", "这里显示路径图的结果");
-            await PopupHelper.ShowTeachingTipAsync(TextBoxElement, "路径图内容（路径图 2/2）", "在这里输入路径图内容，推荐在 www.iconfont.cn 网站找到图标，复制SVG文本内容，粘贴到此处。");
-            SettingHelper.Instance.SvgTaught = true;
+            .Add(new GuideItem()
+            {
+                Title = "路径图结果",
+                Content = "这里显示路径图的结果",
+                Target = ResultBorder,
+            })
+            .Add(new GuideItem()
+            {
+                Title = "路径图内容",
+                Content = "在这里输入路径图内容，推荐在 www.iconfont.cn 网站找到图标，复制SVG文本内容，粘贴到此处。",
+                Target = TextBoxElement,
+            })
+            .End()
+            .RunAsync();
         }
 
         public string PathStr

@@ -46,7 +46,6 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             _passwordService = passwordService;
 
-            Messenger.Default.Register<FolderItem>(this, "FolderSelected", async (item) => await Init(item));
             Messenger.Default.Register<Password>(this, "PasswordAddOrEdited", (item) => PasswordAddOrEdited(item));
             Messenger.Default.Register<string>(this, "PasswordDeleted", (id) => PasswordDeleted(id));
             Messenger.Default.Register<object>(this, "OnDbRecovered", (obj) => SelectedPasswordItem = null);
@@ -57,7 +56,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             Messenger.Default.Unregister(this);
         }
 
-        private async Task Init(FolderItem folderItem)
+        public async Task Init(FolderItem folderItem)
         {
             if (folderItem == null && _curFolder == null)
             {

@@ -4,6 +4,7 @@ using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Modules.Guide;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -72,18 +73,36 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private async void Teach()
         {
-            if (SettingHelper.Instance.AddFolderTaught)
+            await new GuideHandler()
             {
-                return;
+                SettingField = nameof(SettingHelper.Instance.AddFolderTaught),
+                Total = 3,
+                Index = 2,
+                Type = "新建文件夹",
             }
-
-            await PopupHelper.ShowTeachingTipAsync(FolderNameTextBox, "文件夹名称（新建文件夹 2/3）", "输入容易辨识的文件夹名称，易于管理密码");
-            FolderName = "默认文件夹";
-            await PopupHelper.ShowTeachingTipAsync(IconSelecter, "文件夹图标（新建文件夹 3/3）", "选择文件夹图标，可以选择内置图标、图片、路径图");
-            SettingHelper.Instance.AddFolderTaught = true;
-
-            await Save();
-            this.Hide(true);
+            .Add(new GuideItem()
+            {
+                Title = "文件夹名称",
+                Content = "输入容易辨识的文件夹名称，易于管理密码",
+                Target = FolderNameTextBox,
+            })
+            .Add(() =>
+            {
+                FolderName = "默认文件夹";
+            })
+            .Add(new GuideItem()
+            {
+                Title = "文件夹图标",
+                Content = "选择文件夹图标，可以选择内置图标、图片、路径图",
+                Target = IconSelecter,
+            })
+            .Add(async () =>
+            {
+                await Save();
+                this.Hide(true);
+            })
+            .End()
+            .RunAsync();
         }
 
         private async void LayoutDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

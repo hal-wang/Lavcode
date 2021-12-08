@@ -4,6 +4,7 @@ using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Modules.Guide;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,29 +29,69 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private async void FolderSelected(FolderItem item)
         {
-            if (item == null || SettingHelper.Instance.AddPasswordTaught)
-            {
-                return;
-            }
+            await VM.Init(item);
 
-            await PopupHelper.ShowTeachingTipAsync(PasswordListCommandBar, "开始添加（添加记录 1/6）", "点击 + 可新建一条记录，点击右侧中央“添加”按钮也行");
-            VM.OnAddNew();
+            await new GuideHandler()
+            {
+                SettingField = nameof(SettingHelper.Instance.AddPasswordTaught),
+                Total = 6,
+                Type = "添加记录",
+            }
+            .Add(new GuideItem()
+            {
+                Title = "开始添加",
+                Content = "点击 + 可新建一条记录，点击右侧中央“添加”按钮也行",
+                Target = PasswordListCommandBar,
+            })
+            .Add(() =>
+            {
+                VM.OnAddNew();
+            })
+            .RunAsync(() => item != null && VM.PasswordItems.Count == 0);
         }
 
         private async void PasswordAddOrEdited()
         {
-            if (SettingHelper.Instance.PasswordListTaught)
+            await new GuideHandler()
             {
-                return;
+                SettingField = nameof(SettingHelper.Instance.PasswordListTaught),
+                Total = 4,
+                Type = "列表管理",
             }
-
-            await PopupHelper.ShowTeachingTipAsync(EditBtnPosition, "批量操作（列表管理 1/4）", "点击此处能批量操作，可以删除或移动密码", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
-            PasswordListCommandBar.IsMultiSelect = true;
-            await PopupHelper.ShowTeachingTipAsync(EditBtnPosition, "完成编辑（列表管理 2/4）", "再次点击即编辑完成或取消编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.TopRight);
-            PasswordListCommandBar.IsMultiSelect = false;
-            await PopupHelper.ShowTeachingTipAsync(PasswordItemPosition, "右键菜单（列表管理 3/4）", "右键单击密码项，可单独对该密码进行删除或移动", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
-            await PopupHelper.ShowTeachingTipAsync(PasswordItemPosition, "查看详情（列表管理 4/4）", "点击密码记录项即可查看或编辑", Microsoft.UI.Xaml.Controls.TeachingTipPlacementMode.RightBottom);
-            SettingHelper.Instance.PasswordListTaught = true;
+            .Add(new GuideItem()
+            {
+                Title = "批量操作",
+                Content = "点击此处能批量操作，可以删除或移动密码",
+                Target = EditBtnPosition,
+            })
+            .Add(() =>
+            {
+                PasswordListCommandBar.SwitchMultipleManual();
+            })
+            .Add(new GuideItem()
+            {
+                Title = "完成编辑",
+                Content = "再次点击即编辑完成或取消编辑",
+                Target = EditBtnPosition,
+            })
+            .Add(() =>
+            {
+                PasswordListCommandBar.SwitchMultipleManual();
+            })
+            .Add(new GuideItem()
+            {
+                Title = "右键菜单",
+                Content = "右键单击密码项，可单独对该密码进行删除或移动",
+                Target = PasswordItemPosition,
+            })
+            .Add(new GuideItem()
+            {
+                Title = "查看详情",
+                Content = "点击密码记录项即可查看或编辑",
+                Target = PasswordItemPosition,
+            })
+            .End()
+            .RunAsync();
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
