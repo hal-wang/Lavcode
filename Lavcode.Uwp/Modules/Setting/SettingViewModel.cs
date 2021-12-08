@@ -22,5 +22,18 @@ namespace Lavcode.Uwp.Modules.Setting
         }
 
         public bool IsSianoutEnable => Connected && Global.IsNetworked;
+        public bool IsCleanEnable =>
+            !Connected
+            && Global.IsNetworked
+            && ((
+                    SettingHelper.Instance.Provider == Model.Provider.GitHub
+                    &&
+                    !string.IsNullOrEmpty(SettingHelper.Instance.GitHubToken))
+                ||
+                (
+                    SettingHelper.Instance.Provider == Model.Provider.Gitee
+                    &&
+                    !string.IsNullOrEmpty(SettingHelper.Instance.GiteeToken)
+                ));
     }
 }

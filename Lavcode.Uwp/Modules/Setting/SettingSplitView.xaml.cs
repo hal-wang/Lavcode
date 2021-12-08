@@ -25,23 +25,12 @@ namespace Lavcode.Uwp.Modules.Setting
 
         private async void OnSignout(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var cdr = await PopupHelper.ShowDialog($"注销登录会清除当前登录信息，但不会清除任何数据。\n以后你也可以随时重新登录，确认注销？", "注销登录", "确认", "点错了");
+            var cdr = await PopupHelper.ShowDialog($"该操作只会清除当前已登录信息，但不会删除任何用户数据。\n以后你也可以随时重新登录，确认注销？", "注销登录", "确认", "点错了");
             if (cdr != Windows.UI.Xaml.Controls.ContentDialogResult.Primary) return;
 
-            switch (SettingHelper.Instance.Provider)
-            {
-                case Model.Provider.GitHub:
-                    SettingHelper.Instance.GitHubToken = null;
-                    break;
-                case Model.Provider.Gitee:
-                    SettingHelper.Instance.GiteeToken = null;
-                    SettingHelper.Instance.GiteeRefreeToken = null;
-                    break;
-            }
-
-            SettingHelper.Instance.IsAuthOpen = true;
-            SettingHelper.Instance.IsFirstInited = false;
-            await CoreApplication.RequestRestartAsync("R");
+            CleanLoginInfo();
+            App.Frame.Navigate(typeof(Auth.AuthPage));
+            IsPaneOpen = false;
         }
 
         private async void OnHelp(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
@@ -59,6 +48,32 @@ namespace Lavcode.Uwp.Modules.Setting
         {
             FindName(nameof(Rating));
             this.RatingFlyout.ShowAt(RatingButton);
+        }
+
+        private async void OnCleanLoginInfo(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var cdr = await PopupHelper.ShowDialog($"该操作只会清除当前已登录信息，但不会删除任何用户数据。确认清除？", "清除登录信息", "确认", "点错了");
+            if (cdr != Windows.UI.Xaml.Controls.ContentDialogResult.Primary) return;
+
+            CleanLoginInfo();
+            IsPaneOpen = false;
+            MessageHelper.ShowPrimary("已清除");
+        }
+
+        private void CleanLoginInfo()
+        {
+            switch (SettingHelper.Instance.Provider)
+            {
+                case Model.Provider.GitHub:
+                    SettingHelper.Instance.GitHubToken = null;
+                    break;
+                case Model.Provider.Gitee:
+                    SettingHelper.Instance.GiteeToken = null;
+                    SettingHelper.Instance.GiteeRefreeToken = null;
+                    break;
+            }
+            SettingHelper.Instance.IsAuthOpen = true;
+            SettingHelper.Instance.IsFirstInited = false;
         }
     }
 }

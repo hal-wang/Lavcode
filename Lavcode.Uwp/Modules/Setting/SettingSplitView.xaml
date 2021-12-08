@@ -23,6 +23,10 @@
                 Visibility="{x:Bind VM.Connected,Mode=OneWay,Converter={StaticResource BooleanConverter}}"/>
         <hucs:ButtonSettingCell Label="切换存储类型" Tapped="OnChangeProvider"/>
         <Border Style="{ThemeResource SettingSeparator}"/>
+        <hucs:ButtonSettingCell Label="清除登录信息" Tapped="OnCleanLoginInfo"
+                                Visibility="{x:Bind VM.IsCleanEnable,Converter={StaticResource BooleanConverter}}"/>
+        <Border Style="{ThemeResource SettingSeparator}"
+                Visibility="{x:Bind VM.IsCleanEnable,Converter={StaticResource BooleanConverter}}"/>
 
         <Border Style="{ThemeResource SettingSeparator}" Margin="0 30 0 0"/>
         <hucs:ButtonSettingCell Label="反馈" Tapped="OnFeedback"/>
