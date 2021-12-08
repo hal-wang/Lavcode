@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using Lavcode.Common;
 using Lavcode.Uwp.Modules.SqliteSync;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                 ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail,
                 SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary
             };
-            picker.FileTypeFilter.Add(".lc");
+            picker.FileTypeFilter.Add(CommonConstant.SqliteFileExtension);
             PickedFile = await picker.PickSingleFileAsync();
             if (PickedFile == null)
             {
@@ -97,7 +98,7 @@ namespace Lavcode.Uwp.View.Sync.SyncHelper
                     SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop,
                     SuggestedFileName = "Lavcode备份"
                 };
-                savePicker.FileTypeChoices.Add("Lavcode", new List<string>() { ".lc" });
+                savePicker.FileTypeChoices.Add("Lavcode", new List<string>() { CommonConstant.SqliteFileExtension });
                 pickFile = await savePicker.PickSaveFileAsync();
                 if (pickFile == null)
                 {

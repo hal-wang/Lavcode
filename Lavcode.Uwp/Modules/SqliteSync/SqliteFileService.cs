@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lavcode.Common;
+using System;
 using System.IO;
 using Windows.Storage;
 
@@ -9,7 +10,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
         /// <summary>
         /// 数据库文件名称
         /// </summary>
-        public string SqliteFileName { get; } = "localDb1.lc";
+        public string SqliteFileName { get; } = $"localDb1{CommonConstant.SqliteFileExtension}";
 
         /// <summary>
         /// 数据库文件路径

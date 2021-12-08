@@ -17,21 +17,9 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             this.InitializeComponent();
 
             Loaded += Sync_Loaded;
-            Closed += SyncDialog_Closed; ;
         }
 
         public SyncViewModel VM { get; } = SimpleIoc.Default.GetInstance<SyncViewModel>();
-
-
-        private async void SyncDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
-        {
-            try
-            {
-                var historyFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(SqliteSyncConstant.SyncTempFolderName, CreationCollisionOption.OpenIfExists);
-                await historyFolder.DeleteAsync();
-            }
-            catch { }
-        }
 
         private async void Sync_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Lavcode.Common;
 using System.Text;
 
 namespace Lavcode.Uwp.Modules.SqliteSync
@@ -58,6 +58,6 @@ namespace Lavcode.Uwp.Modules.SqliteSync
         /// <summary>
         /// 云盘中的数据库文件名称
         /// </summary>
-        public static string RemoteFileName { get; } = "sync1.lc";
+        public static string RemoteFileName { get; } = $"sync1{CommonConstant.SqliteFileExtension}";
     }
 }
