@@ -8,6 +8,6 @@
         public static string PpUrl { get; } = $"{HomeUrl}/pp/zh/";
         public static string DragPasswordHeader { get; } = "Lavcode_P";
 
-        public static string SqliteFileExtension { get; } = ".lcs";
+        public static string SqliteFileExtension { get; } = ".lc";
     }
 }

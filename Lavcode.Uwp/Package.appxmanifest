@@ -59,7 +59,6 @@
               <uap:FileType>.lavcode</uap:FileType>
               <uap:FileType>.lc</uap:FileType>
               <uap:FileType>.db</uap:FileType>
-              <uap:FileType>.lcs</uap:FileType>
             </uap:SupportedFileTypes>
             <uap:Logo>Assets/Images/circular_logo.png</uap:Logo>
           </uap:FileTypeAssociation>
