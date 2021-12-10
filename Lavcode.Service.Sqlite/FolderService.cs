@@ -11,11 +11,12 @@ namespace Lavcode.Service.Sqlite
 {
     public class FolderService : IFolderService
     {
-        private readonly SQLiteConnection _con;
+        private readonly ConService _cs;
+        private SQLiteConnection Connection => _cs.Connection;
 
         public FolderService(IConService cs)
         {
-            _con = (cs as ConService).Connection;
+            _cs = cs as ConService;
         }
 
         public async Task AddFolder(Folder folder, Icon icon)
@@ -24,12 +25,12 @@ namespace Lavcode.Service.Sqlite
             {
                 folder.LastEditTime = DateTime.Now;
 
-                _con.RunInTransaction(() =>
+                Connection.RunInTransaction(() =>
                 {
                     if (folder.Order == 0)
                     {
                         int order = 1;
-                        var maxOrder = _con.Table<Folder>().OrderByDescending((item) => item.Order).Select((item) => item.Order).FirstOrDefault();
+                        var maxOrder = Connection.Table<Folder>().OrderByDescending((item) => item.Order).Select((item) => item.Order).FirstOrDefault();
                         if (maxOrder != default)
                         {
                             order = maxOrder + 1;
@@ -37,43 +38,43 @@ namespace Lavcode.Service.Sqlite
                         folder.Order = order;
                     }
 
-                    _con.Insert(folder);
+                    Connection.Insert(folder);
                     icon.Id = folder.Id;
-                    _con.Insert(icon);
+                    Connection.Insert(icon);
                 });
             });
         }
 
         public async Task DeleteFolder(string folderId, bool record = true)
         {
-            if (_con.Table<Folder>().Where((item) => item.Id == folderId).Count() == 0)
+            if (Connection.Table<Folder>().Where((item) => item.Id == folderId).Count() == 0)
             {
                 return;
             }
 
             await TaskExtend.Run(() =>
             {
-                _con.RunInTransaction(() =>
+                Connection.RunInTransaction(() =>
                 {
-                    var delectedPwds = _con
+                    var delectedPwds = Connection
                         .Table<Password>()
                         .Where((item) => item.FolderId == folderId)
                         .Select((item) => new DelectedItem(item.Id, StorageType.Password))
                         .ToArray();
                     if (record)
                     {
-                        _con.Insert(new DelectedItem(folderId, StorageType.Folder));
-                        _con.InsertAll(delectedPwds);
+                        Connection.Insert(new DelectedItem(folderId, StorageType.Folder));
+                        Connection.InsertAll(delectedPwds);
                     }
 
                     foreach (var pwd in delectedPwds)
                     {
-                        _con.Table<Icon>().Where((icon) => icon.Id == pwd.Id).Delete();
-                        _con.Table<KeyValuePair>().Where(kvp => pwd.Id == kvp.SourceId).Delete();
+                        Connection.Table<Icon>().Where((icon) => icon.Id == pwd.Id).Delete();
+                        Connection.Table<KeyValuePair>().Where(kvp => pwd.Id == kvp.SourceId).Delete();
                     }
 
-                    _con.Table<Icon>().Where((item) => item.Id == folderId).Delete();
-                    _con.Table<Folder>().Where((item) => item.Id == folderId).Delete();
+                    Connection.Table<Icon>().Where((item) => item.Id == folderId).Delete();
+                    Connection.Table<Folder>().Where((item) => item.Id == folderId).Delete();
                 });
             });
         }
@@ -83,7 +84,7 @@ namespace Lavcode.Service.Sqlite
             List<Folder> folders = null;
             await TaskExtend.Run(() =>
             {
-                folders = _con.Table<Folder>().OrderBy((item) => item.Order).ToList();
+                folders = Connection.Table<Folder>().OrderBy((item) => item.Order).ToList();
             });
             return folders;
         }
@@ -92,17 +93,17 @@ namespace Lavcode.Service.Sqlite
         {
             await TaskExtend.Run(() =>
             {
-                _con.RunInTransaction(() =>
+                Connection.RunInTransaction(() =>
                 {
                     if (folder != null)
                     {
                         folder.LastEditTime = DateTime.Now;
-                        _con.Update(folder);
+                        Connection.Update(folder);
                     }
 
                     if (icon != null)
                     {
-                        _con.Update(icon);
+                        Connection.Update(icon);
                     }
                 });
             });

@@ -9,11 +9,12 @@ namespace Lavcode.Service.Sqlite
 {
     public class DelectedService : IDelectedService
     {
-        private readonly SQLiteConnection _con;
+        private readonly ConService _cs;
+        private SQLiteConnection Connection => _cs.Connection;
 
         public DelectedService(IConService cs)
         {
-            _con = (cs as ConService).Connection;
+            _cs = cs as ConService;
         }
 
         public async Task<List<DelectedItem>> GetDelectedItems()
@@ -21,7 +22,7 @@ namespace Lavcode.Service.Sqlite
             List<DelectedItem> result = null;
             await TaskExtend.Run(() =>
             {
-                result = _con.Table<DelectedItem>().ToList();
+                result = Connection.Table<DelectedItem>().ToList();
             });
             return result;
         }
@@ -30,7 +31,7 @@ namespace Lavcode.Service.Sqlite
         {
             await TaskExtend.Run(() =>
             {
-                _con.Insert(delectedItem);
+                Connection.Insert(delectedItem);
             });
         }
 
@@ -38,7 +39,7 @@ namespace Lavcode.Service.Sqlite
         {
             await TaskExtend.Run(() =>
             {
-                _con.InsertAll(delectedItems);
+                Connection.InsertAll(delectedItems);
             });
         }
     }

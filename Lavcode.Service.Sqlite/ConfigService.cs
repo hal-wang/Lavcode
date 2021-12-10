@@ -1,5 +1,6 @@
 ﻿using HTools.Config;
 using Lavcode.IService;
+using SQLite;
 using System;
 
 namespace Lavcode.Service.Sqlite
@@ -7,7 +8,7 @@ namespace Lavcode.Service.Sqlite
     public class ConfigService : SqliteConfigBase, IConfigService
     {
         public ConfigService(IConService cs) :
-            base((cs as ConService).Connection)
+            base(new Func<SQLiteConnection>(() => (cs as ConService).Connection))
         {
         }
 

@@ -33,7 +33,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
             KeyValuePairs.CollectionChanged += KeyValuePairs_CollectionChanged;
 
-            ExitHandler.Instance.Requests.Add(new(OnCloseRequest, 0));
+            ExitHandler.Instance.Add(OnCloseRequest, 0);
         }
 
         private void KeyValuePairs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs _)

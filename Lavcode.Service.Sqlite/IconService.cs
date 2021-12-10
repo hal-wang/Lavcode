@@ -8,11 +8,12 @@ namespace Lavcode.Service.Sqlite
 {
     public class IconService : IIconService
     {
-        private readonly SQLiteConnection _con;
+        private readonly ConService _cs;
+        private SQLiteConnection Connection => _cs.Connection;
 
         public IconService(IConService cs)
         {
-            _con = (cs as ConService).Connection;
+            _cs = cs as ConService;
         }
 
         public async Task<Icon> GetIcon(string sourceId)
@@ -20,7 +21,7 @@ namespace Lavcode.Service.Sqlite
             Icon result = null;
             await TaskExtend.Run(() =>
             {
-                result = _con.Table<Icon>().Where((item) => item.Id == sourceId).FirstOrDefault();
+                result = Connection.Table<Icon>().Where((item) => item.Id == sourceId).FirstOrDefault();
             });
             return result;
         }

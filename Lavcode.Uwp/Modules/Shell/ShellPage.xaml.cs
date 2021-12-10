@@ -46,7 +46,7 @@ namespace Lavcode.Uwp.Modules.Shell
             }
             _inited = true;
 
-            if (param is not null and StorageFile)
+            if (OpenedFile is not null and StorageFile)
             {
                 FindName(nameof(SyncFileHandler));
             }
@@ -66,14 +66,12 @@ namespace Lavcode.Uwp.Modules.Shell
             TitleBarHelper.SetTitleBar();
         }
 
-        private object param = null;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             Frame.BackStack.Clear();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            param = e.Parameter;
         }
 
         /// <summary>

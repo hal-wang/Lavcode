@@ -16,28 +16,23 @@
             <Paragraph>3、Windows Hello PIN</Paragraph>
         </RichTextBlock>
         <StackPanel Margin="0 20 0 0"
-                            HorizontalAlignment="Right"
-                            Orientation="Horizontal">
-            <Button Style="{ThemeResource LightButtonStyle}"
-                            Background="{ThemeResource SystemAccentBrush}"
-                            Foreground="{ThemeResource AccentButtonForeground}"
-                            Padding="14 6"
-                        Content="重试"
-                        HorizontalAlignment="Left"
-                            Click="RetryButton_Click"/>
-            <Button Style="{ThemeResource LightButtonStyle}"
-                            Background="{ThemeResource SystemAccentBrush}"
-                            Foreground="{ThemeResource AccentButtonForeground}"
-                            Padding="14 6"
-                            Margin="20 0 0 0"
-                        x:Name="ReferenceBtn"
-                        Content="参考"
-                        HorizontalAlignment="Right"
-                        Click="ReferenceBtn_Click"/>
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Style="{ThemeResource AccentButtonStyle}"
+                    Padding="14 6"
+                    Content="重试"
+                    HorizontalAlignment="Left"
+                    Click="RetryButton_Click"/>
+            <Button Padding="14 6"
+                    Margin="20 0 0 0"
+                    x:Name="ReferenceBtn"
+                    Content="参考"
+                    HorizontalAlignment="Right"
+                    Click="ReferenceBtn_Click"/>
         </StackPanel>
 
         <controls:TeachingTip x:Name="ReferenceTip"
-                                      PreferredPlacement="RightBottom"
+                              PreferredPlacement="RightBottom"
                              Target="{x:Bind ReferenceBtn}"
                              Title="打开Windows Hello">
             <controls:TeachingTip.HeroContent>

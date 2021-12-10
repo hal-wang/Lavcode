@@ -23,9 +23,19 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         public SyncFileHandler()
         {
             this.InitializeComponent();
-
-            ExitHandler.Instance.Requests.Add(new(OnCloseRequest, 1));
+            Loaded += SyncFileHandler_Loaded;
+            Unloaded += SyncFileHandler_Unloaded;
             Init();
+        }
+
+        private void SyncFileHandler_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ExitHandler.Instance.Remove(OnCloseRequest);
+        }
+
+        private void SyncFileHandler_Loaded(object sender, RoutedEventArgs e)
+        {
+            ExitHandler.Instance.Add(OnCloseRequest,1);
         }
 
         private async Task<StorageFile> GetTempFile()

@@ -41,10 +41,20 @@ namespace Lavcode.Uwp.Helpers
             Application.Current.Exit();
         }
 
+        public void Add(Func<Task<bool>> func, int level)
+        {
+            Requests.Add(new(func, level));
+        }
+
+        public void Remove(Func<Task<bool>> func)
+        {
+            Requests.RemoveAll(item => item.Func == func);
+        }
+
         /// <summary>
         /// true: 执行后面的回调
         /// false: 不退出并且不执行后面的回调
         /// </summary>
-        public List<(Func<Task<bool>> Func, int level)> Requests { get; } = new();
+        private List<(Func<Task<bool>> Func, int level)> Requests { get; } = new();
     }
 }
