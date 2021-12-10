@@ -4,7 +4,7 @@ using Windows.Storage;
 
 namespace Lavcode.Uwp.View.Sync.SyncHelper
 {
-    internal interface ISyncHelper
+    public interface ISyncHelper
     {
         bool IsAutoVerified { get; set; }
         Task<StorageFile> GetFile();

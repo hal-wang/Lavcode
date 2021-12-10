@@ -1,4 +1,5 @@
 ﻿using Lavcode.Common;
+using Lavcode.Uwp.View.Sync.SyncHelper;
 using System;
 using System.IO;
 using Windows.Storage;
@@ -36,5 +37,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
         public event Action OnOpenedFileChange;
 
         public string FileLaunchFileName { get; set; } = null;
+
+        public ISyncHelper SyncHelper { get; set; }
     }
 }

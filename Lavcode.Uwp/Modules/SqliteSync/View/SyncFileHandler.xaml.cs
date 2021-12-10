@@ -17,7 +17,6 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
 {
     public sealed partial class SyncFileHandler : UserControl
     {
-        private ISyncHelper _syncHelper;
         public event TypedEventHandler<SyncFileHandler, StorageFile> OnLoaded;
 
         public SyncFileHandler()
@@ -35,7 +34,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
 
         private void SyncFileHandler_Loaded(object sender, RoutedEventArgs e)
         {
-            ExitHandler.Instance.Add(OnCloseRequest,1);
+            ExitHandler.Instance.Add(OnCloseRequest, 1);
         }
 
         private async Task<StorageFile> GetTempFile()
@@ -119,27 +118,30 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             await TaskExtend.SleepAsync(100);
             var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
             OpenedFile = sfs.OpenedFile;
-            _syncHelper = await FileSyncHelper.Create(OpenedFile);
-            if (_syncHelper == null)
+            if (sfs.SyncHelper == null)
             {
-                var dispatcherTimer = new DispatcherTimer()
+                sfs.SyncHelper = await FileSyncHelper.Create(OpenedFile);
+                if (sfs.SyncHelper == null)
                 {
-                    Interval = new TimeSpan(0, 0, 5)
-                };
-                dispatcherTimer.Tick += (ss, ee) => Application.Current.Exit();
-                MessageHelper.ShowDanger("文件打开失败\n窗口将在5秒后自动关闭", 0);
-                dispatcherTimer.Start();
-                return;
-            }
+                    var dispatcherTimer = new DispatcherTimer()
+                    {
+                        Interval = new TimeSpan(0, 0, 5)
+                    };
+                    dispatcherTimer.Tick += (ss, ee) => Application.Current.Exit();
+                    MessageHelper.ShowDanger("文件打开失败\n窗口将在5秒后自动关闭", 0);
+                    dispatcherTimer.Start();
+                    return;
+                }
 
-            var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
-            await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, sfs.FileLaunchFileName) });
-            (SimpleIoc.Default.GetInstance<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
-                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => IsDbChanged = true);
+                var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
+                await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, sfs.FileLaunchFileName) });
+                (SimpleIoc.Default.GetInstance<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
+                     await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => IsDbChanged = true);
 
-            if (_syncHelper.IsAutoVerified)
-            {
-                MessageHelper.ShowPrimary("密码正确，自动打开", 5000);
+                if (sfs.SyncHelper.IsAutoVerified)
+                {
+                    MessageHelper.ShowPrimary("密码正确，自动打开", 5000);
+                }
             }
             OnLoaded?.Invoke(this, OpenedFile);
         }
@@ -177,13 +179,14 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         {
             var localTempFile = await GetTempFile();
 
-            var result = isAnother ? await _syncHelper.SetFile(localTempFile, file =>
+            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            var result = isAnother ? await sfs.SyncHelper.SetFile(localTempFile, file =>
                 {
                     var oldFile = OpenedFile;
-                    SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile = file;
+                    sfs.OpenedFile = file;
                     OpenedFile = file;
                 })
-                : await _syncHelper.SetFile(localTempFile);
+                : await sfs.SyncHelper.SetFile(localTempFile);
             if (result)
             {
                 IsDbChanged = false;
