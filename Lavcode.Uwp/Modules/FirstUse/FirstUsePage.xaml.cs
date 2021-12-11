@@ -45,7 +45,7 @@ namespace Lavcode.Uwp.Modules.FirstUse
                 var result = await Launcher.LaunchUriAsync(new Uri(CommonConstant.PpUrl));
                 if (!result)
                 {
-                    MessageHelper.ShowDanger($"打开失败,请使用浏览器打开\n{CommonConstant.PpUrl}", 0);
+                    MessageHelper.ShowDanger($"打开失败，请使用浏览器打开\n{CommonConstant.PpUrl}", 0);
                 }
             }
             catch (Exception ex)

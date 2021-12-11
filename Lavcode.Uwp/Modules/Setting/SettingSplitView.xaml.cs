@@ -1,9 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HTools.Uwp.Helpers;
+using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Feedback;
 using System;
-using Windows.ApplicationModel.Core;
+using Windows.System;
 
 namespace Lavcode.Uwp.Modules.Setting
 {
@@ -74,6 +75,22 @@ namespace Lavcode.Uwp.Modules.Setting
             }
             SettingHelper.Instance.IsAuthOpen = true;
             SettingHelper.Instance.IsFirstInited = false;
+        }
+
+        private async void OnViewPP(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            try
+            {
+                var result = await Launcher.LaunchUriAsync(new Uri(CommonConstant.PpUrl));
+                if (!result)
+                {
+                    MessageHelper.ShowDanger($"打开失败，请使用浏览器打开\n{CommonConstant.PpUrl}", 0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex);
+            }
         }
     }
 }
