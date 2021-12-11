@@ -8,12 +8,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:lucv="using:Lavcode.Uwp.Controls"
     xmlns:lucvc="using:Lavcode.Uwp.Controls.Comment"
     xmlns:local="using:Lavcode.Uwp.Modules.Feedback"
-    xmlns:huc="using:HTools.Uwp.Controls"
+    xmlns:lums="using:Lavcode.Uwp.Modules.Shell"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
     NavigationCacheMode="Enabled">
 
     <Grid>
@@ -22,6 +24,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <lums:BackSvg Grid.RowSpan="3"/>
 
         <lucv:Header Text="反馈">
             <Grid>

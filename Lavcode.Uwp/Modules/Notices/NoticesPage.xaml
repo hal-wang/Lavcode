@@ -5,11 +5,12 @@
 <Page x:Class="Lavcode.Uwp.Modules.Notices.NoticesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:huc="using:HTools.Uwp.Controls"
       xmlns:lucv="using:Lavcode.Uwp.Controls"
       xmlns:lucvc="using:Lavcode.Uwp.Controls.Comment"
-      xmlns:local="using:Lavcode.Uwp.Modules.Notices"
-      xmlns:huc="using:HTools.Uwp.Controls"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      xmlns:lums="using:Lavcode.Uwp.Modules.Shell"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+      muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
       NavigationCacheMode="Enabled">
 
     <Grid>
@@ -17,6 +18,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <lums:BackSvg Grid.RowSpan="2"/>
 
         <lucv:Header Text="通知">
             <Grid>

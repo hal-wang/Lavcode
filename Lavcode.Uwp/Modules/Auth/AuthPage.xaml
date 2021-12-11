@@ -12,10 +12,11 @@
     xmlns:lucv="using:Lavcode.Uwp.Controls"
     xmlns:local="using:Lavcode.Uwp.Modules.Auth"
     xmlns:lums="using:Lavcode.Uwp.Modules.Shell"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
     <Grid>
         <lums:BackSvg />
