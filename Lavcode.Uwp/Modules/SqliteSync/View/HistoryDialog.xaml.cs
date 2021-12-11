@@ -14,15 +14,10 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             DataContext = VM;
             this.InitializeComponent();
 
-            Loaded += HistoryDialog_Loaded;
+            Loaded += (s, e) => VM.Init();
         }
 
         public SyncHistoryViewModel VM { get; } = SimpleIoc.Default.GetInstance<SyncHistoryViewModel>();
-
-        private void HistoryDialog_Loaded(object sender, RoutedEventArgs e)
-        {
-            VM.Init();
-        }
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {

@@ -23,11 +23,13 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
             set { Set(ref _isLoading, value); }
         }
 
-        public ObservableCollection<SyncHistoryItem> HistoryItems { get; } = new ();
+        public ObservableCollection<SyncHistoryItem> HistoryItems { get; } = new();
 
         private StorageFolder _folder = null;
         public async void Init()
         {
+            if (_folder != null) return;
+
             IsLoading = true;
             await TaskExtend.SleepAsync();
 
@@ -54,20 +56,16 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
             var files = await _folder.GetFilesAsync();
             foreach (var file in files)
             {
-                SyncHistoryItem item = null;
-                await TaskExtend.Run(async () =>
+                using var sqliteHelper = await SqliteHelper.OpenAsync(file.Path);
+                var fileInfo = new FileInfo(file.Path);
+                var item = new SyncHistoryItem()
                 {
-                    using var sqliteHelper = await SqliteHelper.OpenAsync(file.Path);
-                    var fileInfo = new FileInfo(file.Path);
-                    item = new SyncHistoryItem()
-                    {
-                        FileName = file.Name,
-                        Size = Math.Round((double)fileInfo.Length / 1024, 2),
-                        FolderCount = (sqliteHelper.ConService as SQLiteConnection).Table<Folder>().Count(),
-                        PasswordCount = (sqliteHelper.ConService as SQLiteConnection).Table<Password>().Count(),
-                        LastEditTime = sqliteHelper.ConfigService.LastEditTime
-                    };
-                });
+                    FileName = file.Name,
+                    Size = Math.Round((double)fileInfo.Length / 1024, 2),
+                    FolderCount = (sqliteHelper.ConService as ConService).Connection.Table<Folder>().Count(),
+                    PasswordCount = (sqliteHelper.ConService as ConService).Connection.Table<Password>().Count(),
+                    LastEditTime = sqliteHelper.ConfigService.LastEditTime
+                };
                 yield return item;
             }
         }
