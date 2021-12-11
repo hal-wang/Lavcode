@@ -32,13 +32,20 @@
         </StackPanel>
 
         <controls:TeachingTip x:Name="ReferenceTip"
-                              PreferredPlacement="RightBottom"
-                             Target="{x:Bind ReferenceBtn}"
-                             Title="打开Windows Hello">
+                              PreferredPlacement="Top"
+                              Target="{x:Bind ReferenceBtn}"
+                              Title="打开Windows Hello">
             <controls:TeachingTip.HeroContent>
-                <Image Source="/Assets/Images/windows_hello.png"
-                               Width="600"
-                               Stretch="Uniform"/>
+                <Grid>
+                    <Image Source="/Assets/Images/windows_hello_10.png"
+                           Stretch="Uniform"
+                           Width="560"
+                           Visibility="{x:Bind IsWin11,Converter={StaticResource BooleanConverter},ConverterParameter=T}"/>
+                    <Image Source="/Assets/Images/windows_hello_11.png"
+                           Stretch="Uniform"
+                           Width="560"
+                           Visibility="{x:Bind IsWin11,Converter={StaticResource BooleanConverter}}"/>
+                </Grid>
             </controls:TeachingTip.HeroContent>
         </controls:TeachingTip>
     </StackPanel>

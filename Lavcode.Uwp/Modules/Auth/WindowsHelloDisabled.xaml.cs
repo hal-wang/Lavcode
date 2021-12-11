@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -10,6 +11,8 @@ namespace Lavcode.Uwp.Modules.Auth
         {
             this.InitializeComponent();
         }
+
+        public bool IsWin11 => SystemInformation.Instance.OperatingSystemVersion.Build >= 22000;
 
         public event TypedEventHandler<WindowsHelloDisabled, Windows.UI.Xaml.RoutedEventArgs> OnRetry;
 
