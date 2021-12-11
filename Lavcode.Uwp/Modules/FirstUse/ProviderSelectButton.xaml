@@ -22,11 +22,11 @@
     <Border ui:Effects.Shadow="{StaticResource Shadow}" Tapped="Border_Tapped">
         <StackPanel Background="{x:Bind Background}" Padding="20" CornerRadius="20">
             <Viewbox Width="100" Height="100">
-                <PathIcon Data="{x:Bind IconData}"/>
+                <PathIcon Data="{x:Bind IconData}" Foreground="{ThemeResource ThemeForegroundBrush}"/>
             </Viewbox>
             <TextBlock Text="{x:Bind Provider,Converter={StaticResource ProviderConverter}}"
-                       FontSize="24" HorizontalAlignment="Center" Margin="0 20" FontWeight="Bold"/>
-            <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap" Opacity="0.9"/>
+                       FontSize="24" HorizontalAlignment="Center" Margin="0 20" FontWeight="Bold" Foreground="{ThemeResource ThemeForegroundBrush}"/>
+            <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap" Opacity="0.9" Foreground="{ThemeResource ThemeForegroundBrush}"/>
         </StackPanel>
     </Border>
 </UserControl>
