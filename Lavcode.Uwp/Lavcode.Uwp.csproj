@@ -306,7 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\alipay.jpg" />
-    <Content Include="Assets\Images\circular_logo.png" />
     <Content Include="Assets\Images\qq_group.jpg" />
     <Content Include="Assets\Images\Visual\BadgeLogo.scale-100.png" />
     <Content Include="Assets\Images\Visual\BadgeLogo.scale-125.png" />

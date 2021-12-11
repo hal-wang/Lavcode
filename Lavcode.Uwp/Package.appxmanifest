@@ -37,8 +37,7 @@
         DisplayName="Lavcode"
         Square150x150Logo="Assets\Images\Visual\Square150x150Logo.png"
         Square44x44Logo="Assets\Images\Visual\Square44x44Logo.png"
-        Description="Lavcode - 安全、免费、丰富、开源的密码管理器"
-        BackgroundColor="black">
+        Description="Lavcode - 安全、免费、丰富、开源的密码管理器" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Images\Visual\Wide310x150Logo.png" Square71x71Logo="Assets\Images\Visual\SmallTile.png" Square310x310Logo="Assets\Images\Visual\LargeTile.png" ShortName="Lavcode">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo"/>
@@ -46,7 +45,7 @@
             <uap:ShowOn Tile="square310x310Logo"/>
           </uap:ShowNameOnTiles>
         </uap:DefaultTile >
-        <uap:SplashScreen Image="Assets\Images\Visual\SplashScreen.png"  BackgroundColor="black"/>
+        <uap:SplashScreen Image="Assets\Images\Visual\SplashScreen.png"   BackgroundColor="transparent"/>
         <uap:LockScreen BadgeLogo="Assets\Images\Visual\BadgeLogo.png" Notification="badge"/>
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscape"/>
@@ -60,12 +59,12 @@
               <uap:FileType>.lc</uap:FileType>
               <uap:FileType>.db</uap:FileType>
             </uap:SupportedFileTypes>
-            <uap:Logo>Assets/Images/circular_logo.png</uap:Logo>
+            <uap:Logo>Assets/Images/Visual/LargeTile.png</uap:Logo>
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="lavcode">
-            <uap:Logo>Assets/Images/circular_logo.png</uap:Logo>
+            <uap:Logo>Assets/Images/Visual/LargeTile.png</uap:Logo>
             <uap:DisplayName>Lavcode</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
