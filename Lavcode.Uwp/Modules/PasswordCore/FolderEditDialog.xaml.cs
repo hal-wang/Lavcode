@@ -49,6 +49,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private async void AddOrEditFolderDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            Loaded -= AddOrEditFolderDialog_Loaded;
             try
             {
                 if (Folder != null)

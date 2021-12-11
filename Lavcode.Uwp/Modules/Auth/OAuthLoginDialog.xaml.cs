@@ -23,11 +23,7 @@ namespace Lavcode.Uwp.Modules.Auth
         {
             this.Provider = provider;
             this.InitializeComponent();
-            Messenger.Default.Register<NameValueCollection>(this, MessageStr, (col) =>
-            {
-                SetResult(col);
-                this.Hide();
-            });
+            Messenger.Default.Register<NameValueCollection>(this, MessageStr, OnRsvLoginMsg);
             this.Closed += OAuthLoadingDialog_Closed;
             Loaded += OAuthLoadingDialog_Loaded;
         }
@@ -62,15 +58,15 @@ namespace Lavcode.Uwp.Modules.Auth
             Messenger.Default.Unregister(this);
         }
 
-        private void SetResult(NameValueCollection collection)
+        private void OnRsvLoginMsg(NameValueCollection collection)
         {
+            Result = collection["token"];
             SettingHelper.Instance.Set(Result, $"{Provider}Token");
             if (Provider == Provider.Gitee)
             {
                 SettingHelper.Instance.GiteeRefreeToken = collection["refresh_token"];
             }
-
-            Result = collection["token"];
+            this.Hide();
         }
 
         #region Static
