@@ -4,7 +4,7 @@
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
-    <PackageCertificateThumbprint>98A47C04D1C0CD4F142436A860530774F08AC232</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>81A00110C907377948080CEC6A0CAB77BDBBF05C</PackageCertificateThumbprint>
     <DefaultLanguage>zh-cn</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup>

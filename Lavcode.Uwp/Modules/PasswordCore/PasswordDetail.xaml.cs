@@ -16,17 +16,23 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             DataContext = VM;
             this.InitializeComponent();
-            Messenger.Default.Register<object>(this, "AddNewPassword", (obj) => AddNewPassword());
+            Loaded += PasswordDetail_Loaded;
+            Unloaded += PasswordDetail_Unloaded;
 
             VM.CalcTextBlock = CalcTextBlock; // 用于计算Key宽度
         }
 
-        public PasswordDetailViewModel VM { get; } = SimpleIoc.Default.GetInstance<PasswordDetailViewModel>();
-
-        ~PasswordDetail()
+        private void PasswordDetail_Unloaded(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Unregister(this);
         }
+
+        private void PasswordDetail_Loaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Register<object>(this, "AddNewPassword", (obj) => AddNewPassword());
+        }
+
+        public PasswordDetailViewModel VM { get; } = SimpleIoc.Default.GetInstance<PasswordDetailViewModel>();
 
         private async void AddNewPassword()
         {

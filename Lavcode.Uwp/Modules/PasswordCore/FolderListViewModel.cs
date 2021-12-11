@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
@@ -34,24 +35,23 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
 
+        public void RegisterMsg()
+        {
+            Messenger.Default.Register<object>(this, "OnDbRecovered", async (obj) => await Refresh());
+        }
+
+        public void UnregisterMsg()
+        {
+            Messenger.Default.Unregister(this);
+        }
+
+
         #region Init
         private readonly IFolderService _folderService;
 
         public FolderListViewModel(IFolderService folderService)
         {
             _folderService = folderService;
-
-            Messenger.Default.Register<object>(this, "OnDbRecovered", async (obj) => await OnDbRecovered());
-        }
-
-        ~FolderListViewModel()
-        {
-            Messenger.Default.Unregister(this);
-        }
-
-        private async Task OnDbRecovered()
-        {
-            await Refresh();
         }
 
         public async Task Refresh()

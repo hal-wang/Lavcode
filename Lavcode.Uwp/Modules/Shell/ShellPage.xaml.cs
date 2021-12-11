@@ -12,14 +12,13 @@ namespace Lavcode.Uwp.Modules.Shell
 {
     public sealed partial class ShellPage : Page
     {
-        private bool _inited = false;
         private readonly ThemeListener _themeListener = new();
         public ShellPage()
         {
             InitializeComponent();
             TitleBarHelper.SetTitleBar();
-            _themeListener.ThemeChanged += ThemeListener_ThemeChanged;
             Loaded += MainPage_Loaded;
+            Unloaded += ShellPage_Unloaded;
             OpenedFile = SimpleIoc.Default.ContainsCreated<SqliteFileService>() ? SimpleIoc.Default.GetInstance<SqliteFileService>()?.OpenedFile : null;
             if (SimpleIoc.Default.ContainsCreated<SqliteFileService>())
             {
@@ -40,11 +39,7 @@ namespace Lavcode.Uwp.Modules.Shell
 
         private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            if (_inited)
-            {
-                return;
-            }
-            _inited = true;
+            _themeListener.ThemeChanged += ThemeListener_ThemeChanged;
 
             if (OpenedFile is not null and StorageFile)
             {
@@ -56,7 +51,7 @@ namespace Lavcode.Uwp.Modules.Shell
             }
         }
 
-        ~ShellPage()
+        private void ShellPage_Unloaded(object sender, RoutedEventArgs e)
         {
             _themeListener.ThemeChanged -= ThemeListener_ThemeChanged;
         }

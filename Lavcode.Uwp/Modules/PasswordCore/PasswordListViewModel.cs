@@ -46,12 +46,16 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             _passwordService = passwordService;
 
+        }
+
+        public void RegisterMsg()
+        {
             Messenger.Default.Register<Password>(this, "PasswordAddOrEdited", (item) => PasswordAddOrEdited(item));
             Messenger.Default.Register<string>(this, "PasswordDeleted", (id) => PasswordDeleted(id));
             Messenger.Default.Register<object>(this, "OnDbRecovered", (obj) => SelectedPasswordItem = null);
         }
 
-        ~PasswordListViewModel()
+        public void UnregisterMsg()
         {
             Messenger.Default.Unregister(this);
         }

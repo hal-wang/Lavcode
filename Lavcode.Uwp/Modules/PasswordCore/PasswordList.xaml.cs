@@ -21,6 +21,20 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             DataContext = VM;
             this.InitializeComponent();
 
+            Loaded += PasswordList_Loaded;
+            Unloaded += PasswordList_Unloaded;
+
+            Loaded += (s, e) => VM.RegisterMsg();
+            Unloaded += (s, e) => VM.UnregisterMsg();
+        }
+
+        private void PasswordList_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
+        }
+
+        private void PasswordList_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
             Messenger.Default.Register<FolderItem>(this, "FolderSelected", item => FolderSelected(item));
             Messenger.Default.Register<Password>(this, "PasswordAddOrEdited", (item) => PasswordAddOrEdited());
         }

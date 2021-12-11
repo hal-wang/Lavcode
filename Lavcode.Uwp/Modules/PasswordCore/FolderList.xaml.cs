@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Guide;
@@ -14,7 +15,10 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             DataContext = VM;
             this.InitializeComponent();
+
             Loaded += Folder_Loaded;
+            Loaded += (s, e) => VM.RegisterMsg();
+            Unloaded += (s, e) => VM.UnregisterMsg();
         }
 
         public FolderListViewModel VM { get; } = SimpleIoc.Default.GetInstance<FolderListViewModel>();
