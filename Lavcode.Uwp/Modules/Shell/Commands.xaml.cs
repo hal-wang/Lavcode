@@ -2,7 +2,6 @@
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
-using Lavcode.Uwp.Modules.Feedback;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.Setting;
 using Lavcode.Uwp.Modules.SqliteSync;
@@ -21,7 +20,7 @@ namespace Lavcode.Uwp.Modules.Shell
 
         public bool IsLaunchFile => SimpleIoc.Default.IsRegistered<SqliteFileService>()
                     && SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile != null;
-        public bool IsSyncVisible => SettingHelper.Instance.Provider == Provider.Sqlite && !IsLaunchFile;
+        public bool IsSyncVisible => SettingHelper.Instance.Provider == Provider.Sqlite && !IsLaunchFile && App.Frame.CurrentSourcePageType == typeof(ShellPage);
 
         public Provider Provider => SettingHelper.Instance.Provider;
 

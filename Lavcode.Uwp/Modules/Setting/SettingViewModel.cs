@@ -1,13 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using Lavcode.IService;
 using Lavcode.Uwp.Helpers;
+using Lavcode.Uwp.Modules.Shell;
 
 namespace Lavcode.Uwp.Modules.Setting
 {
     public class SettingViewModel : ViewModelBase
     {
-        public bool Connected => SimpleIoc.Default.ContainsCreated<IConService>();
+        public bool Connected => App.Frame.CurrentSourcePageType == typeof(ShellPage);
 
         public bool IsAuthOpen
         {
