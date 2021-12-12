@@ -1,0 +1,17 @@
+{
+  "name": "lavcode",
+  "version": "1.1.0",
+  "description": "lavcode",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "vuepress build .",
+    "deploy": "vuepress build . && bash deploy.sh"
+  },
+  "keywords": [],
+  "author": "hal-wang",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  }
+}
