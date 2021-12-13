@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vuepress dev .",
     "build": "vuepress build .",
-    "deploy": "vuepress build . && bash deploy.sh"
+    "deploy": "vuepress build . && sh deploy.sh"
   },
   "keywords": [],
   "author": "hal-wang",
