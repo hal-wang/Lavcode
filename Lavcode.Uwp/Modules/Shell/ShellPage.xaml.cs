@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Modules.SqliteSync;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -19,10 +19,10 @@ namespace Lavcode.Uwp.Modules.Shell
             TitleBarHelper.SetTitleBar();
             Loaded += MainPage_Loaded;
             Unloaded += ShellPage_Unloaded;
-            OpenedFile = SimpleIoc.Default.ContainsCreated<SqliteFileService>() ? SimpleIoc.Default.GetInstance<SqliteFileService>()?.OpenedFile : null;
-            if (SimpleIoc.Default.ContainsCreated<SqliteFileService>())
+            OpenedFile = ServiceProvider.Services.GetService<SqliteFileService>()?.OpenedFile;
+            if (OpenedFile != null)
             {
-                var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+                var sfs = ServiceProvider.Services.GetService<SqliteFileService>();
                 sfs.OnOpenedFileChange += () => OpenedFile = sfs.OpenedFile;
             }
         }

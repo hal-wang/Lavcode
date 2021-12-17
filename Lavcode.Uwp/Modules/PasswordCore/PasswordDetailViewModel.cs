@@ -1,11 +1,11 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public class PasswordDetailViewModel : ViewModelBase
+    public class PasswordDetailViewModel : ObservableObject
     {
         private readonly IPasswordService _passwordService;
         private readonly IIconService _iconService;
@@ -27,9 +27,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             _passwordService = passwordService;
             _iconService = iconService;
 
-            Messenger.Default.Register<PasswordItem>(this, "PasswordSelectedChanged", async (item) => await InitEdit(item?.Password));
-            Messenger.Default.Register<object>(this, "AddNewPassword", (obj) => HandleAddNew());
-            Messenger.Default.Register<FolderItem>(this, "FolderSelected", FolderSelected);
+            StrongReferenceMessenger.Default.Register<PasswordDetailViewModel, PasswordItem, string>(this, "PasswordSelectedChanged", async (_, item) => await InitEdit(item?.Password));
+            StrongReferenceMessenger.Default.Register<PasswordDetailViewModel, object, string>(this, "AddNewPassword", (_, _) => HandleAddNew());
+            StrongReferenceMessenger.Default.Register<PasswordDetailViewModel, FolderItem, string>(this, "FolderSelected", (_, item) => FolderSelected(item));
 
             KeyValuePairs.CollectionChanged += KeyValuePairs_CollectionChanged;
 
@@ -38,7 +38,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private void KeyValuePairs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs _)
         {
-            RaisePropertyChanged(nameof(IsKeyValuePairsVisible));
+            OnPropertyChanged(nameof(IsKeyValuePairsVisible));
         }
 
         #region Folder
@@ -64,21 +64,21 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public string Title
         {
             get { return _title; }
-            set { Set(ref _title, value); }
+            set { SetProperty(ref _title, value); }
         }
 
         private string _value = string.Empty;
         public string Value
         {
             get { return _value; }
-            set { Set(ref _value, value); }
+            set { SetProperty(ref _value, value); }
         }
 
         private string _remark = string.Empty;
         public string Remark
         {
             get { return _remark; }
-            set { Set(ref _remark, value); }
+            set { SetProperty(ref _remark, value); }
         }
         #endregion
 
@@ -89,7 +89,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             set
             {
                 _icon = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -99,9 +99,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             get { return _readOnly; }
             set
             {
-                Set(ref _readOnly, value);
+                SetProperty(ref _readOnly, value);
 
-                RaisePropertyChanged(nameof(IsKeyValuePairsVisible));
+                OnPropertyChanged(nameof(IsKeyValuePairsVisible));
             }
         }
 
@@ -109,7 +109,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public bool IsEmpty
         {
             get { return _isEmpty; }
-            set { Set(ref _isEmpty, value); }
+            set { SetProperty(ref _isEmpty, value); }
         }
 
         private void Clean()
@@ -492,7 +492,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             _oldPassword = newPassword;
             _oldIcon = Icon;
 
-            Messenger.Default.Send(newPassword, "PasswordAddOrEdited");
+            StrongReferenceMessenger.Default.Send(newPassword, "PasswordAddOrEdited");
             MessageHelper.ShowPrimary("保存完成");
 
             ReadOnly = true;
@@ -554,7 +554,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
 
             await NetLoadingHelper.Invoke(() => _passwordService.DeletePassword(_oldPassword.Id), "正在删除");
-            Messenger.Default.Send(_oldPassword.Id, "PasswordDeleted");
+            StrongReferenceMessenger.Default.Send(_oldPassword.Id, "PasswordDeleted");
             IsEmpty = true;
         }
         #endregion

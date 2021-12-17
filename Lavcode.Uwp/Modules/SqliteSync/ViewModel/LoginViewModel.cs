@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using HTools.Uwp;
+﻿using HTools.Uwp;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.SqliteSync.Model;
 using Lavcode.Uwp.View.Sync.SyncHelper;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using Windows.UI.Xaml;
 
 namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
 {
-    public class LoginViewModel : ViewModelBase, IElementViewModel
+    public class LoginViewModel : ObservableObject, IElementViewModel
     {
         public FrameworkElement View { get; set; }
 
@@ -24,21 +24,21 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
         public string Account
         {
             get { return _account; }
-            set { Set(ref _account, value); }
+            set { SetProperty(ref _account, value); }
         }
 
         private string _password = SettingHelper.Instance.DavPassword;
         public string Password
         {
             get { return _password; }
-            set { Set(ref _password, value); }
+            set { SetProperty(ref _password, value); }
         }
 
         private string _url = SettingHelper.Instance.DavCustomUrl;
         public string Url
         {
             get { return _url; }
-            set { Set(ref _url, value); }
+            set { SetProperty(ref _url, value); }
         }
 
         public IReadOnlyList<CloudItem> CloudItems { get; } = DavSyncHelper.CloudItems;
@@ -47,7 +47,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
         public CloudItem SelectedCloud
         {
             get { return _selectedCloud; }
-            set { Set(ref _selectedCloud, value); }
+            set { SetProperty(ref _selectedCloud, value); }
         }
 
         public bool Finish()

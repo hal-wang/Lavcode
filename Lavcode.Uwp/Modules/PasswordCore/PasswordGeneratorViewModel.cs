@@ -1,10 +1,10 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Text;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public class PasswordGeneratorViewModel : ViewModelBase
+    public class PasswordGeneratorViewModel : ObservableObject
     {
         private readonly string _capitalLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private readonly string _lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
@@ -15,35 +15,35 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public bool IsLowercaseLettersEnable
         {
             get { return _isLowercaseLettersEnable; }
-            set { Set(ref _isLowercaseLettersEnable, value); }
+            set { SetProperty(ref _isLowercaseLettersEnable, value); }
         }
 
         private bool _isCapitalLettersEnable = true;
         public bool IsCapitalLettersEnable
         {
             get { return _isCapitalLettersEnable; }
-            set { Set(ref _isCapitalLettersEnable, value); }
+            set { SetProperty(ref _isCapitalLettersEnable, value); }
         }
 
         private bool _isFiguresEnable = true;
         public bool IsFiguresEnalbe
         {
             get { return _isFiguresEnable; }
-            set { Set(ref _isFiguresEnable, value); }
+            set { SetProperty(ref _isFiguresEnable, value); }
         }
 
         private bool _isPunctuationEnable = false;
         public bool IsPunctuationEnable
         {
             get { return _isPunctuationEnable; }
-            set { Set(ref _isPunctuationEnable, value); }
+            set { SetProperty(ref _isPunctuationEnable, value); }
         }
 
         private int _length = 16;
         public int Length
         {
             get { return _length; }
-            set { Set(ref _length, value); }
+            set { SetProperty(ref _length, value); }
         }
 
         private string GetSourceStr()

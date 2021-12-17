@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 
@@ -12,7 +12,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             this.InitializeComponent();
         }
 
-        public PasswordGeneratorViewModel VM { get; } = SimpleIoc.Default.GetInstance<PasswordGeneratorViewModel>();
+        public PasswordGeneratorViewModel VM { get; } = ServiceProvider.Services.GetService<PasswordGeneratorViewModel>();
 
         public event TypedEventHandler<PasswordGenerator, string> PasswordChanged;
 

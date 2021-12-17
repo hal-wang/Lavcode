@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Uwp.Controls.Comment;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Uwp;
 using Octokit;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules.Feedback
 {
-    public class FeedbackViewModel : ViewModelBase
+    public class FeedbackViewModel : ObservableObject
     {
         private Issue _issue = null;
         public Issue Issue
@@ -19,9 +19,9 @@ namespace Lavcode.Uwp.Modules.Feedback
             get => _issue;
             set
             {
-                Set(ref _issue, value);
+                SetProperty(ref _issue, value);
                 _addedCount = 0;
-                RaisePropertyChanged(nameof(Count));
+                OnPropertyChanged(nameof(Count));
             }
         }
 
@@ -32,7 +32,7 @@ namespace Lavcode.Uwp.Modules.Feedback
         public IncrementalLoadingCollection<CommentSource, IssueComment> Feedbacks
         {
             get { return _feedbacks; }
-            set { Set(ref _feedbacks, value); }
+            set { SetProperty(ref _feedbacks, value); }
         }
 
         public async void HandleRefresh()
@@ -82,7 +82,7 @@ namespace Lavcode.Uwp.Modules.Feedback
 
             Feedbacks.Insert(0, fbDialog.CommentResult);
             _addedCount++;
-            RaisePropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(Count));
         }
     }
 }

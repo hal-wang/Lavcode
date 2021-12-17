@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.SyncHelper;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -39,7 +39,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
 
         private async Task<StorageFile> GetTempFile()
         {
-            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            var sfs = ServiceProvider.Services.GetService<SqliteFileService>();
             var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
             return await launchFolder.GetFileAsync(sfs.FileLaunchFileName);
         }
@@ -116,7 +116,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         private async void Init()
         {
             await TaskExtend.SleepAsync(100);
-            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            var sfs = ServiceProvider.Services.GetService<SqliteFileService>();
             OpenedFile = sfs.OpenedFile;
             if (sfs.SyncHelper == null)
             {
@@ -134,8 +134,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
                 }
 
                 var launchFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync(sfs.FileLaunchFolderName, CreationCollisionOption.OpenIfExists);
-                await SimpleIoc.Default.GetInstance<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, sfs.FileLaunchFileName) });
-                (SimpleIoc.Default.GetInstance<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
+                await ServiceProvider.Services.GetService<IConService>().Connect(new { FilePath = Path.Combine(launchFolder.Path, sfs.FileLaunchFileName) });
+                (ServiceProvider.Services.GetService<IConService>() as Service.Sqlite.ConService).Connection.TableChanged += async (ss, ee) =>
                      await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => IsDbChanged = true);
 
                 if (sfs.SyncHelper.IsAutoVerified)
@@ -179,7 +179,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
         {
             var localTempFile = await GetTempFile();
 
-            var sfs = SimpleIoc.Default.GetInstance<SqliteFileService>();
+            var sfs = ServiceProvider.Services.GetService<SqliteFileService>();
             var result = isAnother ? await sfs.SyncHelper.SetFile(localTempFile, file =>
                 {
                     var oldFile = OpenedFile;

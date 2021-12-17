@@ -1,12 +1,12 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using Lavcode.Uwp.Modules.FirstUse;
 using Lavcode.Uwp.Modules.Shell;
 using Lavcode.Uwp.Modules.SqliteSync;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Linq;
 using System.Web;
@@ -29,7 +29,7 @@ namespace Lavcode.Uwp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
-            ViewModelLocator.RegisterSimple();
+            ServiceProvider.RegisterSimple();
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -62,8 +62,8 @@ namespace Lavcode.Uwp
             }
             else if (Frame.Content == null)
             {
-                ViewModelLocator.Register<Service.Sqlite.ConService>();
-                SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile = file;
+                ServiceProvider.Register<Service.Sqlite.ConService>();
+                ServiceProvider.Services.GetService<SqliteFileService>().OpenedFile = file;
                 Frame.Navigate(typeof(ShellPage), file);
             }
             Window.Current.Activate();
@@ -85,10 +85,10 @@ namespace Lavcode.Uwp
                 switch (query["provider"])
                 {
                     case "github":
-                        Messenger.Default.Send(query, $"On{Provider.GitHub}Notify");
+                        StrongReferenceMessenger.Default.Send(query, $"On{Provider.GitHub}Notify");
                         return;
                     case "gitee":
-                        Messenger.Default.Send(query, $"On{Provider.Gitee}Notify");
+                        StrongReferenceMessenger.Default.Send(query, $"On{Provider.Gitee}Notify");
                         return;
                 }
             }

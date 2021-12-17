@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
@@ -22,21 +22,21 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public string Key
         {
             get { return _key; }
-            set { Set(ref _key, value); }
+            set { SetProperty(ref _key, value); }
         }
 
         private string _value = string.Empty;
         public string Value
         {
             get { return _value; }
-            set { Set(ref _value, value); }
+            set { SetProperty(ref _value, value); }
         }
 
         private double _keyLength = 80;
         public double KeyLength
         {
             get { return _keyLength; }
-            set { Set(ref _keyLength, value); }
+            set { SetProperty(ref _keyLength, value); }
         }
     }
 }

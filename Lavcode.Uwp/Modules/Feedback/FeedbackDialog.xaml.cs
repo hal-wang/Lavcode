@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
+using Microsoft.Extensions.DependencyInjection;
 using Octokit;
 using System;
 using Windows.System;
@@ -17,7 +17,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             InitializeComponent();
         }
 
-        public FeedbackDialogViewModel VM { get; } = SimpleIoc.Default.GetInstance<FeedbackDialogViewModel>();
+        public FeedbackDialogViewModel VM { get; } = ServiceProvider.Services.GetService<FeedbackDialogViewModel>();
 
         public bool IsLoading
         {
@@ -54,6 +54,6 @@ namespace Lavcode.Uwp.Modules.Feedback
 
         public IssueComment CommentResult => VM.CommentResult;
 
-        public bool Result { get; private set; } = false;
+        public bool Result { get; set; } = false;
     }
 }

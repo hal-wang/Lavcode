@@ -1,7 +1,7 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Controls.Message;
+﻿using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Modules.SqliteSync.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -17,7 +17,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.View
             Loaded += (s, e) => VM.Init();
         }
 
-        public SyncHistoryViewModel VM { get; } = SimpleIoc.Default.GetInstance<SyncHistoryViewModel>();
+        public SyncHistoryViewModel VM { get; } = ServiceProvider.Services.GetService<SyncHistoryViewModel>();
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {

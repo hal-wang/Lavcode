@@ -1,8 +1,8 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Feedback;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Windows.System;
 
@@ -16,7 +16,7 @@ namespace Lavcode.Uwp.Modules.Setting
             this.InitializeComponent();
         }
 
-        public SettingViewModel VM { get; } = SimpleIoc.Default.GetInstance<SettingViewModel>();
+        public SettingViewModel VM { get; } = ServiceProvider.Services.GetService<SettingViewModel>();
 
         private void OnChangeProvider(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {

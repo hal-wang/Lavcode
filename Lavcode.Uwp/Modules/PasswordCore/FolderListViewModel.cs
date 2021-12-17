@@ -1,9 +1,8 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public class FolderListViewModel : ViewModelBase
+    public class FolderListViewModel : ObservableObject
     {
         public ObservableCollection<FolderItem> FolderItems { get; } = new ObservableCollection<FolderItem>();
 
@@ -29,20 +28,20 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                Set(ref _selectedIndex, value);
+                SetProperty(ref _selectedIndex, value);
                 SettingHelper.Instance.SelectedFolderId = value < FolderItems.Count ? FolderItems[value].Folder.Id : null;
-                Messenger.Default.Send(value < FolderItems.Count ? FolderItems[value] : null, "FolderSelected");
+                StrongReferenceMessenger.Default.Send(value < FolderItems.Count ? FolderItems[value] : null, "FolderSelected");
             }
         }
 
         public void RegisterMsg()
         {
-            Messenger.Default.Register<object>(this, "OnDbRecovered", async (obj) => await Refresh());
+            StrongReferenceMessenger.Default.Register<FolderListViewModel, object, string>(this, "OnDbRecovered", async (_, _) => await Refresh());
         }
 
         public void UnregisterMsg()
         {
-            Messenger.Default.Unregister(this);
+            StrongReferenceMessenger.Default.UnregisterAll(this);
         }
 
 
@@ -78,8 +77,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 }
                 if (SelectedIndex == beforeIndex) // 选中的Index没有变化
                 {
-                    RaisePropertyChanged(nameof(SelectedIndex));
-                    Messenger.Default.Send(SelectedIndex < FolderItems.Count ? FolderItems[SelectedIndex] : null, "FolderSelected");
+                    OnPropertyChanged(nameof(SelectedIndex));
+                    StrongReferenceMessenger.Default.Send(SelectedIndex < FolderItems.Count ? FolderItems[SelectedIndex] : null, "FolderSelected");
                 }
             }
             catch (Exception ex)
@@ -100,8 +99,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
             if (SelectedIndex == index)
             {
-                RaisePropertyChanged(nameof(SelectedIndex));
-                Messenger.Default.Send(newFolderItem, "FolderSelected");
+                OnPropertyChanged(nameof(SelectedIndex));
+                StrongReferenceMessenger.Default.Send(newFolderItem, "FolderSelected");
             }
             else
             {
@@ -129,7 +128,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
                 if (FolderItems.Count == 0) // 删完了
                 {
-                    Messenger.Default.Send<FolderItem>(null, "FolderSelected");
+                    StrongReferenceMessenger.Default.Send<FolderItem, string>(null, "FolderSelected");
                 }
             }
             catch (Exception ex)

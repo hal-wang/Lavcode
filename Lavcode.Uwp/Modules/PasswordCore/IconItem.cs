@@ -1,7 +1,7 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using Lavcode.IService;
+﻿using Lavcode.IService;
 using Lavcode.Model;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Diagnostics;
 using Windows.UI.Core;
@@ -14,14 +14,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public Icon Icon
         {
             get { return _icon; }
-            set { Set(ref _icon, value); }
+            set { SetProperty(ref _icon, value); }
         }
 
         internal async void SetIcon(string sourceId)
         {
             try
             {
-                var iconService = SimpleIoc.Default.GetInstance<IIconService>();
+                var iconService = ServiceProvider.Services.GetService<IIconService>();
                 var icon = await iconService.GetIcon(sourceId);
 
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

@@ -1,10 +1,10 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Controls.Message;
+﻿using HTools.Uwp.Controls.Message;
 using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Guide;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -54,7 +54,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             {
                 if (Folder != null)
                 {
-                    var iconService = SimpleIoc.Default.GetInstance<IIconService>();
+                    var iconService = ServiceProvider.Services.GetService<IIconService>();
                     Icon = await iconService.GetIcon(Folder.Id);
                 }
                 else
@@ -70,7 +70,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
 
-        public bool Result { get; private set; }
+        public bool Result { get; set; }
 
         private async void Teach()
         {
@@ -133,7 +133,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
             await NetLoadingHelper.Invoke(async () =>
              {
-                 var folderService = SimpleIoc.Default.GetInstance<IFolderService>();
+                 var folderService = ServiceProvider.Services.GetService<IFolderService>();
                  if (Folder == null) //添加
                  {
                      var folder = new Folder()

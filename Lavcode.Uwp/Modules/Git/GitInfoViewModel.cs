@@ -1,28 +1,28 @@
-﻿using GalaSoft.MvvmLight;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Octokit;
 using System;
 using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules
 {
-    public class GitInfoViewModel : ViewModelBase
+    public class GitInfoViewModel : ObservableObject
     {
         private bool _loading = false;
         public bool Loading
         {
             get { return _loading; }
-            set { Set(ref _loading, value); }
+            set { SetProperty(ref _loading, value); }
         }
 
         private Repository _repository = null;
         public Repository Repository
         {
             get { return _repository; }
-            set { Set(ref _repository, value); }
+            set { SetProperty(ref _repository, value); }
         }
 
         public async Task Init()

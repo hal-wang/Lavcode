@@ -1,11 +1,10 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Shell;
 using Lavcode.Uwp.Modules.SqliteSync;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.Auth
 {
-    public class AuthViewModel : ViewModelBase
+    public class AuthViewModel : Microsoft.Toolkit.Mvvm.ComponentModel.ObservableObject
     {
         public Provider Provider => SettingHelper.Instance.Provider;
 
@@ -23,14 +22,14 @@ namespace Lavcode.Uwp.Modules.Auth
         public bool SupportWindowsHello
         {
             get { return _supportWindowsHello; }
-            set { Set(ref _supportWindowsHello, value); }
+            set { SetProperty(ref _supportWindowsHello, value); }
         }
 
         private bool _loading = false;
         public bool Loading
         {
             get { return _loading; }
-            set { Set(ref _loading, value); }
+            set { SetProperty(ref _loading, value); }
         }
 
         public async Task Init()
@@ -88,24 +87,24 @@ namespace Lavcode.Uwp.Modules.Auth
                         switch (provider)
                         {
                             case Provider.GitHub:
-                                ViewModelLocator.Register<Service.GitHub.GitHubConService>();
+                                ServiceProvider.Register<Service.GitHub.GitHubConService>();
                                 break;
                             case Provider.Gitee:
-                                ViewModelLocator.Register<Service.Gitee.GiteeConService>();
+                                ServiceProvider.Register<Service.Gitee.GiteeConService>();
                                 break;
                         }
                         break;
                     case Provider.Sqlite:
-                        ViewModelLocator.Register<Service.Sqlite.ConService>();
+                        ServiceProvider.Register<Service.Sqlite.ConService>();
                         loginData = new
                         {
-                            FilePath = SimpleIoc.Default.GetInstance<SqliteFileService>().SqliteFilePath
+                            FilePath = ServiceProvider.Services.GetService<SqliteFileService>().SqliteFilePath
                         };
                         break;
                 }
 
                 if (loginData == null) return;
-                var conResult = await SimpleIoc.Default.GetInstance<IConService>().Connect(loginData);
+                var conResult = await ServiceProvider.Services.GetService<IConService>().Connect(loginData);
                 if (!conResult) return;
 
                 (Window.Current.Content as Frame)?.Navigate(typeof(ShellPage));

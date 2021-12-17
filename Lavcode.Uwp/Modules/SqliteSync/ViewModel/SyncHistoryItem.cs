@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 
 namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel

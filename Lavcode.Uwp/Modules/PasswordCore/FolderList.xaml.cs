@@ -1,8 +1,7 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Guide;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,7 +20,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             Unloaded += (s, e) => VM.UnregisterMsg();
         }
 
-        public FolderListViewModel VM { get; } = SimpleIoc.Default.GetInstance<FolderListViewModel>();
+        public FolderListViewModel VM { get; } = ServiceProvider.Services.GetService<FolderListViewModel>();
 
         private async void Folder_Loaded(object sender, RoutedEventArgs e)
         {

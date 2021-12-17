@@ -31,7 +31,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public string Name
         {
             get { return _name; }
-            set { Set(ref _name, value); }
+            set { SetProperty(ref _name, value); }
         }
     }
 }

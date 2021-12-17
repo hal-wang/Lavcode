@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Specialized;
@@ -23,7 +23,7 @@ namespace Lavcode.Uwp.Modules.Auth
         {
             this.Provider = provider;
             this.InitializeComponent();
-            Messenger.Default.Register<NameValueCollection>(this, MessageStr, OnRsvLoginMsg);
+            StrongReferenceMessenger.Default.Register<NameValueCollection, string>(this, MessageStr, (a, b) => OnRsvLoginMsg(b));
             this.Closed += OAuthLoadingDialog_Closed;
             Loaded += OAuthLoadingDialog_Loaded;
         }
@@ -51,11 +51,11 @@ namespace Lavcode.Uwp.Modules.Auth
             }
         }
 
-        public string Result { get; private set; }
+        public string Result { get; set; }
 
         private void OAuthLoadingDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
         {
-            Messenger.Default.Unregister(this);
+            StrongReferenceMessenger.Default.UnregisterAll(this);
         }
 
         private void OnRsvLoginMsg(NameValueCollection collection)

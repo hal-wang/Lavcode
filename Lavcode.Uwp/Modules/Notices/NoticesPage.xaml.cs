@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -18,7 +18,7 @@ namespace Lavcode.Uwp.Modules.Notices
             Loaded += NoticesPage_Loaded;
         }
 
-        public NoticesViewModel VM { get; } = SimpleIoc.Default.GetInstance<NoticesViewModel>();
+        public NoticesViewModel VM { get; } = ServiceProvider.Services.GetService<NoticesViewModel>();
 
         private async void NoticesPage_Loaded(object sender, RoutedEventArgs e)
         {

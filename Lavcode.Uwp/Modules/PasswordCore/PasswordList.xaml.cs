@@ -1,10 +1,10 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Guide;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,16 +30,16 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private void PasswordList_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Messenger.Default.Unregister(this);
+            StrongReferenceMessenger.Default.UnregisterAll(this);
         }
 
         private void PasswordList_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Messenger.Default.Register<FolderItem>(this, "FolderSelected", item => FolderSelected(item));
-            Messenger.Default.Register<Password>(this, "PasswordAddOrEdited", (item) => PasswordAddOrEdited());
+            StrongReferenceMessenger.Default.Register<PasswordList, FolderItem, string>(this, "FolderSelected", (_, item) => FolderSelected(item));
+            StrongReferenceMessenger.Default.Register<PasswordList, FolderItem, string>(this, "PasswordAddOrEdited", (_, item) => PasswordAddOrEdited());
         }
 
-        public PasswordListViewModel VM { get; } = SimpleIoc.Default.GetInstance<PasswordListViewModel>();
+        public PasswordListViewModel VM { get; } = ServiceProvider.Services.GetService<PasswordListViewModel>();
 
         private async void FolderSelected(FolderItem item)
         {

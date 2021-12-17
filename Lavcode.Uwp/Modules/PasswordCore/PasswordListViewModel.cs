@@ -1,11 +1,11 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public class PasswordListViewModel : ViewModelBase
+    public class PasswordListViewModel : ObservableObject
     {
         private FolderItem _curFolder = null;
 
@@ -28,9 +28,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             get { return _selectedPasswordItem; }
             set
             {
-                Set(ref _selectedPasswordItem, value);
+                SetProperty(ref _selectedPasswordItem, value);
 
-                Messenger.Default.Send(value, "PasswordSelectedChanged");
+                StrongReferenceMessenger.Default.Send(value, "PasswordSelectedChanged");
             }
         }
 
@@ -50,14 +50,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public void RegisterMsg()
         {
-            Messenger.Default.Register<Password>(this, "PasswordAddOrEdited", (item) => PasswordAddOrEdited(item));
-            Messenger.Default.Register<string>(this, "PasswordDeleted", (id) => PasswordDeleted(id));
-            Messenger.Default.Register<object>(this, "OnDbRecovered", (obj) => SelectedPasswordItem = null);
+            StrongReferenceMessenger.Default.Register<PasswordListViewModel, Password, string>(this, "PasswordAddOrEdited", (_, item) => PasswordAddOrEdited(item));
+            StrongReferenceMessenger.Default.Register<PasswordListViewModel, string, string>(this, "PasswordDeleted", (_, id) => PasswordDeleted(id));
+            StrongReferenceMessenger.Default.Register<PasswordListViewModel, object, string>(this, "OnDbRecovered", (_, _) => SelectedPasswordItem = null);
         }
 
         public void UnregisterMsg()
         {
-            Messenger.Default.Unregister(this);
+            StrongReferenceMessenger.Default.UnregisterAll(this);
         }
 
         public async Task Init(FolderItem folderItem)
@@ -121,7 +121,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public void OnAddNew()
         {
-            Messenger.Default.Send<object>(null, "AddNewPassword");
+            StrongReferenceMessenger.Default.Send<object, string>(null, "AddNewPassword");
         }
 
         private void PasswordDeleted(string passwordId)
@@ -162,9 +162,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             get { return _selectedItems; }
             set
             {
-                Set(ref _selectedItems, value);
+                SetProperty(ref _selectedItems, value);
 
-                RaisePropertyChanged(nameof(IsSelectAll));
+                OnPropertyChanged(nameof(IsSelectAll));
             }
         }
 

@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -18,7 +18,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             Loaded += FeedbackPage_Loaded;
         }
 
-        public FeedbackViewModel VM { get; } = SimpleIoc.Default.GetInstance<FeedbackViewModel>();
+        public FeedbackViewModel VM { get; } = ServiceProvider.Services.GetService<FeedbackViewModel>();
 
         private async void FeedbackPage_Loaded(object sender, RoutedEventArgs e)
         {

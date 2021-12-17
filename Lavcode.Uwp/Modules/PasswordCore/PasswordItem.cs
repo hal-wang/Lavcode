@@ -32,14 +32,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public string Title
         {
             get { return _title; }
-            set { Set(ref _title, value); }
+            set { SetProperty(ref _title, value); }
         }
 
         private string _remark = string.Empty;
         public string Remark
         {
             get { return _remark; }
-            set { Set(ref _remark, value); }
+            set { SetProperty(ref _remark, value); }
         }
     }
 }

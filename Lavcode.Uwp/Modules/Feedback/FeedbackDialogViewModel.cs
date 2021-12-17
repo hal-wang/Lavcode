@@ -1,21 +1,21 @@
-﻿using GalaSoft.MvvmLight;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Octokit;
 using System;
 using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules.Feedback
 {
-    public class FeedbackDialogViewModel : ViewModelBase
+    public class FeedbackDialogViewModel : ObservableObject
     {
         private string _content = string.Empty;
         public string Content
         {
             get { return _content; }
-            set { Set(ref _content, value); }
+            set { SetProperty(ref _content, value); }
         }
 
         public IssueComment CommentResult { get; private set; } = null;

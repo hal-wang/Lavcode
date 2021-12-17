@@ -1,15 +1,15 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Uwp.View.Sync.SyncHelper;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
 {
-    public class SyncViewModel : ViewModelBase
+    public class SyncViewModel : ObservableObject
     {
         #region 导出
         private async Task LocalTo(bool isRemote)
@@ -75,7 +75,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
                 LoadingHelper.Show("正在整理");
                 await syncHelper.ReplaceDbFile(remoteDbFile);
 
-                Messenger.Default.Send<object>(null, "OnDbRecovered");
+                StrongReferenceMessenger.Default.Send<object, string>(null, "OnDbRecovered");
                 MessageHelper.ShowPrimary("恢复完成");
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
                 }
                 await syncHelper.ReplaceDbFile(localDbFile);
 
-                Messenger.Default.Send<object>(null, "OnDbRecovered");
+                StrongReferenceMessenger.Default.Send<object, string>(null, "OnDbRecovered");
                 MessageHelper.ShowPrimary("同步完成");
             }
             catch (Exception ex)

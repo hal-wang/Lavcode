@@ -1,8 +1,8 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using HTools;
+﻿using HTools;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Guide;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -24,15 +24,15 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         private void PasswordDetail_Unloaded(object sender, RoutedEventArgs e)
         {
-            Messenger.Default.Unregister(this);
+            StrongReferenceMessenger.Default.UnregisterAll(this);
         }
 
         private void PasswordDetail_Loaded(object sender, RoutedEventArgs e)
         {
-            Messenger.Default.Register<object>(this, "AddNewPassword", (obj) => AddNewPassword());
+            StrongReferenceMessenger.Default.Register<PasswordDetail, object, string>(this, "AddNewPassword", (sender, obj) => AddNewPassword());
         }
 
-        public PasswordDetailViewModel VM { get; } = SimpleIoc.Default.GetInstance<PasswordDetailViewModel>();
+        public PasswordDetailViewModel VM { get; } = ServiceProvider.Services.GetService<PasswordDetailViewModel>();
 
         private async void AddNewPassword()
         {

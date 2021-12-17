@@ -1,15 +1,15 @@
-﻿using GalaSoft.MvvmLight;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
-    public class PasswordMoveToViewModel : ViewModelBase
+    public class PasswordMoveToViewModel : ObservableObject
     {
         private readonly IFolderService _folderService;
         private readonly IPasswordService _passwordService;
@@ -28,7 +28,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public FolderItem SelectedFolder
         {
             get { return _selectedFolder; }
-            set { Set(ref _selectedFolder, value); }
+            set { SetProperty(ref _selectedFolder, value); }
         }
 
         public async void Init(Folder curFolder, IReadOnlyList<Password> passwords)

@@ -1,10 +1,10 @@
-﻿using GalaSoft.MvvmLight;
-using Lavcode.Uwp.Helpers;
+﻿using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Shell;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Lavcode.Uwp.Modules.Setting
 {
-    public class SettingViewModel : ViewModelBase
+    public class SettingViewModel : ObservableObject
     {
         public bool Connected => App.Frame.CurrentSourcePageType == typeof(ShellPage);
 

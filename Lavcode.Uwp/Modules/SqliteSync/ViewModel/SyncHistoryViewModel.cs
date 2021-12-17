@@ -1,10 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Service.Sqlite;
 using Lavcode.Uwp.View.Sync.SyncHelper;
-using SQLite;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,13 +13,13 @@ using Windows.Storage;
 
 namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
 {
-    public class SyncHistoryViewModel : ViewModelBase
+    public class SyncHistoryViewModel : ObservableObject
     {
         private bool _isLoading = false;
         public bool IsLoading
         {
             get { return _isLoading; }
-            set { Set(ref _isLoading, value); }
+            set { SetProperty(ref _isLoading, value); }
         }
 
         public ObservableCollection<SyncHistoryItem> HistoryItems { get; } = new();

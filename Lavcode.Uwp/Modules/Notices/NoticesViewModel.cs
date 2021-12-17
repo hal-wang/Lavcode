@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using HTools;
+﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Common;
 using Lavcode.Uwp.Controls.Comment;
 using Lavcode.Uwp.Helpers;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Uwp;
 using Octokit;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules.Notices
 {
-    public class NoticesViewModel : ViewModelBase
+    public class NoticesViewModel : ObservableObject
     {
         public string Author => RepositoryConstant.GitAccount;
 
@@ -19,14 +19,14 @@ namespace Lavcode.Uwp.Modules.Notices
         public Issue Issue
         {
             get { return _issue; }
-            set { Set(ref _issue, value); }
+            set { SetProperty(ref _issue, value); }
         }
 
         private IncrementalLoadingCollection<CommentSource, IssueComment> _notices = null;
         public IncrementalLoadingCollection<CommentSource, IssueComment> Notices
         {
             get { return _notices; }
-            set { Set(ref _notices, value); }
+            set { SetProperty(ref _notices, value); }
         }
 
         public async void HandleRefresh()

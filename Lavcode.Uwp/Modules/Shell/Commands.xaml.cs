@@ -1,11 +1,11 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Notices;
 using Lavcode.Uwp.Modules.Setting;
 using Lavcode.Uwp.Modules.SqliteSync;
 using Lavcode.Uwp.Modules.SqliteSync.View;
+using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -18,8 +18,7 @@ namespace Lavcode.Uwp.Modules.Shell
             this.InitializeComponent();
         }
 
-        public bool IsLaunchFile => SimpleIoc.Default.IsRegistered<SqliteFileService>()
-                    && SimpleIoc.Default.GetInstance<SqliteFileService>().OpenedFile != null;
+        public bool IsLaunchFile => ServiceProvider.Services.GetService<SqliteFileService>()?.OpenedFile != null;
         public bool IsSyncVisible => SettingHelper.Instance.Provider == Provider.Sqlite && !IsLaunchFile && App.Frame.CurrentSourcePageType == typeof(ShellPage);
 
         public Provider Provider => SettingHelper.Instance.Provider;
