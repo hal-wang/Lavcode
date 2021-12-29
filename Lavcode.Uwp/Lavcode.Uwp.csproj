@@ -4,7 +4,7 @@
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
-    <PackageCertificateThumbprint>81A00110C907377948080CEC6A0CAB77BDBBF05C</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>98A47C04D1C0CD4F142436A860530774F08AC232</PackageCertificateThumbprint>
     <DefaultLanguage>zh-cn</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup>
@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Helpers\NetLoadingHelper.cs" />
+    <Compile Include="Helpers\UpdateHelper.cs" />
     <Compile Include="Modules\Guide\GuideHandler.cs" />
     <Compile Include="Modules\Guide\GuideItem.cs" />
     <Compile Include="Modules\Guide\GuideSettingMapItem.cs" />

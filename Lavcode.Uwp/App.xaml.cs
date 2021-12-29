@@ -122,6 +122,8 @@ namespace Lavcode.Uwp
             Frame.Navigated += OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
             Window.Current.Content = Frame;
+
+            new Action(async () => await UpdateHelper.DownloadAndInstallAllUpdatesAsync()).Invoke();
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)
