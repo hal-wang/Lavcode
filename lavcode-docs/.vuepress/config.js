@@ -1,9 +1,7 @@
 module.exports = {
-  title: "Lavcode", // 显示在左上角的网页名称以及首页在浏览器标签显示的title名称
-  description: "Lavcode 开源密码管理", // meta 中的描述文字，用于SEO
-  head: [
-    ["link", { rel: "icon", href: "/logo.png" }], //浏览器的标签栏的网页图标
-  ],
+  title: "Lavcode",
+  description: "Lavcode 开源密码管理",
+  head: [["link", { rel: "icon", href: "/logo.png" }]],
   markdown: {
     lineNumbers: true,
   },
@@ -11,16 +9,13 @@ module.exports = {
   serviceWorker: true,
   themeConfig: {
     logo: "/logo.png",
-    lastUpdated: "lastUpdate", // string | boolean
+    lastUpdated: "lastUpdate",
     sidebarDepth: 2,
     repo: "hal-wang/Lavcode",
-    // 可选，默认为 master
-    docsBranch: "master",
-    // 默认为 true，设置为 false 来禁用
+    docsBranch: "main",
     editLinks: true,
     nav: [
       { text: "首页", link: "/" },
-      { text: "捐赠", link: "/donate/" },
       {
         text: "使用帮助",
         items: [
@@ -38,6 +33,7 @@ module.exports = {
           },
         ],
       },
+      { text: "捐赠", link: "/donate/" },
     ],
     sidebar: {
       "/usage/": ["", "svgicon/"],
