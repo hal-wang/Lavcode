@@ -21,3 +21,6 @@ yarn-error.log*
 *.sw*
 
 /.vuepress/dist
+
+yarn.lock
+package-lock.json
