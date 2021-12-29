@@ -27,5 +27,10 @@ namespace Lavcode.Uwp.Helpers
                 Debug.WriteLine(ex);
             }
         }
+
+        public static async void DownloadAndInstallAllUpdates()
+        {
+            await DownloadAndInstallAllUpdatesAsync();
+        }
     }
 }

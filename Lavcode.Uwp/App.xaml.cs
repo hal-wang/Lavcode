@@ -44,8 +44,10 @@ namespace Lavcode.Uwp
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            CreateFrame();
+            base.OnLaunched(e);
+            UpdateHelper.DownloadAndInstallAllUpdates();
 
+            CreateFrame();
             if (!e.PrelaunchActivated)
             {
                 SimpleNavFirstPage();
@@ -122,8 +124,6 @@ namespace Lavcode.Uwp
             Frame.Navigated += OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
             Window.Current.Content = Frame;
-
-            new Action(async () => await UpdateHelper.DownloadAndInstallAllUpdatesAsync()).Invoke();
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)
