@@ -32,35 +32,7 @@ namespace Lavcode.Uwp.Modules.Auth
             set { SetProperty(ref _loading, value); }
         }
 
-        public async Task Init()
-        {
-            try
-            {
-                await Login();
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ShowError(ex);
-            }
-            finally
-            {
-                LoadingHelper.Hide();
-            }
-        }
-
-        public async void LoginCommand()
-        {
-            try
-            {
-                await Login();
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ShowError(ex);
-            }
-        }
-
-        private async Task Login()
+        public async void TryLogin()
         {
             if (Loading)
             {
@@ -70,45 +42,7 @@ namespace Lavcode.Uwp.Modules.Auth
             Loading = true;
             try
             {
-                if (ShouldAuthWindowsHello && !await WindowsHelloAuth())
-                {
-                    return;
-                }
-
-                var provider = SettingHelper.Instance.Provider;
-                object loginData = null;
-                switch (provider)
-                {
-                    case Provider.GitHub:
-                    case Provider.Gitee:
-                        var gitToken = await OAuthLoginDialog.Login(provider);
-                        if (string.IsNullOrEmpty(gitToken)) return;
-                        loginData = new { Token = gitToken };
-                        switch (provider)
-                        {
-                            case Provider.GitHub:
-                                ServiceProvider.Register<Service.GitHub.GitHubConService>();
-                                break;
-                            case Provider.Gitee:
-                                ServiceProvider.Register<Service.Gitee.GiteeConService>();
-                                break;
-                        }
-                        break;
-                    case Provider.Sqlite:
-                        ServiceProvider.Register<Service.Sqlite.ConService>();
-                        loginData = new
-                        {
-                            FilePath = ServiceProvider.Services.GetService<SqliteFileService>().SqliteFilePath
-                        };
-                        break;
-                }
-
-                if (loginData == null) return;
-                var conResult = await ServiceProvider.Services.GetService<IConService>().Connect(loginData);
-                if (!conResult) return;
-
-                (Window.Current.Content as Frame)?.Navigate(typeof(ShellPage));
-                SettingHelper.Instance.IsFirstInited = true;
+                await Login();
             }
             catch (Exception ex)
             {
@@ -118,6 +52,49 @@ namespace Lavcode.Uwp.Modules.Auth
             {
                 Loading = false;
             }
+        }
+
+        private async Task Login()
+        {
+            if (ShouldAuthWindowsHello && !await WindowsHelloAuth())
+            {
+                return;
+            }
+
+            var provider = SettingHelper.Instance.Provider;
+            object loginData = null;
+            switch (provider)
+            {
+                case Provider.GitHub:
+                case Provider.Gitee:
+                    var gitToken = await OAuthLoginDialog.Login(provider);
+                    if (string.IsNullOrEmpty(gitToken)) return;
+                    loginData = new { Token = gitToken };
+                    switch (provider)
+                    {
+                        case Provider.GitHub:
+                            ServiceProvider.Register<Service.GitHub.GitHubConService>();
+                            break;
+                        case Provider.Gitee:
+                            ServiceProvider.Register<Service.Gitee.GiteeConService>();
+                            break;
+                    }
+                    break;
+                case Provider.Sqlite:
+                    ServiceProvider.Register<Service.Sqlite.ConService>();
+                    loginData = new
+                    {
+                        FilePath = ServiceProvider.Services.GetService<SqliteFileService>().SqliteFilePath
+                    };
+                    break;
+            }
+            if (loginData == null) return;
+
+            var conResult = await ServiceProvider.Services.GetService<IConService>().Connect(loginData);
+            if (!conResult) return;
+
+            (Window.Current.Content as Frame)?.Navigate(typeof(ShellPage));
+            SettingHelper.Instance.IsFirstInited = true;
         }
 
         /// <summary>

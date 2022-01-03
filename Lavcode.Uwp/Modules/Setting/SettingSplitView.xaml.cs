@@ -30,7 +30,7 @@ namespace Lavcode.Uwp.Modules.Setting
             if (cdr != Windows.UI.Xaml.Controls.ContentDialogResult.Primary) return;
 
             CleanLoginInfo();
-            App.Frame.Navigate(typeof(Auth.AuthPage));
+            App.Frame.Navigate(typeof(Auth.AuthPage), false);
             IsPaneOpen = false;
         }
 

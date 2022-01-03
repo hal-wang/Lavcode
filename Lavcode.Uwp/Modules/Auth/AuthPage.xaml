@@ -58,7 +58,7 @@
                         Style="{ThemeResource AccentButtonStyle}"
                         IsAccessKeyScope="True"
                         HorizontalAlignment="Stretch"
-                        Click="{x:Bind VM.LoginCommand}"
+                        Click="{x:Bind VM.TryLogin}"
                         Margin="0 30 0 0"/>
 
                 <interactivity:Interaction.Behaviors>

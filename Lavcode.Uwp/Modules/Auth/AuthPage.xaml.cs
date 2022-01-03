@@ -8,6 +8,8 @@ namespace Lavcode.Uwp.Modules.Auth
 {
     public sealed partial class AuthPage : Page
     {
+        private bool _autoLogin = true;
+
         public AuthPage()
         {
             this.InitializeComponent();
@@ -16,14 +18,22 @@ namespace Lavcode.Uwp.Modules.Auth
             Loaded += AuthPage_Loaded;
         }
 
-        private async void AuthPage_Loaded(object sender, RoutedEventArgs e)
+        private void AuthPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await VM.Init();
+            if (_autoLogin)
+            {
+                VM.TryLogin();
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            if (e.Parameter is bool b)
+            {
+                _autoLogin = b;
+            }
 
             Frame.BackStack.Clear();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
