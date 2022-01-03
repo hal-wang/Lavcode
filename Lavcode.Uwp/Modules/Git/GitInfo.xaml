@@ -21,7 +21,7 @@
                             VerticalAlignment="Center"
                             Opacity="0.6">
                     <TextBlock Text="源码更新时间"/>
-                    <TextBlock Text="{x:Bind VM.Repository.UpdatedAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-ddL}"
+                    <TextBlock Text="{x:Bind VM.Repository.PushedAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-ddL}"
                                Margin="10 0 0 0"/>
                 </StackPanel>
                 
@@ -39,7 +39,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <local:Icon Count="{x:Bind VM.Repository.WatchersCount,Mode=OneWay}"
+                <local:Icon Count="{x:Bind VM.Repository.SubscribersCount,Mode=OneWay}"
                             Data="M512.515746 217.984686c-292.146756 0-445.309088 249.7696-445.309088 293.998941 0 44.25083 153.162332 294.031687 445.309088 294.031687 292.13243 0 445.304995-249.780857 445.304995-294.031687C957.820742 467.754287 804.648177 217.984686 512.515746 217.984686zM512.515746 713.128787c-109.310591 0-197.921745-63.809281-197.921745-201.14516 0-137.307226 88.611154-201.116507 197.921745-201.116507S710.430328 374.676401 710.430328 511.983627C710.430328 649.319505 621.826338 713.128787 512.515746 713.128787zM512.515746 511.983627c-18.126846-25.778106 35.698037-113.345488 6.16235-113.345488-54.651714 0-118.677936 44.713364-118.677936 113.345488 0 68.664869 57.864896 115.803469 112.515586 115.803469 54.637388 0 111.283526-47.139623 111.283526-115.803469C623.799272 480.446353 527.928784 533.903869 512.515746 511.983627z"/>
                 <local:Icon Count="{x:Bind VM.Repository.StargazersCount,Mode=OneWay}"
                             Grid.Column="1"
