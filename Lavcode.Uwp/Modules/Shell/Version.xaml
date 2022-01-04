@@ -20,11 +20,13 @@
             <Run>v</Run>
             <Run Text="{x:Bind VersionStr}"/>
         </TextBlock>
-        <TextBlock Margin="10 0 0 0"
-                   Visibility="{x:Bind ProviderVisibility,Mode=OneWay}">
-            <Run>（</Run>
-            <Run Text="{x:Bind Provider,Converter={StaticResource ProviderConverter}}"/>
-            <Run>）</Run>
-        </TextBlock>
+        <Border>
+            <TextBlock Margin="10 0 0 0"
+                       Visibility="{x:Bind IsProviderVisible,Mode=OneWay,Converter={StaticResource BooleanConverter}}">
+                <Run>（</Run>
+                <Run Text="{x:Bind Provider,Converter={StaticResource ProviderConverter}}"/>
+                <Run>）</Run>
+            </TextBlock>
+        </Border>
     </StackPanel>
 </UserControl>
