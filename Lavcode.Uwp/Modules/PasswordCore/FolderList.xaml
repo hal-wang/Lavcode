@@ -23,9 +23,10 @@
 
         <muxc:TabView Grid.Row="1"
                       CanDragTabs="True"
+                      TabDragStarting="{x:Bind VM.DragStarting}"
                       TabDragCompleted="{x:Bind VM.DragCompleted}"
                       TabItemsSource="{x:Bind VM.FolderItems}"
-                      SelectedIndex="{x:Bind VM.SelectedIndex,Mode=TwoWay}"
+                      SelectedItem="{x:Bind VM.SelectedItem,Mode=TwoWay}"
                       IsAddTabButtonVisible="False">
             <muxc:TabView.TabStripFooter>
                 <Button Margin="0 4 0 -4"

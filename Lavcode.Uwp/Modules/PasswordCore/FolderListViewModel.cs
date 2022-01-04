@@ -15,24 +15,25 @@ namespace Lavcode.Uwp.Modules.PasswordCore
     public class FolderListViewModel : ObservableObject
     {
         public ObservableCollection<FolderItem> FolderItems { get; } = new ObservableCollection<FolderItem>();
-
-        private bool _initing = false;
-        private int _selectedIndex = 0;
-        public int SelectedIndex
+        private FolderItem _selectedItem = null;
+        public FolderItem SelectedItem
         {
-            get { return _selectedIndex; }
+            get => _selectedItem;
             set
             {
-                if (_initing || value < 0 || _selectedIndex == value)
+                if (_initing || _selectedItem == value || IsDragging)
                 {
+                    OnPropertyChanged();
                     return;
                 }
 
-                SetProperty(ref _selectedIndex, value);
-                SettingHelper.Instance.SelectedFolderId = value < FolderItems.Count ? FolderItems[value].Folder.Id : null;
-                StrongReferenceMessenger.Default.Send(value < FolderItems.Count ? FolderItems[value] : null, "FolderSelected");
+                SetProperty(ref _selectedItem, value);
+                SettingHelper.Instance.SelectedFolderId = value?.Folder?.Id;
+                StrongReferenceMessenger.Default.Send(value, "FolderSelected");
             }
         }
+
+        private bool _initing = false;
 
         public void RegisterMsg()
         {
@@ -65,20 +66,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 }
                 _initing = false;
 
-                var beforeIndex = SelectedIndex;
-                var selectedFolderItem = FolderItems.Where(item => item.Folder.Id == SettingHelper.Instance.SelectedFolderId).FirstOrDefault();
-                if (selectedFolderItem == default)
+                var beforeFolder = SelectedItem;
+                SelectedItem
+                    = FolderItems.FirstOrDefault(item => item.Folder.Id == SettingHelper.Instance.SelectedFolderId)
+                    ?? FolderItems.FirstOrDefault();
+                if (SelectedItem == beforeFolder) // 选中的文件夹没有变化
                 {
-                    SelectedIndex = 0;
-                }
-                else
-                {
-                    SelectedIndex = FolderItems.IndexOf(selectedFolderItem);
-                }
-                if (SelectedIndex == beforeIndex) // 选中的Index没有变化
-                {
-                    OnPropertyChanged(nameof(SelectedIndex));
-                    StrongReferenceMessenger.Default.Send(SelectedIndex < FolderItems.Count ? FolderItems[SelectedIndex] : null, "FolderSelected");
+                    OnPropertyChanged(nameof(SelectedItem));
+                    StrongReferenceMessenger.Default.Send(SelectedItem, "FolderSelected");
                 }
             }
             catch (Exception ex)
@@ -95,17 +90,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
             var newFolderItem = new FolderItem(editFolder.Folder, editFolder.Icon);
             FolderItems.Add(newFolderItem);
-            var index = FolderItems.IndexOf(newFolderItem);
-
-            if (SelectedIndex == index)
-            {
-                OnPropertyChanged(nameof(SelectedIndex));
-                StrongReferenceMessenger.Default.Send(newFolderItem, "FolderSelected");
-            }
-            else
-            {
-                SelectedIndex = index;
-            }
+            SelectedItem = newFolderItem;
         }
 
         public async Task DeleteFolder(FolderItem folderItem)
@@ -147,8 +132,11 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         }
 
         #region 排序
+        public bool IsDragging = false;
+
         public async void DragCompleted(TabView sender, TabViewTabDragCompletedEventArgs args)
         {
+            IsDragging = false;
             try
             {
                 if (args.DropResult == Windows.ApplicationModel.DataTransfer.DataPackageOperation.Move)
@@ -173,6 +161,11 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     await _folderService.UpdateFolder(FolderItems[i].Folder);
                 }
             }, "正在排序");
+        }
+
+        public void DragStarting()
+        {
+            IsDragging = true;
         }
         #endregion
     }
