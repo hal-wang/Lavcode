@@ -14,9 +14,17 @@
     Opacity="0.4"
     FontFamily="{ThemeResource PivotTitleFontFamily}">
 
-    <TextBlock>
-        <Run Text="Lovcode "/>
-        <Run>v</Run>
-        <Run Text="{x:Bind VersionStr}"/>
-    </TextBlock>
+    <StackPanel Orientation="Horizontal">
+        <TextBlock>
+            <Run Text="Lovcode "/>
+            <Run>v</Run>
+            <Run Text="{x:Bind VersionStr}"/>
+        </TextBlock>
+        <TextBlock Margin="10 0 0 0"
+                   Visibility="{x:Bind ProviderVisibility,Mode=OneWay}">
+            <Run>（</Run>
+            <Run Text="{x:Bind Provider,Converter={StaticResource ProviderConverter}}"/>
+            <Run>）</Run>
+        </TextBlock>
+    </StackPanel>
 </UserControl>

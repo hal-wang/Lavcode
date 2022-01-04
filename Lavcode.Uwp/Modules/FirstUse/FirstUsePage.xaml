@@ -26,7 +26,7 @@
             <lucv:Logo x:Name="Logo" Visibility="Collapsed"/>
 
             <huc:TitleBar Grid.Column="1">
-                <lums:Version/>
+                <lums:Version ProviderVisibility="Collapsed"/>
             </huc:TitleBar>
         </Grid>
 

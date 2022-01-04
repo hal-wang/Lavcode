@@ -36,22 +36,23 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <local:Version/>
+                    <local:Version Grid.Column="0"/>
 
-                    <Grid Grid.Column="1">
-                        <TextBlock Text="{x:Bind OpenedFile.Name,Mode=OneWay}"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   FontSize="15"
-                                   Opacity="0.4"
-                                   FontStyle="Italic"
-                                   TextTrimming="CharacterEllipsis"
-                                   Margin="0 0 10 0"
-                                   Visibility="{x:Bind OpenedFile,Mode=OneTime,Converter={StaticResource IsNullConverter},ConverterParameter=true}"/>
-                    </Grid>
+                    <TextBlock Grid.Column="3"
+                               Text="{x:Bind OpenedFile.Name,Mode=OneWay}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Opacity="0.4"
+                                FontStyle="Italic"
+                                TextTrimming="CharacterEllipsis"
+                                Margin="0 0 10 0"
+                                Visibility="{x:Bind OpenedFile,Mode=OneTime,Converter={StaticResource IsNullConverter},ConverterParameter=true}"/>
                 </Grid>
             </huc:TitleBar>
             <StackPanel Grid.Column="2"
