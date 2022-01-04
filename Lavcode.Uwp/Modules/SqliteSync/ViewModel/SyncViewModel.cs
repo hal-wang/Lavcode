@@ -1,6 +1,8 @@
 ﻿using HTools;
 using HTools.Uwp.Helpers;
+using Lavcode.IService;
 using Lavcode.Uwp.View.Sync.SyncHelper;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
@@ -75,7 +77,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
                 LoadingHelper.Show("正在整理");
                 await syncHelper.ReplaceDbFile(remoteDbFile);
 
-                StrongReferenceMessenger.Default.Send<object, string>(null, "OnDbRecovered");
+                await OnDbRecovered();
                 MessageHelper.ShowPrimary("恢复完成");
             }
             catch (Exception ex)
@@ -131,7 +133,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
                 }
                 await syncHelper.ReplaceDbFile(localDbFile);
 
-                StrongReferenceMessenger.Default.Send<object, string>(null, "OnDbRecovered");
+                await OnDbRecovered();
                 MessageHelper.ShowPrimary("同步完成");
             }
             catch (Exception ex)
@@ -157,6 +159,15 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
             await Merge(false);
         }
         #endregion
+
+        private async Task OnDbRecovered()
+        {
+            await Lavcode.Uwp.ServiceProvider.Services.GetService<IConService>().Connect(new
+            {
+                FilePath = Lavcode.Uwp.ServiceProvider.Services.GetService<SqliteFileService>().SqliteFilePath
+            });
+            StrongReferenceMessenger.Default.Send<object, string>(null, "OnDbRecovered");
+        }
 
         #region Cleanup
         public async static Task CleanupTempFile()

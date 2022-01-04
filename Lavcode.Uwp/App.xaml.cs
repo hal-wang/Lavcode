@@ -45,7 +45,11 @@ namespace Lavcode.Uwp
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             base.OnLaunched(e);
+
+#if DEBUG
+#else
             UpdateHelper.DownloadAndInstallAllUpdates();
+#endif
 
             CreateFrame();
             if (!e.PrelaunchActivated)

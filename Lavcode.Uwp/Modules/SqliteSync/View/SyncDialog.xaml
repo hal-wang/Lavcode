@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:lucv="using:Lavcode.Uwp.Controls"
-    xmlns:hlucs="using:Lavcode.Uwp.View.Sync"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     Style="{ThemeResource DefaultContentDialogStyle}"
     mc:Ignorable="d"
