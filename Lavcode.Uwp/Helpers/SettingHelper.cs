@@ -13,58 +13,58 @@ namespace Lavcode.Uwp.Helpers
         #region 教程
         public bool AddFolderTaught
         {
-            get { return Get(false); }
-            set { Set(value); }
+            get => Get(false);
+            set => Set(value);
         }
 
         public bool AddPasswordTaught
         {
-            get { return Get(false); }
-            set { Set(value); }
+            get => Get(false);
+            set => Set(value);
         }
 
         public bool PasswordListTaught
         {
-            get { return Get(false); }
-            set { Set(value); }
+            get => Get(false);
+            set => Set(value);
         }
 
         public bool SvgTaught
         {
-            get { return Get(false); }
-            set { Set(value); }
+            get => Get(false);
+            set => Set(value);
         }
 
         public bool SyncTaught
         {
-            get { return Get(false); }
-            set { Set(value); }
+            get => Get(false);
+            set => Set(value);
         }
         #endregion
 
         #region Sqlite Sync
         public string DavAccount
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public string DavPassword
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public string DavCustomUrl
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public CloudType DavCloudType
         {
-            get { return (CloudType)Get((int)CloudType.Jgy); }
-            set { Set((int)value); }
+            get => (CloudType)Get((int)CloudType.Jgy);
+            set => Set((int)value);
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace Lavcode.Uwp.Helpers
         /// </summary>
         public string SyncFilePassword
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
         #endregion
 
@@ -82,43 +82,43 @@ namespace Lavcode.Uwp.Helpers
         /// </summary>
         public string SelectedFolderId
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public bool IsFirstInited
         {
-            get { return Get(false); }
-            set { Set(value); }
+            get => Get(false);
+            set => Set(value);
         }
 
         public bool IsBgVisible
         {
-            get { return Get(true); }
+            get => Get(true);
             set
             {
                 Set(value);
                 IsBgVisibleChanged?.Invoke(value);
             }
         }
-        public Action<bool> IsBgVisibleChanged;
+        public event Action<bool> IsBgVisibleChanged;
 
         public string GitHubToken
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public string GiteeToken
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public string GiteeRefreeToken
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public Provider Provider
@@ -129,8 +129,14 @@ namespace Lavcode.Uwp.Helpers
 
         public bool IsAuthOpen
         {
-            get { return Get(true, $"Is{Provider}AuthOpen"); }
-            set { Set(value, $"Is{Provider}AuthOpen"); }
+            get => Get(true, $"Is{Provider}AuthOpen");
+            set => Set(value, $"Is{Provider}AuthOpen");
+        }
+
+        public bool IsAutoLogin
+        {
+            get => Get(true);
+            set => Set(value);
         }
     }
 }

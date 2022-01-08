@@ -10,8 +10,11 @@ namespace Lavcode.Uwp.Modules.Shell
         {
             this.InitializeComponent();
 
-            SettingHelper.Instance.IsBgVisibleChanged += (b) => ImgVisible = b;
+            Loaded += (s, e) => SettingHelper.Instance.IsBgVisibleChanged += OnIsBgVisibleChanged;
+            Unloaded += (s, e) => SettingHelper.Instance.IsBgVisibleChanged -= OnIsBgVisibleChanged;
         }
+
+        private void OnIsBgVisibleChanged(bool imgVisible) => ImgVisible = imgVisible;
 
         public bool ImgVisible
         {

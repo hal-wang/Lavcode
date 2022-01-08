@@ -11,6 +11,9 @@
 
     <StackPanel>
         <Border Style="{ThemeResource SettingSeparator}"/>
+        <hucs:SwitchSettingCell Label="启动时自动登录"
+                                Value="{x:Bind VM.IsAutoLogin,Mode=TwoWay}"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
         <hucs:SwitchSettingCell Label="登录验证"
                                 Value="{x:Bind VM.IsAuthOpen,Mode=TwoWay}"
                                 Visibility="{x:Bind VM.Connected,Mode=OneWay,Converter={StaticResource BooleanConverter}}"/>

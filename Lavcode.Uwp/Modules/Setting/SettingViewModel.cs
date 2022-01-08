@@ -14,6 +14,12 @@ namespace Lavcode.Uwp.Modules.Setting
             set => SettingHelper.Instance.IsAuthOpen = value;
         }
 
+        public bool IsAutoLogin
+        {
+            get => SettingHelper.Instance.IsAutoLogin;
+            set => SettingHelper.Instance.IsAutoLogin = value;
+        }
+
         public bool IsBgVisible
         {
             get => SettingHelper.Instance.IsBgVisible;
