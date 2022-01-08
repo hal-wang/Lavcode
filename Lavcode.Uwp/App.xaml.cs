@@ -56,6 +56,7 @@ namespace Lavcode.Uwp
             {
                 SimpleNavFirstPage();
             }
+            Window.Current.Activate();
         }
 
         protected override void OnFileActivated(FileActivatedEventArgs e)
@@ -81,6 +82,10 @@ namespace Lavcode.Uwp
             CreateFrame();
             if (!isOpened)
             {
+                if (args.Kind == ActivationKind.CommandLineLaunch)
+                {
+                    OnCommandLineLaunch(args as CommandLineActivatedEventArgs);
+                }
                 SimpleNavFirstPage();
             }
             else if (args.Kind == ActivationKind.Protocol)
@@ -97,6 +102,38 @@ namespace Lavcode.Uwp
                         StrongReferenceMessenger.Default.Send(query, $"On{Provider.Gitee}Notify");
                         return;
                 }
+            }
+            Window.Current.Activate();
+        }
+
+        private void OnCommandLineLaunch(CommandLineActivatedEventArgs args)
+        {
+            var arguments = args.Operation.Arguments?.Split(' ');
+            if (arguments == null || arguments.Length <= 1)
+            {
+                return;
+            }
+
+            if (
+                arguments[1]?.ToLower() == Provider.Gitee.ToString().ToLower() ||
+                arguments[1]?.ToLower() == "码云")
+            {
+                SettingHelper.Instance.Provider = Provider.Gitee;
+            }
+            else if (
+                arguments[1]?.ToLower() == Provider.GitHub.ToString().ToLower() ||
+                arguments[1]?.ToLower() == "git" ||
+                arguments[1]?.ToLower() == "gayhub") // LOL
+            {
+                SettingHelper.Instance.Provider = Provider.GitHub;
+            }
+            else if (
+                arguments[1]?.ToLower() == Provider.Sqlite.ToString().ToLower() ||
+                arguments[1]?.ToLower() == "sqlite" ||
+                arguments[1]?.ToLower() == "local" ||
+                arguments[1]?.ToLower() == "本地")
+            {
+                SettingHelper.Instance.Provider = Provider.Sqlite;
             }
         }
 

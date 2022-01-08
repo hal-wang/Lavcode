@@ -4,8 +4,9 @@
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+		 xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
          xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
-         IgnorableNamespaces="uap mp rescap desktop4">
+         IgnorableNamespaces="uap uap5 mp rescap desktop4">
 
   <Identity
     Name="524473F72DB2F.Lavcode"
@@ -68,6 +69,14 @@
             <uap:DisplayName>Lavcode</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
+		  <uap5:Extension
+            Category="windows.appExecutionAlias"
+            Executable="Lavcode.Uwp.exe"
+            EntryPoint="Lavcode.Uwp.App">
+			  <uap5:AppExecutionAlias>
+				  <uap5:ExecutionAlias Alias="lavcode.exe" />
+			  </uap5:AppExecutionAlias>
+		  </uap5:Extension>
       </Extensions>
     </Application>
   </Applications>
