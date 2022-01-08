@@ -14,6 +14,16 @@ namespace Lavcode.Uwp.Modules.Setting
         {
             DataContext = VM;
             this.InitializeComponent();
+            Loaded += (s, e) => App.Frame.Navigated += Frame_Navigated;
+            Unloaded += (s, e) => App.Frame.Navigated -= Frame_Navigated;
+        }
+
+        private void Frame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            if (this.IsPaneOpen)
+            {
+                this.IsPaneOpen = false;
+            }
         }
 
         public SettingViewModel VM { get; } = ServiceProvider.Services.GetService<SettingViewModel>();

@@ -93,6 +93,12 @@ namespace Lavcode.Uwp.Modules.Auth
             var conResult = await ServiceProvider.Services.GetService<IConService>().Connect(loginData);
             if (!conResult) return;
 
+            // Has navigated to another page
+            if (App.Frame.CurrentSourcePageType != typeof(AuthPage))
+            {
+                return;
+            }
+
             (Window.Current.Content as Frame)?.Navigate(typeof(ShellPage));
             SettingHelper.Instance.IsFirstInited = true;
         }
