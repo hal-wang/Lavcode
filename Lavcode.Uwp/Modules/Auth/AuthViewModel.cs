@@ -7,6 +7,7 @@ using Lavcode.Uwp.Modules.SqliteSync;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.UI.Xaml;
@@ -43,6 +44,10 @@ namespace Lavcode.Uwp.Modules.Auth
             try
             {
                 await Login();
+            }
+            catch (HttpRequestException)
+            {
+                MessageHelper.ShowDanger("网络连接失败，请检查网络设置");
             }
             catch (Exception ex)
             {

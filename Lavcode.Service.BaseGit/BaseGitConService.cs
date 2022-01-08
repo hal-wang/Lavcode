@@ -112,27 +112,19 @@ namespace Lavcode.Service.BaseGit
 
         public virtual async Task<bool> Connect(object args)
         {
-            try
-            {
-                if (!await BeforeConnect(args)) return false;
+            if (!await BeforeConnect(args)) return false;
 
-                UserLogin = await GetUserLogin();
-                Repository = await GetRepository();
+            UserLogin = await GetUserLogin();
+            Repository = await GetRepository();
 
-                var issues = await CreateTable(await GetAllIssues());
-                FolderIssue = await GetIssueTableItems<Folder>(issues);
-                PasswordIssue = await GetIssueTableItems<Password>(issues);
-                IconIssue = await GetIssueTableItems<Icon>(issues);
-                DelectedItemIssue = await GetIssueTableItems<DelectedItem>(issues);
-                KeyValuePairIssue = await GetIssueTableItems<KeyValuePair>(issues);
-                ConfigIssue = await GetIssueTableItems<Config>(issues);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                return false;
-            }
+            var issues = await CreateTable(await GetAllIssues());
+            FolderIssue = await GetIssueTableItems<Folder>(issues);
+            PasswordIssue = await GetIssueTableItems<Password>(issues);
+            IconIssue = await GetIssueTableItems<Icon>(issues);
+            DelectedItemIssue = await GetIssueTableItems<DelectedItem>(issues);
+            KeyValuePairIssue = await GetIssueTableItems<KeyValuePair>(issues);
+            ConfigIssue = await GetIssueTableItems<Config>(issues);
+            return true;
         }
 
         private async Task<IssueItem<T>> GetIssueTableItems<T>(IList<IssueItem> issues)
