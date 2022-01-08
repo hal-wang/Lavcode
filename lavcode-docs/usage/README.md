@@ -207,6 +207,22 @@ WebDav 云同步和文件同步，备份文件一律使用`AES256`加密。
 当然，文件打开的前提是你有正确的密码
 :::
 
+## 用命令打开 Lavcode
+
+可用命令快速打开 Lavcode，格式为 `lavcode` 或 `lavcode + 存储方式`
+
+- 快速打开
+  - `lavcode`
+- GitHub
+  - `lavcode git`
+  - `lavcode github`
+- Gitee
+  - `lavcode gitee`
+  - `lavcode 码云`
+- 本地
+  - `lavcode local`
+  - `lavcode sqlite`
+
 ## 结尾
 
 喜欢本软件就[给个 Star 吧](https://github.com/hal-wang/Lavcode)

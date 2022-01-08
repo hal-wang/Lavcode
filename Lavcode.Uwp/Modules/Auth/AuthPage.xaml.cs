@@ -1,4 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
+using Lavcode.Uwp.Helpers;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,7 +21,7 @@ namespace Lavcode.Uwp.Modules.Auth
 
         private void AuthPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_autoLogin)
+            if (_autoLogin && SettingHelper.Instance.IsAutoLogin)
             {
                 VM.TryLogin();
             }
