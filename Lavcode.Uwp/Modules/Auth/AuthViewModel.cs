@@ -61,10 +61,13 @@ namespace Lavcode.Uwp.Modules.Auth
 
         private async Task Login()
         {
+#if WITHOUT_HELLO
+#else
             if (ShouldAuthWindowsHello && !await WindowsHelloAuth())
             {
                 return;
             }
+#endif
 
             var provider = SettingHelper.Instance.Provider;
             object loginData = null;
