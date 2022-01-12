@@ -18,7 +18,7 @@
 
 ## 更多
 
-更多信息，请查看 [https://lavcode.hal.wang](https://lavcode.hal.wang/pages/dev/start/)
+更多信息，请查看 [https://lavcode.hal.wang](https://lavcode.hal.wang)
 
 ## 截图
 
