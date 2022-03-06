@@ -16,7 +16,7 @@
 
     <StackPanel Orientation="Horizontal">
         <TextBlock>
-            <Run Text="Lovcode "/>
+            <Run Text="Lavcode "/>
             <Run>v</Run>
             <Run Text="{x:Bind VersionStr}"/>
         </TextBlock>
