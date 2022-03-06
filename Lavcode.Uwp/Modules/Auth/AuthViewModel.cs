@@ -111,6 +111,8 @@ namespace Lavcode.Uwp.Modules.Auth
             SettingHelper.Instance.IsFirstInited = true;
         }
 
+#if WITHOUT_HELLO
+#else
         /// <summary>
         /// 是否需要验证 WindowsHello
         /// </summary>
@@ -146,6 +148,6 @@ namespace Lavcode.Uwp.Modules.Auth
                 return false;
             }
         }
+#endif
     }
-
 }

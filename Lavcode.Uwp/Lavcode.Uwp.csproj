@@ -145,6 +145,7 @@
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
+    <Compile Include="Helpers\CommandLauncher.cs" />
     <Compile Include="Helpers\NetLoadingHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
     <Compile Include="Modules\Guide\GuideHandler.cs" />
