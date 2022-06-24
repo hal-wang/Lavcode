@@ -5,12 +5,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:huc="using:HTools.Uwp.Controls"
+    HorizontalAlignment="Stretch"
+    HorizontalContentAlignment="Stretch"
     mc:Ignorable="d">
 
     <StackPanel HorizontalAlignment="Stretch">
         <huc:PathButton Data="{x:Bind Data,Mode=OneWay}"
                         Padding="10 10"
                         Height="40"
+                        Width="50"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Center"
                         Click="PathButton_Click"/>
