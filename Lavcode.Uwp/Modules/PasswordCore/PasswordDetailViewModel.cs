@@ -112,6 +112,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             set { SetProperty(ref _isEmpty, value); }
         }
 
+        private bool _passwordVisible = false;
+        public bool PasswordVisible
+        {
+            get => _passwordVisible;
+            set => SetProperty(ref _passwordVisible, value);
+        }
+
+        public void OnPasswordVisibleChange()
+        {
+            PasswordVisible = !PasswordVisible;
+        }
+
         private void Clean()
         {
             KeyValuePairs.Clear();
