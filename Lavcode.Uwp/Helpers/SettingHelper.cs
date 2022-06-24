@@ -138,5 +138,11 @@ namespace Lavcode.Uwp.Helpers
             get => Get(true);
             set => Set(value);
         }
+
+        public bool UseProxy
+        {
+            get => Get(false);
+            set => Set(value);
+        }
     }
 }

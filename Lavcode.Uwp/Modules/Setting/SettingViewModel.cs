@@ -40,5 +40,11 @@ namespace Lavcode.Uwp.Modules.Setting
                     &&
                     !string.IsNullOrEmpty(SettingHelper.Instance.GiteeToken)
                 ));
+
+        public bool UseProxy
+        {
+            get => SettingHelper.Instance.UseProxy;
+            set => SettingHelper.Instance.UseProxy = value;
+        }
     }
 }

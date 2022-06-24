@@ -5,7 +5,6 @@ using Lavcode.Service.BaseGit.Models;
 using OneOf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +12,7 @@ namespace Lavcode.Service.BaseGit
 {
     public abstract class BaseGitConService : IConService
     {
+        public Func<bool> UseProxy { get; private set; } = null;
         protected int PageSize { get; } = 20;
 
         internal IssueItem<Folder> FolderIssue { get; private set; }
@@ -191,6 +191,11 @@ namespace Lavcode.Service.BaseGit
                 page++;
             } while (comments.Count >= PageSize);
             return result;
+        }
+
+        public void SetProxy(Func<bool> useProxy)
+        {
+            UseProxy = useProxy;
         }
 
         public void Dispose()

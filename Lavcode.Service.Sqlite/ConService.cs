@@ -12,6 +12,8 @@ namespace Lavcode.Service.Sqlite
     {
         public SQLiteConnection Connection { get; private set; }
 
+        public Func<bool> UseProxy { get; } = null;
+
         public async Task<bool> Connect(object args)
         {
             var filePath = DynamicHelper.ToExpandoObject(args).FilePath as string;
@@ -45,6 +47,10 @@ namespace Lavcode.Service.Sqlite
         public void Dispose()
         {
             Connection?.Dispose();
+        }
+
+        public void SetProxy(Func<bool> useProxy)
+        {
         }
     }
 }

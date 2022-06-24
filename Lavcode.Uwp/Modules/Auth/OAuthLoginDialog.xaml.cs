@@ -72,7 +72,10 @@ namespace Lavcode.Uwp.Modules.Auth
         #region Static
         private static async Task RefreshGiteeToken()
         {
-            var res = await new HttpClient().PostAsync("https://gitee.com/oauth/token", query: new
+            var res = await new HttpClient(new HttpClientHandler()
+            {
+                UseProxy = SettingHelper.Instance.UseProxy,
+            }).PostAsync("https://gitee.com/oauth/token", query: new
             {
                 grant_type = "refresh_token",
                 refresh_token = SettingHelper.Instance.GiteeRefreeToken

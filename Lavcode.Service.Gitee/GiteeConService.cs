@@ -18,7 +18,10 @@ namespace Lavcode.Service.Gitee
     {
         private string _token = string.Empty;
 
-        private HttpClient HttpClient => new()
+        private HttpClient HttpClient => new(new HttpClientHandler()
+        {
+            UseProxy = UseProxy?.Invoke() ?? false,
+        })
         {
             BaseAddress = new Uri("https://gitee.com/api/v5/"),
             Timeout = TimeSpan.FromSeconds(5),
@@ -86,7 +89,6 @@ namespace Lavcode.Service.Gitee
                     repo = Repository.Name,
                 });
             res.EnsureSuccessStatusCode();
-            var comment = await res.GetContent<JObject>();
         }
 
         protected async override Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, OneOf<int, string> issueNumber)

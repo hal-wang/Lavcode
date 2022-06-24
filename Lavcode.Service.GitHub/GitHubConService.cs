@@ -4,9 +4,11 @@ using Lavcode.Service.BaseGit;
 using Lavcode.Service.BaseGit.Models;
 using Newtonsoft.Json;
 using Octokit;
+using Octokit.Internal;
 using OneOf;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Lavcode.Service.GitHub
@@ -123,7 +125,12 @@ namespace Lavcode.Service.GitHub
             var token = DynamicHelper.ToExpandoObject(args).Token as string;
 
             var credentials = new Credentials(token, AuthenticationType.Oauth);
-            Client = new GitHubClient(new ProductHeaderValue("Lavcode")) { Credentials = credentials };
+            var adapt = new HttpClientAdapter(() => new HttpClientHandler()
+            {
+                UseProxy = UseProxy?.Invoke() ?? false,
+            });
+            var connection = new Connection(new ProductHeaderValue("Lavcode"), adapt);
+            Client = new GitHubClient(connection) { Credentials = credentials };
             return Task.FromResult(true);
         }
     }

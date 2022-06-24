@@ -98,6 +98,7 @@ namespace Lavcode.Uwp.Modules.Auth
             }
             if (loginData == null) return;
 
+            ServiceProvider.Services.GetService<IConService>().SetProxy(() => SettingHelper.Instance.UseProxy);
             var conResult = await ServiceProvider.Services.GetService<IConService>().Connect(loginData);
             if (!conResult) return;
 

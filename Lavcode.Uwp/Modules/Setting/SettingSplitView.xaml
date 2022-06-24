@@ -30,6 +30,10 @@
                                 Visibility="{x:Bind VM.IsCleanEnable,Converter={StaticResource BooleanConverter}}"/>
         <Border Style="{ThemeResource SettingSeparator}"
                 Visibility="{x:Bind VM.IsCleanEnable,Converter={StaticResource BooleanConverter}}"/>
+        <hucs:SwitchSettingCell Label="系统代理"
+                                Value="{x:Bind VM.UseProxy,Mode=TwoWay}"/>
+        <Border Style="{ThemeResource SettingSeparator}"/>
+        <TextBlock Text="如果 GitHub 或 Gitee 无法联网，请尝试打开或关闭此选项" Margin="10 2 10 0" TextWrapping="Wrap" FontSize="12" Opacity="0.7"/>
 
         <Border Style="{ThemeResource SettingSeparator}" Margin="0 30 0 0"/>
         <hucs:ButtonSettingCell Label="反馈" Tapped="OnFeedback"/>
