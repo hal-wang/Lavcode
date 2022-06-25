@@ -1,6 +1,5 @@
 import { defaultTheme, defineUserConfig } from "vuepress";
 import * as path from "path";
-import { registerComponentsPlugin } from "@vuepress/plugin-register-components";
 
 export default defineUserConfig({
   lang: "zh-CN",
@@ -46,9 +45,4 @@ export default defineUserConfig({
       "/pp/": ["en.md", "zh.md"],
     },
   }),
-  plugins: [
-    registerComponentsPlugin({
-      componentsDir: path.resolve(__dirname, "../components"),
-    }),
-  ],
 });
