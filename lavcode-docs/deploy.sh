@@ -1,4 +1,4 @@
-cd .vuepress/dist/
+cd docs/.vuepress/dist/
 git init -b gh-pages
 git add -A
 git commit -m deploy
