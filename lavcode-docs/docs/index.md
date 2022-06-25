@@ -7,6 +7,9 @@ actions:
   - text: 快速开始
     link: /usage/start
     type: primary
+  - text: 下载
+    type: secondary
+    link: https://www.microsoft.com/store/apps/9N3N7R34ZJDC
   - text: GitHub
     type: secondary
     link: https://github.com/hal-wang/Lavcode

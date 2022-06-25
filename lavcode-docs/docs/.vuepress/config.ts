@@ -28,10 +28,11 @@ export default defineUserConfig({
   head: [["link", { rel: "icon", href: "/logo.png" }]],
   base: "/",
   theme: defaultTheme({
-    docsRepo: "https://github.com/hal-wang/Lavcode",
+    repo: "https://github.com/hal-wang/Lavcode",
+    docsRepo: "hal-wang/Lavcode",
     docsBranch: "main",
     docsDir: "docs",
-    editLinkPattern: ":repo/edit/:branch/:path",
+    editLinkPattern: ":repo/edit/:branch/lavcode-docs/:path",
     editLink: true,
     editLinkText: "编辑此页",
     logo: "/logo.png",
