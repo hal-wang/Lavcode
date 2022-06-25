@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "deploy": "vuepress build . && sh deploy.sh"
+    "deploy": "vuepress build docs && sh deploy.sh"
   },
   "author": "hal-wang",
   "license": "MIT",
