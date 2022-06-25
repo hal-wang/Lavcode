@@ -1,5 +1,19 @@
 import { defaultTheme, defineUserConfig } from "vuepress";
-import * as path from "path";
+
+const pages = [
+  {
+    text: "新手指南",
+    children: ["start.md", "password.md", "problem.md"],
+  },
+  {
+    text: "基础",
+    children: ["safety.md", "sync.md", "window.md", "svgicon.md"],
+  },
+  {
+    text: "进阶",
+    children: ["command.md", "contribute.md"],
+  },
+];
 
 export default defineUserConfig({
   lang: "zh-CN",
@@ -21,13 +35,7 @@ export default defineUserConfig({
     notFound: ["你访问的页面不存在"],
     navbar: [
       { text: "首页", link: "/index.md" },
-      {
-        text: "使用帮助",
-        children: [
-          { text: "快速开始", link: "/usage/start.md" },
-          { text: "Svg图标", link: "/usage/svgicon.md" },
-        ],
-      },
+      ...pages.map((item) => Object.assign({ link: "/usage/" }, item)),
       {
         text: "下载",
         ariaLabel: "下载",
@@ -41,7 +49,7 @@ export default defineUserConfig({
       { text: "捐赠", link: "/donate.md" },
     ],
     sidebar: {
-      "/usage/": ["start.md", "svgicon.md"],
+      "/usage/": pages,
       "/pp/": ["en.md", "zh.md"],
     },
   }),
