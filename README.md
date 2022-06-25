@@ -9,7 +9,6 @@
     <a href="https://github.com/hal-wang/Lavcode"><img src="https://img.shields.io/github/repo-size/hal-wang/Lavcode" alt="repo size" /></a>
     <a href="https://github.com/hal-wang/Lavcode" ><img src="https://img.shields.io/github/issues/hal-wang/Lavcode" alt="GitHub Issues" /></a>
     <a href="https://github.com/hal-wang/Lavcode/pulls" ><img src="https://img.shields.io/github/issues-pr/hal-wang/Lavcode" /></a>
-    <a href="https://github.com/hal-wang/Lavcode/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" ></a>
     <a href="https://gitpod.io/#https://github.com/hal-wang/Lavcode"><img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" ></a>
     <a href="https://paypal.me/ihalwang" ><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
 </p>
@@ -17,6 +16,13 @@
 ---
 
 **主页查看更多详情：**<https://lavcode.hal.wang>
+
+## 下载使用
+
+`Lavcode` 发布在 `Win10/11` 应用商店 Microsoft Store
+
+- 应用商店内搜索 `Lavcode` 并下载安装
+- 也可以通过此链接跳转：<https://www.microsoft.com/store/apps/9N3N7R34ZJDC>
 
 ## 遇到问题？
 
@@ -40,7 +46,7 @@
   <img src="https://contrib.rocks/image?repo=hal-wang/Lavcode" />
 </a>
 
-_自动更新_
+_列表自动更新_
 
 ## 截图
 
