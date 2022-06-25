@@ -3,8 +3,13 @@ home: true
 heroImage: /logo.png
 heroText: Lavcode 密码管理
 tagline: 安全、免费、丰富、开源的密码管理器
-actionText: 开始  →
-actionLink: /usage/
+actions:
+  - text: 快速开始
+    link: /usage/start
+    type: primary
+  - text: GitHub
+    type: secondary
+    link: https://github.com/hal-wang/Lavcode
 features:
   - title: 免费开源
     details: 完全免费开源，代码公开透明，无后台，无窃取。安全管理存储密码。
