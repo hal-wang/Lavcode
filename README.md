@@ -40,7 +40,7 @@
 - 软件错误请在这里提：[Issues](https://github.com/hal-wang/Lavcode/issues)
 - 代码改进欢迎提交 [PR](https://github.com/hal-wang/Lavcode/pulls)
 
-### 贡献列表
+### 代码贡献列表
 
 <a href="https://github.com/hal-wang/Lavcode/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=hal-wang/Lavcode" />
@@ -50,10 +50,10 @@ _列表自动更新_
 
 ## 截图
 
-![截图1](https://lavcode.hal.wang/screenshots/1.png)
-![截图2](https://lavcode.hal.wang/screenshots/2.png)
-![截图3](https://lavcode.hal.wang/screenshots/3.png)
-![截图4](https://lavcode.hal.wang/screenshots/4.png)
+![截图1](https://lavcode.hal.wang/assets/storage.0ec87792.png)
+![截图2](https://lavcode.hal.wang/assets/storage.0ec87792.png)
+![截图3](https://lavcode.hal.wang/assets/3.467c230d.png)
+![截图4](https://lavcode.hal.wang/assets/4.27685662.png)
 
 ## License
 
