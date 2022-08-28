@@ -121,6 +121,12 @@ namespace Lavcode.Uwp.Helpers
             set => Set(value);
         }
 
+        public string ApiUrl
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         public string ApiToken
         {
             get => Get<string>();

@@ -148,6 +148,9 @@
     <Compile Include="Helpers\CommandLauncher.cs" />
     <Compile Include="Helpers\NetLoadingHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
+    <Compile Include="Modules\Auth\ApiLoginDialog.xaml.cs">
+      <DependentUpon>ApiLoginDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Guide\GuideHandler.cs" />
     <Compile Include="Modules\Guide\GuideItem.cs" />
     <Compile Include="Modules\Guide\GuideSettingMapItem.cs" />
@@ -388,6 +391,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Header.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Auth\ApiLoginDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

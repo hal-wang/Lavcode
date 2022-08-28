@@ -17,7 +17,7 @@ namespace Lavcode.Service.Api
         private string _baseUrl = null;
         public Func<bool> UseProxy { private set; get; } = null;
 
-        public async Task<bool> Connect(object args)
+        public Task<bool> Connect(object args)
         {
             var obj = DynamicHelper.ToExpandoObject(args);
             _version = obj.Version;
@@ -27,15 +27,11 @@ namespace Lavcode.Service.Api
             {
                 _token = obj.Token;
             }
-            else if (obj.Password != null)
-            {
-                _token = await Login(obj.Password);
-            }
             if (string.IsNullOrEmpty(_token))
             {
-                return false;
+                return Task.FromResult(false);
             }
-            return true;
+            return Task.FromResult(true);
         }
 
         public void Dispose()
@@ -88,7 +84,7 @@ namespace Lavcode.Service.Api
             return client;
         }
 
-        private async Task<string> Login(string password)
+        public async Task<string> Login(string password)
         {
             var obj = await GetAsync<JObject>("auth", query: new
             {
@@ -147,6 +143,10 @@ namespace Lavcode.Service.Api
             catch (HttpRequestException)
             {
                 throw new HttpRequestException("请求失败，请检查网络设置");
+            }
+            catch (UriFormatException)
+            {
+                throw new Exception("地址格式错误");
             }
             catch (Exception ex)
             {

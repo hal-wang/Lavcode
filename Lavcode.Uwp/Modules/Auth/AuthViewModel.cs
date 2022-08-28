@@ -96,10 +96,14 @@ namespace Lavcode.Uwp.Modules.Auth
                     };
                     break;
                 case Provider.Api:
+                    var apiToken = await ApiLoginDialog.Login();
+                    if (string.IsNullOrEmpty(apiToken)) return;
                     ServiceProvider.Register<Service.Api.ConService>();
                     loginData = new
                     {
-                        Token = SettingHelper.Instance.ApiToken
+                        Token = apiToken,
+                        Version = Global.Version,
+                        BaseUrl = SettingHelper.Instance.ApiUrl,
                     };
                     break;
             }
