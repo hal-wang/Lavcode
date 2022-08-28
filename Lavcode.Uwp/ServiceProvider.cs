@@ -37,6 +37,11 @@ namespace Lavcode.Uwp
                 services.AddSingleton<IFolderService, Service.BaseGit.FolderService>();
                 services.AddSingleton<IPasswordService, Service.BaseGit.PasswordService>();
             }
+            else if (typeof(Service.Api.ConService) == typeof(T))
+            {
+                services.AddSingleton<IFolderService, Service.Api.FolderService>();
+                services.AddSingleton<IPasswordService, Service.Api.PasswordService>();
+            }
 
             RegisterViewModel(services);
             Services = services.BuildServiceProvider();
@@ -71,8 +76,6 @@ namespace Lavcode.Uwp
             {
                 case Model.Provider.Sqlite:
                     Modules.SqliteSync.ViewModel.ServiceProvider.Register(services);
-                    break;
-                case Model.Provider.GitHub:
                     break;
             }
         }

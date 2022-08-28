@@ -95,6 +95,13 @@ namespace Lavcode.Uwp.Modules.Auth
                         FilePath = ServiceProvider.Services.GetService<SqliteFileService>().SqliteFilePath
                     };
                     break;
+                case Provider.Api:
+                    ServiceProvider.Register<Service.Api.ConService>();
+                    loginData = new
+                    {
+                        Token = SettingHelper.Instance.ApiToken
+                    };
+                    break;
             }
             if (loginData == null) return;
 
@@ -130,6 +137,9 @@ namespace Lavcode.Uwp.Modules.Auth
 
                 // Gitee 没有登录过
                 if (SettingHelper.Instance.Provider == Provider.Gitee && string.IsNullOrEmpty(SettingHelper.Instance.GiteeToken)) return false;
+
+                // 云接口 没有登录过
+                if (SettingHelper.Instance.Provider == Provider.Api && string.IsNullOrEmpty(SettingHelper.Instance.ApiToken)) return false;
 
                 return SettingHelper.Instance.IsAuthOpen;
             }

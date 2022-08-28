@@ -9,9 +9,8 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="300"
-    Height="330"
-    Width="240"
-    Margin="20 0"
+    Width="220"
+    Margin="14 0"
     ui:FrameworkElementExtensions.Cursor="Hand"
     Background="{ThemeResource SystemAccentBrush7}">
 

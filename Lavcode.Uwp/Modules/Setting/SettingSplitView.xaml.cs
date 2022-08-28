@@ -82,6 +82,9 @@ namespace Lavcode.Uwp.Modules.Setting
                     SettingHelper.Instance.GiteeToken = null;
                     SettingHelper.Instance.GiteeRefreeToken = null;
                     break;
+                case Model.Provider.Api:
+                    SettingHelper.Instance.ApiToken = null;
+                    break;
             }
             SettingHelper.Instance.IsAuthOpen = true;
             SettingHelper.Instance.IsFirstInited = false;

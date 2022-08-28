@@ -37,11 +37,17 @@ namespace Lavcode.Uwp.Helpers
                 }
                 else if (
                     pStr.ToLower() == Model.Provider.Sqlite.ToString().ToLower() ||
-                    pStr.ToLower() == "sqlite" ||
                     pStr.ToLower() == "local" ||
                     pStr.ToLower() == "本地")
                 {
                     return Model.Provider.Sqlite;
+                }
+                else if (
+                    pStr.ToLower() == Model.Provider.Api.ToString().ToLower() ||
+                    pStr.ToLower() == "net" ||
+                    pStr.ToLower() == "network")
+                {
+                    return Model.Provider.Api;
                 }
                 else
                 {

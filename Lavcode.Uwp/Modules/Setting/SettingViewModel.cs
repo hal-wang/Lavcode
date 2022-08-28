@@ -39,6 +39,12 @@ namespace Lavcode.Uwp.Modules.Setting
                     SettingHelper.Instance.Provider == Model.Provider.Gitee
                     &&
                     !string.IsNullOrEmpty(SettingHelper.Instance.GiteeToken)
+                )
+                ||
+                (
+                    SettingHelper.Instance.Provider == Model.Provider.Api
+                    &&
+                    !string.IsNullOrEmpty(SettingHelper.Instance.ApiToken)
                 ));
 
         public bool UseProxy

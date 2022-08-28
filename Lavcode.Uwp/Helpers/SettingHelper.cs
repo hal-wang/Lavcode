@@ -121,6 +121,12 @@ namespace Lavcode.Uwp.Helpers
             set => Set(value);
         }
 
+        public string ApiToken
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         public Provider Provider
         {
             get => (Provider)Get((int)Provider.GitHub);

@@ -593,6 +593,10 @@
       <Project>{7813445b-901e-4099-8426-37a760524d79}</Project>
       <Name>Lavcode.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lavcode.Service.Api\Lavcode.Service.Api.csproj">
+      <Project>{081f5363-80b6-4160-ad8e-37f9d9bca17d}</Project>
+      <Name>Lavcode.Service.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lavcode.Service.BaseGit\Lavcode.Service.BaseGit.csproj">
       <Project>{14c051d7-48f4-484c-8f9a-3e4c020b959c}</Project>
       <Name>Lavcode.Service.BaseGit</Name>

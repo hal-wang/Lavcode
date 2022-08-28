@@ -5,5 +5,6 @@
         Sqlite,
         GitHub,
         Gitee,
+        Api
     }
 }
