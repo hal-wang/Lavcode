@@ -20,7 +20,7 @@ namespace Lavcode.Service.Sqlite
             _cs = cs as ConService;
         }
 
-        public async Task AddPassword(PasswordModel password, IconModel icon, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task AddPassword(PasswordModel password, List<KeyValuePairModel> keyValuePairs = null)
         {
             await TaskExtend.Run(() =>
             {
@@ -42,15 +42,15 @@ namespace Lavcode.Service.Sqlite
                 // 如果有重复
                 if (Connection.Table<PasswordEntity>().Where((item) => item.Id == password.Id).Count() > 0)
                 {
-                    password.Id = Guid.NewGuid().ToString();
+                    throw new Exception("不能重复添加");
                 }
 
                 Connection.RunInTransaction(() =>
                 {
                     var passwordEntity = PasswordEntity.FromModel(password);
                     Connection.Insert(passwordEntity);
-                    icon.Id = passwordEntity.Id;
-                    Connection.Insert(IconEntity.FromModel(icon));
+                    password.Icon.Id = passwordEntity.Id;
+                    Connection.Insert(IconEntity.FromModel(password.Icon));
 
                     if (keyValuePairs != null)
                     {
@@ -139,7 +139,7 @@ namespace Lavcode.Service.Sqlite
             return result;
         }
 
-        public async Task UpdatePassword(PasswordModel password, IconModel icon = null, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task UpdatePassword(PasswordModel password, bool skipIcon, List<KeyValuePairModel> keyValuePairs = null)
         {
             await TaskExtend.Run(() =>
             {
@@ -148,9 +148,10 @@ namespace Lavcode.Service.Sqlite
                 Connection.RunInTransaction(() =>
                 {
                     Connection.Update(password);
-                    if (icon != null)
+                    if (!skipIcon && password.Icon != null)
                     {
-                        Connection.Update(icon);
+                        password.Icon.Id = password.Id;
+                        Connection.Update(password.Icon);
                     }
 
                     if (keyValuePairs != null)

@@ -59,7 +59,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 foreach (var password in Passwords)
                 {
                     password.FolderId = SelectedFolder.Folder.Id;
-                    await _passwordService.UpdatePassword(password);
+                    await _passwordService.UpdatePassword(password, true);
                 }
             }, "正在移动");
 

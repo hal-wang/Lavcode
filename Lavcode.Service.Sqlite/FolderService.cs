@@ -20,7 +20,7 @@ namespace Lavcode.Service.Sqlite
             _cs = cs as ConService;
         }
 
-        public async Task AddFolder(FolderModel folder, IconModel icon)
+        public async Task AddFolder(FolderModel folder)
         {
             await TaskExtend.Run(() =>
             {
@@ -41,8 +41,8 @@ namespace Lavcode.Service.Sqlite
 
                     var folderEntity = FolderEntity.FromModel(folder);
                     Connection.Insert(folderEntity);
-                    icon.Id = folderEntity.Id;
-                    Connection.Insert(IconEntity.FromModel(icon));
+                    folder.Icon.Id = folderEntity.Id;
+                    Connection.Insert(IconEntity.FromModel(folder.Icon));
                 });
             });
         }
@@ -100,7 +100,7 @@ namespace Lavcode.Service.Sqlite
             return folders;
         }
 
-        public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
+        public async Task UpdateFolder(FolderModel folder, bool skipIcon)
         {
             await TaskExtend.Run(() =>
             {
@@ -112,9 +112,10 @@ namespace Lavcode.Service.Sqlite
                         Connection.Update(FolderEntity.FromModel(folder));
                     }
 
-                    if (icon != null)
+                    if (!skipIcon && folder.Icon != null)
                     {
-                        Connection.Update(IconEntity.FromModel(icon));
+                        folder.Icon.Id = folder.Id;
+                        Connection.Update(IconEntity.FromModel(folder.Icon));
                     }
                 });
             });

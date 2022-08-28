@@ -71,7 +71,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
                     continue;
                 }
 
-                await _localSqliteHelper.FolderService.AddFolder(remoteFolder, remoteFolder.Icon);
+                await _localSqliteHelper.FolderService.AddFolder(remoteFolder);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
                 }
 
                 var remoteKvp = await _remoteSqliteHelper.PasswordService.GetKeyValuePairs(remotePassword.Id);
-                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, remotePassword.Icon, remoteKvp);
+                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, false, remoteKvp);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
                     continue;
                 }
 
-                await _localSqliteHelper.FolderService.UpdateFolder(remoteFolder, remoteFolder.Icon);
+                await _localSqliteHelper.FolderService.UpdateFolder(remoteFolder, false);
             }
         }
 
@@ -115,7 +115,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
                 }
 
                 var remoteKvp = await _remoteSqliteHelper.PasswordService.GetKeyValuePairs(remotePassword.Id);
-                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, remotePassword.Icon, remoteKvp);
+                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, false, remoteKvp);
             }
         }
 

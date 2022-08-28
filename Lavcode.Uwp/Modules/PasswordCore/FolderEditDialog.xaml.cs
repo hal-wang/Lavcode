@@ -139,16 +139,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                      var folder = new FolderModel()
                      {
                          Name = FolderName,
+                         Icon = Icon
                      };
-                     await folderService.AddFolder(folder, Icon);
+                     await folderService.AddFolder(folder);
                      Folder = folder;
                  }
                  else //编辑
                  {
                      var folder = Folder.DeepClone();
                      folder.Name = FolderName;
+                     folder.Icon = Icon;
 
-                     await folderService.UpdateFolder(folder, Icon);
+                     await folderService.UpdateFolder(folder, false);
                      Folder = folder;
                  }
              }, "正在保存");

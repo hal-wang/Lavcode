@@ -158,7 +158,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 for (var i = 0; i < FolderItems.Count; i++)
                 {
                     FolderItems[i].Folder.Order = i;
-                    await _folderService.UpdateFolder(FolderItems[i].Folder);
+                    await _folderService.UpdateFolder(FolderItems[i].Folder, true);
                 }
             }, "正在排序");
         }

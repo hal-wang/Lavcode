@@ -18,7 +18,7 @@ namespace Lavcode.Service.BaseGit
             _con = cs as BaseGitConService;
         }
 
-        public async Task AddPassword(PasswordModel password, IconModel icon, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task AddPassword(PasswordModel password, List<KeyValuePairModel> keyValuePairs = null)
         {
             password.LastEditTime = DateTime.Now;
 
@@ -39,14 +39,14 @@ namespace Lavcode.Service.BaseGit
             // 如果有重复
             if (_con.PasswordIssue.Comments.Where((item) => item.Value.Id == password.Id).Count() > 0)
             {
-                password.Id = Guid.NewGuid().ToString();
+                throw new Exception("不能重复添加");
             }
 
             var passwordEntity = PasswordEntity.FromModel(password);
             await _con.CreateComment(passwordEntity);
 
-            icon.Id = passwordEntity.Id;
-            await _con.CreateComment(IconEntity.FromModel(icon));
+            password.Icon.Id = passwordEntity.Id;
+            await _con.CreateComment(IconEntity.FromModel(password.Icon));
             if (keyValuePairs != null)
             {
                 foreach (var kvp in keyValuePairs)
@@ -110,13 +110,14 @@ namespace Lavcode.Service.BaseGit
             return Task.FromResult(result);
         }
 
-        public async Task UpdatePassword(PasswordModel password, IconModel icon = null, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task UpdatePassword(PasswordModel password, bool skipIcon, List<KeyValuePairModel> keyValuePairs = null)
         {
             password.LastEditTime = DateTime.Now;
             await _con.UpdateComment(PasswordEntity.FromModel(password), (item1, item2) => item1.Id == item2.Id);
-            if (icon != null)
+            if (!skipIcon && password.Icon != null)
             {
-                await _con.UpdateComment(IconEntity.FromModel(icon), (item1, item2) => item1.Id == item2.Id);
+                password.Icon.Id = password.Id;
+                await _con.UpdateComment(IconEntity.FromModel(password.Icon), (item1, item2) => item1.Id == item2.Id);
             }
 
             if (keyValuePairs != null)

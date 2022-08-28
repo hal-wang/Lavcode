@@ -150,7 +150,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 for (var i = 0; i < PasswordItems.Count; i++)
                 {
                     PasswordItems[i].Password.Order = i;
-                    await _passwordService.UpdatePassword(PasswordItems[i].Password);
+                    await _passwordService.UpdatePassword(PasswordItems[i].Password, true);
                 }
             }, "正在排序");
         }
@@ -310,7 +310,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                         var password = item["Password"].ToObject<PasswordModel>();
                         password.FolderId = _curFolder.Folder.Id;
 
-                        await _passwordService.AddPassword(password, item["Icon"].ToObject<IconModel>(), item["KeyValuePairs"].ToObject<List<KeyValuePairModel>>());
+                        await _passwordService.AddPassword(password, item["KeyValuePairs"].ToObject<List<KeyValuePairModel>>());
                         PasswordItems.Add(new PasswordItem(password));
                     }
                 }, "正在复制");
@@ -329,7 +329,6 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 items.Add(new
                 {
                     passwordItem.Password,
-                    passwordItem.Icon,
                     KeyValuePairs = (await _passwordService.GetKeyValuePairs(passwordItem.Password.Id)).ToArray()
                 });
             }

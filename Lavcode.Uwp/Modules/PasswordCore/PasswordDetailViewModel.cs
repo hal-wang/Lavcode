@@ -486,16 +486,17 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             newPassword.Title = Title;
             newPassword.Value = Value;
             newPassword.Remark = Remark;
+            newPassword.Icon = Icon;
 
             await NetLoadingHelper.Invoke(async () =>
             {
                 if (_oldPassword == null)
                 {
-                    await _passwordService.AddPassword(newPassword, Icon, CurKeyValuePairs);
+                    await _passwordService.AddPassword(newPassword, CurKeyValuePairs);
                 }
                 else
                 {
-                    await _passwordService.UpdatePassword(newPassword, Icon, CurKeyValuePairs);
+                    await _passwordService.UpdatePassword(newPassword, false, CurKeyValuePairs);
                 }
             }, "正在保存");
 

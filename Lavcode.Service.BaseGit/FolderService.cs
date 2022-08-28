@@ -17,7 +17,7 @@ namespace Lavcode.Service.BaseGit
             _con = cs as BaseGitConService;
         }
 
-        public async Task AddFolder(FolderModel folder, IconModel icon)
+        public async Task AddFolder(FolderModel folder)
         {
             folder.LastEditTime = DateTime.Now;
             if (folder.Order == 0)
@@ -34,8 +34,8 @@ namespace Lavcode.Service.BaseGit
             var folderEntity = FolderEntity.FromModel(folder);
             await _con.CreateComment(folderEntity);
 
-            icon.Id = folderEntity.Id;
-            await _con.CreateComment(IconEntity.FromModel(icon));
+            folder.Icon.Id = folderEntity.Id;
+            await _con.CreateComment(IconEntity.FromModel(folder.Icon));
         }
 
         public async Task DeleteFolder(string folderId, bool record = true)
@@ -75,7 +75,7 @@ namespace Lavcode.Service.BaseGit
             return Task.FromResult(result);
         }
 
-        public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
+        public async Task UpdateFolder(FolderModel folder, bool skipIcon)
         {
             if (folder != null)
             {
@@ -83,9 +83,10 @@ namespace Lavcode.Service.BaseGit
                 await _con.UpdateComment(FolderEntity.FromModel(folder), (item1, item2) => item1.Id == item2.Id);
             }
 
-            if (icon != null)
+            if (!skipIcon && folder.Icon != null)
             {
-                await _con.UpdateComment(IconEntity.FromModel(icon), (item1, item2) => item1.Id == item2.Id);
+                folder.Icon.Id = folder.Id;
+                await _con.UpdateComment(IconEntity.FromModel(folder.Icon), (item1, item2) => item1.Id == item2.Id);
             }
         }
     }

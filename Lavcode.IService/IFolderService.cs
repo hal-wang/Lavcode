@@ -7,8 +7,8 @@ namespace Lavcode.IService
     public interface IFolderService : IDataService
     {
         public Task DeleteFolder(string folderId, bool record = true);
-        public Task AddFolder(FolderModel folder, IconModel icon);
-        public Task UpdateFolder(FolderModel folder, IconModel icon = null);
+        public Task AddFolder(FolderModel folder);
+        public Task UpdateFolder(FolderModel folder, bool skipIcon);
         public Task<List<FolderModel>> GetFolders();
     }
 }
