@@ -62,8 +62,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
                     FileName = file.Name,
                     Size = Math.Round((double)fileInfo.Length / 1024, 2),
                     FolderCount = (sqliteHelper.ConService as ConService).Connection.Table<Folder>().Count(),
-                    PasswordCount = (sqliteHelper.ConService as ConService).Connection.Table<Password>().Count(),
-                    LastEditTime = sqliteHelper.ConfigService.LastEditTime
+                    PasswordCount = (sqliteHelper.ConService as ConService).Connection.Table<Password>().Count()
                 };
                 yield return item;
             }

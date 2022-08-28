@@ -11,7 +11,6 @@ namespace Lavcode.Service.Sqlite
         public IPasswordService PasswordService { get; private set; }
         public IIconService IconService { get; private set; }
         public IDelectedService DeletedService { get; private set; }
-        public IConfigService ConfigService { get; private set; }
 
         private SqliteHelper() { }
         public async static Task<SqliteHelper> OpenAsync(string filePath)
@@ -26,7 +25,6 @@ namespace Lavcode.Service.Sqlite
             result.PasswordService = new PasswordService(result.ConService);
             result.IconService = new IconService(result.ConService);
             result.DeletedService = new DelectedService(result.ConService);
-            result.ConfigService = new ConfigService(result.ConService);
 
             return result;
         }

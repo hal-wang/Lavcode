@@ -31,7 +31,6 @@ namespace Lavcode.Uwp
                 services.AddSingleton<IPasswordService, Service.Sqlite.PasswordService>();
                 services.AddSingleton<IIconService, Service.Sqlite.IconService>();
                 services.AddSingleton<IDelectedService, Service.Sqlite.DelectedService>();
-                services.AddSingleton<IConfigService, Service.Sqlite.ConfigService>();
                 services.AddSingleton<SqliteFileService>();
             }
             else if (typeof(Service.BaseGit.BaseGitConService).IsAssignableFrom(typeof(T)))
@@ -40,7 +39,6 @@ namespace Lavcode.Uwp
                 services.AddSingleton<IPasswordService, Service.BaseGit.PasswordService>();
                 services.AddSingleton<IIconService, Service.BaseGit.IconService>();
                 services.AddSingleton<IDelectedService, Service.BaseGit.DelectedService>();
-                services.AddSingleton<IConfigService, Service.BaseGit.ConfigService>();
             }
 
             RegisterViewModel(services);

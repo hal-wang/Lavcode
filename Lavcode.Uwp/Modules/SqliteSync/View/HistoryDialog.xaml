@@ -25,7 +25,6 @@
                            IsReadOnly="True">
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn Header="备份时间" Binding="{Binding FileName,Converter={StaticResource DateParseConverter},ConverterParameter=yyMMddHHmmssff:yyyy-MM-dd HH:mm:ss}"/>
-                <controls:DataGridTextColumn Header="最后编辑时间" Binding="{Binding LastEditTime,Converter={StaticResource DateFormatConverter},ConverterParameter=yyyy-MM-dd HH:mm:ss}"/>
                 <controls:DataGridTextColumn Header="文件夹数量" Binding="{Binding FolderCount}" />
                 <controls:DataGridTextColumn Header="密码数量" Binding="{Binding PasswordCount}" />
                 <controls:DataGridTextColumn Header="文件大小(KB)" Binding="{Binding Size}" />
