@@ -31,7 +31,8 @@ namespace Lavcode.Service.Sqlite.Entities
 
         public int Order { get; set; }
 
-        public DateTime LastEditTime { get; set; }
+        [Column("LastEditTime")]
+        public DateTime UpdatedAt { get; set; }
 
         public PasswordModel ToModel()
         {
@@ -42,7 +43,8 @@ namespace Lavcode.Service.Sqlite.Entities
                 Title = Title,
                 Value = Value,
                 Remark = Remark,
-                Order = Order
+                Order = Order,
+                UpdatedAt = UpdatedAt,
             };
         }
 
@@ -55,7 +57,8 @@ namespace Lavcode.Service.Sqlite.Entities
                 Title = model.Title,
                 Value = model.Value,
                 Remark = model.Remark,
-                Order = model.Order
+                Order = model.Order,
+                UpdatedAt = model.UpdatedAt.DateTime
             };
         }
     }

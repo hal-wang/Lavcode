@@ -6,16 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Dtos\**" />
-    <EmbeddedResource Remove="Dtos\**" />
-    <None Remove="Dtos\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="FolderService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Lavcode.IService\Lavcode.IService.csproj" />
   </ItemGroup>
 

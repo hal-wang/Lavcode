@@ -94,7 +94,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             foreach (var localFolder in localFolders)
             {
                 var remoteFolder = remoteFolders.Where((item) => item.Id == localFolder.Id).FirstOrDefault();
-                if (remoteFolder == default || remoteFolder.LastEditTime <= localFolder.LastEditTime)
+                if (remoteFolder == default || remoteFolder.UpdatedAt <= localFolder.UpdatedAt)
                 {
                     continue;
                 }
@@ -108,7 +108,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             foreach (var localPassword in localPasswords)
             {
                 var remotePassword = remotePasswords.Where((item) => item.Id == localPassword.Id).FirstOrDefault();
-                if (remotePassword == default || remotePassword.LastEditTime <= localPassword.LastEditTime)
+                if (remotePassword == default || remotePassword.UpdatedAt <= localPassword.UpdatedAt)
                 {
                     continue;
                 }

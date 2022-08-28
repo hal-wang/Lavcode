@@ -20,7 +20,7 @@ namespace Lavcode.Service.BaseGit
 
         public async Task AddPassword(PasswordModel password)
         {
-            password.LastEditTime = DateTime.Now;
+            password.UpdatedAt = DateTime.Now;
 
             if (password.Order == 0)
             {
@@ -105,7 +105,7 @@ namespace Lavcode.Service.BaseGit
 
         public async Task UpdatePassword(PasswordModel password, bool skipIcon, bool skipKvp)
         {
-            password.LastEditTime = DateTime.Now;
+            password.UpdatedAt = DateTime.Now;
             await _con.UpdateComment(PasswordEntity.FromModel(password), (item1, item2) => item1.Id == item2.Id);
             if (!skipIcon && password.Icon != null)
             {

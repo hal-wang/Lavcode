@@ -19,7 +19,7 @@ namespace Lavcode.Service.BaseGit
 
         public async Task AddFolder(FolderModel folder)
         {
-            folder.LastEditTime = DateTime.Now;
+            folder.UpdatedAt = DateTime.Now;
             if (folder.Order == 0)
             {
                 int order = 1;
@@ -79,7 +79,7 @@ namespace Lavcode.Service.BaseGit
         {
             if (folder != null)
             {
-                folder.LastEditTime = DateTime.Now;
+                folder.UpdatedAt = DateTime.Now;
                 await _con.UpdateComment(FolderEntity.FromModel(folder), (item1, item2) => item1.Id == item2.Id);
             }
 

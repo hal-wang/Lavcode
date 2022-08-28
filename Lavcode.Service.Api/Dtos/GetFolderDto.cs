@@ -8,11 +8,9 @@ namespace Lavcode.Service.Api.Dtos
         public string Id { get; set; }
         public string Name { get; set; }
         public int Order { get; set; }
-        public DateTime LastEditTime { get; set; }
+        public long UpdatedAt { get; set; }
 
         public GetIconDto Icon { get; set; }
-
-
 
         public FolderModel ToModel()
         {
@@ -21,7 +19,8 @@ namespace Lavcode.Service.Api.Dtos
                 Id = Id,
                 Name = Name,
                 Order = Order,
-                LastEditTime = LastEditTime,
+                UpdatedAt = DateTimeOffset.FromUnixTimeMilliseconds(UpdatedAt),
+                Icon = Icon.ToModel()
             };
         }
     }

@@ -17,7 +17,7 @@ namespace Lavcode.Model
         public string Value { get; set; }
         public string Remark { get; set; }
         public int Order { get; set; }
-        public DateTime LastEditTime { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
 
         public IconModel Icon { get; set; }
         public IList<KeyValuePairModel> KeyValuePairs { get; set; }

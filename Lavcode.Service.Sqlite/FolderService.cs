@@ -24,7 +24,7 @@ namespace Lavcode.Service.Sqlite
         {
             await TaskExtend.Run(() =>
             {
-                folder.LastEditTime = DateTime.Now;
+                folder.UpdatedAt = DateTime.Now;
 
                 Connection.RunInTransaction(() =>
                 {
@@ -108,7 +108,7 @@ namespace Lavcode.Service.Sqlite
                 {
                     if (folder != null)
                     {
-                        folder.LastEditTime = DateTime.Now;
+                        folder.UpdatedAt = DateTime.Now;
                         Connection.Update(FolderEntity.FromModel(folder));
                     }
 

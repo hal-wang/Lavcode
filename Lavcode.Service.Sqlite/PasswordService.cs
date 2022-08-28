@@ -24,7 +24,7 @@ namespace Lavcode.Service.Sqlite
         {
             await TaskExtend.Run(() =>
             {
-                password.LastEditTime = DateTime.Now;
+                password.UpdatedAt = DateTime.Now;
 
                 if (password.Order == 0)
                 {
@@ -135,7 +135,7 @@ namespace Lavcode.Service.Sqlite
         {
             await TaskExtend.Run(() =>
             {
-                password.LastEditTime = DateTime.Now;
+                password.UpdatedAt = DateTime.Now;
 
                 Connection.RunInTransaction(() =>
                 {

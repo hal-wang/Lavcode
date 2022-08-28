@@ -20,7 +20,8 @@ namespace Lavcode.Service.Sqlite.Entities
 
         public int Order { get; set; }
 
-        public DateTime LastEditTime { get; set; }
+        [Column("LastEditTime")]
+        public DateTime UpdatedAt { get; set; }
 
         public FolderModel ToModel()
         {
@@ -29,7 +30,7 @@ namespace Lavcode.Service.Sqlite.Entities
                 Id = Id,
                 Name = Name,
                 Order = Order,
-                LastEditTime = LastEditTime,
+                UpdatedAt = UpdatedAt,
             };
         }
 
@@ -40,7 +41,7 @@ namespace Lavcode.Service.Sqlite.Entities
                 Id = model.Id,
                 Name = model.Name,
                 Order = model.Order,
-                LastEditTime = model.LastEditTime,
+                UpdatedAt = model.UpdatedAt.DateTime,
             };
         }
     }

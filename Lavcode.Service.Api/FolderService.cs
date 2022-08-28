@@ -21,7 +21,7 @@ namespace Lavcode.Service.Api
         {
             await TaskExtend.Run(() =>
             {
-                folder.LastEditTime = DateTime.Now;
+                folder.UpdatedAt = DateTime.Now;
 
                 Connection.RunInTransaction(() =>
                 {
@@ -79,13 +79,7 @@ namespace Lavcode.Service.Api
 
         public async Task<List<FolderModel>> GetFolders()
         {
-            var folders = _cs.PostAsync<GetFolderDto[]>("folder");
-            List<Folder> folders = null;
-            await TaskExtend.Run(() =>
-            {
-                folders = Connection.Table<Folder>().OrderBy((item) => item.Order).ToList();
-            });
-            return folders;
+            return await _cs.GetAsync<List<GetFolderDto>>("folder");
         }
 
         public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
@@ -96,7 +90,7 @@ namespace Lavcode.Service.Api
                 {
                     if (folder != null)
                     {
-                        folder.LastEditTime = DateTime.Now;
+                        folder.UpdatedAt = DateTime.Now;
                         Connection.Update(folder);
                     }
 

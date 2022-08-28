@@ -1,4 +1,5 @@
 ﻿using Lavcode.Model;
+using Newtonsoft.Json;
 using System;
 
 namespace Lavcode.Service.BaseGit.Entities
@@ -16,7 +17,9 @@ namespace Lavcode.Service.BaseGit.Entities
         public string Value { get; set; }
         public string Remark { get; set; }
         public int Order { get; set; }
-        public DateTime LastEditTime { get; set; }
+
+        [JsonProperty("LastEditTime")]
+        public DateTime UpdatedAt { get; set; }
 
         public PasswordModel ToModel()
         {
@@ -27,7 +30,8 @@ namespace Lavcode.Service.BaseGit.Entities
                 Title = Title,
                 Value = Value,
                 Remark = Remark,
-                Order = Order
+                Order = Order,
+                UpdatedAt = UpdatedAt
             };
         }
 
@@ -40,7 +44,8 @@ namespace Lavcode.Service.BaseGit.Entities
                 Title = model.Title,
                 Value = model.Value,
                 Remark = model.Remark,
-                Order = model.Order
+                Order = model.Order,
+                UpdatedAt = model.UpdatedAt.DateTime
             };
         }
     }

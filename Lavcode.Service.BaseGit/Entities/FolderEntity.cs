@@ -1,4 +1,5 @@
 ﻿using Lavcode.Model;
+using Newtonsoft.Json;
 using System;
 
 namespace Lavcode.Service.BaseGit.Entities
@@ -13,7 +14,9 @@ namespace Lavcode.Service.BaseGit.Entities
         public string Id { get; set; }
         public string Name { get; set; }
         public int Order { get; set; }
-        public DateTime LastEditTime { get; set; }
+
+        [JsonProperty("LastEditTime")]
+        public DateTime UpdatedAt { get; set; }
 
         public FolderModel ToModel()
         {
@@ -22,7 +25,7 @@ namespace Lavcode.Service.BaseGit.Entities
                 Id = Id,
                 Name = Name,
                 Order = Order,
-                LastEditTime = LastEditTime,
+                UpdatedAt = UpdatedAt,
             };
         }
 
@@ -33,7 +36,7 @@ namespace Lavcode.Service.BaseGit.Entities
                 Id = model.Id,
                 Name = model.Name,
                 Order = model.Order,
-                LastEditTime = model.LastEditTime,
+                UpdatedAt = model.UpdatedAt.DateTime,
             };
         }
     }
