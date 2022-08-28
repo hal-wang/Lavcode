@@ -1,6 +1,6 @@
 ﻿using HTools;
 using Lavcode.IService;
-using Lavcode.Model;
+using Lavcode.Service.BaseGit.Entities;
 using Lavcode.Service.BaseGit.Models;
 using OneOf;
 using System;
@@ -15,26 +15,26 @@ namespace Lavcode.Service.BaseGit
         public Func<bool> UseProxy { get; private set; } = null;
         protected int PageSize { get; } = 20;
 
-        internal IssueItem<FolderModel> FolderIssue { get; private set; }
-        internal IssueItem<PasswordModel> PasswordIssue { get; private set; }
-        internal IssueItem<IconModel> IconIssue { get; private set; }
-        internal IssueItem<KeyValuePairModel> KeyValuePairIssue { get; private set; }
+        internal IssueItem<FolderEntity> FolderIssue { get; private set; }
+        internal IssueItem<PasswordEntity> PasswordIssue { get; private set; }
+        internal IssueItem<IconEntity> IconIssue { get; private set; }
+        internal IssueItem<KeyValuePairEntity> KeyValuePairIssue { get; private set; }
 
-        private IssueItem<T> GetIssue<T>()
+        private IssueItem<T> GetIssue<T>() where T : IEntity
         {
-            if (typeof(T) == typeof(FolderModel))
+            if (typeof(T) == typeof(FolderEntity))
             {
                 return FolderIssue as IssueItem<T>;
             }
-            else if (typeof(T) == typeof(PasswordModel))
+            else if (typeof(T) == typeof(PasswordEntity))
             {
                 return PasswordIssue as IssueItem<T>;
             }
-            else if (typeof(T) == typeof(IconModel))
+            else if (typeof(T) == typeof(IconEntity))
             {
                 return IconIssue as IssueItem<T>;
             }
-            else if (typeof(T) == typeof(KeyValuePairModel))
+            else if (typeof(T) == typeof(KeyValuePairEntity))
             {
                 return KeyValuePairIssue as IssueItem<T>;
             }
@@ -44,21 +44,21 @@ namespace Lavcode.Service.BaseGit
             }
         }
 
-        private string GetTableName<T>()
+        private string GetTableName<T>() where T : IEntity
         {
-            if (typeof(T) == typeof(FolderModel))
+            if (typeof(T) == typeof(FolderEntity))
             {
                 return "Folder";
             }
-            else if (typeof(T) == typeof(PasswordModel))
+            else if (typeof(T) == typeof(PasswordEntity))
             {
                 return "Password";
             }
-            else if (typeof(T) == typeof(IconModel))
+            else if (typeof(T) == typeof(IconEntity))
             {
                 return "Icon";
             }
-            else if (typeof(T) == typeof(KeyValuePairModel))
+            else if (typeof(T) == typeof(KeyValuePairEntity))
             {
                 return "KeyValuePair";
             }
@@ -68,12 +68,12 @@ namespace Lavcode.Service.BaseGit
             }
         }
 
-        internal IList<T> GetComments<T, K>(K key, Func<T, K, bool> isEqual)
+        internal IList<T> GetComments<T, K>(K key, Func<T, K, bool> isEqual) where T : IEntity
         {
             return GetIssue<T>().Comments.Where(item => isEqual(item.Value, key)).Select(item => item.Value).ToList();
         }
 
-        internal async Task UpdateComment<T>(T value, Func<T, T, bool> isEqual)
+        internal async Task UpdateComment<T>(T value, Func<T, T, bool> isEqual) where T : IEntity
         {
             var issues = GetIssue<T>();
             var existComment = issues.Comments.Where(item => isEqual(item.Value, value)).FirstOrDefault();
@@ -88,7 +88,7 @@ namespace Lavcode.Service.BaseGit
             });
         }
 
-        internal async Task DeleteComment<T, K>(K key, Func<T, K, bool> isEqual)
+        internal async Task DeleteComment<T, K>(K key, Func<T, K, bool> isEqual) where T : IEntity
         {
             var issues = GetIssue<T>();
             var delectedItems = issues.Comments.Where(item => isEqual(item.Value, key)).ToList();
@@ -100,7 +100,7 @@ namespace Lavcode.Service.BaseGit
             }
         }
 
-        internal async Task CreateComment<T>(T value)
+        internal async Task CreateComment<T>(T value) where T : IEntity
         {
             var issues = GetIssue<T>();
             var newComment = await CreateComment(issues.IssueNumber, value);
@@ -111,7 +111,7 @@ namespace Lavcode.Service.BaseGit
             });
         }
 
-        internal async Task UpsertComment<T>(T value, Func<T, T, bool> isEqual)
+        internal async Task UpsertComment<T>(T value, Func<T, T, bool> isEqual) where T : IEntity
         {
             var issues = GetIssue<T>();
             if (issues.Comments.Any(item => isEqual(item.Value, value)))
@@ -132,14 +132,14 @@ namespace Lavcode.Service.BaseGit
             Repository = await GetRepository();
 
             var issues = await CreateTable(await GetAllIssues());
-            FolderIssue = await GetIssueTableItems<FolderModel>(issues);
-            PasswordIssue = await GetIssueTableItems<PasswordModel>(issues);
-            IconIssue = await GetIssueTableItems<IconModel>(issues);
-            KeyValuePairIssue = await GetIssueTableItems<KeyValuePairModel>(issues);
+            FolderIssue = await GetIssueTableItems<FolderEntity>(issues);
+            PasswordIssue = await GetIssueTableItems<PasswordEntity>(issues);
+            IconIssue = await GetIssueTableItems<IconEntity>(issues);
+            KeyValuePairIssue = await GetIssueTableItems<KeyValuePairEntity>(issues);
             return true;
         }
 
-        private async Task<IssueItem<T>> GetIssueTableItems<T>(IList<IssueItem> issues)
+        private async Task<IssueItem<T>> GetIssueTableItems<T>(IList<IssueItem> issues) where T : IEntity
         {
             var issue = issues.First(item => item.Title == GetTableName<T>());
             var comments = await GetAllComments<T>(issue.IssueNumber);
@@ -154,14 +154,14 @@ namespace Lavcode.Service.BaseGit
 
         private async Task<IList<IssueItem>> CreateTable(IList<IssueItem> issues)
         {
-            await CreateIssueTable<FolderModel>(issues);
-            await CreateIssueTable<PasswordModel>(issues);
-            await CreateIssueTable<IconModel>(issues);
-            await CreateIssueTable<KeyValuePairModel>(issues);
+            await CreateIssueTable<FolderEntity>(issues);
+            await CreateIssueTable<PasswordEntity>(issues);
+            await CreateIssueTable<IconEntity>(issues);
+            await CreateIssueTable<KeyValuePairEntity>(issues);
             return issues;
         }
 
-        private async Task CreateIssueTable<T>(IList<IssueItem> issues)
+        private async Task CreateIssueTable<T>(IList<IssueItem> issues) where T : IEntity
         {
             var name = GetTableName<T>();
             if (!issues.Any(issue => issue.Title == name))
@@ -190,7 +190,7 @@ namespace Lavcode.Service.BaseGit
             return result;
         }
 
-        private async Task<IList<CommentItem<T>>> GetAllComments<T>(OneOf<int, string> issueNumber)
+        private async Task<IList<CommentItem<T>>> GetAllComments<T>(OneOf<int, string> issueNumber) where T : IEntity
         {
             var result = new List<CommentItem<T>>();
             IReadOnlyList<CommentItem<T>> comments;
@@ -220,10 +220,10 @@ namespace Lavcode.Service.BaseGit
         protected abstract Task<string> GetUserLogin();
         protected abstract Task<RepositoryItem> GetRepository();
         protected abstract Task DeleteComment(int commentId);
-        protected abstract Task<CommentItem<T>> UpdateComment<T>(int commentId, T value);
-        protected abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, OneOf<int, string> issueNumber);
-        protected abstract Task<CommentItem<T>> CreateComment<T>(OneOf<int, string> issueNumber, T value);
+        protected abstract Task<CommentItem<T>> UpdateComment<T>(int commentId, T value) where T : IEntity;
+        protected abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, OneOf<int, string> issueNumber) where T : IEntity;
+        protected abstract Task<CommentItem<T>> CreateComment<T>(OneOf<int, string> issueNumber, T value) where T : IEntity;
         protected abstract Task<IReadOnlyList<IssueItem>> GetPageIssues(int page);
-        protected abstract Task<IssueItem<T>> CreateIssue<T>(string name);
+        protected abstract Task<IssueItem<T>> CreateIssue<T>(string name) where T : IEntity;
     }
 }

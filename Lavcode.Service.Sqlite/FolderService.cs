@@ -83,12 +83,21 @@ namespace Lavcode.Service.Sqlite
 
         public async Task<List<FolderModel>> GetFolders()
         {
-            List<FolderEntity> folders = null;
+            List<FolderModel> folders = null;
             await TaskExtend.Run(() =>
             {
-                folders = Connection.Table<FolderEntity>().OrderBy((item) => item.Order).ToList();
+                folders = Connection
+                    .Table<FolderEntity>()
+                    .OrderBy((item) => item.Order)
+                    .Select((item) => item.ToModel())
+                    .Select(item =>
+                    {
+                        item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
+                        return item;
+                    })
+                    .ToList();
             });
-            return folders.Select(f => f.ToModel()).ToList();
+            return folders;
         }
 
         public async Task UpdateFolder(FolderModel folder, IconModel icon = null)

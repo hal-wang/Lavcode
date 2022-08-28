@@ -21,12 +21,10 @@ namespace Lavcode.Uwp.Modules.PasswordCore
     public class PasswordDetailViewModel : ObservableObject
     {
         private readonly IPasswordService _passwordService;
-        private readonly IIconService _iconService;
 
-        public PasswordDetailViewModel(IPasswordService passwordService, IIconService iconService)
+        public PasswordDetailViewModel(IPasswordService passwordService)
         {
             _passwordService = passwordService;
-            _iconService = iconService;
 
             StrongReferenceMessenger.Default.Register<PasswordDetailViewModel, PasswordItem, string>(this, "PasswordSelectedChanged", async (_, item) => await InitEdit(item?.Password));
             StrongReferenceMessenger.Default.Register<PasswordDetailViewModel, object, string>(this, "AddNewPassword", (_, _) => HandleAddNew());
@@ -329,7 +327,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 Remark = password.Remark;
 
                 SetKeyValuePairs(await _passwordService.GetKeyValuePairs(password.Id));
-                Icon = await _iconService.GetIcon(_oldPassword.Id);
+                Icon = _oldPassword.Icon;
                 _oldIcon = Icon;
             }
         }

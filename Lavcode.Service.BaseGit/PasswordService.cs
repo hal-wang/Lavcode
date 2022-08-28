@@ -1,6 +1,7 @@
 ﻿using HTools;
 using Lavcode.IService;
 using Lavcode.Model;
+using Lavcode.Service.BaseGit.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,17 +42,18 @@ namespace Lavcode.Service.BaseGit
                 password.Id = Guid.NewGuid().ToString();
             }
 
-            await _con.CreateComment(password);
+            var passwordEntity = PasswordEntity.FromModel(password);
+            await _con.CreateComment(passwordEntity);
 
-            icon.Id = password.Id;
-            await _con.CreateComment(icon);
+            icon.Id = passwordEntity.Id;
+            await _con.CreateComment(IconEntity.FromModel(icon));
             if (keyValuePairs != null)
             {
                 foreach (var kvp in keyValuePairs)
                 {
                     kvp.Id = default;
                     kvp.SourceId = password.Id;
-                    await _con.CreateComment(kvp);
+                    await _con.CreateComment(KeyValuePairEntity.FromModel(kvp));
                 }
             }
         }
@@ -63,23 +65,32 @@ namespace Lavcode.Service.BaseGit
                 return;
             }
 
-            await _con.DeleteComment<PasswordModel, string>(passwordId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<IconModel, string>(passwordId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<KeyValuePairModel, string>(passwordId, (item1, item2) => item1.SourceId == item2);
+            await _con.DeleteComment<PasswordEntity, string>(passwordId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<IconEntity, string>(passwordId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<KeyValuePairEntity, string>(passwordId, (item1, item2) => item1.SourceId == item2);
         }
 
         public Task<List<KeyValuePairModel>> GetKeyValuePairs(string passwordId)
         {
-            var result = _con.KeyValuePairIssue.Comments.Where(item => item.Value.SourceId == passwordId).Select(item => item.Value).ToList();
+            var result = _con.KeyValuePairIssue.Comments
+                .Where(item => item.Value.SourceId == passwordId)
+                .Select(item => item.Value.ToModel())
+                .ToList();
             return Task.FromResult(result);
         }
 
         public Task<List<PasswordModel>> GetPasswords(string folderId)
         {
             var result = _con
-                .GetComments<PasswordModel, string>(folderId, (item1, item2) => item1.FolderId == folderId)
+                .GetComments<PasswordEntity, string>(folderId, (item1, item2) => item1.FolderId == folderId)
                 .Where(item => item.FolderId == folderId)
                 .OrderBy((item) => item.FolderId).ThenBy((item) => item.Order)
+                .Select(item => item.ToModel())
+                .Select(item =>
+                {
+                    item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
+                    return item;
+                })
                 .ToList();
 
             return Task.FromResult(result);
@@ -87,27 +98,35 @@ namespace Lavcode.Service.BaseGit
 
         public Task<List<PasswordModel>> GetPasswords()
         {
-            var result = _con.PasswordIssue.Comments.Select(item => item.Value).ToList();
+            var result = _con.PasswordIssue.Comments
+                .Select(item => item.Value)
+                .Select(item => item.ToModel())
+                .Select(item =>
+                {
+                    item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
+                    return item;
+                })
+                .ToList();
             return Task.FromResult(result);
         }
 
         public async Task UpdatePassword(PasswordModel password, IconModel icon = null, List<KeyValuePairModel> keyValuePairs = null)
         {
             password.LastEditTime = DateTime.Now;
-            await _con.UpdateComment(password, (item1, item2) => item1.Id == item2.Id);
+            await _con.UpdateComment(PasswordEntity.FromModel(password), (item1, item2) => item1.Id == item2.Id);
             if (icon != null)
             {
-                await _con.UpdateComment(icon, (item1, item2) => item1.Id == item2.Id);
+                await _con.UpdateComment(IconEntity.FromModel(icon), (item1, item2) => item1.Id == item2.Id);
             }
 
             if (keyValuePairs != null)
             {
-                await _con.DeleteComment<KeyValuePairModel, string>(password.Id, (item1, item2) => item1.SourceId == item2);
+                await _con.DeleteComment<KeyValuePairEntity, string>(password.Id, (item1, item2) => item1.SourceId == item2);
                 foreach (var kvp in keyValuePairs)
                 {
                     kvp.Id = default;
                     kvp.SourceId = password.Id;
-                    await _con.CreateComment(kvp);
+                    await _con.CreateComment(KeyValuePairEntity.FromModel(kvp));
                 }
             }
         }

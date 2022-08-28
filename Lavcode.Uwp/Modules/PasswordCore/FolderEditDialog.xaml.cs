@@ -48,15 +48,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public FolderModel Folder { get; private set; }
 
-        private async void AddOrEditFolderDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void AddOrEditFolderDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Loaded -= AddOrEditFolderDialog_Loaded;
             try
             {
                 if (Folder != null)
                 {
-                    var iconService = ServiceProvider.Services.GetService<IIconService>();
-                    Icon = await iconService.GetIcon(Folder.Id);
+                    Icon = Folder.Icon;
                 }
                 else
                 {

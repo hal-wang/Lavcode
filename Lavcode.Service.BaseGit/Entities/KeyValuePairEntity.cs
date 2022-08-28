@@ -1,10 +1,8 @@
 ﻿using Lavcode.Model;
-using SQLite;
 
-namespace Lavcode.Service.Sqlite.Entities
+namespace Lavcode.Service.BaseGit.Entities
 {
-    [Table("KeyValuePair")]
-    public class KeyValuePairEntity
+    public class KeyValuePairEntity : IEntity
     {
         public int Id { get; set; }
         public string SourceId { get; set; }

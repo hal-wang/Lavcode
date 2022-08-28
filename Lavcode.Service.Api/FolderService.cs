@@ -17,7 +17,7 @@ namespace Lavcode.Service.Api
             _cs = cs as ConService;
         }
 
-        public async Task AddFolder(Folder folder, Icon icon)
+        public async Task AddFolder(FolderModel folder, IconModel icon)
         {
             await TaskExtend.Run(() =>
             {
@@ -77,9 +77,9 @@ namespace Lavcode.Service.Api
             });
         }
 
-        public async Task<List<Folder>> GetFolders()
+        public async Task<List<FolderModel>> GetFolders()
         {
-            //_cs.PostAsync<GetFolderDto>("folder")
+            var folders = _cs.PostAsync<GetFolderDto[]>("folder");
             List<Folder> folders = null;
             await TaskExtend.Run(() =>
             {
@@ -88,7 +88,7 @@ namespace Lavcode.Service.Api
             return folders;
         }
 
-        public async Task UpdateFolder(Folder folder, Icon icon = null)
+        public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
         {
             await TaskExtend.Run(() =>
             {

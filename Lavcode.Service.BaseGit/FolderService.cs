@@ -1,5 +1,6 @@
 ﻿using Lavcode.IService;
 using Lavcode.Model;
+using Lavcode.Service.BaseGit.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,11 @@ namespace Lavcode.Service.BaseGit
                 folder.Order = order;
             }
 
-            await _con.CreateComment(folder);
+            var folderEntity = FolderEntity.FromModel(folder);
+            await _con.CreateComment(folderEntity);
 
-            icon.Id = folder.Id;
-            await _con.CreateComment(icon);
+            icon.Id = folderEntity.Id;
+            await _con.CreateComment(IconEntity.FromModel(icon));
         }
 
         public async Task DeleteFolder(string folderId, bool record = true)
@@ -51,17 +53,25 @@ namespace Lavcode.Service.BaseGit
 
             foreach (var pwd in delectedPwds)
             {
-                await _con.DeleteComment<IconModel, string>(pwd.Id, (item1, item2) => item1.Id == item2);
-                await _con.DeleteComment<KeyValuePairModel, string>(pwd.Id, (item1, item2) => item1.SourceId == item2);
+                await _con.DeleteComment<IconEntity, string>(pwd.Id, (item1, item2) => item1.Id == item2);
+                await _con.DeleteComment<KeyValuePairEntity, string>(pwd.Id, (item1, item2) => item1.SourceId == item2);
             }
 
-            await _con.DeleteComment<FolderModel, string>(folderId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<IconModel, string>(folderId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<IconEntity, string>(folderId, (item1, item2) => item1.Id == item2);
         }
 
         public Task<List<FolderModel>> GetFolders()
         {
-            var result = _con.FolderIssue.Comments.Select(item => item.Value).OrderBy(item => item.Order).ToList();
+            var result = _con.FolderIssue.Comments
+                .Select(item => item.Value)
+                .Select(item => item.ToModel())
+                .Select(item =>
+                {
+                    item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
+                    return item;
+                })
+                .OrderBy(item => item.Order)
+                .ToList();
             return Task.FromResult(result);
         }
 
@@ -70,12 +80,12 @@ namespace Lavcode.Service.BaseGit
             if (folder != null)
             {
                 folder.LastEditTime = DateTime.Now;
-                await _con.UpdateComment(folder, (item1, item2) => item1.Id == item2.Id);
+                await _con.UpdateComment(FolderEntity.FromModel(folder), (item1, item2) => item1.Id == item2.Id);
             }
 
             if (icon != null)
             {
-                await _con.UpdateComment(icon, (item1, item2) => item1.Id == item2.Id);
+                await _con.UpdateComment(IconEntity.FromModel(icon), (item1, item2) => item1.Id == item2.Id);
             }
         }
     }

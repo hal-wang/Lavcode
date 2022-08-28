@@ -101,22 +101,42 @@ namespace Lavcode.Service.Sqlite
 
         public async Task<List<PasswordModel>> GetPasswords(string folderId)
         {
-            List<PasswordEntity> result = null;
+            List<PasswordModel> result = null;
             await TaskExtend.Run(() =>
             {
-                result = Connection.Table<PasswordEntity>().Where((item) => item.FolderId == folderId).OrderBy((item) => item.Order).ToList();
+                result = Connection
+                    .Table<PasswordEntity>()
+                    .Where((item) => item.FolderId == folderId)
+                    .OrderBy((item) => item.Order)
+                    .Select((item) => item.ToModel())
+                    .Select(item =>
+                    {
+                        item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
+                        return item;
+                    })
+                    .ToList();
             });
-            return result.Select(item => item.ToModel()).ToList();
+            return result;
         }
 
         public async Task<List<PasswordModel>> GetPasswords()
         {
-            List<PasswordEntity> result = null;
+            List<PasswordModel> result = null;
             await TaskExtend.Run(() =>
             {
-                result = Connection.Table<PasswordEntity>().OrderBy((item) => item.FolderId).ThenBy((item) => item.Order).ToList();
+                result = Connection
+                    .Table<PasswordEntity>()
+                    .OrderBy((item) => item.FolderId)
+                    .ThenBy((item) => item.Order)
+                    .Select((item) => item.ToModel())
+                    .Select(item =>
+                    {
+                        item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
+                        return item;
+                    })
+                    .ToList();
             });
-            return result.Select(item => item.ToModel()).ToList();
+            return result;
         }
 
         public async Task UpdatePassword(PasswordModel password, IconModel icon = null, List<KeyValuePairModel> keyValuePairs = null)

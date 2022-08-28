@@ -9,7 +9,6 @@ namespace Lavcode.Service.Sqlite
         public IConService ConService { get; private set; }
         public IFolderService FolderService { get; private set; }
         public IPasswordService PasswordService { get; private set; }
-        public IIconService IconService { get; private set; }
         public DelectedService DeletedService { get; private set; }
 
         private SqliteHelper() { }
@@ -23,7 +22,6 @@ namespace Lavcode.Service.Sqlite
 
             result.FolderService = new FolderService(result.ConService);
             result.PasswordService = new PasswordService(result.ConService);
-            result.IconService = new IconService(result.ConService);
             result.DeletedService = new DelectedService(result.ConService);
 
             return result;

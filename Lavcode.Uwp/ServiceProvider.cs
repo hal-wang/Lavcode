@@ -29,7 +29,6 @@ namespace Lavcode.Uwp
             {
                 services.AddSingleton<IFolderService, Service.Sqlite.FolderService>();
                 services.AddSingleton<IPasswordService, Service.Sqlite.PasswordService>();
-                services.AddSingleton<IIconService, Service.Sqlite.IconService>();
                 services.AddSingleton<Service.Sqlite.DelectedService, Service.Sqlite.DelectedService>();
                 services.AddSingleton<SqliteFileService>();
             }
@@ -37,7 +36,6 @@ namespace Lavcode.Uwp
             {
                 services.AddSingleton<IFolderService, Service.BaseGit.FolderService>();
                 services.AddSingleton<IPasswordService, Service.BaseGit.PasswordService>();
-                services.AddSingleton<IIconService, Service.BaseGit.IconService>();
             }
 
             RegisterViewModel(services);

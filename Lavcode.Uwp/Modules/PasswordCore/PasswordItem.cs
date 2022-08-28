@@ -18,7 +18,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             if (icon == null)
             {
                 //后台设置图标
-                SetIcon(password.Id);
+                SetIcon(password.Icon);
             }
             else
             {

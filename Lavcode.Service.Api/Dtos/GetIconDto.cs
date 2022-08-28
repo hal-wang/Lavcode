@@ -7,5 +7,15 @@ namespace Lavcode.Service.Api.Dtos
         public string Id { get; set; }
         public IconType IconType { get; set; }
         public string Value { get; set; }
+
+        public IconModel ToModel()
+        {
+            return new IconModel()
+            {
+                Id = Id,
+                IconType = IconType,
+                Value = Value
+            };
+        }
     }
 }

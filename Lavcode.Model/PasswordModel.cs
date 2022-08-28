@@ -11,5 +11,7 @@ namespace Lavcode.Model
         public string Remark { get; set; }
         public int Order { get; set; }
         public DateTime LastEditTime { get; set; }
+
+        public IconModel Icon { get; set; }
     }
 }

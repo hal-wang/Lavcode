@@ -22,7 +22,7 @@
         </TextBlock>
         <Border>
             <TextBlock Margin="10 0 0 0"
-                       Visibility="{x:Bind IsProviderVisible,Mode=OneWay,Converter={StaticResource BooleanConverter}}">
+                       Visibility="{x:Bind IsProviderVisible,Converter={StaticResource BooleanConverter}}">
                 <Run>（</Run>
                 <Run Text="{x:Bind Provider,Converter={StaticResource ProviderConverter}}"/>
                 <Run>）</Run>

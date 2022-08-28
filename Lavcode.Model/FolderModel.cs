@@ -8,5 +8,7 @@ namespace Lavcode.Model
         public string Name { get; set; }
         public int Order { get; set; }
         public DateTime LastEditTime { get; set; }
+
+        public IconModel Icon { get; set; }
     }
 }
