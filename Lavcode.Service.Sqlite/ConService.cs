@@ -41,7 +41,6 @@ namespace Lavcode.Service.Sqlite
             Connection.CreateTable<Icon>();
             Connection.CreateTable<KeyValuePair>();
             Connection.CreateTable<DelectedItem>();
-            Connection.CreateTable<Config>();
         }
 
         public void Dispose()

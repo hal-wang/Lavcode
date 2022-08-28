@@ -20,7 +20,6 @@ namespace Lavcode.Service.BaseGit
         internal IssueItem<Icon> IconIssue { get; private set; }
         internal IssueItem<DelectedItem> DelectedItemIssue { get; private set; }
         internal IssueItem<KeyValuePair> KeyValuePairIssue { get; private set; }
-        internal IssueItem<Config> ConfigIssue { get; private set; }
 
         private IssueItem<T> GetIssue<T>()
         {
@@ -43,10 +42,6 @@ namespace Lavcode.Service.BaseGit
             else if (typeof(T) == typeof(KeyValuePair))
             {
                 return KeyValuePairIssue as IssueItem<T>;
-            }
-            else if (typeof(T) == typeof(Config))
-            {
-                return ConfigIssue as IssueItem<T>;
             }
             else
             {
@@ -123,7 +118,6 @@ namespace Lavcode.Service.BaseGit
             IconIssue = await GetIssueTableItems<Icon>(issues);
             DelectedItemIssue = await GetIssueTableItems<DelectedItem>(issues);
             KeyValuePairIssue = await GetIssueTableItems<KeyValuePair>(issues);
-            ConfigIssue = await GetIssueTableItems<Config>(issues);
             return true;
         }
 
@@ -147,7 +141,6 @@ namespace Lavcode.Service.BaseGit
             await CreateIssueTable<Icon>(issues);
             await CreateIssueTable<DelectedItem>(issues);
             await CreateIssueTable<KeyValuePair>(issues);
-            await CreateIssueTable<Config>(issues);
             return issues;
         }
 
