@@ -1,6 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Common;
-using Lavcode.Model;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Guide;
 using Microsoft.Extensions.DependencyInjection;
@@ -170,10 +169,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         }
         #endregion
 
-        private async void PasswordListView_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        private void PasswordListView_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            var items = await VM.CreateDragItems(e.Items.Where(item => item is PasswordItem).Select(item => item as PasswordItem).ToArray());
-            if (items.Count == 0)
+            var items = e.Items
+                .Where(item => item is PasswordItem)
+                .Select(item => item as PasswordItem)
+                .Select(item => item.Password)
+                .ToArray();
+            if (items.Length == 0)
             {
                 return;
             }

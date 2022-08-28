@@ -18,7 +18,7 @@ namespace Lavcode.Service.BaseGit
             _con = cs as BaseGitConService;
         }
 
-        public async Task AddPassword(PasswordModel password, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task AddPassword(PasswordModel password)
         {
             password.LastEditTime = DateTime.Now;
 
@@ -47,9 +47,9 @@ namespace Lavcode.Service.BaseGit
 
             password.Icon.Id = passwordEntity.Id;
             await _con.CreateComment(IconEntity.FromModel(password.Icon));
-            if (keyValuePairs != null)
+            if (password.KeyValuePairs != null)
             {
-                foreach (var kvp in keyValuePairs)
+                foreach (var kvp in password.KeyValuePairs)
                 {
                     kvp.Id = default;
                     kvp.SourceId = password.Id;
@@ -70,15 +70,6 @@ namespace Lavcode.Service.BaseGit
             await _con.DeleteComment<KeyValuePairEntity, string>(passwordId, (item1, item2) => item1.SourceId == item2);
         }
 
-        public Task<List<KeyValuePairModel>> GetKeyValuePairs(string passwordId)
-        {
-            var result = _con.KeyValuePairIssue.Comments
-                .Where(item => item.Value.SourceId == passwordId)
-                .Select(item => item.Value.ToModel())
-                .ToList();
-            return Task.FromResult(result);
-        }
-
         public Task<List<PasswordModel>> GetPasswords(string folderId)
         {
             var result = _con
@@ -89,6 +80,7 @@ namespace Lavcode.Service.BaseGit
                 .Select(item =>
                 {
                     item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
+                    item.KeyValuePairs = _con.KeyValuePairIssue.Comments.Where(kvp => kvp.Value.SourceId == item.Id).Select(item => item.Value).Select(item => item.ToModel()).ToList();
                     return item;
                 })
                 .ToList();
@@ -104,13 +96,14 @@ namespace Lavcode.Service.BaseGit
                 .Select(item =>
                 {
                     item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
+                    item.KeyValuePairs = _con.KeyValuePairIssue.Comments.Where(kvp => kvp.Value.SourceId == item.Id).Select(item => item.Value).Select(item => item.ToModel()).ToList();
                     return item;
                 })
                 .ToList();
             return Task.FromResult(result);
         }
 
-        public async Task UpdatePassword(PasswordModel password, bool skipIcon, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task UpdatePassword(PasswordModel password, bool skipIcon, bool skipKvp)
         {
             password.LastEditTime = DateTime.Now;
             await _con.UpdateComment(PasswordEntity.FromModel(password), (item1, item2) => item1.Id == item2.Id);
@@ -120,10 +113,10 @@ namespace Lavcode.Service.BaseGit
                 await _con.UpdateComment(IconEntity.FromModel(password.Icon), (item1, item2) => item1.Id == item2.Id);
             }
 
-            if (keyValuePairs != null)
+            if (!skipKvp && password.KeyValuePairs != null)
             {
                 await _con.DeleteComment<KeyValuePairEntity, string>(password.Id, (item1, item2) => item1.SourceId == item2);
-                foreach (var kvp in keyValuePairs)
+                foreach (var kvp in password.KeyValuePairs)
                 {
                     kvp.Id = default;
                     kvp.SourceId = password.Id;

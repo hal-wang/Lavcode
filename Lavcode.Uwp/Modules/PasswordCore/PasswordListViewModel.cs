@@ -150,7 +150,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 for (var i = 0; i < PasswordItems.Count; i++)
                 {
                     PasswordItems[i].Password.Order = i;
-                    await _passwordService.UpdatePassword(PasswordItems[i].Password, true);
+                    await _passwordService.UpdatePassword(PasswordItems[i].Password, true, true);
                 }
             }, "正在排序");
         }
@@ -307,10 +307,10 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     var items = JsonConvert.DeserializeObject<List<JObject>>(content);
                     foreach (JObject item in items)
                     {
-                        var password = item["Password"].ToObject<PasswordModel>();
+                        var password = item.ToObject<PasswordModel>();
                         password.FolderId = _curFolder.Folder.Id;
 
-                        await _passwordService.AddPassword(password, item["KeyValuePairs"].ToObject<List<KeyValuePairModel>>());
+                        await _passwordService.AddPassword(password);
                         PasswordItems.Add(new PasswordItem(password));
                     }
                 }, "正在复制");
@@ -319,20 +319,6 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             {
                 MessageHelper.ShowError(ex);
             }
-        }
-
-        public async Task<List<object>> CreateDragItems(PasswordItem[] passwordItems)
-        {
-            var items = new List<object>();
-            foreach (var passwordItem in passwordItems)
-            {
-                items.Add(new
-                {
-                    passwordItem.Password,
-                    KeyValuePairs = (await _passwordService.GetKeyValuePairs(passwordItem.Password.Id)).ToArray()
-                });
-            }
-            return items;
         }
     }
 }

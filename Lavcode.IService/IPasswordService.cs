@@ -7,10 +7,9 @@ namespace Lavcode.IService
     public interface IPasswordService : IDataService
     {
         public Task DeletePassword(string passwordId, bool record = true);
-        public Task AddPassword(PasswordModel password, List<KeyValuePairModel> keyValuePairs = null);
-        public Task UpdatePassword(PasswordModel password, bool skipIcon, List<KeyValuePairModel> keyValuePairs = null);
+        public Task AddPassword(PasswordModel password);
+        public Task UpdatePassword(PasswordModel password, bool skipIcon, bool skipKvp);
         public Task<List<PasswordModel>> GetPasswords(string folderId);
         public Task<List<PasswordModel>> GetPasswords();
-        public Task<List<KeyValuePairModel>> GetKeyValuePairs(string passwordId);
     }
 }

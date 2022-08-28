@@ -20,7 +20,7 @@ namespace Lavcode.Service.Sqlite
             _cs = cs as ConService;
         }
 
-        public async Task AddPassword(PasswordModel password, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task AddPassword(PasswordModel password)
         {
             await TaskExtend.Run(() =>
             {
@@ -52,14 +52,14 @@ namespace Lavcode.Service.Sqlite
                     password.Icon.Id = passwordEntity.Id;
                     Connection.Insert(IconEntity.FromModel(password.Icon));
 
-                    if (keyValuePairs != null)
+                    if (password.KeyValuePairs != null)
                     {
-                        foreach (var kvp in keyValuePairs)
+                        foreach (var kvp in password.KeyValuePairs)
                         {
                             kvp.Id = default;
                             kvp.SourceId = password.Id;
                         }
-                        var list = keyValuePairs.Select(item => KeyValuePairEntity.FromModel(item)).ToArray();
+                        var list = password.KeyValuePairs.Select(item => KeyValuePairEntity.FromModel(item)).ToArray();
                         Connection.InsertAll(list);
                     }
                 });
@@ -89,16 +89,6 @@ namespace Lavcode.Service.Sqlite
             });
         }
 
-        public async Task<List<KeyValuePairModel>> GetKeyValuePairs(string passwordId)
-        {
-            List<KeyValuePairEntity> result = null;
-            await TaskExtend.Run(() =>
-            {
-                result = Connection.Table<KeyValuePairEntity>().Where((item) => item.SourceId == passwordId).ToList();
-            });
-            return result.Select(item => item.ToModel()).ToList();
-        }
-
         public async Task<List<PasswordModel>> GetPasswords(string folderId)
         {
             List<PasswordModel> result = null;
@@ -112,6 +102,7 @@ namespace Lavcode.Service.Sqlite
                     .Select(item =>
                     {
                         item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
+                        item.KeyValuePairs = Connection.Table<KeyValuePairEntity>().Where(kvp => kvp.SourceId == item.Id).Select(item => item.ToModel()).ToList();
                         return item;
                     })
                     .ToList();
@@ -132,6 +123,7 @@ namespace Lavcode.Service.Sqlite
                     .Select(item =>
                     {
                         item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
+                        item.KeyValuePairs = Connection.Table<KeyValuePairEntity>().Where(kvp => kvp.SourceId == item.Id).Select(item => item.ToModel()).ToList();
                         return item;
                     })
                     .ToList();
@@ -139,7 +131,7 @@ namespace Lavcode.Service.Sqlite
             return result;
         }
 
-        public async Task UpdatePassword(PasswordModel password, bool skipIcon, List<KeyValuePairModel> keyValuePairs = null)
+        public async Task UpdatePassword(PasswordModel password, bool skipIcon, bool skipKvp)
         {
             await TaskExtend.Run(() =>
             {
@@ -154,15 +146,15 @@ namespace Lavcode.Service.Sqlite
                         Connection.Update(password.Icon);
                     }
 
-                    if (keyValuePairs != null)
+                    if (!skipKvp && password.KeyValuePairs != null)
                     {
                         Connection.Table<KeyValuePairEntity>().Where((item) => item.SourceId == password.Id).Delete();
-                        foreach (var kvp in keyValuePairs)
+                        foreach (var kvp in password.KeyValuePairs)
                         {
                             kvp.Id = default;
                             kvp.SourceId = password.Id;
                         }
-                        Connection.InsertAll(keyValuePairs);
+                        Connection.InsertAll(password.KeyValuePairs);
                     }
                 });
             });

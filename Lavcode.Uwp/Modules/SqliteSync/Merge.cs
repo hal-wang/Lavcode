@@ -85,8 +85,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
                     continue;
                 }
 
-                var remoteKvp = await _remoteSqliteHelper.PasswordService.GetKeyValuePairs(remotePassword.Id);
-                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, false, remoteKvp);
+                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, false, false);
             }
         }
 
@@ -114,8 +113,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
                     continue;
                 }
 
-                var remoteKvp = await _remoteSqliteHelper.PasswordService.GetKeyValuePairs(remotePassword.Id);
-                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, false, remoteKvp);
+                await _localSqliteHelper.PasswordService.UpdatePassword(remotePassword, false, false);
             }
         }
 

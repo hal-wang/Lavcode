@@ -248,7 +248,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             SetKeysLength();
         }
 
-        private void SetKeyValuePairs(List<KeyValuePairModel> keyValuePairs)
+        private void SetKeyValuePairs(IList<KeyValuePairModel> keyValuePairs)
         {
             _oldKeyValuePairs.Clear();
             KeyValuePairs.Clear();
@@ -307,10 +307,10 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            await SetPassword(password);
+            SetPassword(password);
         }
 
-        private async Task SetPassword(PasswordModel password)
+        private void SetPassword(PasswordModel password)
         {
             if (password == null)
             {
@@ -326,7 +326,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 Value = password.Value;
                 Remark = password.Remark;
 
-                SetKeyValuePairs(await _passwordService.GetKeyValuePairs(password.Id));
+                SetKeyValuePairs(password.KeyValuePairs);
                 Icon = _oldPassword.Icon;
                 _oldIcon = Icon;
             }
@@ -358,7 +358,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 }
                 else
                 {
-                    await SetPassword(_oldPassword);
+                    SetPassword(_oldPassword);
                     ReadOnly = true;
                 }
             }
@@ -487,16 +487,17 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             newPassword.Value = Value;
             newPassword.Remark = Remark;
             newPassword.Icon = Icon;
+            newPassword.KeyValuePairs = CurKeyValuePairs;
 
             await NetLoadingHelper.Invoke(async () =>
             {
                 if (_oldPassword == null)
                 {
-                    await _passwordService.AddPassword(newPassword, CurKeyValuePairs);
+                    await _passwordService.AddPassword(newPassword);
                 }
                 else
                 {
-                    await _passwordService.UpdatePassword(newPassword, false, CurKeyValuePairs);
+                    await _passwordService.UpdatePassword(newPassword, false, false);
                 }
             }, "正在保存");
 
