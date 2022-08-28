@@ -1,4 +1,5 @@
 ﻿using Lavcode.Model;
+using Lavcode.Service.Sqlite.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             //await DeleteDeletedItems();
         }
 
-        private async Task AddFolders(List<Folder> localFolders, List<Folder> remoteFolders)
+        private async Task AddFolders(List<FolderModel> localFolders, List<FolderModel> remoteFolders)
         {
             foreach (var remoteFolder in remoteFolders)
             {
@@ -75,7 +76,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             }
         }
 
-        private async Task AddPasswords(List<Password> localPasswords, List<Password> remotePasswords, List<Folder> localFolders)
+        private async Task AddPasswords(List<PasswordModel> localPasswords, List<PasswordModel> remotePasswords, List<FolderModel> localFolders)
         {
             foreach (var remotePassword in remotePasswords)
             {
@@ -91,7 +92,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             }
         }
 
-        private async Task UpdateFolders(List<Folder> localFolders, List<Folder> remoteFolders)
+        private async Task UpdateFolders(List<FolderModel> localFolders, List<FolderModel> remoteFolders)
         {
             foreach (var localFolder in localFolders)
             {
@@ -106,7 +107,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             }
         }
 
-        private async Task UpdatePasswords(List<Password> localPasswords, List<Password> remotePasswords)
+        private async Task UpdatePasswords(List<PasswordModel> localPasswords, List<PasswordModel> remotePasswords)
         {
             foreach (var localPassword in localPasswords)
             {
@@ -122,7 +123,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             }
         }
 
-        private async Task DeletePasswordItems(List<DelectedItem> delectedItems)
+        private async Task DeletePasswordItems(List<DelectedEntity> delectedItems)
         {
             foreach (var delectedPassword in delectedItems.Where((item) => item.StorageType == StorageType.Password))
             {
@@ -131,7 +132,7 @@ namespace Lavcode.Uwp.Modules.SqliteSync
             }
         }
 
-        private async Task DeleteFolderItems(List<DelectedItem> delectedItems)
+        private async Task DeleteFolderItems(List<DelectedEntity> delectedItems)
         {
             foreach (var delectedFolder in delectedItems.Where((item) => item.StorageType == StorageType.Folder))
             {
@@ -144,9 +145,9 @@ namespace Lavcode.Uwp.Modules.SqliteSync
         /// 将删除记录全部合并放在一个表
         /// </summary>
         /// <returns></returns>
-        private async Task<List<DelectedItem>> MergeDelectedItems()
+        private async Task<List<DelectedEntity>> MergeDelectedItems()
         {
-            var result = new List<DelectedItem>();
+            var result = new List<DelectedEntity>();
             var localDelectedItems = await _localSqliteHelper.DeletedService.GetDelectedItems();
             var remoteDelectedItems = await _remoteSqliteHelper.DeletedService.GetDelectedItems();
 

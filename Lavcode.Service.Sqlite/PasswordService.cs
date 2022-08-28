@@ -1,6 +1,7 @@
 ﻿using HTools;
 using Lavcode.IService;
 using Lavcode.Model;
+using Lavcode.Service.Sqlite.Entities;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Lavcode.Service.Sqlite
             _cs = cs as ConService;
         }
 
-        public async Task AddPassword(Password password, Icon icon, List<KeyValuePair> keyValuePairs = null)
+        public async Task AddPassword(PasswordModel password, IconModel icon, List<KeyValuePairModel> keyValuePairs = null)
         {
             await TaskExtend.Run(() =>
             {
@@ -28,7 +29,7 @@ namespace Lavcode.Service.Sqlite
                 if (password.Order == 0)
                 {
                     var order = Connection
-                        .Table<Password>()
+                        .Table<PasswordEntity>()
                         .Where((item) => item.FolderId == password.FolderId)
                         .OrderByDescending((item) => item.Order)
                         .Take(1)
@@ -39,16 +40,17 @@ namespace Lavcode.Service.Sqlite
                 }
 
                 // 如果有重复
-                if (Connection.Table<Password>().Where((item) => item.Id == password.Id).Count() > 0)
+                if (Connection.Table<PasswordEntity>().Where((item) => item.Id == password.Id).Count() > 0)
                 {
-                    password.SetNewId();
+                    password.Id = Guid.NewGuid().ToString();
                 }
 
                 Connection.RunInTransaction(() =>
                 {
-                    Connection.Insert(password);
-                    icon.Id = password.Id;
-                    Connection.Insert(icon);
+                    var passwordEntity = PasswordEntity.FromModel(password);
+                    Connection.Insert(passwordEntity);
+                    icon.Id = passwordEntity.Id;
+                    Connection.Insert(IconEntity.FromModel(icon));
 
                     if (keyValuePairs != null)
                     {
@@ -57,7 +59,8 @@ namespace Lavcode.Service.Sqlite
                             kvp.Id = default;
                             kvp.SourceId = password.Id;
                         }
-                        Connection.InsertAll(keyValuePairs);
+                        var list = keyValuePairs.Select(item => KeyValuePairEntity.FromModel(item)).ToArray();
+                        Connection.InsertAll(list);
                     }
                 });
             });
@@ -65,7 +68,7 @@ namespace Lavcode.Service.Sqlite
 
         public async Task DeletePassword(string passwordId, bool record = true)
         {
-            if (Connection.Table<Password>().Where((item) => item.Id == passwordId).Count() == 0)
+            if (Connection.Table<PasswordEntity>().Where((item) => item.Id == passwordId).Count() == 0)
             {
                 return;
             }
@@ -74,49 +77,49 @@ namespace Lavcode.Service.Sqlite
             {
                 Connection.RunInTransaction(() =>
                 {
-                    Connection.Table<Password>().Where((item) => item.Id == passwordId).Delete();
-                    Connection.Table<Icon>().Where((item) => item.Id == passwordId).Delete();
-                    Connection.Table<KeyValuePair>().Where(item => item.SourceId == passwordId).Delete();
+                    Connection.Table<PasswordEntity>().Where((item) => item.Id == passwordId).Delete();
+                    Connection.Table<IconEntity>().Where((item) => item.Id == passwordId).Delete();
+                    Connection.Table<KeyValuePairEntity>().Where(item => item.SourceId == passwordId).Delete();
 
                     if (record)
                     {
-                        Connection.Insert(new DelectedItem(passwordId, StorageType.Password));
+                        Connection.Insert(new DelectedEntity(passwordId, StorageType.Password));
                     }
                 });
             });
         }
 
-        public async Task<List<KeyValuePair>> GetKeyValuePairs(string passwordId)
+        public async Task<List<KeyValuePairModel>> GetKeyValuePairs(string passwordId)
         {
-            List<KeyValuePair> result = null;
+            List<KeyValuePairEntity> result = null;
             await TaskExtend.Run(() =>
             {
-                result = Connection.Table<KeyValuePair>().Where((item) => item.SourceId == passwordId).ToList();
+                result = Connection.Table<KeyValuePairEntity>().Where((item) => item.SourceId == passwordId).ToList();
             });
-            return result;
+            return result.Select(item => item.ToModel()).ToList();
         }
 
-        public async Task<List<Password>> GetPasswords(string folderId)
+        public async Task<List<PasswordModel>> GetPasswords(string folderId)
         {
-            List<Password> result = null;
+            List<PasswordEntity> result = null;
             await TaskExtend.Run(() =>
             {
-                result = Connection.Table<Password>().Where((item) => item.FolderId == folderId).OrderBy((item) => item.Order).ToList();
+                result = Connection.Table<PasswordEntity>().Where((item) => item.FolderId == folderId).OrderBy((item) => item.Order).ToList();
             });
-            return result;
+            return result.Select(item => item.ToModel()).ToList();
         }
 
-        public async Task<List<Password>> GetPasswords()
+        public async Task<List<PasswordModel>> GetPasswords()
         {
-            List<Password> result = null;
+            List<PasswordEntity> result = null;
             await TaskExtend.Run(() =>
             {
-                result = Connection.Table<Password>().OrderBy((item) => item.FolderId).ThenBy((item) => item.Order).ToList();
+                result = Connection.Table<PasswordEntity>().OrderBy((item) => item.FolderId).ThenBy((item) => item.Order).ToList();
             });
-            return result;
+            return result.Select(item => item.ToModel()).ToList();
         }
 
-        public async Task UpdatePassword(Password password, Icon icon = null, List<KeyValuePair> keyValuePairs = null)
+        public async Task UpdatePassword(PasswordModel password, IconModel icon = null, List<KeyValuePairModel> keyValuePairs = null)
         {
             await TaskExtend.Run(() =>
             {
@@ -132,7 +135,7 @@ namespace Lavcode.Service.Sqlite
 
                     if (keyValuePairs != null)
                     {
-                        Connection.Table<KeyValuePair>().Where((item) => item.SourceId == password.Id).Delete();
+                        Connection.Table<KeyValuePairEntity>().Where((item) => item.SourceId == password.Id).Delete();
                         foreach (var kvp in keyValuePairs)
                         {
                             kvp.Id = default;

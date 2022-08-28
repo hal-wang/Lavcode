@@ -5,6 +5,6 @@ namespace Lavcode.IService
 {
     public interface IIconService : IDataService
     {
-        public Task<Icon> GetIcon(string sourceId);
+        public Task<IconModel> GetIcon(string sourceId);
     }
 }

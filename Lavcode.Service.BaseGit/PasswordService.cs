@@ -17,7 +17,7 @@ namespace Lavcode.Service.BaseGit
             _con = cs as BaseGitConService;
         }
 
-        public async Task AddPassword(Password password, Icon icon, List<KeyValuePair> keyValuePairs = null)
+        public async Task AddPassword(PasswordModel password, IconModel icon, List<KeyValuePairModel> keyValuePairs = null)
         {
             password.LastEditTime = DateTime.Now;
 
@@ -38,7 +38,7 @@ namespace Lavcode.Service.BaseGit
             // 如果有重复
             if (_con.PasswordIssue.Comments.Where((item) => item.Value.Id == password.Id).Count() > 0)
             {
-                password.SetNewId();
+                password.Id = Guid.NewGuid().ToString();
             }
 
             await _con.CreateComment(password);
@@ -63,27 +63,21 @@ namespace Lavcode.Service.BaseGit
                 return;
             }
 
-            await _con.DeleteComment<Password, string>(passwordId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<Icon, string>(passwordId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<KeyValuePair, string>(passwordId, (item1, item2) => item1.SourceId == item2);
-
-            if (record)
-            {
-                await _con.CreateComment(new DelectedItem(passwordId, StorageType.Password));
-            }
-
+            await _con.DeleteComment<PasswordModel, string>(passwordId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<IconModel, string>(passwordId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<KeyValuePairModel, string>(passwordId, (item1, item2) => item1.SourceId == item2);
         }
 
-        public Task<List<KeyValuePair>> GetKeyValuePairs(string passwordId)
+        public Task<List<KeyValuePairModel>> GetKeyValuePairs(string passwordId)
         {
             var result = _con.KeyValuePairIssue.Comments.Where(item => item.Value.SourceId == passwordId).Select(item => item.Value).ToList();
             return Task.FromResult(result);
         }
 
-        public Task<List<Password>> GetPasswords(string folderId)
+        public Task<List<PasswordModel>> GetPasswords(string folderId)
         {
             var result = _con
-                .GetComments<Password, string>(folderId, (item1, item2) => item1.FolderId == folderId)
+                .GetComments<PasswordModel, string>(folderId, (item1, item2) => item1.FolderId == folderId)
                 .Where(item => item.FolderId == folderId)
                 .OrderBy((item) => item.FolderId).ThenBy((item) => item.Order)
                 .ToList();
@@ -91,13 +85,13 @@ namespace Lavcode.Service.BaseGit
             return Task.FromResult(result);
         }
 
-        public Task<List<Password>> GetPasswords()
+        public Task<List<PasswordModel>> GetPasswords()
         {
             var result = _con.PasswordIssue.Comments.Select(item => item.Value).ToList();
             return Task.FromResult(result);
         }
 
-        public async Task UpdatePassword(Password password, Icon icon = null, List<KeyValuePair> keyValuePairs = null)
+        public async Task UpdatePassword(PasswordModel password, IconModel icon = null, List<KeyValuePairModel> keyValuePairs = null)
         {
             password.LastEditTime = DateTime.Now;
             await _con.UpdateComment(password, (item1, item2) => item1.Id == item2.Id);
@@ -108,7 +102,7 @@ namespace Lavcode.Service.BaseGit
 
             if (keyValuePairs != null)
             {
-                await _con.DeleteComment<KeyValuePair, string>(password.Id, (item1, item2) => item1.SourceId == item2);
+                await _con.DeleteComment<KeyValuePairModel, string>(password.Id, (item1, item2) => item1.SourceId == item2);
                 foreach (var kvp in keyValuePairs)
                 {
                     kvp.Id = default;

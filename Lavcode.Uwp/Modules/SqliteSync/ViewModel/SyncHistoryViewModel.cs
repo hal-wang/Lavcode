@@ -1,7 +1,7 @@
 ﻿using HTools;
 using HTools.Uwp.Helpers;
-using Lavcode.Model;
 using Lavcode.Service.Sqlite;
+using Lavcode.Service.Sqlite.Entities;
 using Lavcode.Uwp.View.Sync.SyncHelper;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
@@ -61,8 +61,8 @@ namespace Lavcode.Uwp.Modules.SqliteSync.ViewModel
                 {
                     FileName = file.Name,
                     Size = Math.Round((double)fileInfo.Length / 1024, 2),
-                    FolderCount = (sqliteHelper.ConService as ConService).Connection.Table<Folder>().Count(),
-                    PasswordCount = (sqliteHelper.ConService as ConService).Connection.Table<Password>().Count()
+                    FolderCount = (sqliteHelper.ConService as ConService).Connection.Table<FolderEntity>().Count(),
+                    PasswordCount = (sqliteHelper.ConService as ConService).Connection.Table<PasswordEntity>().Count()
                 };
                 yield return item;
             }

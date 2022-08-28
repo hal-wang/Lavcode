@@ -14,7 +14,7 @@ namespace Lavcode.Service.BaseGit
             _con = cs as BaseGitConService;
         }
 
-        public Task<Icon> GetIcon(string sourceId)
+        public Task<IconModel> GetIcon(string sourceId)
         {
             var result = _con.IconIssue.Comments.Where(item => item.Value.Id == sourceId).Select(item => item.Value).FirstOrDefault();
             return Task.FromResult(result);

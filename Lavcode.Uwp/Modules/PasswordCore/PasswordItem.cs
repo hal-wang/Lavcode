@@ -4,12 +4,12 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 {
     public class PasswordItem : IconItem
     {
-        public PasswordItem(Password password, Icon icon = null)
+        public PasswordItem(PasswordModel password, IconModel icon = null)
         {
             Set(password, icon);
         }
 
-        public void Set(Password password, Icon icon = null)
+        public void Set(PasswordModel password, IconModel icon = null)
         {
             Password = password;
             Title = password.Title;
@@ -26,7 +26,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
 
-        public Password Password { get; set; }
+        public PasswordModel Password { get; set; }
 
         private string _title = string.Empty;
         public string Title

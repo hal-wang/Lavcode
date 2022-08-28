@@ -1,26 +1,23 @@
 ﻿using HTools;
 using Lavcode.IService;
 using Lavcode.Model;
-using Lavcode.Service.Sqlite.Entities;
-using SQLite;
+using Lavcode.Service.Api.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lavcode.Service.Sqlite
+namespace Lavcode.Service.Api
 {
     public class FolderService : IFolderService
     {
         private readonly ConService _cs;
-        private SQLiteConnection Connection => _cs.Connection;
-
         public FolderService(IConService cs)
         {
             _cs = cs as ConService;
         }
 
-        public async Task AddFolder(FolderModel folder, IconModel icon)
+        public async Task AddFolder(Folder folder, Icon icon)
         {
             await TaskExtend.Run(() =>
             {
@@ -31,7 +28,7 @@ namespace Lavcode.Service.Sqlite
                     if (folder.Order == 0)
                     {
                         int order = 1;
-                        var maxOrder = Connection.Table<FolderEntity>().OrderByDescending((item) => item.Order).Select((item) => item.Order).FirstOrDefault();
+                        var maxOrder = Connection.Table<Folder>().OrderByDescending((item) => item.Order).Select((item) => item.Order).FirstOrDefault();
                         if (maxOrder != default)
                         {
                             order = maxOrder + 1;
@@ -39,17 +36,16 @@ namespace Lavcode.Service.Sqlite
                         folder.Order = order;
                     }
 
-                    var folderEntity = FolderEntity.FromModel(folder);
-                    Connection.Insert(folderEntity);
-                    icon.Id = folderEntity.Id;
-                    Connection.Insert(IconEntity.FromModel(icon));
+                    Connection.Insert(folder);
+                    icon.Id = folder.Id;
+                    Connection.Insert(icon);
                 });
             });
         }
 
         public async Task DeleteFolder(string folderId, bool record = true)
         {
-            if (Connection.Table<FolderEntity>().Where((item) => item.Id == folderId).Count() == 0)
+            if (Connection.Table<Folder>().Where((item) => item.Id == folderId).Count() == 0)
             {
                 return;
             }
@@ -59,39 +55,40 @@ namespace Lavcode.Service.Sqlite
                 Connection.RunInTransaction(() =>
                 {
                     var delectedPwds = Connection
-                        .Table<PasswordEntity>()
+                        .Table<Password>()
                         .Where((item) => item.FolderId == folderId)
-                        .Select((item) => new DelectedEntity(item.Id, StorageType.Password))
+                        .Select((item) => new DelectedItem(item.Id, StorageType.Password))
                         .ToArray();
                     if (record)
                     {
-                        Connection.Insert(new DelectedEntity(folderId, StorageType.Folder));
+                        Connection.Insert(new DelectedItem(folderId, StorageType.Folder));
                         Connection.InsertAll(delectedPwds);
                     }
 
                     foreach (var pwd in delectedPwds)
                     {
-                        Connection.Table<IconEntity>().Where((icon) => icon.Id == pwd.Id).Delete();
-                        Connection.Table<KeyValuePairEntity>().Where(kvp => pwd.Id == kvp.SourceId).Delete();
+                        Connection.Table<Icon>().Where((icon) => icon.Id == pwd.Id).Delete();
+                        Connection.Table<KeyValuePair>().Where(kvp => pwd.Id == kvp.SourceId).Delete();
                     }
 
-                    Connection.Table<IconEntity>().Where((item) => item.Id == folderId).Delete();
-                    Connection.Table<FolderEntity>().Where((item) => item.Id == folderId).Delete();
+                    Connection.Table<Icon>().Where((item) => item.Id == folderId).Delete();
+                    Connection.Table<Folder>().Where((item) => item.Id == folderId).Delete();
                 });
             });
         }
 
-        public async Task<List<FolderModel>> GetFolders()
+        public async Task<List<Folder>> GetFolders()
         {
-            List<FolderEntity> folders = null;
+            //_cs.PostAsync<GetFolderDto>("folder")
+            List<Folder> folders = null;
             await TaskExtend.Run(() =>
             {
-                folders = Connection.Table<FolderEntity>().OrderBy((item) => item.Order).ToList();
+                folders = Connection.Table<Folder>().OrderBy((item) => item.Order).ToList();
             });
-            return folders.Select(f => f.ToModel()).ToList();
+            return folders;
         }
 
-        public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
+        public async Task UpdateFolder(Folder folder, Icon icon = null)
         {
             await TaskExtend.Run(() =>
             {
@@ -100,12 +97,12 @@ namespace Lavcode.Service.Sqlite
                     if (folder != null)
                     {
                         folder.LastEditTime = DateTime.Now;
-                        Connection.Update(FolderEntity.FromModel(folder));
+                        Connection.Update(folder);
                     }
 
                     if (icon != null)
                     {
-                        Connection.Update(IconEntity.FromModel(icon));
+                        Connection.Update(icon);
                     }
                 });
             });

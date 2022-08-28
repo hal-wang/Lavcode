@@ -10,8 +10,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 {
     public abstract class IconItem : ObservableObject
     {
-        private Icon _icon = null;
-        public Icon Icon
+        private IconModel _icon = null;
+        public IconModel Icon
         {
             get { return _icon; }
             set { SetProperty(ref _icon, value); }

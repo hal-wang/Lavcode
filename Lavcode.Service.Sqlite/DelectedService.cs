@@ -1,13 +1,13 @@
 ﻿using HTools;
 using Lavcode.IService;
-using Lavcode.Model;
+using Lavcode.Service.Sqlite.Entities;
 using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Lavcode.Service.Sqlite
 {
-    public class DelectedService : IDelectedService
+    public class DelectedService
     {
         private readonly ConService _cs;
         private SQLiteConnection Connection => _cs.Connection;
@@ -17,17 +17,17 @@ namespace Lavcode.Service.Sqlite
             _cs = cs as ConService;
         }
 
-        public async Task<List<DelectedItem>> GetDelectedItems()
+        public async Task<List<DelectedEntity>> GetDelectedItems()
         {
-            List<DelectedItem> result = null;
+            List<DelectedEntity> result = null;
             await TaskExtend.Run(() =>
             {
-                result = Connection.Table<DelectedItem>().ToList();
+                result = Connection.Table<DelectedEntity>().ToList();
             });
             return result;
         }
 
-        public async Task Add(DelectedItem delectedItem)
+        public async Task Add(DelectedEntity delectedItem)
         {
             await TaskExtend.Run(() =>
             {
@@ -35,7 +35,7 @@ namespace Lavcode.Service.Sqlite
             });
         }
 
-        public async Task Add(IList<DelectedItem> delectedItems)
+        public async Task Add(IList<DelectedEntity> delectedItems)
         {
             await TaskExtend.Run(() =>
             {

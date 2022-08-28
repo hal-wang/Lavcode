@@ -15,33 +15,52 @@ namespace Lavcode.Service.BaseGit
         public Func<bool> UseProxy { get; private set; } = null;
         protected int PageSize { get; } = 20;
 
-        internal IssueItem<Folder> FolderIssue { get; private set; }
-        internal IssueItem<Password> PasswordIssue { get; private set; }
-        internal IssueItem<Icon> IconIssue { get; private set; }
-        internal IssueItem<DelectedItem> DelectedItemIssue { get; private set; }
-        internal IssueItem<KeyValuePair> KeyValuePairIssue { get; private set; }
+        internal IssueItem<FolderModel> FolderIssue { get; private set; }
+        internal IssueItem<PasswordModel> PasswordIssue { get; private set; }
+        internal IssueItem<IconModel> IconIssue { get; private set; }
+        internal IssueItem<KeyValuePairModel> KeyValuePairIssue { get; private set; }
 
         private IssueItem<T> GetIssue<T>()
         {
-            if (typeof(T) == typeof(Folder))
+            if (typeof(T) == typeof(FolderModel))
             {
                 return FolderIssue as IssueItem<T>;
             }
-            else if (typeof(T) == typeof(Password))
+            else if (typeof(T) == typeof(PasswordModel))
             {
                 return PasswordIssue as IssueItem<T>;
             }
-            else if (typeof(T) == typeof(Icon))
+            else if (typeof(T) == typeof(IconModel))
             {
                 return IconIssue as IssueItem<T>;
             }
-            else if (typeof(T) == typeof(DelectedItem))
-            {
-                return DelectedItemIssue as IssueItem<T>;
-            }
-            else if (typeof(T) == typeof(KeyValuePair))
+            else if (typeof(T) == typeof(KeyValuePairModel))
             {
                 return KeyValuePairIssue as IssueItem<T>;
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        private string GetTableName<T>()
+        {
+            if (typeof(T) == typeof(FolderModel))
+            {
+                return "Folder";
+            }
+            else if (typeof(T) == typeof(PasswordModel))
+            {
+                return "Password";
+            }
+            else if (typeof(T) == typeof(IconModel))
+            {
+                return "Icon";
+            }
+            else if (typeof(T) == typeof(KeyValuePairModel))
+            {
+                return "KeyValuePair";
             }
             else
             {
@@ -113,17 +132,16 @@ namespace Lavcode.Service.BaseGit
             Repository = await GetRepository();
 
             var issues = await CreateTable(await GetAllIssues());
-            FolderIssue = await GetIssueTableItems<Folder>(issues);
-            PasswordIssue = await GetIssueTableItems<Password>(issues);
-            IconIssue = await GetIssueTableItems<Icon>(issues);
-            DelectedItemIssue = await GetIssueTableItems<DelectedItem>(issues);
-            KeyValuePairIssue = await GetIssueTableItems<KeyValuePair>(issues);
+            FolderIssue = await GetIssueTableItems<FolderModel>(issues);
+            PasswordIssue = await GetIssueTableItems<PasswordModel>(issues);
+            IconIssue = await GetIssueTableItems<IconModel>(issues);
+            KeyValuePairIssue = await GetIssueTableItems<KeyValuePairModel>(issues);
             return true;
         }
 
         private async Task<IssueItem<T>> GetIssueTableItems<T>(IList<IssueItem> issues)
         {
-            var issue = issues.First(item => item.Title == typeof(T).Name);
+            var issue = issues.First(item => item.Title == GetTableName<T>());
             var comments = await GetAllComments<T>(issue.IssueNumber);
             return new IssueItem<T>()
             {
@@ -136,19 +154,19 @@ namespace Lavcode.Service.BaseGit
 
         private async Task<IList<IssueItem>> CreateTable(IList<IssueItem> issues)
         {
-            await CreateIssueTable<Folder>(issues);
-            await CreateIssueTable<Password>(issues);
-            await CreateIssueTable<Icon>(issues);
-            await CreateIssueTable<DelectedItem>(issues);
-            await CreateIssueTable<KeyValuePair>(issues);
+            await CreateIssueTable<FolderModel>(issues);
+            await CreateIssueTable<PasswordModel>(issues);
+            await CreateIssueTable<IconModel>(issues);
+            await CreateIssueTable<KeyValuePairModel>(issues);
             return issues;
         }
 
         private async Task CreateIssueTable<T>(IList<IssueItem> issues)
         {
-            if (!issues.Any(issue => issue.Title == typeof(T).Name))
+            var name = GetTableName<T>();
+            if (!issues.Any(issue => issue.Title == name))
             {
-                var newIssue = await CreateIssue<T>(typeof(T).Name);
+                var newIssue = await CreateIssue<T>(name);
                 issues.Add(new IssueItem()
                 {
                     IssueId = newIssue.IssueId,

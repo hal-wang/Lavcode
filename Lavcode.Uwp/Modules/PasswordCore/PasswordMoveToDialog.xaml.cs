@@ -1,4 +1,5 @@
 ﻿using HTools.Uwp.Helpers;
+using Lavcode.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 {
     public sealed partial class PasswordMoveToDialog : ContentDialog, IResultDialog<bool>
     {
-        public PasswordMoveToDialog(Lavcode.Model.Folder curFolder, IReadOnlyList<Lavcode.Model.Password> passwords)
+        public PasswordMoveToDialog(FolderModel curFolder, IReadOnlyList<PasswordModel> passwords)
         {
             DataContext = VM;
             this.InitializeComponent();

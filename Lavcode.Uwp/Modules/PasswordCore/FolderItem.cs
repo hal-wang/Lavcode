@@ -4,12 +4,12 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 {
     public class FolderItem : IconItem
     {
-        public FolderItem(Folder folder, Icon icon = null)
+        public FolderItem(FolderModel folder, IconModel icon = null)
         {
             Set(folder, icon);
         }
 
-        public void Set(Folder folder, Icon icon = null)
+        public void Set(FolderModel folder, IconModel icon = null)
         {
             Folder = folder;
             Name = folder.Name;
@@ -25,7 +25,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
 
-        public Folder Folder { get; set; }
+        public FolderModel Folder { get; set; }
 
         private string _name = string.Empty;
         public string Name

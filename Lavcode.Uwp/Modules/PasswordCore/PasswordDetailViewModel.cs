@@ -83,8 +83,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         }
         #endregion
 
-        private Icon _icon = Icon.GetDefault(StorageType.Password);
-        public Icon Icon
+        private IconModel _icon = IconModel.GetDefault(StorageType.Password);
+        public IconModel Icon
         {
             get { return _icon; }
             set
@@ -131,7 +131,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             Title = string.Empty;
             Value = string.Empty;
             Remark = string.Empty;
-            Icon = Icon.GetDefault(StorageType.Password);
+            Icon = IconModel.GetDefault(StorageType.Password);
         }
 
         public async void HandleAddNew()
@@ -250,7 +250,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             SetKeysLength();
         }
 
-        private void SetKeyValuePairs(List<Model.KeyValuePair> keyValuePairs)
+        private void SetKeyValuePairs(List<KeyValuePairModel> keyValuePairs)
         {
             _oldKeyValuePairs.Clear();
             KeyValuePairs.Clear();
@@ -284,16 +284,16 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         #endregion
 
         #region 编辑
-        private Password _oldPassword = null;
-        private Icon _oldIcon = null;
-        private List<Model.KeyValuePair> _oldKeyValuePairs = new();
+        private PasswordModel _oldPassword = null;
+        private IconModel _oldIcon = null;
+        private List<KeyValuePairModel> _oldKeyValuePairs = new();
 
         /// <summary>
         /// 初始化详情页
         /// </summary>
         /// <param name="password">空则清空内容，否则为查看</param>
         /// <returns></returns>
-        private async Task InitEdit(Password password)
+        private async Task InitEdit(PasswordModel password)
         {
             if (password == null && _oldPassword == null)
             {
@@ -312,7 +312,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             await SetPassword(password);
         }
 
-        private async Task SetPassword(Password password)
+        private async Task SetPassword(PasswordModel password)
         {
             if (password == null)
             {
@@ -480,7 +480,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
 
             var newPassword = _oldPassword == null
-                ? new Password()
+                ? new PasswordModel()
                 {
                     FolderId = _curFolderId
                 }
@@ -515,14 +515,14 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         /// <summary>
         /// 当前编辑的键值对
         /// </summary>
-        private List<Model.KeyValuePair> CurKeyValuePairs
+        private List<KeyValuePairModel> CurKeyValuePairs
         {
             get
             {
-                List<Model.KeyValuePair> result = new();
+                List<KeyValuePairModel> result = new();
                 foreach (var kvp in KeyValuePairs.Where((item) => !string.IsNullOrEmpty(item.Value)))
                 {
-                    result.Add(new Model.KeyValuePair()
+                    result.Add(new KeyValuePairModel()
                     {
                         Key = kvp.Key,
                         Value = kvp.Value,

@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Lavcode.Model;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Lavcode.Uwp.Modules.PasswordCore
 {
@@ -11,7 +12,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public PasswordDetailViewModel VM { get; }
 
-        public PasswordKeyValuePairItem(Lavcode.Model.KeyValuePair keyValuePair, PasswordDetailViewModel vm)
+        public PasswordKeyValuePairItem(KeyValuePairModel keyValuePair, PasswordDetailViewModel vm)
             : this(vm)
         {
             Key = keyValuePair.Key;

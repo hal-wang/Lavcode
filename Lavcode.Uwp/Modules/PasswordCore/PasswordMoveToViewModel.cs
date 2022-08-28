@@ -21,8 +21,8 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         }
 
         public ObservableCollection<FolderItem> FolderItems { get; } = new();
-        public IReadOnlyList<Password> Passwords { get; private set; }
-        private Folder _curFolder;
+        public IReadOnlyList<PasswordModel> Passwords { get; private set; }
+        private FolderModel _curFolder;
 
         private FolderItem _selectedFolder = null;
         public FolderItem SelectedFolder
@@ -31,7 +31,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             set { SetProperty(ref _selectedFolder, value); }
         }
 
-        public async void Init(Folder curFolder, IReadOnlyList<Password> passwords)
+        public async void Init(FolderModel curFolder, IReadOnlyList<PasswordModel> passwords)
         {
             Passwords = passwords;
             _curFolder = curFolder;

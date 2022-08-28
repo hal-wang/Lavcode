@@ -1,6 +1,6 @@
 ﻿using HTools;
 using Lavcode.IService;
-using Lavcode.Model;
+using Lavcode.Service.Sqlite.Entities;
 using SQLite;
 using System;
 using System.Diagnostics;
@@ -36,11 +36,11 @@ namespace Lavcode.Service.Sqlite
 
         private void CreateTables()
         {
-            Connection.CreateTable<Folder>();
-            Connection.CreateTable<Password>();
-            Connection.CreateTable<Icon>();
-            Connection.CreateTable<KeyValuePair>();
-            Connection.CreateTable<DelectedItem>();
+            Connection.CreateTable<FolderEntity>();
+            Connection.CreateTable<PasswordEntity>();
+            Connection.CreateTable<IconEntity>();
+            Connection.CreateTable<KeyValuePairEntity>();
+            Connection.CreateTable<DelectedEntity>();
         }
 
         public void Dispose()

@@ -1,18 +1,20 @@
-﻿using SQLite;
+﻿using Lavcode.Model;
+using SQLite;
 
-namespace Lavcode.Model
+namespace Lavcode.Service.Sqlite.Entities
 {
     /// <summary>
     /// 记录已删除的文件夹或密码，用于备份恢复
     /// </summary>
-    public class DelectedItem
+    [Table("DelectedItem")]
+    public class DelectedEntity
     {
         /// <summary>
         /// 默认构造函数，给Sqlite用
         /// </summary>
-        public DelectedItem() { }
+        public DelectedEntity() { }
 
-        public DelectedItem(string sourceId, StorageType storageType)
+        public DelectedEntity(string sourceId, StorageType storageType)
         {
             Id = sourceId;
             StorageType = storageType;

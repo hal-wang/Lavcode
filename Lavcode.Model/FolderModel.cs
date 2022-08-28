@@ -1,15 +1,12 @@
-﻿using SQLite;
-using System;
+﻿using System;
 
 namespace Lavcode.Model
 {
-    public class Folder : UniqueItem
+    public class FolderModel
     {
-        [MaxLength(100)]
+        public string Id { get; set; }
         public string Name { get; set; }
-
         public int Order { get; set; }
-
         public DateTime LastEditTime { get; set; }
     }
 }

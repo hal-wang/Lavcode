@@ -19,15 +19,15 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
 
         public IncrementalLoadingCollection<IconSource, string> Icons { get; } = new IncrementalLoadingCollection<IconSource, string>();
 
-        public Icon Icon
+        public IconModel Icon
         {
-            get { return (Icon)GetValue(IconProperty); }
+            get { return (IconModel)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Icon), typeof(IconSelecter), new PropertyMetadata(null));
+            DependencyProperty.Register("Icon", typeof(IconModel), typeof(IconSelecter), new PropertyMetadata(null));
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {

@@ -10,7 +10,7 @@ namespace Lavcode.Service.Sqlite
         public IFolderService FolderService { get; private set; }
         public IPasswordService PasswordService { get; private set; }
         public IIconService IconService { get; private set; }
-        public IDelectedService DeletedService { get; private set; }
+        public DelectedService DeletedService { get; private set; }
 
         private SqliteHelper() { }
         public async static Task<SqliteHelper> OpenAsync(string filePath)

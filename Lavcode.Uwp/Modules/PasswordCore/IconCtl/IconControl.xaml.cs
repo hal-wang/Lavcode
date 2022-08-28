@@ -12,23 +12,23 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
             this.InitializeComponent();
         }
 
-        public Icon Icon
+        public IconModel Icon
         {
-            get { return (Icon)GetValue(IconProperty); }
+            get { return (IconModel)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Icon), typeof(IconControl), new PropertyMetadata(null, OnIconChanged));
+            DependencyProperty.Register("Icon", typeof(IconModel), typeof(IconControl), new PropertyMetadata(null, OnIconChanged));
 
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var iconControl = d as IconControl;
-            if (e.NewValue is not Icon icon)
+            if (e.NewValue is not IconModel icon)
             {
-                icon = new Icon()
+                icon = new IconModel()
                 {
                     IconType = IconType.SegoeMDL2,
                     Value = string.Empty
@@ -37,7 +37,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
             iconControl.OnIconChanged(icon);
         }
 
-        private async void OnIconChanged(Icon icon)
+        private async void OnIconChanged(IconModel icon)
         {
             switch (icon.IconType)
             {

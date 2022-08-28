@@ -50,7 +50,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public void RegisterMsg()
         {
-            StrongReferenceMessenger.Default.Register<PasswordListViewModel, Password, string>(this, "PasswordAddOrEdited", (_, item) => PasswordAddOrEdited(item));
+            StrongReferenceMessenger.Default.Register<PasswordListViewModel, PasswordModel, string>(this, "PasswordAddOrEdited", (_, item) => PasswordAddOrEdited(item));
             StrongReferenceMessenger.Default.Register<PasswordListViewModel, string, string>(this, "PasswordDeleted", (_, id) => PasswordDeleted(id));
             StrongReferenceMessenger.Default.Register<PasswordListViewModel, object, string>(this, "OnDbRecovered", (_, _) => SelectedPasswordItem = null);
         }
@@ -99,7 +99,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         #endregion
 
-        private void PasswordAddOrEdited(Password password)
+        private void PasswordAddOrEdited(PasswordModel password)
         {
             if (_curFolder == null || _curFolder.Folder.Id != password.FolderId)
             {
@@ -268,7 +268,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     return;
                 }
 
-                if (!await new PasswordMoveToDialog(_curFolder.Folder, new List<Password>() { item.Password }).QueueAsync<bool>())
+                if (!await new PasswordMoveToDialog(_curFolder.Folder, new List<PasswordModel>() { item.Password }).QueueAsync<bool>())
                 {
                     return;
                 }
@@ -307,10 +307,10 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                     var items = JsonConvert.DeserializeObject<List<JObject>>(content);
                     foreach (JObject item in items)
                     {
-                        var password = item["Password"].ToObject<Password>();
+                        var password = item["Password"].ToObject<PasswordModel>();
                         password.FolderId = _curFolder.Folder.Id;
 
-                        await _passwordService.AddPassword(password, item["Icon"].ToObject<Icon>(), item["KeyValuePairs"].ToObject<List<Lavcode.Model.KeyValuePair>>());
+                        await _passwordService.AddPassword(password, item["Icon"].ToObject<IconModel>(), item["KeyValuePairs"].ToObject<List<KeyValuePairModel>>());
                         PasswordItems.Add(new PasswordItem(password));
                     }
                 }, "正在复制");

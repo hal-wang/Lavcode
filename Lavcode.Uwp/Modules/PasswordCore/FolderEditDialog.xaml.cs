@@ -15,7 +15,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 {
     public sealed partial class FolderEditDialog : ContentDialog, IResultDialog<bool>
     {
-        public FolderEditDialog(Folder folder = null)
+        public FolderEditDialog(FolderModel folder = null)
         {
             Folder = folder;
             FolderName = folder == null ? string.Empty : folder.Name;
@@ -35,18 +35,18 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         public static readonly DependencyProperty FolderNameProperty =
             DependencyProperty.Register("FolderName", typeof(string), typeof(FolderEditDialog), new PropertyMetadata(string.Empty));
 
-        public Icon Icon
+        public IconModel Icon
         {
-            get { return (Icon)GetValue(IconProperty); }
+            get { return (IconModel)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Icon), typeof(FolderEditDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("Icon", typeof(IconModel), typeof(FolderEditDialog), new PropertyMetadata(null));
 
 
-        public Folder Folder { get; private set; }
+        public FolderModel Folder { get; private set; }
 
         private async void AddOrEditFolderDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -60,7 +60,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 }
                 else
                 {
-                    Icon = Icon.GetDefault(StorageType.Folder);
+                    Icon = IconModel.GetDefault(StorageType.Folder);
                 }
 
                 Teach();
@@ -137,7 +137,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                  var folderService = ServiceProvider.Services.GetService<IFolderService>();
                  if (Folder == null) //添加
                  {
-                     var folder = new Folder()
+                     var folder = new FolderModel()
                      {
                          Name = FolderName,
                      };

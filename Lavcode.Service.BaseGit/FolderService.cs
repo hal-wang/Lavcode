@@ -16,7 +16,7 @@ namespace Lavcode.Service.BaseGit
             _con = cs as BaseGitConService;
         }
 
-        public async Task AddFolder(Folder folder, Icon icon)
+        public async Task AddFolder(FolderModel folder, IconModel icon)
         {
             folder.LastEditTime = DateTime.Now;
             if (folder.Order == 0)
@@ -46,36 +46,26 @@ namespace Lavcode.Service.BaseGit
             var delectedPwds = _con
                 .PasswordIssue.Comments
                 .Where((item) => item.Value.FolderId == folderId)
-                .Select((item) => new DelectedItem(item.Value.Id, StorageType.Password))
+                .Select((item) => item.Value)
                 .ToArray();
 
             foreach (var pwd in delectedPwds)
             {
-                await _con.DeleteComment<Icon, string>(pwd.Id, (item1, item2) => item1.Id == item2);
-                await _con.DeleteComment<KeyValuePair, string>(pwd.Id, (item1, item2) => item1.SourceId == item2);
+                await _con.DeleteComment<IconModel, string>(pwd.Id, (item1, item2) => item1.Id == item2);
+                await _con.DeleteComment<KeyValuePairModel, string>(pwd.Id, (item1, item2) => item1.SourceId == item2);
             }
 
-            await _con.DeleteComment<Folder, string>(folderId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<Icon, string>(folderId, (item1, item2) => item1.Id == item2);
-
-            if (record)
-            {
-                await _con.CreateComment(new DelectedItem(folderId, StorageType.Folder));
-
-                foreach (var dp in delectedPwds)
-                {
-                    await _con.CreateComment(new DelectedItem(dp.Id, StorageType.Password));
-                }
-            }
+            await _con.DeleteComment<FolderModel, string>(folderId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<IconModel, string>(folderId, (item1, item2) => item1.Id == item2);
         }
 
-        public Task<List<Folder>> GetFolders()
+        public Task<List<FolderModel>> GetFolders()
         {
             var result = _con.FolderIssue.Comments.Select(item => item.Value).OrderBy(item => item.Order).ToList();
             return Task.FromResult(result);
         }
 
-        public async Task UpdateFolder(Folder folder, Icon icon = null)
+        public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
         {
             if (folder != null)
             {
