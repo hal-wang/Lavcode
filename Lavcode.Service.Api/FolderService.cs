@@ -2,7 +2,6 @@
 using Lavcode.IService;
 using Lavcode.Model;
 using Lavcode.Service.Api.Dtos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,89 +16,58 @@ namespace Lavcode.Service.Api
             _cs = cs as ConService;
         }
 
-        public async Task AddFolder(FolderModel folder, IconModel icon)
+        public async Task AddFolder(FolderModel folder)
         {
-            await TaskExtend.Run(() =>
+            var newFolder = await _cs.PostAsync<FolderModel>("folder", new CreateFolderDto()
             {
-                folder.UpdatedAt = DateTime.Now;
-
-                Connection.RunInTransaction(() =>
+                Name = folder.Name,
+                Icon = new UpsertIconDto()
                 {
-                    if (folder.Order == 0)
-                    {
-                        int order = 1;
-                        var maxOrder = Connection.Table<Folder>().OrderByDescending((item) => item.Order).Select((item) => item.Order).FirstOrDefault();
-                        if (maxOrder != default)
-                        {
-                            order = maxOrder + 1;
-                        }
-                        folder.Order = order;
-                    }
-
-                    Connection.Insert(folder);
-                    icon.Id = folder.Id;
-                    Connection.Insert(icon);
-                });
+                    IconType = folder.Icon.IconType,
+                    Value = folder.Icon.Value
+                },
             });
+            folder.UpdatedAt = newFolder.UpdatedAt;
+            folder.Order = newFolder.Order;
+            folder.Icon = newFolder.Icon;
+            folder.Id = newFolder.Id;
         }
 
         public async Task DeleteFolder(string folderId, bool record = true)
         {
-            if (Connection.Table<Folder>().Where((item) => item.Id == folderId).Count() == 0)
+            await _cs.DeleteAsync("folder/:folderId", param: new
             {
-                return;
-            }
-
-            await TaskExtend.Run(() =>
-            {
-                Connection.RunInTransaction(() =>
-                {
-                    var delectedPwds = Connection
-                        .Table<Password>()
-                        .Where((item) => item.FolderId == folderId)
-                        .Select((item) => new DelectedItem(item.Id, StorageType.Password))
-                        .ToArray();
-                    if (record)
-                    {
-                        Connection.Insert(new DelectedItem(folderId, StorageType.Folder));
-                        Connection.InsertAll(delectedPwds);
-                    }
-
-                    foreach (var pwd in delectedPwds)
-                    {
-                        Connection.Table<Icon>().Where((icon) => icon.Id == pwd.Id).Delete();
-                        Connection.Table<KeyValuePair>().Where(kvp => pwd.Id == kvp.SourceId).Delete();
-                    }
-
-                    Connection.Table<Icon>().Where((item) => item.Id == folderId).Delete();
-                    Connection.Table<Folder>().Where((item) => item.Id == folderId).Delete();
-                });
+                folderId
             });
         }
 
         public async Task<List<FolderModel>> GetFolders()
         {
-            return await _cs.GetAsync<List<GetFolderDto>>("folder");
+            var folders = await _cs.GetAsync<List<GetFolderDto>>("folder");
+            return folders.Select(item => item.ToModel()).ToList();
         }
 
-        public async Task UpdateFolder(FolderModel folder, IconModel icon = null)
+        public async Task UpdateFolder(FolderModel folder, bool skipIcon)
         {
-            await TaskExtend.Run(() =>
+            var newFolder = await _cs.PutAsync<FolderModel>("folder/:folderId", new UpdateFolderDto()
             {
-                Connection.RunInTransaction(() =>
+                Name = folder.Name,
+                Icon = skipIcon ? null : new UpsertIconDto()
                 {
-                    if (folder != null)
-                    {
-                        folder.UpdatedAt = DateTime.Now;
-                        Connection.Update(folder);
-                    }
-
-                    if (icon != null)
-                    {
-                        Connection.Update(icon);
-                    }
-                });
+                    IconType = folder.Icon.IconType,
+                    Value = folder.Icon.Value
+                },
+                Order = folder.Order,
+            },
+            new
+            {
+                folderId = folder.Id
             });
+            folder.UpdatedAt = newFolder.UpdatedAt;
+            if (!skipIcon)
+            {
+                folder.Icon = newFolder.Icon;
+            }
         }
     }
 }
