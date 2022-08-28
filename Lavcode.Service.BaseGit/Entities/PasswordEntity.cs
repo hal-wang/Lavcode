@@ -6,11 +6,6 @@ namespace Lavcode.Service.BaseGit.Entities
 {
     public class PasswordEntity : IEntity
     {
-        public PasswordEntity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         public string Id { get; set; }
         public string FolderId { get; set; }
         public string Title { get; set; }

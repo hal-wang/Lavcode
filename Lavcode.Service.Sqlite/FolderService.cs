@@ -40,6 +40,7 @@ namespace Lavcode.Service.Sqlite
                     }
 
                     var folderEntity = FolderEntity.FromModel(folder);
+                    folderEntity.Id = Guid.NewGuid().ToString();
                     Connection.Insert(folderEntity);
                     folder.Icon.Id = folderEntity.Id;
                     Connection.Insert(IconEntity.FromModel(folder.Icon));

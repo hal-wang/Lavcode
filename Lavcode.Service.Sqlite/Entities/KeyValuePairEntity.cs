@@ -1,12 +1,14 @@
 ﻿using Lavcode.Model;
 using SQLite;
+using System;
 
 namespace Lavcode.Service.Sqlite.Entities
 {
     [Table("KeyValuePair")]
     public class KeyValuePairEntity
     {
-        public int Id { get; set; }
+        [PrimaryKey]
+        public string Id { get; set; }
         public string SourceId { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }

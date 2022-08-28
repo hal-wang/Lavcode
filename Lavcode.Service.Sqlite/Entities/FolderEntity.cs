@@ -7,11 +7,6 @@ namespace Lavcode.Service.Sqlite.Entities
     [Table("Folder")]
     public class FolderEntity
     {
-        public FolderEntity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         [PrimaryKey]
         public string Id { get; set; }
 

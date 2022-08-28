@@ -48,6 +48,7 @@ namespace Lavcode.Service.Sqlite
                 Connection.RunInTransaction(() =>
                 {
                     var passwordEntity = PasswordEntity.FromModel(password);
+                    passwordEntity.Id = Guid.NewGuid().ToString();
                     Connection.Insert(passwordEntity);
                     password.Icon.Id = passwordEntity.Id;
                     Connection.Insert(IconEntity.FromModel(password.Icon));
@@ -56,7 +57,7 @@ namespace Lavcode.Service.Sqlite
                     {
                         foreach (var kvp in password.KeyValuePairs)
                         {
-                            kvp.Id = default;
+                            kvp.Id = Guid.NewGuid().ToString();
                             kvp.SourceId = password.Id;
                         }
                         var list = password.KeyValuePairs.Select(item => KeyValuePairEntity.FromModel(item)).ToArray();
@@ -151,7 +152,7 @@ namespace Lavcode.Service.Sqlite
                         Connection.Table<KeyValuePairEntity>().Where((item) => item.SourceId == password.Id).Delete();
                         foreach (var kvp in password.KeyValuePairs)
                         {
-                            kvp.Id = default;
+                            kvp.Id = Guid.NewGuid().ToString();
                             kvp.SourceId = password.Id;
                         }
                         Connection.InsertAll(password.KeyValuePairs);

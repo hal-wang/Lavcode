@@ -32,6 +32,7 @@ namespace Lavcode.Service.BaseGit
             }
 
             var folderEntity = FolderEntity.FromModel(folder);
+            folderEntity.Id = Guid.NewGuid().ToString();
             await _con.CreateComment(folderEntity);
 
             folder.Icon.Id = folderEntity.Id;

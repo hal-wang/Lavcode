@@ -7,11 +7,6 @@ namespace Lavcode.Service.Sqlite.Entities
     [Table("Password")]
     public class PasswordEntity
     {
-        public PasswordEntity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         [PrimaryKey]
         public string Id { get; set; }
 

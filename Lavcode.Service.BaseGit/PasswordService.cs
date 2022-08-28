@@ -43,6 +43,7 @@ namespace Lavcode.Service.BaseGit
             }
 
             var passwordEntity = PasswordEntity.FromModel(password);
+            passwordEntity.Id = Guid.NewGuid().ToString();
             await _con.CreateComment(passwordEntity);
 
             password.Icon.Id = passwordEntity.Id;
@@ -51,7 +52,7 @@ namespace Lavcode.Service.BaseGit
             {
                 foreach (var kvp in password.KeyValuePairs)
                 {
-                    kvp.Id = default;
+                    kvp.Id = Guid.NewGuid().ToString();
                     kvp.SourceId = password.Id;
                     await _con.CreateComment(KeyValuePairEntity.FromModel(kvp));
                 }
@@ -118,7 +119,7 @@ namespace Lavcode.Service.BaseGit
                 await _con.DeleteComment<KeyValuePairEntity, string>(password.Id, (item1, item2) => item1.SourceId == item2);
                 foreach (var kvp in password.KeyValuePairs)
                 {
-                    kvp.Id = default;
+                    kvp.Id = Guid.NewGuid().ToString();
                     kvp.SourceId = password.Id;
                     await _con.CreateComment(KeyValuePairEntity.FromModel(kvp));
                 }

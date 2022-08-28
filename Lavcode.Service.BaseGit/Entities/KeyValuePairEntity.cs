@@ -4,7 +4,7 @@ namespace Lavcode.Service.BaseGit.Entities
 {
     public class KeyValuePairEntity : IEntity
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string SourceId { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
