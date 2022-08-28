@@ -549,6 +549,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DeepCloner">
+      <Version>0.10.4</Version>
+    </PackageReference>
     <PackageReference Include="HTools">
       <Version>1.6.12</Version>
     </PackageReference>

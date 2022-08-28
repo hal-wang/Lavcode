@@ -1,10 +1,9 @@
-﻿using HTools;
-using SQLite;
+﻿using SQLite;
 using System;
 
 namespace Lavcode.Model
 {
-    public class Password : UniqueItem, ICloneable<Password>
+    public class Password : UniqueItem
     {
         public string FolderId { get; set; }
 
@@ -23,24 +22,5 @@ namespace Lavcode.Model
         public int Order { get; set; }
 
         public DateTime LastEditTime { get; set; }
-
-        public Password DeepClone()
-        {
-            return new Password()
-            {
-                FolderId = FolderId,
-                Id = Id,
-                LastEditTime = LastEditTime,
-                Order = Order,
-                Remark = Remark,
-                Title = Title,
-                Value = Value
-            };
-        }
-
-        public Password ShallowClone()
-        {
-            return DeepClone();
-        }
     }
 }
