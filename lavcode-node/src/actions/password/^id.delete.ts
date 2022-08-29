@@ -27,11 +27,30 @@ export default class extends Action {
   private readonly passwordId!: string;
 
   async invoke() {
-    await this.collectionService.password
-      .where({
-        _id: this.passwordId,
-      })
-      .remove();
+    const transaction = await this.collectionService.startTransaction();
+    try {
+      await transaction.iconCollection
+        .where({
+          _id: this.passwordId,
+        })
+        .remove();
+      await transaction.keyValuePairCollection
+        .where({
+          sourceId: this.passwordId,
+        })
+        .remove();
+      await transaction.passwordCollection
+        .where({
+          _id: this.passwordId,
+        })
+        .remove();
+      await transaction.commit();
+    } catch {
+      await transaction.rollback({});
+      this.internalServerErrorMsg("删除失败");
+      return;
+    }
+
     this.noContent();
   }
 }

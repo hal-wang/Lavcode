@@ -7,12 +7,9 @@ import {
   ApiSecurity,
   ApiTags,
 } from "@ipare/swagger";
-import { FolderEntity } from "../../entities/folder.entity";
-import { IconEntity } from "../../entities/icon.entity";
 import { CollectionService } from "../../services/collection.service";
-import { DbhelperService } from "../../services/dbhelper.service";
-import { GetFolderDto } from "./dtos/get-folder.dto";
 import { UpdateFolderDto } from "./dtos/update-folder.dto";
+import { FolderService } from "./services/folder.service";
 
 @ApiTags("folder")
 @ApiDescription("Update folder")
@@ -28,7 +25,7 @@ export default class extends Action {
   @Inject
   private readonly collectionService!: CollectionService;
   @Inject
-  private readonly dbHelperService!: DbhelperService;
+  private readonly folderService!: FolderService;
 
   @Param("id")
   private readonly folderId!: string;
@@ -37,31 +34,29 @@ export default class extends Action {
   private readonly folder!: UpdateFolderDto;
 
   async invoke() {
-    const folder: FolderEntity = await this.dbHelperService.update(
-      this.collectionService.folder,
-      this.folderId,
-      {
+    const transaction = await this.collectionService.startTransaction();
+    try {
+      await transaction.folderCollection.doc(this.folderId).update({
         name: this.folder.name,
         order: this.folder.order,
         updatedAt: new Date().valueOf(),
-      }
-    );
-    let icon: IconEntity | undefined = undefined;
-    if (this.folder.icon) {
-      icon = await this.dbHelperService.update(
-        this.collectionService.icon,
-        this.folderId,
-        {
+      });
+      if (this.folder.icon) {
+        transaction.iconCollection.doc(this.folderId).update({
           iconType: this.folder.icon.iconType,
           value: this.folder.icon.value,
-        }
-      );
-    } else {
-      icon = await this.dbHelperService.getOne(
-        this.collectionService.icon,
-        this.folderId
-      );
+        });
+      }
+      await transaction.commit();
+    } catch {
+      await transaction.rollback({});
+      this.internalServerErrorMsg("更新失败");
+      return;
     }
-    this.ok(GetFolderDto.fromEntity(folder, icon));
+
+    const folders = await this.folderService.getFolders({
+      _id: this.folderId,
+    });
+    this.ok(folders[0]);
   }
 }

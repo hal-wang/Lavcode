@@ -7,12 +7,9 @@ import {
   ApiSecurity,
   ApiTags,
 } from "@ipare/swagger";
-import { KeyValuePairEntity } from "../../entities/key-value-pair.entity";
-import { PasswordEntity } from "../../entities/password-entity";
 import { CollectionService } from "../../services/collection.service";
-import { DbhelperService } from "../../services/dbhelper.service";
 import { CreatePasswordDto } from "./dtos/craete-password.dto";
-import { GetPasswordDto } from "./dtos/get-password.dto";
+import { PasswordService } from "./services/password.service";
 
 @ApiTags("password")
 @ApiDescription("Create password")
@@ -28,7 +25,7 @@ export default class extends Action {
   @Inject
   private readonly collectionService!: CollectionService;
   @Inject
-  private readonly dbHelperService!: DbhelperService;
+  private readonly passwordService!: PasswordService;
 
   @Body
   private readonly password!: CreatePasswordDto;
@@ -46,35 +43,42 @@ export default class extends Action {
       .get();
     const order = orderRes.data[0]?.order ?? 0;
 
-    const password: PasswordEntity = await this.dbHelperService.add(
-      this.collectionService.password,
-      {
+    let passwordId: string | undefined;
+    const transaction = await this.collectionService.startTransaction();
+    try {
+      const addRes = await transaction.passwordCollection.add({
         folderId: this.password.folderId,
         title: this.password.title,
         value: this.password.value,
         remark: this.password.remark,
         order: order + 1,
         updatedAt: new Date().valueOf(),
+      });
+      passwordId = addRes.id;
+      await transaction.iconCollection.add({
+        _id: passwordId,
+        iconType: this.password.icon.iconType,
+        value: this.password.icon.value,
+      });
+      if (this.password.keyValuePairs.length) {
+        await transaction.keyValuePairCollection.add(
+          this.password.keyValuePairs.map((item) => ({
+            sourceId: passwordId,
+            key: item.key,
+            value: item.value,
+          }))
+        );
       }
-    );
-    const icon = await this.dbHelperService.add(this.collectionService.icon, {
-      _id: password._id,
-      iconType: this.password.icon.iconType,
-      value: this.password.icon.value,
+      await transaction.commit();
+    } catch {
+      await transaction.rollback({});
+      this.internalServerErrorMsg("创建失败");
+      return;
+    }
+
+    const passwords = await this.passwordService.getPasswords({
+      _id: passwordId,
     });
-    await this.collectionService.password.add(
-      this.password.keyValuePairs.map((item) => ({
-        sourceId: password._id,
-        key: item.key,
-        value: item.value,
-      }))
-    );
-    const kvpsRes = await this.collectionService.keyValuePair
-      .where({
-        sourceId: password._id,
-      })
-      .get();
-    const kvps = kvpsRes.data as KeyValuePairEntity[];
-    this.ok(GetPasswordDto.fromEntity(password, icon, kvps));
+    this.ok(passwords[0]);
   }
 }

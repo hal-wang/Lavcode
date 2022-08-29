@@ -7,11 +7,9 @@ import {
   ApiSecurity,
   ApiTags,
 } from "@ipare/swagger";
-import { FolderEntity } from "../../entities/folder.entity";
 import { CollectionService } from "../../services/collection.service";
-import { DbhelperService } from "../../services/dbhelper.service";
 import { CreateFolderDto } from "./dtos/create-folder.dto";
-import { GetFolderDto } from "./dtos/get-folder.dto";
+import { FolderService } from "./services/folder.service";
 
 @ApiTags("folder")
 @ApiDescription("Create folder")
@@ -27,7 +25,7 @@ export default class extends Action {
   @Inject
   private readonly collectionService!: CollectionService;
   @Inject
-  private readonly dbHelperService!: DbhelperService;
+  private readonly folderService!: FolderService;
 
   @Body
   private readonly folder!: CreateFolderDto;
@@ -42,19 +40,30 @@ export default class extends Action {
       .get();
     const order = orderRes.data[0]?.order ?? 0;
 
-    const folder: FolderEntity = await this.dbHelperService.add(
-      this.collectionService.folder,
-      {
+    let folderId: string | undefined;
+    const transaction = await this.collectionService.startTransaction();
+    try {
+      const folderRes = await transaction.folderCollection.add({
         name: this.folder.name,
         order: order + 1,
         updatedAt: new Date().valueOf(),
-      }
-    );
-    const icon = await this.dbHelperService.add(this.collectionService.icon, {
-      _id: folder._id,
-      iconType: this.folder.icon.iconType,
-      value: this.folder.icon.value,
+      });
+      folderId = folderRes.id;
+      await transaction.iconCollection.add({
+        _id: folderRes.id,
+        iconType: this.folder.icon.iconType,
+        value: this.folder.icon.value,
+      });
+      await transaction.commit();
+    } catch {
+      await transaction.rollback({});
+      this.internalServerErrorMsg("创建失败");
+      return;
+    }
+
+    const folders = await this.folderService.getFolders({
+      _id: folderId,
     });
-    this.ok(GetFolderDto.fromEntity(folder, icon));
+    this.ok(folders[0]);
   }
 }
