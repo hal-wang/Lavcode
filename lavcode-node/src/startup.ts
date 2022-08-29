@@ -71,12 +71,11 @@ export default <T extends Startup>(startup: T, mode: string) =>
         }
         return false;
       },
-      (ctx, err) => {
-        if (!ctx.jwtToken) {
-          ctx.unauthorizedMsg("Please login");
-        } else {
-          ctx.unauthorizedMsg(err.message);
-        }
+      async (ctx, err) => {
+        const logger = await ctx.getLogger();
+        logger.error("Token 无效，" + err.message);
+
+        ctx.unauthorizedMsg("请注销并重新登录");
       }
     )
     .useGlobalFilter(AuthFilter)

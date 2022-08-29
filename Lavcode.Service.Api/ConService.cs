@@ -17,7 +17,19 @@ namespace Lavcode.Service.Api
         private string _baseUrl = null;
         public Func<bool> UseProxy { private set; get; } = null;
 
-        public Task<bool> Connect(object args)
+        public static async Task<ConService> CreateTemp(string version, string apiUrl)
+        {
+            var conService = new ConService();
+            await conService.Connect(new
+            {
+                Version = version,
+                BaseUrl = apiUrl,
+                Token = ""
+            });
+            return conService;
+        }
+
+        public async Task<bool> Connect(object args)
         {
             var obj = DynamicHelper.ToExpandoObject(args);
             _version = obj.Version;
@@ -29,9 +41,10 @@ namespace Lavcode.Service.Api
             }
             if (string.IsNullOrEmpty(_token))
             {
-                return Task.FromResult(false);
+                return false;
             }
-            return Task.FromResult(true);
+
+            return await Task.FromResult(true);
         }
 
         public void Dispose()
@@ -84,6 +97,20 @@ namespace Lavcode.Service.Api
             return client;
         }
 
+        public async Task<bool> VerifyToken(string token)
+        {
+            try
+            {
+                this._token = token;
+                await SendAsync<JObject>("auth", "HEAD");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<string> Login(string password)
         {
             var obj = await GetAsync<JObject>("auth", query: new
@@ -119,7 +146,7 @@ namespace Lavcode.Service.Api
                             if (jObj.ContainsKey("message"))
                             {
                                 var msg = jObj["message"];
-                                if(msg is JArray jArray)
+                                if (msg is JArray jArray)
                                 {
                                     throw new HttpRequestException(msg[0].Value<string>());
                                 }

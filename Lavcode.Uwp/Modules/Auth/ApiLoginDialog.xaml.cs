@@ -13,6 +13,8 @@ namespace Lavcode.Uwp.Modules.Auth
         public ApiLoginDialog()
         {
             this.InitializeComponent();
+
+            ApiUrl = SettingHelper.Instance.ApiUrl;
         }
 
         public string Result { get; set; }
@@ -44,14 +46,7 @@ namespace Lavcode.Uwp.Modules.Auth
         {
             args.Cancel = true;
 
-            using var conService = new ConService();
-            await conService.Connect(new
-            {
-                Version = Global.Version,
-                BaseUrl = ApiUrl,
-                Token = ""
-            });
-
+            using var conService = await ConService.CreateTemp(Global.Version, ApiUrl);
             string token;
             try
             {
@@ -77,6 +72,16 @@ namespace Lavcode.Uwp.Modules.Auth
             {
                 var loginDialog = new ApiLoginDialog();
                 token = await loginDialog.QueueAsync<string>();
+            }
+            else
+            {
+                using var conService = await ConService.CreateTemp(Global.Version, SettingHelper.Instance.ApiUrl);
+                if (!await conService.VerifyToken(token))
+                {
+                    MessageHelper.ShowDanger("登录过期，请重新登录");
+                    var loginDialog = new ApiLoginDialog();
+                    token = await loginDialog.QueueAsync<string>();
+                }
             }
 
             return token;

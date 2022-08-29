@@ -1,16 +1,15 @@
 import { Inject } from "@ipare/inject";
-import { Header, Query } from "@ipare/pipe";
+import { Query } from "@ipare/pipe";
 import { Action } from "@ipare/router";
 import {
   ApiDescription,
   ApiResponses,
   ApiTags,
   DtoDescription,
-  DtoLengthRange,
   DtoRequired,
 } from "@ipare/swagger";
 import { Logger, LoggerInject } from "@ipare/logger";
-import { IsString, IsNumberString, IsBase64 } from "class-validator";
+import { IsString, IsBase64 } from "class-validator";
 import { Open } from "../../decorators/open.decorator";
 import { JwtService } from "@ipare/jwt";
 
@@ -30,18 +29,11 @@ export default class extends Action {
 
   @IsString()
   @IsBase64()
-  @DtoRequired()
   @DtoDescription("Lavcode password")
   @Query("password")
   private readonly password!: string;
 
   async invoke() {
-    console.log(
-      "password",
-      process.env.PASSWORD,
-      this.password,
-      Buffer.from(this.password, "base64").toString("utf-8")
-    );
     if (
       Buffer.from(this.password, "base64").toString("utf-8") !=
       process.env.PASSWORD
@@ -50,9 +42,14 @@ export default class extends Action {
       return;
     }
 
-    const token = await this.jwtService.sign({
-      from: "lavcode",
-    });
+    const token = await this.jwtService.sign(
+      {
+        from: "lavcode",
+      },
+      {
+        expiresIn: "90d",
+      }
+    );
     this.logger.info("create token");
     this.ok({
       token: token,
