@@ -140,21 +140,21 @@ namespace Lavcode.Service.Api
                     }
                 }
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
-                throw new TimeoutException("请求超时，请检查网络设置");
+                throw new TimeoutException(ex.Message);
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException ex)
             {
-                throw new TaskCanceledException("请求失败，请检查网络设置");
+                throw new TaskCanceledException(ex.Message);
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
-                throw new HttpRequestException("请求失败，请检查网络设置");
+                throw new HttpRequestException(ex.Message);
             }
-            catch (UriFormatException)
+            catch (UriFormatException ex)
             {
-                throw new Exception("地址格式错误");
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {

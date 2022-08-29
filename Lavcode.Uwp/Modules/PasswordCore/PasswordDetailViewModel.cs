@@ -489,7 +489,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             newPassword.Icon = Icon;
             newPassword.KeyValuePairs = CurKeyValuePairs;
 
-            await NetLoadingHelper.Invoke(async () =>
+            var execResult = await NetLoadingHelper.Invoke<bool>(async () =>
             {
                 if (_oldPassword == null)
                 {
@@ -499,7 +499,9 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 {
                     await _passwordService.UpdatePassword(newPassword, false, false);
                 }
+                return true;
             }, "正在保存");
+            if (!execResult) return false;
 
             _oldKeyValuePairs = CurKeyValuePairs;
             _oldPassword = newPassword;

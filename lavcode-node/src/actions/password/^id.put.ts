@@ -72,7 +72,7 @@ export default class extends Action {
           sourceId: this.passwordId,
         })
         .remove();
-      await this.collectionService.password.add(
+      await this.collectionService.keyValuePair.add(
         this.password.keyValuePairs.map((item) => ({
           sourceId: password._id,
           key: item.key,

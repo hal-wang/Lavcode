@@ -20,7 +20,7 @@ namespace Lavcode.Service.Api
 
         public async Task AddPassword(PasswordModel password)
         {
-            var newPassword = await _cs.PostAsync<PasswordModel>("password", new CreatePasswordDto()
+            var newPassword = await _cs.PostAsync<GetPasswordDto>("password", new CreatePasswordDto()
             {
                 FolderId = password.FolderId,
                 Remark = password.Remark,
@@ -37,11 +37,13 @@ namespace Lavcode.Service.Api
                     Value = item.Value
                 }).ToList()
             });
-            password.UpdatedAt = newPassword.UpdatedAt;
-            password.Icon = newPassword.Icon;
-            password.KeyValuePairs = newPassword.KeyValuePairs;
-            password.Id = password.Id;
-            password.Order = password.Order;
+            var newPasswordModel = newPassword.ToModel();
+
+            password.UpdatedAt = newPasswordModel.UpdatedAt;
+            password.Icon = newPasswordModel.Icon;
+            password.KeyValuePairs = newPasswordModel.KeyValuePairs;
+            password.Id = newPasswordModel.Id;
+            password.Order = newPasswordModel.Order;
         }
 
         public async Task DeletePassword(string passwordId, bool record = true)
@@ -68,7 +70,7 @@ namespace Lavcode.Service.Api
 
         public async Task UpdatePassword(PasswordModel password, bool skipIcon, bool skipKvp)
         {
-            var newPassword = await _cs.PostAsync<PasswordModel>("password/:passwordId", new UpdatePasswordDto()
+            var newPassword = await _cs.PutAsync<GetPasswordDto>("password/:passwordId", new UpdatePasswordDto()
             {
                 FolderId = password.FolderId,
                 Remark = password.Remark,
@@ -90,14 +92,16 @@ namespace Lavcode.Service.Api
             {
                 passwordId = password.Id,
             });
-            password.UpdatedAt = newPassword.UpdatedAt;
+            var newPasswordModel = newPassword.ToModel();
+
+            password.UpdatedAt = newPasswordModel.UpdatedAt;
             if (!skipIcon)
             {
-                password.Icon = newPassword.Icon;
+                password.Icon = newPasswordModel.Icon;
             }
             if (!skipKvp)
             {
-                password.KeyValuePairs = newPassword.KeyValuePairs;
+                password.KeyValuePairs = newPasswordModel.KeyValuePairs;
             }
         }
     }

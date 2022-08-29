@@ -18,7 +18,7 @@ namespace Lavcode.Service.Api
 
         public async Task AddFolder(FolderModel folder)
         {
-            var newFolder = await _cs.PostAsync<FolderModel>("folder", new CreateFolderDto()
+            var newFolder = await _cs.PostAsync<GetFolderDto>("folder", new CreateFolderDto()
             {
                 Name = folder.Name,
                 Icon = new UpsertIconDto()
@@ -27,10 +27,12 @@ namespace Lavcode.Service.Api
                     Value = folder.Icon.Value
                 },
             });
-            folder.UpdatedAt = newFolder.UpdatedAt;
-            folder.Order = newFolder.Order;
-            folder.Icon = newFolder.Icon;
-            folder.Id = newFolder.Id;
+            var newFolderModel = newFolder.ToModel();
+
+            folder.UpdatedAt = newFolderModel.UpdatedAt;
+            folder.Order = newFolderModel.Order;
+            folder.Icon = newFolderModel.Icon;
+            folder.Id = newFolderModel.Id;
         }
 
         public async Task DeleteFolder(string folderId, bool record = true)
@@ -49,7 +51,7 @@ namespace Lavcode.Service.Api
 
         public async Task UpdateFolder(FolderModel folder, bool skipIcon)
         {
-            var newFolder = await _cs.PutAsync<FolderModel>("folder/:folderId", new UpdateFolderDto()
+            var newFolder = await _cs.PutAsync<GetFolderDto>("folder/:folderId", new UpdateFolderDto()
             {
                 Name = folder.Name,
                 Icon = skipIcon ? null : new UpsertIconDto()
@@ -63,10 +65,12 @@ namespace Lavcode.Service.Api
             {
                 folderId = folder.Id
             });
-            folder.UpdatedAt = newFolder.UpdatedAt;
+            var newFolderModel = newFolder.ToModel();
+
+            folder.UpdatedAt = newFolderModel.UpdatedAt;
             if (!skipIcon)
             {
-                folder.Icon = newFolder.Icon;
+                folder.Icon = newFolderModel.Icon;
             }
         }
     }
