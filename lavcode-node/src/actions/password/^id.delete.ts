@@ -9,8 +9,8 @@ import {
 } from "@ipare/swagger";
 import { CollectionService } from "../../services/collection.service";
 
-@ApiTags("folder")
-@ApiDescription("Delete folder")
+@ApiTags("password")
+@ApiDescription("Delete a password")
 @ApiResponses({
   "204": {
     description: "success",
@@ -24,12 +24,12 @@ export default class extends Action {
   private readonly collectionService!: CollectionService;
 
   @Param("id")
-  private readonly folderId!: string;
+  private readonly passwordId!: string;
 
   async invoke() {
-    await this.collectionService.folder
+    await this.collectionService.password
       .where({
-        _id: this.folderId,
+        _id: this.passwordId,
       })
       .remove();
     this.noContent();

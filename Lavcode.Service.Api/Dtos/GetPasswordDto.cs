@@ -13,7 +13,7 @@ namespace Lavcode.Service.Api.Dtos
         public string Value { get; set; }
         public string Remark { get; set; }
         public int Order { get; set; }
-        public DateTimeOffset UpdatedAt { get; set; }
+        public long UpdatedAt { get; set; }
 
         public GetIconDto Icon { get; set; }
         public IList<GetKeyValuePairDto> KeyValuePairs { get; set; }
@@ -28,7 +28,7 @@ namespace Lavcode.Service.Api.Dtos
                 Value = Value,
                 Remark = Remark,
                 Order = Order,
-                UpdatedAt = UpdatedAt,
+                UpdatedAt = DateTimeOffset.FromUnixTimeMilliseconds(UpdatedAt),
                 Icon = Icon.ToModel(),
                 KeyValuePairs = KeyValuePairs.Select(item => item.ToModel()).ToList()
             };

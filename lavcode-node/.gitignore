@@ -7,3 +7,4 @@ coverage
 .ipare-cache
 
 *-error.log
+.env.local

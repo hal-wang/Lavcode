@@ -25,8 +25,12 @@ export default <T extends Startup>(startup: T, mode: string) =>
     .useConsoleLogger()
     .use(async (ctx, next) => {
       const logger = await ctx.getLogger();
-      logger.info("event: " + JSON.stringify(ctx.lambdaEvent));
-      logger.info("context: " + JSON.stringify(ctx.lambdaContext));
+      if (ctx.lambdaEvent) {
+        logger.info("event: " + JSON.stringify(ctx.lambdaEvent));
+      }
+      if (ctx.lambdaContext) {
+        logger.info("context: " + JSON.stringify(ctx.lambdaContext));
+      }
       await next();
     })
     .useSwagger({

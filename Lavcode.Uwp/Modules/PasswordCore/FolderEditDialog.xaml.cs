@@ -131,6 +131,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return false;
             }
 
+            var result = false;
             await NetLoadingHelper.Invoke(async () =>
              {
                  var folderService = ServiceProvider.Services.GetService<IFolderService>();
@@ -141,7 +142,15 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                          Name = FolderName,
                          Icon = Icon
                      };
-                     await folderService.AddFolder(folder);
+                     try
+                     {
+                         await folderService.AddFolder(folder);
+                     }
+                     catch (Exception ex)
+                     {
+                         MessageHelper.ShowError(ex);
+                         return;
+                     }
                      Folder = folder;
                  }
                  else //编辑
@@ -150,11 +159,20 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                      folder.Name = FolderName;
                      folder.Icon = Icon;
 
-                     await folderService.UpdateFolder(folder, false);
+                     try
+                     {
+                         await folderService.UpdateFolder(folder, false);
+                     }
+                     catch (Exception ex)
+                     {
+                         MessageHelper.ShowError(ex);
+                         return;
+                     }
                      Folder = folder;
                  }
+                 result = true;
              }, "正在保存");
-            return true;
+            return result;
         }
     }
 }

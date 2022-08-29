@@ -16,15 +16,15 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ipare start",
-    "start": "ipare start",
+    "dev": "npm start",
+    "start": "ipare start --mode local",
     "build": "ipare build",
     "lint": "eslint src --ext .ts"
   },
   "author": "hal-wang",
   "license": "MIT",
   "dependencies": {
-    "@cloudbase/node-sdk": "^2.9.1",
+    "@cloudbase/node-sdk": "2.7.1",
     "@ipare/core": "^1.8.12",
     "@ipare/env": "^1.8.12",
     "@ipare/filter": "^1.8.12",

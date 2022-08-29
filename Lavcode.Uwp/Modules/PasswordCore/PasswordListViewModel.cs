@@ -78,15 +78,23 @@ namespace Lavcode.Uwp.Modules.PasswordCore
                 return;
             }
 
-            await foreach (var password in GetPasswordItems())
+            try
             {
-                PasswordItems.Add(password);
+                await foreach (var password in GetPasswordItems())
+                {
+                    PasswordItems.Add(password);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex);
             }
         }
 
         private async IAsyncEnumerable<PasswordItem> GetPasswordItems()
         {
-            foreach (var password in await _passwordService.GetPasswords(_curFolder.Folder.Id))
+            var passwords = await _passwordService.GetPasswords(_curFolder.Folder.Id);
+            foreach (var password in passwords)
             {
                 PasswordItem passwordItem = null;
                 await TaskExtend.Run(() =>

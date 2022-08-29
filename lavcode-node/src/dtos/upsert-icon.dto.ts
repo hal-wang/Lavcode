@@ -1,6 +1,6 @@
 import { DtoRequired } from "@ipare/swagger";
 import { IsNotEmpty } from "class-validator";
-import { IconType } from "../../../enums/icon-type";
+import { IconType } from "../enums/icon-type";
 
 export class UpsertIconDto {
   @DtoRequired()

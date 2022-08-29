@@ -118,7 +118,15 @@ namespace Lavcode.Service.Api
                             var jObj = JsonConvert.DeserializeObject<JObject>(contentStr);
                             if (jObj.ContainsKey("message"))
                             {
-                                throw new HttpRequestException(jObj["message"].Value<string>());
+                                var msg = jObj["message"];
+                                if(msg is JArray jArray)
+                                {
+                                    throw new HttpRequestException(msg[0].Value<string>());
+                                }
+                                else
+                                {
+                                    throw new HttpRequestException(msg.Value<string>());
+                                }
                             }
                             else
                             {

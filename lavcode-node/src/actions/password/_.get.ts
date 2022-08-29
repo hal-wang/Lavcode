@@ -1,19 +1,22 @@
 import { Inject } from "@ipare/inject";
+import { Query } from "@ipare/pipe";
 import { Action } from "@ipare/router";
 import {
   ApiDescription,
   ApiResponses,
   ApiSecurity,
   ApiTags,
+  DtoDescription,
 } from "@ipare/swagger";
-import { FolderEntity } from "../../entities/folder.entity";
 import { IconEntity } from "../../entities/icon.entity";
+import { KeyValuePairEntity } from "../../entities/key-value-pair.entity";
+import { PasswordEntity } from "../../entities/password-entity";
 import { CbappService } from "../../services/cbapp.service";
 import { CollectionService } from "../../services/collection.service";
-import { GetFolderDto } from "./dtos/get-folder.dto";
+import { GetPasswordDto } from "./dtos/get-password.dto";
 
-@ApiTags("folder")
-@ApiDescription("Get all folders")
+@ApiTags("password")
+@ApiDescription("Get passwords")
 @ApiResponses({
   "200": {
     description: "success",
@@ -28,11 +31,21 @@ export default class extends Action {
   @Inject
   private readonly cbappService!: CbappService;
 
+  @Query("folderId")
+  @DtoDescription("Empty value for all passwords")
+  private readonly folderId!: string;
+
   async invoke() {
     const $ = this.cbappService.db.command.aggregate;
 
-    const res = await this.collectionService.folder
-      .aggregate()
+    let query = this.collectionService.password.aggregate();
+    if (this.folderId) {
+      query = query.match({
+        folderId: this.folderId,
+      });
+    }
+
+    const res = await query
       .lookup({
         from: this.collectionService.icon.name,
         localField: "_id",
@@ -45,13 +58,20 @@ export default class extends Action {
       .project({
         icons: 0,
       })
+      .lookup({
+        from: this.collectionService.keyValuePair.name,
+        localField: "_id",
+        foreignField: "sourceId",
+        as: "keyValuePairs",
+      })
       .end();
-    const folderEntities = res.data as (FolderEntity & {
+    const passwordEntities = res.data as (PasswordEntity & {
       icon: IconEntity;
+      keyValuePairs: KeyValuePairEntity[];
     })[];
-    const folders = folderEntities.map((f) =>
-      GetFolderDto.fromEntity(f, f.icon)
+    const passwords = passwordEntities.map((f) =>
+      GetPasswordDto.fromEntity(f, f.icon, f.keyValuePairs)
     );
-    this.ok(folders);
+    this.ok(passwords);
   }
 }

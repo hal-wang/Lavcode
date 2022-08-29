@@ -1,18 +1,28 @@
 import { Inject } from "@ipare/inject";
 import { Body, Param } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import { ApiDescription, ApiResponses, ApiTags } from "@ipare/swagger";
+import {
+  ApiDescription,
+  ApiResponses,
+  ApiSecurity,
+  ApiTags,
+} from "@ipare/swagger";
 import { FolderEntity } from "../../entities/folder.entity";
+import { IconEntity } from "../../entities/icon.entity";
 import { CollectionService } from "../../services/collection.service";
 import { DbhelperService } from "../../services/dbhelper.service";
+import { GetFolderDto } from "./dtos/get-folder.dto";
 import { UpdateFolderDto } from "./dtos/update-folder.dto";
 
 @ApiTags("folder")
-@ApiDescription("Edit folder")
+@ApiDescription("Update folder")
 @ApiResponses({
   "204": {
     description: "success",
   },
+})
+@ApiSecurity({
+  Bearer: [],
 })
 export default class extends Action {
   @Inject
@@ -27,25 +37,16 @@ export default class extends Action {
   private readonly folder!: UpdateFolderDto;
 
   async invoke() {
-    const orderRes = await this.collectionService.folder
-      .orderBy("order", "desc")
-      .field({
-        order: true,
-      })
-      .limit(1)
-      .get();
-    const order = orderRes.data[0]?.order ?? 0;
-
     const folder: FolderEntity = await this.dbHelperService.update(
       this.collectionService.folder,
       this.folderId,
       {
         name: this.folder.name,
-        order: order,
-        lastEditTime: new Date().valueOf(),
+        order: this.folder.order,
+        updatedAt: new Date().valueOf(),
       }
     );
-    let icon: FolderEntity | undefined = undefined;
+    let icon: IconEntity | undefined = undefined;
     if (this.folder.icon) {
       icon = await this.dbHelperService.update(
         this.collectionService.icon,
@@ -61,9 +62,6 @@ export default class extends Action {
         this.folderId
       );
     }
-    this.ok({
-      folder,
-      icon,
-    });
+    this.ok(GetFolderDto.fromEntity(folder, icon));
   }
 }

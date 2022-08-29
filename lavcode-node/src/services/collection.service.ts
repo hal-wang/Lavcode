@@ -22,10 +22,4 @@ export class CollectionService {
   get keyValuePair(): Database.CollectionReference {
     return this.getCollection("keyValuePair");
   }
-  get delectedItem(): Database.CollectionReference {
-    return this.getCollection("delectedItem");
-  }
-  get config(): Database.CollectionReference {
-    return this.getCollection("config");
-  }
 }

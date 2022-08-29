@@ -1,11 +1,17 @@
 import { Inject } from "@ipare/inject";
 import { Body } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import { ApiDescription, ApiResponses, ApiTags } from "@ipare/swagger";
+import {
+  ApiDescription,
+  ApiResponses,
+  ApiSecurity,
+  ApiTags,
+} from "@ipare/swagger";
 import { FolderEntity } from "../../entities/folder.entity";
 import { CollectionService } from "../../services/collection.service";
 import { DbhelperService } from "../../services/dbhelper.service";
 import { CreateFolderDto } from "./dtos/create-folder.dto";
+import { GetFolderDto } from "./dtos/get-folder.dto";
 
 @ApiTags("folder")
 @ApiDescription("Create folder")
@@ -13,6 +19,9 @@ import { CreateFolderDto } from "./dtos/create-folder.dto";
   "200": {
     description: "success",
   },
+})
+@ApiSecurity({
+  Bearer: [],
 })
 export default class extends Action {
   @Inject
@@ -37,8 +46,8 @@ export default class extends Action {
       this.collectionService.folder,
       {
         name: this.folder.name,
-        order: order,
-        lastEditTime: new Date().valueOf(),
+        order: order + 1,
+        updatedAt: new Date().valueOf(),
       }
     );
     const icon = await this.dbHelperService.add(this.collectionService.icon, {
@@ -46,9 +55,6 @@ export default class extends Action {
       iconType: this.folder.icon.iconType,
       value: this.folder.icon.value,
     });
-    this.ok({
-      folder,
-      icon,
-    });
+    this.ok(GetFolderDto.fromEntity(folder, icon));
   }
 }

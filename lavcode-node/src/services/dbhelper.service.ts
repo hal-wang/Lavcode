@@ -95,7 +95,7 @@ export class DbhelperService {
     };
   }
 
-  async add<T = any, K = T>(
+  async add<T extends object = any, K = T>(
     collection: Database.CollectionReference,
     obj: T
   ): Promise<K> {
@@ -104,7 +104,7 @@ export class DbhelperService {
     return res.data[0] as K;
   }
 
-  async set<T = any, K = any>(
+  async set<T extends object = any, K = any>(
     collection: Database.CollectionReference,
     id: string,
     obj: T
@@ -114,7 +114,7 @@ export class DbhelperService {
     return res.data[0] as K;
   }
 
-  async update<T = any, K = any>(
+  async update<T extends object = any, K = any>(
     collection: Database.CollectionReference,
     id: string,
     obj: T

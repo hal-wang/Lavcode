@@ -1,5 +1,5 @@
-import { IconEntity } from "../../../entities/icon.entity";
-import { IconType } from "../../../enums/icon-type";
+import { IconEntity } from "../entities/icon.entity";
+import { IconType } from "../enums/icon-type";
 
 export class GetIconDto {
   id!: string;

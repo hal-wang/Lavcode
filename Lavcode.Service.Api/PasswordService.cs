@@ -54,7 +54,7 @@ namespace Lavcode.Service.Api
 
         public async Task<List<PasswordModel>> GetPasswords(string folderId)
         {
-            var folders = await _cs.GetAsync<List<GetPasswordDto>>("folder/:folderId/password", param: new
+            var folders = await _cs.GetAsync<List<GetPasswordDto>>("password", query: new
             {
                 folderId
             });
@@ -63,8 +63,7 @@ namespace Lavcode.Service.Api
 
         public async Task<List<PasswordModel>> GetPasswords()
         {
-            var folders = await _cs.GetAsync<List<GetPasswordDto>>("password");
-            return folders.Select(item => item.ToModel()).ToList();
+            return await GetPasswords("");
         }
 
         public async Task UpdatePassword(PasswordModel password, bool skipIcon, bool skipKvp)

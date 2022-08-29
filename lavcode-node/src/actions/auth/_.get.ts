@@ -36,6 +36,12 @@ export default class extends Action {
   private readonly password!: string;
 
   async invoke() {
+    console.log(
+      "password",
+      process.env.PASSWORD,
+      this.password,
+      Buffer.from(this.password, "base64").toString("utf-8")
+    );
     if (
       Buffer.from(this.password, "base64").toString("utf-8") !=
       process.env.PASSWORD
