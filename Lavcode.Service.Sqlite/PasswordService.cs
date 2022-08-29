@@ -50,6 +50,7 @@ namespace Lavcode.Service.Sqlite
                     var passwordEntity = PasswordEntity.FromModel(password);
                     passwordEntity.Id = Guid.NewGuid().ToString();
                     Connection.Insert(passwordEntity);
+                    password.Id = passwordEntity.Id;
                     password.Icon.Id = passwordEntity.Id;
                     Connection.Insert(IconEntity.FromModel(password.Icon));
 
@@ -58,7 +59,7 @@ namespace Lavcode.Service.Sqlite
                         foreach (var kvp in password.KeyValuePairs)
                         {
                             kvp.Id = Guid.NewGuid().ToString();
-                            kvp.SourceId = password.Id;
+                            kvp.PasswordId = password.Id;
                         }
                         var list = password.KeyValuePairs.Select(item => KeyValuePairEntity.FromModel(item)).ToArray();
                         Connection.InsertAll(list);
@@ -80,7 +81,7 @@ namespace Lavcode.Service.Sqlite
                 {
                     Connection.Table<PasswordEntity>().Where((item) => item.Id == passwordId).Delete();
                     Connection.Table<IconEntity>().Where((item) => item.Id == passwordId).Delete();
-                    Connection.Table<KeyValuePairEntity>().Where(item => item.SourceId == passwordId).Delete();
+                    Connection.Table<KeyValuePairEntity>().Where(item => item.PasswordId == passwordId).Delete();
 
                     if (record)
                     {
@@ -103,7 +104,7 @@ namespace Lavcode.Service.Sqlite
                     .Select(item =>
                     {
                         item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
-                        item.KeyValuePairs = Connection.Table<KeyValuePairEntity>().Where(kvp => kvp.SourceId == item.Id).Select(item => item.ToModel()).ToList();
+                        item.KeyValuePairs = Connection.Table<KeyValuePairEntity>().Where(kvp => kvp.PasswordId == item.Id).Select(item => item.ToModel()).ToList();
                         return item;
                     })
                     .ToList();
@@ -124,7 +125,7 @@ namespace Lavcode.Service.Sqlite
                     .Select(item =>
                     {
                         item.Icon = Connection.Table<IconEntity>().FirstOrDefault(icon => icon.Id == item.Id)?.ToModel();
-                        item.KeyValuePairs = Connection.Table<KeyValuePairEntity>().Where(kvp => kvp.SourceId == item.Id).Select(item => item.ToModel()).ToList();
+                        item.KeyValuePairs = Connection.Table<KeyValuePairEntity>().Where(kvp => kvp.PasswordId == item.Id).Select(item => item.ToModel()).ToList();
                         return item;
                     })
                     .ToList();
@@ -149,11 +150,11 @@ namespace Lavcode.Service.Sqlite
 
                     if (!skipKvp && password.KeyValuePairs != null)
                     {
-                        Connection.Table<KeyValuePairEntity>().Where((item) => item.SourceId == password.Id).Delete();
+                        Connection.Table<KeyValuePairEntity>().Where((item) => item.PasswordId == password.Id).Delete();
                         foreach (var kvp in password.KeyValuePairs)
                         {
                             kvp.Id = Guid.NewGuid().ToString();
-                            kvp.SourceId = password.Id;
+                            kvp.PasswordId = password.Id;
                         }
                         Connection.InsertAll(password.KeyValuePairs);
                     }

@@ -1,17 +1,11 @@
 ﻿using Lavcode.Model;
 using SQLite;
-using System;
 
 namespace Lavcode.Service.Sqlite.Entities
 {
     [Table("Icon")]
     public class IconEntity
     {
-        public IconEntity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         [PrimaryKey]
         public string Id { get; set; }
 

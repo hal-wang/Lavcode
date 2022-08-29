@@ -53,12 +53,12 @@ export default class extends Action {
       if (this.password.keyValuePairs) {
         await transaction.keyValuePairCollection
           .where({
-            sourceId: this.passwordId,
+            passwordId: this.passwordId,
           })
           .remove();
         await transaction.keyValuePairCollection.add(
           this.password.keyValuePairs.map((item) => ({
-            sourceId: this.passwordId,
+            passwordId: this.passwordId,
             key: item.key,
             value: item.value,
           }))

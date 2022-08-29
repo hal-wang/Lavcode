@@ -1,6 +1,5 @@
 ﻿using Lavcode.Model;
 using SQLite;
-using System;
 
 namespace Lavcode.Service.Sqlite.Entities
 {
@@ -9,7 +8,9 @@ namespace Lavcode.Service.Sqlite.Entities
     {
         [PrimaryKey]
         public string Id { get; set; }
-        public string SourceId { get; set; }
+
+        [Column("SourceId")]
+        public string PasswordId { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
 
@@ -18,7 +19,7 @@ namespace Lavcode.Service.Sqlite.Entities
             return new KeyValuePairModel()
             {
                 Id = Id,
-                SourceId = SourceId,
+                PasswordId = PasswordId,
                 Key = Key,
                 Value = Value
             };
@@ -29,7 +30,7 @@ namespace Lavcode.Service.Sqlite.Entities
             return new KeyValuePairEntity()
             {
                 Id = model.Id,
-                SourceId = model.SourceId,
+                PasswordId = model.PasswordId,
                 Key = model.Key,
                 Value = model.Value
             };

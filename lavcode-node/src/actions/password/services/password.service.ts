@@ -35,7 +35,7 @@ export class PasswordService {
       .lookup({
         from: this.collectionService.keyValuePair.name,
         localField: "_id",
-        foreignField: "sourceId",
+        foreignField: "passwordId",
         as: "keyValuePairs",
       })
       .end();

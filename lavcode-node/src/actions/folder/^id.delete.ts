@@ -49,7 +49,7 @@ export default class extends Action {
         .remove();
       await transaction.keyValuePairCollection
         .where({
-          sourceId: _.in(passwordIds),
+          passwordId: _.in(passwordIds),
         })
         .remove();
       await transaction.iconCollection

@@ -42,6 +42,7 @@ namespace Lavcode.Service.Sqlite
                     var folderEntity = FolderEntity.FromModel(folder);
                     folderEntity.Id = Guid.NewGuid().ToString();
                     Connection.Insert(folderEntity);
+                    folder.Id = folderEntity.Id;
                     folder.Icon.Id = folderEntity.Id;
                     Connection.Insert(IconEntity.FromModel(folder.Icon));
                 });
@@ -73,7 +74,7 @@ namespace Lavcode.Service.Sqlite
                     foreach (var pwd in delectedPwds)
                     {
                         Connection.Table<IconEntity>().Where((icon) => icon.Id == pwd.Id).Delete();
-                        Connection.Table<KeyValuePairEntity>().Where(kvp => pwd.Id == kvp.SourceId).Delete();
+                        Connection.Table<KeyValuePairEntity>().Where(kvp => pwd.Id == kvp.PasswordId).Delete();
                     }
 
                     Connection.Table<IconEntity>().Where((item) => item.Id == folderId).Delete();

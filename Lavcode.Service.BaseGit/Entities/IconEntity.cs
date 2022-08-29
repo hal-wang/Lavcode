@@ -1,15 +1,9 @@
 ﻿using Lavcode.Model;
-using System;
 
 namespace Lavcode.Service.BaseGit.Entities
 {
     public class IconEntity : IEntity
     {
-        public IconEntity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         public string Id { get; set; }
         public IconType IconType { get; set; }
         public string Value { get; set; }

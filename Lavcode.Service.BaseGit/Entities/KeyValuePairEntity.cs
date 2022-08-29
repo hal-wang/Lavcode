@@ -1,11 +1,14 @@
 ﻿using Lavcode.Model;
+using Newtonsoft.Json;
 
 namespace Lavcode.Service.BaseGit.Entities
 {
     public class KeyValuePairEntity : IEntity
     {
         public string Id { get; set; }
-        public string SourceId { get; set; }
+
+        [JsonProperty("SourceId")]
+        public string PasswordId { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
 
@@ -14,7 +17,7 @@ namespace Lavcode.Service.BaseGit.Entities
             return new KeyValuePairModel()
             {
                 Id = Id,
-                SourceId = SourceId,
+                PasswordId = PasswordId,
                 Key = Key,
                 Value = Value
             };
@@ -25,7 +28,7 @@ namespace Lavcode.Service.BaseGit.Entities
             return new KeyValuePairEntity()
             {
                 Id = model.Id,
-                SourceId = model.SourceId,
+                PasswordId = model.PasswordId,
                 Key = model.Key,
                 Value = model.Value
             };

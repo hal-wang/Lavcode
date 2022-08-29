@@ -34,7 +34,7 @@ namespace Lavcode.Service.BaseGit
             var folderEntity = FolderEntity.FromModel(folder);
             folderEntity.Id = Guid.NewGuid().ToString();
             await _con.CreateComment(folderEntity);
-
+            folder.Id = folderEntity.Id;
             folder.Icon.Id = folderEntity.Id;
             await _con.CreateComment(IconEntity.FromModel(folder.Icon));
         }
@@ -55,10 +55,10 @@ namespace Lavcode.Service.BaseGit
             foreach (var pwd in delectedPwds)
             {
                 await _con.DeleteComment<IconEntity, string>(pwd.Id, (item1, item2) => item1.Id == item2);
-                await _con.DeleteComment<KeyValuePairEntity, string>(pwd.Id, (item1, item2) => item1.SourceId == item2);
+                await _con.DeleteComment<KeyValuePairEntity, string>(pwd.Id, (item1, item2) => item1.PasswordId == item2);
             }
 
-            await _con.DeleteComment<IconEntity, string>(folderId, (item1, item2) => item1.Id == item2);
+            await _con.DeleteComment<FolderEntity, string>(folderId, (item1, item2) => item1.Id == item2);
         }
 
         public Task<List<FolderModel>> GetFolders()

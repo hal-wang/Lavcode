@@ -45,15 +45,16 @@ namespace Lavcode.Service.BaseGit
             var passwordEntity = PasswordEntity.FromModel(password);
             passwordEntity.Id = Guid.NewGuid().ToString();
             await _con.CreateComment(passwordEntity);
-
+            password.Id = passwordEntity.Id;
             password.Icon.Id = passwordEntity.Id;
             await _con.CreateComment(IconEntity.FromModel(password.Icon));
+
             if (password.KeyValuePairs != null)
             {
                 foreach (var kvp in password.KeyValuePairs)
                 {
                     kvp.Id = Guid.NewGuid().ToString();
-                    kvp.SourceId = password.Id;
+                    kvp.PasswordId = password.Id;
                     await _con.CreateComment(KeyValuePairEntity.FromModel(kvp));
                 }
             }
@@ -68,7 +69,7 @@ namespace Lavcode.Service.BaseGit
 
             await _con.DeleteComment<PasswordEntity, string>(passwordId, (item1, item2) => item1.Id == item2);
             await _con.DeleteComment<IconEntity, string>(passwordId, (item1, item2) => item1.Id == item2);
-            await _con.DeleteComment<KeyValuePairEntity, string>(passwordId, (item1, item2) => item1.SourceId == item2);
+            await _con.DeleteComment<KeyValuePairEntity, string>(passwordId, (item1, item2) => item1.PasswordId == item2);
         }
 
         public Task<List<PasswordModel>> GetPasswords(string folderId)
@@ -81,7 +82,7 @@ namespace Lavcode.Service.BaseGit
                 .Select(item =>
                 {
                     item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
-                    item.KeyValuePairs = _con.KeyValuePairIssue.Comments.Where(kvp => kvp.Value.SourceId == item.Id).Select(item => item.Value).Select(item => item.ToModel()).ToList();
+                    item.KeyValuePairs = _con.KeyValuePairIssue.Comments.Where(kvp => kvp.Value.PasswordId == item.Id).Select(item => item.Value).Select(item => item.ToModel()).ToList();
                     return item;
                 })
                 .ToList();
@@ -97,7 +98,7 @@ namespace Lavcode.Service.BaseGit
                 .Select(item =>
                 {
                     item.Icon = _con.IconIssue.Comments.FirstOrDefault(icon => icon.Value.Id == item.Id)?.Value?.ToModel();
-                    item.KeyValuePairs = _con.KeyValuePairIssue.Comments.Where(kvp => kvp.Value.SourceId == item.Id).Select(item => item.Value).Select(item => item.ToModel()).ToList();
+                    item.KeyValuePairs = _con.KeyValuePairIssue.Comments.Where(kvp => kvp.Value.PasswordId == item.Id).Select(item => item.Value).Select(item => item.ToModel()).ToList();
                     return item;
                 })
                 .ToList();
@@ -116,11 +117,11 @@ namespace Lavcode.Service.BaseGit
 
             if (!skipKvp && password.KeyValuePairs != null)
             {
-                await _con.DeleteComment<KeyValuePairEntity, string>(password.Id, (item1, item2) => item1.SourceId == item2);
+                await _con.DeleteComment<KeyValuePairEntity, string>(password.Id, (item1, item2) => item1.PasswordId == item2);
                 foreach (var kvp in password.KeyValuePairs)
                 {
                     kvp.Id = Guid.NewGuid().ToString();
-                    kvp.SourceId = password.Id;
+                    kvp.PasswordId = password.Id;
                     await _con.CreateComment(KeyValuePairEntity.FromModel(kvp));
                 }
             }

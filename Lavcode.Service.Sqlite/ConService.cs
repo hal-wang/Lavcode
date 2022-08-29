@@ -63,7 +63,7 @@ namespace Lavcode.Service.Sqlite
             foreach (var kvp in kvps)
             {
                 // fix 合并冲突
-                kvp.Id = kvp.Id + kvp.SourceId;
+                kvp.Id = kvp.Id + kvp.PasswordId;
             }
             Connection.RunInTransaction(() =>
             {

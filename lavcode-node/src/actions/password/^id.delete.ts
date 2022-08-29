@@ -36,7 +36,7 @@ export default class extends Action {
         .remove();
       await transaction.keyValuePairCollection
         .where({
-          sourceId: this.passwordId,
+          passwordId: this.passwordId,
         })
         .remove();
       await transaction.passwordCollection

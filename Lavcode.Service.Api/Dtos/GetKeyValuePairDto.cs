@@ -8,8 +8,8 @@ namespace Lavcode.Service.Api.Dtos
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("sourceId")]
-        public string SourceId { get; set; }
+        [JsonProperty("passwordId")]
+        public string PasswordId { get; set; }
 
         [JsonProperty("key")]
         public string Key { get; set; }
@@ -22,7 +22,7 @@ namespace Lavcode.Service.Api.Dtos
             return new KeyValuePairModel()
             {
                 Id = Id,
-                SourceId = SourceId,
+                PasswordId = PasswordId,
                 Key = Key,
                 Value = Value
             };

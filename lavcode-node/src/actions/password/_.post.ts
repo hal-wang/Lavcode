@@ -63,7 +63,7 @@ export default class extends Action {
       if (this.password.keyValuePairs.length) {
         await transaction.keyValuePairCollection.add(
           this.password.keyValuePairs.map((item) => ({
-            sourceId: passwordId,
+            passwordId,
             key: item.key,
             value: item.value,
           }))
