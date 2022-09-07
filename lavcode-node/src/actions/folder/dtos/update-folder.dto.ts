@@ -1,16 +1,13 @@
-import { DtoDescription, DtoRequired } from "@ipare/swagger";
-import { IsNumber, IsString } from "class-validator";
+import { V } from "@ipare/validator";
 import { UpsertIconDto } from "../../../dtos/upsert-icon.dto";
 
 export class UpdateFolderDto {
-  @DtoRequired()
-  @IsString()
+  @V().Required().IsString()
   name!: string;
 
-  @DtoRequired()
-  @IsNumber()
+  @V().Required().IsNumber()
   order!: number;
 
-  @DtoDescription("空则不修改图标")
+  @V().Description("空则不修改图标")
   icon!: UpsertIconDto;
 }

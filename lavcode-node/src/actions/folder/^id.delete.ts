@@ -1,25 +1,17 @@
 import { Inject } from "@ipare/inject";
 import { Param } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiSecurity,
-  ApiTags,
-} from "@ipare/swagger";
+import { V } from "@ipare/validator";
 import { CbappService } from "../../services/cbapp.service";
 import { CollectionService } from "../../services/collection.service";
 
-@ApiTags("folder")
-@ApiDescription("Delete folder")
-@ApiResponses({
-  "204": {
-    description: "success",
-  },
-})
-@ApiSecurity({
-  Bearer: [],
-})
+@V()
+  .Tags("folder")
+  .Description("Delete a folder")
+  .ResponseDescription(204, "success")
+  .Security({
+    Bearer: [],
+  })
 export default class extends Action {
   @Inject
   private readonly collectionService!: CollectionService;

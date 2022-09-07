@@ -1,9 +1,14 @@
+import { V } from "@ipare/validator";
 import { KeyValuePairEntity } from "../../../entities/key-value-pair.entity";
 
 export class GetKeyValuePairDto {
+  @V().Required()
   id!: string;
+  @V().Required()
   passwordId!: string;
+  @V().Required()
   key!: string;
+  @V().Required()
   value!: string;
 
   public static fromEntity(entity: KeyValuePairEntity) {

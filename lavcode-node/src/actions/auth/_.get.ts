@@ -1,35 +1,25 @@
 import { Inject } from "@ipare/inject";
 import { Query } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiTags,
-  DtoDescription,
-  DtoRequired,
-} from "@ipare/swagger";
 import { Logger, LoggerInject } from "@ipare/logger";
-import { IsString, IsBase64 } from "class-validator";
 import { Open } from "../../decorators/open.decorator";
 import { JwtService } from "@ipare/jwt";
+import { V } from "@ipare/validator";
+import { GetTokenDto } from "./dtos/get-token.dto";
 
 @Open
-@ApiTags("auth")
-@ApiDescription("Get login token")
-@ApiResponses({
-  "200": {
-    description: "success",
-  },
-})
+@V()
+  .Tags("auth")
+  .Description("Get login token")
+  .Response(200, GetTokenDto)
+  .ResponseDescription(200, "success")
 export default class extends Action {
   @Inject
   private readonly jwtService!: JwtService;
   @LoggerInject()
   private readonly logger!: Logger;
 
-  @IsString()
-  @IsBase64()
-  @DtoDescription("Lavcode password")
+  @V().IsString().IsBase64().Description("Lavcode password")
   @Query("password")
   private readonly password!: string;
 

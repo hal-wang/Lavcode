@@ -1,11 +1,16 @@
 import { FolderEntity } from "../../../entities/folder.entity";
 import { IconEntity } from "../../../entities/icon.entity";
 import { GetIconDto } from "../../../dtos/get-icon.dto";
+import { V } from "@ipare/validator";
 
 export class GetFolderDto {
+  @V().Required()
   id!: string;
+  @V().Required()
   name!: string;
+  @V().Required()
   order!: number;
+  @V().Required()
   updatedAt!: number;
 
   icon?: GetIconDto;

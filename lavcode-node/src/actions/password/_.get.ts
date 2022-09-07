@@ -1,31 +1,24 @@
 import { Inject } from "@ipare/inject";
 import { Query } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiSecurity,
-  ApiTags,
-  DtoDescription,
-} from "@ipare/swagger";
+import { V } from "@ipare/validator";
+import { GetPasswordDto } from "./dtos/get-password.dto";
 import { PasswordService } from "./services/password.service";
 
-@ApiTags("password")
-@ApiDescription("Get passwords")
-@ApiResponses({
-  "200": {
-    description: "success",
-  },
-})
-@ApiSecurity({
-  Bearer: [],
-})
+@V()
+  .Tags("password")
+  .Description("Get passwords")
+  .Response(200, [GetPasswordDto])
+  .ResponseDescription(200, "success")
+  .Security({
+    Bearer: [],
+  })
 export default class extends Action {
   @Inject
   private readonly passwordService!: PasswordService;
 
   @Query("folderId")
-  @DtoDescription("Empty value for all passwords")
+  @V().Description("Empty value for all passwords")
   private readonly folderId!: string;
 
   async invoke() {

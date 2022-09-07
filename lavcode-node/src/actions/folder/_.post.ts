@@ -1,26 +1,20 @@
 import { Inject } from "@ipare/inject";
 import { Body } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiSecurity,
-  ApiTags,
-} from "@ipare/swagger";
+import { V } from "@ipare/validator";
 import { CollectionService } from "../../services/collection.service";
 import { CreateFolderDto } from "./dtos/create-folder.dto";
+import { GetFolderDto } from "./dtos/get-folder.dto";
 import { FolderService } from "./services/folder.service";
 
-@ApiTags("folder")
-@ApiDescription("Create folder")
-@ApiResponses({
-  "200": {
-    description: "success",
-  },
-})
-@ApiSecurity({
-  Bearer: [],
-})
+@V()
+  .Tags("folder")
+  .Description("Create folder")
+  .Response(200, GetFolderDto)
+  .ResponseDescription(200, "success")
+  .Security({
+    Bearer: [],
+  })
 export default class extends Action {
   @Inject
   private readonly collectionService!: CollectionService;

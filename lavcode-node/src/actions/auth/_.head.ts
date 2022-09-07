@@ -1,21 +1,13 @@
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiSecurity,
-  ApiTags,
-} from "@ipare/swagger";
+import { V } from "@ipare/validator";
 
-@ApiTags("auth")
-@ApiDescription("Verify token")
-@ApiResponses({
-  "204": {
-    description: "success",
-  },
-})
-@ApiSecurity({
-  Bearer: [],
-})
+@V()
+  .Tags("auth")
+  .Description("Verify token")
+  .ResponseDescription(204, "success")
+  .Security({
+    Bearer: [],
+  })
 export default class extends Action {
   async invoke() {
     this.noContent();

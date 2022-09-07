@@ -1,13 +1,10 @@
-import { DtoRequired } from "@ipare/swagger";
-import { IsNotEmpty, IsString } from "class-validator";
+import { V } from "@ipare/validator";
 import { UpsertIconDto } from "../../../dtos/upsert-icon.dto";
 
 export class CreateFolderDto {
-  @DtoRequired()
-  @IsString()
+  @V().Required().IsString()
   name!: string;
 
-  @DtoRequired()
-  @IsNotEmpty()
+  @V().Required()
   icon!: UpsertIconDto;
 }

@@ -1,10 +1,10 @@
-import { DtoDescription } from "@ipare/swagger";
+import { V } from "@ipare/validator";
 
-@DtoDescription("Page params")
+@V().Description("Page params")
 export class PageParamsDto {
-  @DtoDescription("Page index")
+  @V().Description("Page index").IsNumber().IsOptional()
   readonly page?: number;
 
-  @DtoDescription("Per page limit")
+  @V().Description("Per page limit").IsNumber().IsOptional()
   readonly limit?: number;
 }

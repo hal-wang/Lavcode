@@ -34,6 +34,7 @@ export default <T extends Startup>(startup: T, mode: string) =>
       await next();
     })
     .useSwagger({
+      path: "",
       builder: async (builder) =>
         builder
           .addInfo({

@@ -1,13 +1,10 @@
-import { DtoRequired } from "@ipare/swagger";
-import { IsNotEmpty } from "class-validator";
+import { V } from "@ipare/validator";
 import { IconType } from "../enums/icon-type";
 
 export class UpsertIconDto {
-  @DtoRequired()
-  @IsNotEmpty()
+  @V().Required()
   iconType!: IconType;
 
-  @DtoRequired()
-  @IsNotEmpty()
+  @V().Required()
   value!: string;
 }

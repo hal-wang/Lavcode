@@ -1,23 +1,17 @@
 import { Inject } from "@ipare/inject";
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiSecurity,
-  ApiTags,
-} from "@ipare/swagger";
+import { V } from "@ipare/validator";
+import { GetFolderDto } from "./dtos/get-folder.dto";
 import { FolderService } from "./services/folder.service";
 
-@ApiTags("folder")
-@ApiDescription("Get all folders")
-@ApiResponses({
-  "200": {
-    description: "success",
-  },
-})
-@ApiSecurity({
-  Bearer: [],
-})
+@V()
+  .Tags("folder")
+  .Description("Get all folders")
+  .Response(200, [GetFolderDto])
+  .ResponseDescription(200, "success")
+  .Security({
+    Bearer: [],
+  })
 export default class extends Action {
   @Inject
   private readonly folderService!: FolderService;

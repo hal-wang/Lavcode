@@ -1,26 +1,20 @@
 import { Inject } from "@ipare/inject";
 import { Body } from "@ipare/pipe";
 import { Action } from "@ipare/router";
-import {
-  ApiDescription,
-  ApiResponses,
-  ApiSecurity,
-  ApiTags,
-} from "@ipare/swagger";
+import { V } from "@ipare/validator";
 import { CollectionService } from "../../services/collection.service";
 import { CreatePasswordDto } from "./dtos/craete-password.dto";
+import { GetPasswordDto } from "./dtos/get-password.dto";
 import { PasswordService } from "./services/password.service";
 
-@ApiTags("password")
-@ApiDescription("Create password")
-@ApiResponses({
-  "200": {
-    description: "success",
-  },
-})
-@ApiSecurity({
-  Bearer: [],
-})
+@V()
+  .Tags("password")
+  .Description("Create password")
+  .Response(200, GetPasswordDto)
+  .ResponseDescription(200, "success")
+  .Security({
+    Bearer: [],
+  })
 export default class extends Action {
   @Inject
   private readonly collectionService!: CollectionService;
