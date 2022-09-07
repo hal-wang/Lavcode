@@ -35,6 +35,7 @@ export default <T extends Startup>(startup: T, mode: string) =>
     })
     .useSwagger({
       path: "",
+      basePath: mode == "production" ? "v1" : "",
       builder: async (builder) =>
         builder
           .addInfo({

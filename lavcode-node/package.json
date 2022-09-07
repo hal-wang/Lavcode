@@ -19,7 +19,8 @@
     "dev": "npm start",
     "start": "ipare start --mode local",
     "build": "ipare build",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "deploy": "tcb login && tcb framework deploy --mode local"
   },
   "author": "hal-wang",
   "license": "MIT",
@@ -39,6 +40,7 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "@cloudbase/cli": "^2.1.4",
     "@ipare/cli": "^0.5.3",
     "@types/jest": "^28.1.8",
     "@types/node": "^18.7.15",

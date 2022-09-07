@@ -1,0 +1,55 @@
+{
+  "version": "2.0",
+  "envId": "{{env.ENV_ID}}",
+  "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+  "functionRoot": "./functions",
+  "framework": {
+    "name": "lavcode",
+    "hooks": {
+      "preDeploy": {
+        "type": "execCommand",
+        "commands": [
+          "npm i -g yarn --force && yarn config set registry https://registry.npmjs.org",
+          "yarn install && yarn build"
+        ]
+      }
+    },
+    "plugins": {
+      "function": {
+        "use": "@cloudbase/framework-plugin-function",
+        "inputs": {
+          "functionRootPath": "dist",
+          "functions": [
+            {
+              "name": "v1",
+              "envVariables": {
+                "PASSWORD": "{{env.PASSWORD}}"
+              },
+              "runtime": "Nodejs12.16",
+              "memorySize": 256
+            }
+          ]
+        }
+      },
+      "db": {
+        "use": "@cloudbase/framework-plugin-database",
+        "inputs": {
+          "collections": [
+            {
+              "collectionName": "folder"
+            },
+            {
+              "collectionName": "password"
+            },
+            {
+              "collectionName": "icon"
+            },
+            {
+              "collectionName": "keyValuePair"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
