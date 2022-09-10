@@ -24,8 +24,9 @@ jobs:
           ENV_ID: ${{ secrets.NODE_ENV_ID }}
         run: |
           cd lavcode-node
-          sh deploy.sh
-      - name: Deploy
+          npm install
+          echo -e "SECRET_KEY=$SECRET_KEY\nENV_ID=$ENV_ID" > ./.env.local
+      - name: Publish
         env:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
