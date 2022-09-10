@@ -37,7 +37,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
 
         public void RegisterMsg()
         {
-            StrongReferenceMessenger.Default.Register<FolderListViewModel, object, string>(this, "OnDbRecovered", async (_, _) => await Refresh());
+            StrongReferenceMessenger.Default.Register<FolderListViewModel, object, string>(this, "OnDbRecovered", async (_, _) => await Refresh(true));
         }
 
         public void UnregisterMsg()
@@ -45,26 +45,40 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             StrongReferenceMessenger.Default.UnregisterAll(this);
         }
 
-
         #region Init
         private readonly IFolderService _folderService;
-
-        public FolderListViewModel(IFolderService folderService)
+        private readonly IConService _conService;
+        public FolderListViewModel(IFolderService folderService, IConService conService)
         {
             _folderService = folderService;
+            _conService = conService;
         }
 
-        public async Task Refresh()
+        public async Task Refresh(bool deepRefresh)
         {
             try
             {
                 _initing = true;
-                FolderItems.Clear();
-                foreach (var folder in await _folderService.GetFolders())
+                try
                 {
-                    FolderItems.Add(new FolderItem(folder));
+                    await NetLoadingHelper.Invoke(async () =>
+                    {
+                        if (deepRefresh && !await _conService.Refresh())
+                        {
+                            return;
+                        }
+
+                        FolderItems.Clear();
+                        foreach (var folder in await _folderService.GetFolders())
+                        {
+                            FolderItems.Add(new FolderItem(folder));
+                        }
+                    });
                 }
-                _initing = false;
+                finally
+                {
+                    _initing = false;
+                }
 
                 var beforeFolder = SelectedItem;
                 SelectedItem
@@ -82,6 +96,11 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
         #endregion
+
+        public async void HandleRefresh()
+        {
+            await Refresh(true);
+        }
 
         public async void HandleAddFolder()
         {

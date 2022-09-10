@@ -16,8 +16,11 @@ namespace Lavcode.Service.Sqlite
 
         public Func<bool> UseProxy { get; } = null;
 
+        private object _args;
         public async Task<bool> Connect(object args)
         {
+            _args = args;
+
             var filePath = DynamicHelper.ToExpandoObject(args).FilePath as string;
             try
             {
@@ -35,6 +38,11 @@ namespace Lavcode.Service.Sqlite
                 Debug.Write(ex);
                 return false;
             }
+        }
+
+        public virtual async Task<bool> Refresh()
+        {
+            return await Connect(_args);
         }
 
         private void CreateTables()

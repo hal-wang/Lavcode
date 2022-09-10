@@ -29,8 +29,10 @@ namespace Lavcode.Service.Api
             return conService;
         }
 
+        private object _args;
         public async Task<bool> Connect(object args)
         {
+            _args = args;
             var obj = DynamicHelper.ToExpandoObject(args);
             _version = obj.Version;
             _baseUrl = obj.BaseUrl;
@@ -45,6 +47,11 @@ namespace Lavcode.Service.Api
             }
 
             return await Task.FromResult(true);
+        }
+
+        public async Task<bool> Refresh()
+        {
+            return await Connect(_args);
         }
 
         public void Dispose()

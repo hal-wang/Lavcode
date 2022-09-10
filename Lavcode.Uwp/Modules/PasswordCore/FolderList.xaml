@@ -12,6 +12,11 @@
     d:DesignWidth="600">
 
     <Grid Background="{ThemeResource PrimaryAcrylicBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        
         <!--用于引导定位-->
         <Border HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -220,5 +225,9 @@
                 </DataTemplate>
             </muxc:TabView.TabItemTemplate>
         </muxc:TabView>
+
+        <Button Grid.Column="1" VerticalAlignment="Bottom" Style="{ThemeResource EllipsisButton}" Margin="0 4 0 -4" Height="48" Click="{x:Bind VM.HandleRefresh}">
+            <SymbolIcon Symbol="Refresh"/>
+        </Button>
     </Grid>
 </UserControl>

@@ -124,9 +124,12 @@ namespace Lavcode.Service.BaseGit
             }
         }
 
+        private object _args;
         public virtual async Task<bool> Connect(object args)
         {
             if (!await BeforeConnect(args)) return false;
+
+            _args = args;
 
             UserLogin = await GetUserLogin();
             Repository = await GetRepository();
@@ -137,6 +140,11 @@ namespace Lavcode.Service.BaseGit
             IconIssue = await GetIssueTableItems<IconEntity>(issues);
             KeyValuePairIssue = await GetIssueTableItems<KeyValuePairEntity>(issues);
             return true;
+        }
+
+        public virtual async Task<bool> Refresh()
+        {
+            return await Connect(_args);
         }
 
         private async Task<IssueItem<T>> GetIssueTableItems<T>(IList<IssueItem> issues) where T : IEntity

@@ -25,7 +25,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         private async void Folder_Loaded(object sender, RoutedEventArgs e)
         {
             Loaded -= Folder_Loaded;
-            await VM.Refresh();
+            await VM.Refresh(false);
 
             await new GuideHandler()
             {
