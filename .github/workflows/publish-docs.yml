@@ -1,3 +1,5 @@
+name: "publish docs"
+
 on:
   push:
     branches: [main]
@@ -16,18 +18,30 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Setup ENV
+
+      - name: Build
         env:
           SECRET_KEY: ${{ secrets.NODE_SECRET_KEY }}
           ENV_ID: ${{ secrets.NODE_ENV_ID }}
         run: |
           cd lavcode-docs
-          sh deploy.sh
-      - name: Deploy
-        env:
-          TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
-          TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          npm install
+          npm run build
+
+      - name: Init-Git
         run: |
-          cd lavcode-node
-          npx tcb login --apiKeyId $TENCENT_SECRET_ID --apiKey $TENCENT_SECRET_KEY
-          npx tcb framework deploy --mode local
+          cd lavcode-docs/docs/.vuepress/dist
+          git config --global user.name 'hal-wang' 
+          git config --global user.email 'hi@hal.wang'
+          git init -b gh-pages
+          git add -A
+          git commit -m "publish"
+
+      - name: Publish
+        uses: ad-m/github-push-action@master
+        with:
+          directory: lavcode-docs/docs/.vuepress/dist
+          repository: hal-wang/Lavcode
+          force: true
+          branch: gh-pages
+          github_token: ${{ secrets.PUSH_REPO }}
