@@ -26,7 +26,7 @@ export default class extends Action {
   async invoke() {
     if (
       Buffer.from(this.password, "base64").toString("utf-8") !=
-      process.env.PASSWORD
+      process.env.SECRET_KEY
     ) {
       this.unauthorizedMsg("密码错误");
       return;

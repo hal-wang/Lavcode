@@ -23,10 +23,11 @@
             {
               "name": "v1",
               "envVariables": {
-                "PASSWORD": "{{env.PASSWORD}}"
+                "SECRET_KEY": "{{env.SECRET_KEY}}"
               },
               "runtime": "Nodejs12.16",
-              "memorySize": 256
+              "memorySize": 256,
+              "installDependency": true
             }
           ]
         }

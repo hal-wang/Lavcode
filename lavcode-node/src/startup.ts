@@ -63,7 +63,7 @@ export default <T extends Startup>(startup: T, mode: string) =>
     })
     .useValidator()
     .useJwt({
-      secret: process.env.PASSWORD,
+      secret: process.env.SECRET_KEY,
     })
     .useRouterParser()
     .useJwtVerify(

@@ -8,3 +8,4 @@ coverage
 
 *-error.log
 .env.local
+TCBSAM.yaml
