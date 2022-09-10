@@ -5,12 +5,12 @@ import { UpsertKeyValuePair } from "./upsert-key-value-pair.dto";
 export class UpdatePasswordDto {
   @V().Required()
   folderId!: string;
-  @V().Required()
-  title!: string;
-  @V().Required()
-  value!: string;
-  @V().Required()
-  remark!: string;
+  @V().IsOptional()
+  title?: string;
+  @V().IsOptional()
+  value?: string;
+  @V().IsOptional()
+  remark?: string;
   @V().Required()
   order!: string;
 
