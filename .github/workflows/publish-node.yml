@@ -1,0 +1,32 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    if: github.repository == 'hal-wang/Lavcode'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - name: Setup ENV
+        env:
+          SECRET_KEY: ${{ secrets.NODE_SECRET_KEY }}
+          ENV_ID: ${{ secrets.NODE_ENV_ID }}
+        run: |
+          echo -e "SECRET_KEY=$SECRET_KEY\nENV_ID=$ENV_ID" > ./.env.local
+      - name: Deploy
+        env:
+          TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+          TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+        run: |
+          npx tcb login --apiKeyId $TENCENT_SECRET_ID --apiKey $TENCENT_SECRET_KEY
+          npx tcb framework deploy --mode local

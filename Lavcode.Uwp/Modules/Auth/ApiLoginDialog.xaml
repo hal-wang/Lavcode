@@ -39,9 +39,7 @@
                                 <Hyperlink NavigateUri="https://github.com/hal-wang/Lavcode">https://github.com/hal-wang/Lavcode</Hyperlink>
                                 <LineBreak/>
                                 <LineBreak/>
-                                <Run>密码是在部署时设置的环境变量</Run>
-                                <Italic>PASSWORD</Italic>
-                                <Run>，用于防止他人调用接口</Run>
+                                <Run>密码是在部署时设置的环境变量，用于防止他人调用接口</Run>
                             </Paragraph>
                         </RichTextBlock>
                     </controls:TeachingTip>
