@@ -8,6 +8,6 @@ export class UpdateFolderDto {
   @V().Required().IsNumber()
   order!: number;
 
-  @V().Description("空则不修改图标")
+  @V().IsOptional().Description("空则不修改图标")
   icon!: UpsertIconDto;
 }

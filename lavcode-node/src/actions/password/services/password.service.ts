@@ -38,6 +38,9 @@ export class PasswordService {
         foreignField: "passwordId",
         as: "keyValuePairs",
       })
+      .sort({
+        order: 1,
+      })
       .end();
     const passwordEntities = res.data as (PasswordEntity & {
       icon: IconEntity;

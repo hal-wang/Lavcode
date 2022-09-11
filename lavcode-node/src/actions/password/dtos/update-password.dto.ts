@@ -14,8 +14,8 @@ export class UpdatePasswordDto {
   @V().Required()
   order!: string;
 
-  @V().Required()
+  @V().IsOptional()
   icon!: UpsertIconDto;
-  @V().Required().Items(UpsertKeyValuePair)
+  @V().IsOptional().Items(UpsertKeyValuePair)
   keyValuePairs!: UpsertKeyValuePair[];
 }

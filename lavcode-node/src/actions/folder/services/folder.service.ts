@@ -31,6 +31,9 @@ export class FolderService {
       .project({
         icons: 0,
       })
+      .sort({
+        order: 1,
+      })
       .end();
     const folderEntities = res.data as (FolderEntity & {
       icon: IconEntity;
