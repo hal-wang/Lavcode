@@ -78,7 +78,7 @@ namespace Lavcode.Uwp.Modules.Auth
                 using var conService = await ConService.CreateTemp(Global.Version, SettingHelper.Instance.ApiUrl);
                 if (!await conService.VerifyToken(token))
                 {
-                    MessageHelper.ShowDanger("登录过期，请重新登录");
+                    MessageHelper.ShowDanger("登录失败，请重新登录");
                     var loginDialog = new ApiLoginDialog();
                     token = await loginDialog.QueueAsync<string>();
                 }
