@@ -11,7 +11,7 @@ const usagePages = [
   },
   {
     text: "进阶",
-    children: ["command.md", "contribute.md"],
+    children: ["command.md", "contribute.md", "api.md"],
   },
 ];
 
