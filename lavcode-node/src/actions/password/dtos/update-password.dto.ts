@@ -11,8 +11,8 @@ export class UpdatePasswordDto {
   value?: string;
   @V().IsOptional()
   remark?: string;
-  @V().Required()
-  order!: string;
+  @V().IsNumber().Required()
+  order!: number;
 
   @V().IsOptional()
   icon!: UpsertIconDto;
