@@ -13,7 +13,6 @@ namespace Lavcode.Asp.Dtos
         /// <summary>
         /// 空则不修改图标
         /// </summary>
-        [Required]
         public UpsertIconDto? Icon { get; set; }
     }
 }

@@ -21,5 +21,8 @@ namespace Lavcode.Asp.Entities
         /// </summary>
         [MaxLength(1024 * 1024 * 10)]
         public string Value { get; set; } = null!;
+
+        public virtual FolderEntity? Folder { get; set; }
+        public virtual PasswordEntity? Password { get; set; }
     }
 }

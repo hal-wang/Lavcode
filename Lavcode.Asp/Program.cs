@@ -4,6 +4,7 @@ using Lavcode.Asp.Filters;
 using Lavcode.Asp.Services;
 using LogDashboard;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -33,6 +34,7 @@ builder.Services.AddControllers(options =>
     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 });
+builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -91,7 +93,6 @@ builder.Services.AddAuthentication(x =>
         OnChallenge = async context =>
         {
             context.HandleResponse();
-            context.Response.StatusCode = 401;
             await context.Response.WriteAsJsonAsync(new
             {
                 message = "请注销并重新登录"
@@ -138,6 +139,17 @@ app.Use(async (ctx, next) =>
         {
             await dbCotnext.Database.EnsureCreatedAsync();
         }
+    }
+    await next();
+});
+
+// add Bearer
+app.Use(async (ctx, next) =>
+{
+    var token = ctx.Request.Headers["Authorization"].FirstOrDefault();
+    if (!string.IsNullOrEmpty(token) && !token.StartsWith("Bearer "))
+    {
+        ctx.Request.Headers["Authorization"] = new string[] { "Bearer " + token };
     }
     await next();
 });

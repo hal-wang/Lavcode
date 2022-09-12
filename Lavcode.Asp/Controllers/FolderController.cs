@@ -40,14 +40,15 @@ namespace Lavcode.Asp.Controllers
         public async Task<IActionResult> CreateFolder([FromBody] CreateFolderDto dto)
         {
             var order = await _databaseContext.Folders.OrderByDescending(f => f.Order).Select(f => f.Order).FirstOrDefaultAsync();
+            var folderId = Guid.NewGuid().ToString();
             var newFolder = await _databaseContext.Folders.AddAsync(new FolderEntity()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = folderId,
                 Icon = new IconEntity()
                 {
                     IconType = dto.Icon.IconType,
                     Value = dto.Icon.Value,
-                    Id = Guid.NewGuid().ToString()
+                    Id = folderId,
                 },
                 Name = dto.Name,
                 Order = order += 1,
@@ -83,7 +84,7 @@ namespace Lavcode.Asp.Controllers
             }
             await _databaseContext.SaveChangesAsync();
 
-            var newFolder = await _databaseContext.Folders.Where(f => f.Id == folderId).Include(f => f.Icon).ToArrayAsync();
+            var newFolder = await _databaseContext.Folders.Where(f => f.Id == folderId).Include(f => f.Icon).FirstOrDefaultAsync();
             return Ok(newFolder);
         }
 
