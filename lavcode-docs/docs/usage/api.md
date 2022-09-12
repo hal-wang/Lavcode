@@ -6,15 +6,35 @@ Lavcode 支持通过接口的方式存取数据
 
 输入接口地址和密码即可使用
 
-本教程使用源码提供的 `lavcode-node` 快速部署接口
-
-## 部署接口
+## 后端接口方案
 
 Lavcode 没有提供直接用的接口，因为大多数人都不愿意将密码存储到别人那里，因此你需要自行部署
 
-在源码 `lavcode-node` 文件夹中，提供了 `nodejs` + 腾讯云 `CloudBase` 的方式部署云接口
+源码提供两种方案实现后端接口。对于复杂需求，也可以仿照这两种方案实现自定义方案
 
-你需要按以下步骤进行
+1. 方案 1
+
+[cloudbase](https://www.cloudbase.net/) + nodejs + [ipare](https://ipare.org)
+
+源码目录 `lavcode-node`
+
+此方案使用比较简单，适合零开发经验的用户，稍微有些开发经验就更好了
+
+2. 方案 2
+
+.NET6 + Asp + Sql Server
+
+源码目录 `Lavcode.Asp`
+
+此方案使用起来稍复杂，需要一定的开发基础
+
+## 部署接口
+
+此部分同样适用于 0 开发基础的普通用户
+
+使用源码提供的 `lavcode-node` 快速部署接口
+
+按以下步骤进行
 
 1. 一键部署
 
@@ -58,7 +78,7 @@ lavcode-node 使用了 nodejs 框架 [ipare](https://ipare.org)，按 Restful �
 
 接口的默认页面是 `swagger`，同样是由 [ipare](https://ipare.org) 自动生成，你可以通过修改源码的方式隐藏 `swagger`
 
-## 本地运行
+### 本地运行
 
 你也可以选择本地运行 `lavcode-node`
 
@@ -73,9 +93,102 @@ TENCENT_SECRET_ID=腾讯云 SecretId
 
 `SecretKey` 和 `SecretId` 的获取参考 <https://cloud.tencent.com/developer/article/1385239>
 
-用 vscode 打开 `lavcode-node` 目录，按 F5 即可启动调试
+先运行命令
 
-或执行命令 `npm start`
+```sh
+npm install
+```
+
+然后用 vscode 打开 `lavcode-node` 目录，按 F5 即可启动调试
+
+或执行命令
+
+```sh
+npm start
+```
+
+### 部署
+
+可以本地部署，也可以使用 `GitHub Actions` 部署
+
+#### 本地部署
+
+与前面 `本地运行` 部分创建了 `.env.local` 文件类似，但只用确保包含下面内容
+
+```
+SECRET_KEY=云接口密码
+ENV_ID=CloudBase 环境Id
+```
+
+然后在 `lavcode-node` 目录，运行下面命令
+
+```sh
+npm install
+
+npx tcb login
+npx tcb framework deploy --mode local
+```
+
+#### 使用 `GitHub Actions` 部署
+
+1. 设置 GitHub Secrets
+
+Fork 仓库后，设置 GitHub Secrets，添加如下 Secrets
+
+- NODE_ENV_ID: CloudBase 环境 Id
+- NODE_SECRET_KEY: 云接口密码
+- TENCENT_SECRET_ID: 腾讯云 SecretId
+- TENCENT_SECRET_KEY: 腾讯云 SecretKey
+
+![Secrets](./api/secrets.png)
+
+`SecretKey` 和 `SecretId` 的获取参考 <https://cloud.tencent.com/developer/article/1385239>
+
+2. 修改脚本
+
+修改源码文件 `.github/workflows/publish-node.yml`
+
+删除此行：`if: github.repository == 'hal-wang/Lavcode'`
+
+3. 提交代码
+
+上面操作完成后，每次提交代码，都会自动部署
+
+## Lavcode.Asp 介绍
+
+Lavcode.Asp 用 C# 语言开发，使用了 Asp.Net Core 框架，按 Restful 规范实现接口
+
+数据库使用 Sql Server + EF，可以很方便的切换数据库，如 MySQL 或 Sqlite
+
+接口的默认页面是 `swagger`，你可以通过修改源码的方式隐藏 `swagger`
+
+### 本地运行
+
+在 `Lavcode.Asp` 文件夹中，创建文件 `appsettings.local.json`，内容如
+
+```json
+{
+  "SecretKey": "your_secret_key",
+  "ConnectionStrings": {
+    "MSSQL": "Server=127.0.0.1;Database=Lavcode;uid=sa;Password=H;Encrypt=True;TrustServerCertificate=True;"
+  }
+}
+```
+
+- `SecretKey` 为云接口密码
+- `ConnectionStrings.MSSQL` 为数据库连接字符串，一般修改地址和端口即可
+
+无需手动创建数据库，数据库会在首次运行时自动创建
+
+使用 vs 2022 或更新版本打开 `Lavcode.sln`，启动项目选择 `Lavcode.Asp`，按下 F5 即可开始调试
+
+### 部署
+
+与其他 Asp.NET Core 项目部署方式相同
+
+可以部署到 `IIS` / `Docker`/ `Apache` 等
+
+部署时别忘记修改 `appsettings.json` 文件中的 `SecretKey` 和 `ConnectionStrings.MSSQL`
 
 ## 安全性
 
@@ -83,4 +196,4 @@ TENCENT_SECRET_ID=腾讯云 SecretId
 
 ## 开发接口
 
-你也可以参考源码 `lavcode-node` 自己开发后端接口，能更灵活的更换语言框架和数据库
+你也可以参考源码提供的两种后端方案，自己开发后端接口，能更灵活的更换语言框架和数据库
