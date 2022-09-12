@@ -99,7 +99,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore.IconCtl
         {
             try
             {
-                var uriBing = new Uri("https://blog.hal.wang/aa87f3dc");
+                var uriBing = new Uri("https://lavcode.hal.wang/usage/svgicon");
                 var success = await Launcher.LaunchUriAsync(uriBing);
             }
             catch (Exception ex)
