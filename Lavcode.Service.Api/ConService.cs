@@ -81,14 +81,15 @@ namespace Lavcode.Service.Api
         {
             new KeyValuePair<string, string>("platform", "uwp"),
             new KeyValuePair<string, string>("version", _version??""),
-            new KeyValuePair<string, string>("Authorization", _token??""),
+            new KeyValuePair<string, string>("Authorization", string.IsNullOrEmpty(_token) ? "" : $"Bearer {_token}"),
         };
 
         private HttpClient GetHttpClient()
         {
-            HttpClient client = new(new HttpClientHandler()
+            HttpClient client = new(new HttpClientHandler
             {
                 UseProxy = UseProxy?.Invoke() ?? false,
+                ServerCertificateCustomValidationCallback = (_, _, _, _) => true,
             })
             {
                 Timeout = _timeout ?? TimeSpan.FromSeconds(20),
