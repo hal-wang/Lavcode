@@ -48,7 +48,7 @@ export default defineUserConfig({
         ariaLabel: "下载",
         children: [
           {
-            text: "Windows 10",
+            text: "Windows 10/11",
             link: "https://www.microsoft.com/store/apps/9N3N7R34ZJDC",
           },
         ],
