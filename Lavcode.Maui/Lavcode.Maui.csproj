@@ -52,4 +52,16 @@
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AntDesign" Version="0.12.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Lavcode.Model\Lavcode.Model.csproj" />
+    </ItemGroup>
+
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="npm run buildcss" />
+	</Target>
 </Project>

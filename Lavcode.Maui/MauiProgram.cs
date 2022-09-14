@@ -1,7 +1,4 @@
-﻿using Lavcode.Maui.Data;
-using Microsoft.AspNetCore.Components.WebView.Maui;
-
-namespace Lavcode.Maui
+﻿namespace Lavcode.Maui
 {
     public static class MauiProgram
     {
@@ -16,11 +13,11 @@ namespace Lavcode.Maui
                 });
 
             builder.Services.AddMauiBlazorWebView();
-#if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
-#endif
+            builder.Services.AddAntDesign();
 
-            builder.Services.AddSingleton<WeatherForecastService>();
+#if DEBUG
+            builder.Services.AddBlazorWebViewDeveloperTools();
+#endif
 
             return builder.Build();
         }

@@ -1,0 +1,51 @@
+﻿@using Lavcode.Model;
+
+<Card Title="@ProviderName" Class="bg-primary text-primary-text" BodyStyle="padding:10px 20px;">
+    <Extra>
+        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2363" width="30" height="30">
+            <path d="@Icon" p-id="2364" fill="white"></path>
+        </svg>
+    </Extra>
+    <Body>
+        <div class="flex flex-row">
+            @Description
+        </div>
+    </Body>
+</Card>
+
+@code {
+    [Parameter]
+    public string Icon { get; set; } = null!;
+    [Parameter]
+    public Provider Provider { get; set; }
+    [Parameter]
+    public string Description { get; set; } = null!;
+
+    public string ProviderName
+    {
+        get
+        {
+            switch (Provider)
+            {
+                case Provider.Sqlite:
+                    return "本地";
+                case Provider.GitHub:
+                    return "GitHub";
+                case Provider.Gitee:
+                    return "Gitee";
+                case Provider.Api:
+                    return "云接口";
+            }
+
+            throw new Exception();
+        }
+    }
+}
+
+
+<style scoped>
+    .ant-card-head {
+        color: white;
+        font-weight: bold;
+    }
+</style>
