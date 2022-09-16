@@ -9,7 +9,7 @@ import { PasswordService } from "./services/password.service";
 
 @V()
   .Tags("password")
-  .Description("Update password")
+  .Summary("Update password")
   .Response(200, GetPasswordDto)
   .ResponseDescription(200, "success")
   .Security({

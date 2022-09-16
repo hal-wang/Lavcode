@@ -6,7 +6,7 @@ import { CollectionService } from "../../services/collection.service";
 
 @V()
   .Tags("password")
-  .Description("Delete a password")
+  .Summary("Delete a password")
   .ResponseDescription(204, "success")
   .Security({
     Bearer: [],

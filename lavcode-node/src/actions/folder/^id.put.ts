@@ -9,7 +9,7 @@ import { FolderService } from "./services/folder.service";
 
 @V()
   .Tags("folder")
-  .Description("Update folder")
+  .Summary("Update folder")
   .Response(200, GetFolderDto)
   .ResponseDescription(200, "success")
   .Security({

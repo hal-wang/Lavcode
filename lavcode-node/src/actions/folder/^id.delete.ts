@@ -7,7 +7,7 @@ import { CollectionService } from "../../services/collection.service";
 
 @V()
   .Tags("folder")
-  .Description("Delete a folder")
+  .Summary("Delete a folder")
   .ResponseDescription(204, "success")
   .Security({
     Bearer: [],
