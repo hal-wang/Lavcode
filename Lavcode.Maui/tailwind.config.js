@@ -9,8 +9,8 @@ module.exports = {
                 '-1': '-1',
             },
             colors: {
-                primary: '#085ea2',
-                'primary-text': "#fff",
+                primary: 'var(--color-primary)',
+                'primary-text': 'var(--color-primary-text)',
             },
             screens: {
                 sm: '576px',

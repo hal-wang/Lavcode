@@ -1,6 +1,13 @@
-﻿@tailwind base;
+﻿:root {
+    --color-primary: #085ea2;
+    --color-primary-text: #fff;
+}
+
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import './colors.less';
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
