@@ -10,7 +10,7 @@ import { GetTokenDto } from "./dtos/get-token.dto";
 @Open
 @V()
   .Tags("auth")
-  .Description("Get login token")
+  .Summary("Get login token")
   .Response(200, GetTokenDto)
   .ResponseDescription(200, "success")
 export default class extends Action {

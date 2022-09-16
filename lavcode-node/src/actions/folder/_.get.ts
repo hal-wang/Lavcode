@@ -6,7 +6,7 @@ import { FolderService } from "./services/folder.service";
 
 @V()
   .Tags("folder")
-  .Description("Get all folders")
+  .Summary("Get all folders")
   .Response(200, [GetFolderDto])
   .ResponseDescription(200, "success")
   .Security({

@@ -3,7 +3,7 @@ import { V } from "@ipare/validator";
 
 @V()
   .Tags("auth")
-  .Description("Verify token")
+  .Summary("Verify token")
   .ResponseDescription(204, "success")
   .Security({
     Bearer: [],

@@ -9,7 +9,7 @@ import { FolderService } from "./services/folder.service";
 
 @V()
   .Tags("folder")
-  .Description("Create folder")
+  .Summary("Create folder")
   .Response(200, GetFolderDto)
   .ResponseDescription(200, "success")
   .Security({

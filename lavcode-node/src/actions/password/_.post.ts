@@ -9,7 +9,7 @@ import { PasswordService } from "./services/password.service";
 
 @V()
   .Tags("password")
-  .Description("Create password")
+  .Summary("Create password")
   .Response(200, GetPasswordDto)
   .ResponseDescription(200, "success")
   .Security({

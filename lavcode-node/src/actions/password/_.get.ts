@@ -7,7 +7,7 @@ import { PasswordService } from "./services/password.service";
 
 @V()
   .Tags("password")
-  .Description("Get passwords")
+  .Summary("Get passwords")
   .Response(200, [GetPasswordDto])
   .ResponseDescription(200, "success")
   .Security({
