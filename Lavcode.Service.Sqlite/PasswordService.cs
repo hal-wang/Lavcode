@@ -141,11 +141,11 @@ namespace Lavcode.Service.Sqlite
 
                 Connection.RunInTransaction(() =>
                 {
-                    Connection.Update(password);
+                    Connection.Update(PasswordEntity.FromModel(password));
                     if (!skipIcon && password.Icon != null)
                     {
                         password.Icon.Id = password.Id;
-                        Connection.Update(password.Icon);
+                        Connection.Update(IconEntity.FromModel(password.Icon));
                     }
 
                     if (!skipKvp && password.KeyValuePairs != null)
@@ -156,7 +156,8 @@ namespace Lavcode.Service.Sqlite
                             kvp.Id = Guid.NewGuid().ToString();
                             kvp.PasswordId = password.Id;
                         }
-                        Connection.InsertAll(password.KeyValuePairs);
+                        var list = password.KeyValuePairs.Select(item => KeyValuePairEntity.FromModel(item)).ToArray();
+                        Connection.InsertAll(list);
                     }
                 });
             });
