@@ -19,19 +19,30 @@
         <lucv:DialogTitle Title="反馈" Closable="True" Dialog="{x:Bind}"/>
     </ContentDialog.Title>
 
-    <Grid Width="340">
-        <TextBox PlaceholderText="填写反馈内容（支持 Markdown）"
-                 AcceptsReturn="True"
-                 MinHeight="100"
-                 MaxHeight="200"
-                 VerticalAlignment="Center"
-                 Text="{x:Bind VM.Content,Mode=TwoWay}"/>
-        <Button Style="{ThemeResource LightButtonStyle}"
-                ToolTipService.ToolTip="预览"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Click="Preview_Click">
-            <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE7B3;"/>
-        </Button>
-    </Grid>
+    <StackPanel Width="340">
+        <TextBox PlaceholderText="标题" Text="{x:Bind VM.Title,Mode=TwoWay}"/>
+
+        <Grid Margin="0 10 0 0">
+            <TextBox PlaceholderText="填写反馈内容（可选，支持 Markdown）"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     MinHeight="100"
+                     MaxHeight="200"
+                     VerticalAlignment="Center"
+                     Text="{x:Bind VM.Content,Mode=TwoWay}"/>
+            <Button Style="{ThemeResource LightButtonStyle}"
+                    ToolTipService.ToolTip="预览"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="Preview_Click">
+                <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE7B3;"/>
+            </Button>
+        </Grid>
+
+        <StackPanel Margin="0 4 0 0" Opacity="0.6">
+            <TextBlock Text="反馈完成后，等待短暂时间刷新才展现" FontSize="12" TextWrapping="Wrap"/>
+            <TextBlock Text="内容公开显示，如果包含隐私信息请选择发邮件" FontSize="12" TextWrapping="Wrap"/>
+            <TextBlock Text="修改请访问 GitHub 操作相关 Issues" FontSize="12" TextWrapping="Wrap"/>
+        </StackPanel>
+    </StackPanel>
 </ContentDialog>

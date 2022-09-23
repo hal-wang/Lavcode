@@ -58,7 +58,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             }
         }
 
-        public string FeedbackUrl { get; } = $"{RepositoryConstant.GitHubRepositoryUrl}/issues/{RepositoryConstant.FeedbackIssueNumber}";
+        public string FeedbackUrl { get; } = $"{RepositoryConstant.GitHubRepositoryUrl}/issues";
         private async void Git_Click(object sender, RoutedEventArgs e)
         {
             try

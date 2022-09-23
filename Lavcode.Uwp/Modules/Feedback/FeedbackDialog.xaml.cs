@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Lavcode.Uwp.Modules.Feedback
 {
-    public sealed partial class FeedbackDialog : ContentDialog, IResultDialog<bool>
+    public sealed partial class FeedbackDialog : ContentDialog, IResultDialog<Issue>
     {
         public FeedbackDialog()
         {
@@ -37,7 +37,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             IsLoading = true;
             if (await VM.Feedback())
             {
-                this.Hide(true);
+                this.Hide(VM.IssueResult);
             }
             IsLoading = false;
         }
@@ -52,8 +52,6 @@ namespace Lavcode.Uwp.Modules.Feedback
             await Launcher.LaunchUriAsync(new Uri(RepositoryConstant.GitHubUrl, UriKind.Absolute));
         }
 
-        public IssueComment CommentResult => VM.CommentResult;
-
-        public bool Result { get; set; } = false;
+        public Issue Result { get; set; } = null;
     }
 }

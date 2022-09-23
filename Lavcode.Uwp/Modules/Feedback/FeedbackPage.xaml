@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:huc="using:HTools.Uwp.Controls"
     xmlns:lucv="using:Lavcode.Uwp.Controls"
-    xmlns:lucvc="using:Lavcode.Uwp.Controls.Comment"
+    xmlns:luci="using:Lavcode.Uwp.Controls.Issue"
     xmlns:local="using:Lavcode.Uwp.Modules.Feedback"
     xmlns:lums="using:Lavcode.Uwp.Modules.Shell"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
@@ -107,15 +107,13 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center">
-                <TextBlock Text="总数："
-                           VerticalAlignment="Center"/>
-                <TextBlock Text="{x:Bind VM.Count,Mode=OneWay}"
-                           Visibility="{x:Bind VM.Issue,Mode=OneWay,Converter={StaticResource IsNullConverter},ConverterParameter=T}"
-                           VerticalAlignment="Center"/>
+                <TextBlock Text="Open issues:" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Text="{x:Bind VM.Count,Mode=OneWay}" VerticalAlignment="Center"
+                           Visibility="{x:Bind VM.Count,Mode=OneWay,Converter={StaticResource IsStrEmptyConverter},ConverterParameter=T}"/>
                 <TextBlock Text="未获取"
                            FontSize="11"
                            Opacity="0.7"
-                           Visibility="{x:Bind VM.Issue,Mode=OneWay,Converter={StaticResource IsNullConverter}}"
+                           Visibility="{x:Bind VM.Count,Mode=OneWay,Converter={StaticResource IsStrEmptyConverter}}"
                            VerticalAlignment="Center"/>
                 <Button Style="{ThemeResource LightButtonStyle}"
                         ToolTipService.ToolTip="刷新"
@@ -126,7 +124,7 @@
             </StackPanel>
         </Grid>
 
-        <lucvc:CommentList Grid.Row="2"
-                           Comments="{x:Bind VM.Feedbacks,Mode=OneWay}"/>
+        <luci:IssueList Grid.Row="2"
+                        Issues="{x:Bind VM.Feedbacks,Mode=OneWay}"/>
     </Grid>
 </Page>

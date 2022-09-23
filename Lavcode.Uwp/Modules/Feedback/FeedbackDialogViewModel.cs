@@ -3,8 +3,10 @@ using Lavcode.Common;
 using Lavcode.Uwp.Helpers;
 using Lavcode.Uwp.Modules.Auth;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using Octokit;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Lavcode.Uwp.Modules.Feedback
@@ -18,13 +20,20 @@ namespace Lavcode.Uwp.Modules.Feedback
             set { SetProperty(ref _content, value); }
         }
 
-        public IssueComment CommentResult { get; private set; } = null;
+        private string _title = string.Empty;
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
+        public Issue IssueResult { get; private set; } = null;
 
         public async Task<bool> Feedback()
         {
-            if (string.IsNullOrEmpty(Content))
+            if (string.IsNullOrEmpty(Title))
             {
-                MessageHelper.ShowWarning("请输入反馈内容");
+                MessageHelper.ShowWarning("请输入标题");
                 return false;
             }
 
@@ -34,7 +43,18 @@ namespace Lavcode.Uwp.Modules.Feedback
                 if (string.IsNullOrEmpty(token)) return false;
 
                 var client = GitHubHelper.GetAuthClient(RepositoryConstant.Repos, token);
-                CommentResult = await client.Issue.Comment.Create(RepositoryConstant.GitAccount, RepositoryConstant.Repos, RepositoryConstant.FeedbackIssueNumber, Content);
+                var newIssue = new NewIssue("From client, DO NOT EDIT!")
+                {
+                    Body = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new
+                    {
+                        title = Title,
+                        body = Content,
+                        platform = "uwp",
+                        version = Global.Version,
+                        provider = SettingHelper.Instance.Provider.ToString().ToLower(),
+                    }))),
+                };
+                IssueResult = await client.Issue.Create(RepositoryConstant.GitAccount, RepositoryConstant.Repos, newIssue);
             }
             catch (System.Net.Http.HttpRequestException)
             {
@@ -47,7 +67,9 @@ namespace Lavcode.Uwp.Modules.Feedback
                 return false;
             }
 
-            MessageHelper.ShowPrimary("反馈成功");
+            Title = string.Empty;
+            Content = string.Empty;
+            MessageHelper.ShowPrimary("反馈成功，请等待短暂时间后刷新");
             return true;
         }
 

@@ -1,7 +1,6 @@
 ﻿using HTools;
 using HTools.Uwp.Helpers;
 using Lavcode.Common;
-using Lavcode.Uwp.Controls.Comment;
 using Lavcode.Uwp.Helpers;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Uwp;
@@ -13,23 +12,15 @@ namespace Lavcode.Uwp.Modules.Feedback
 {
     public class FeedbackViewModel : ObservableObject
     {
-        private Issue _issue = null;
-        public Issue Issue
+        private string _count = "";
+        public string Count
         {
-            get => _issue;
-            set
-            {
-                SetProperty(ref _issue, value);
-                _addedCount = 0;
-                OnPropertyChanged(nameof(Count));
-            }
+            get => _count;
+            set => SetProperty(ref _count, value);
         }
 
-        private int _addedCount = 0;
-        public int Count => (Issue == null ? 0 : Issue.Comments) + _addedCount;
-
-        private IncrementalLoadingCollection<CommentSource, IssueComment> _feedbacks = null;
-        public IncrementalLoadingCollection<CommentSource, IssueComment> Feedbacks
+        private IncrementalLoadingCollection<IssueSource, Issue> _feedbacks = null;
+        public IncrementalLoadingCollection<IssueSource, Issue> Feedbacks
         {
             get { return _feedbacks; }
             set { SetProperty(ref _feedbacks, value); }
@@ -37,24 +28,16 @@ namespace Lavcode.Uwp.Modules.Feedback
 
         public async void HandleRefresh()
         {
-            Issue = null;
             await Init();
         }
 
         public async Task Init()
         {
-            if (Issue != null)
-            {
-                return;
-            }
-
             LoadingHelper.Show();
             await TaskExtend.SleepAsync(100);
             try
             {
-                await GetIssueInfo();
-
-                Feedbacks = new IncrementalLoadingCollection<CommentSource, IssueComment>(new CommentSource(RepositoryConstant.FeedbackIssueNumber, Issue.Comments));
+                Feedbacks = new IncrementalLoadingCollection<IssueSource, Issue>(new IssueSource(new string[] { RepositoryConstant.FeedbackIssueTag }));
                 Feedbacks.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();
@@ -65,24 +48,35 @@ namespace Lavcode.Uwp.Modules.Feedback
                 LoadingHelper.Hide();
                 MessageHelper.ShowError(ex, 0);
             }
+
+            await InitRepo();
         }
 
-        private async Task GetIssueInfo()
+        private async Task InitRepo()
         {
-            var _client = GitHubHelper.GetBaseClient(RepositoryConstant.Repos);
-            Issue = await _client.Issue.Get(RepositoryConstant.GitAccount, RepositoryConstant.Repos, RepositoryConstant.FeedbackIssueNumber);
+            var github = GitHubHelper.GetBaseClient(RepositoryConstant.Repos);
+            var repo = await github.Repository.Get(RepositoryConstant.GitAccount, RepositoryConstant.Repos);
+            Count = repo.OpenIssuesCount.ToString();
         }
 
         public async void HandleFeedback()
         {
-            var fbDialog = new FeedbackDialog();
-            if (!await fbDialog.QueueAsync<bool>()) return;
+            var newIssue = await new FeedbackDialog().QueueAsync<Issue>();
+            if (newIssue == null) return;
+            if (Feedbacks == null)
+            {
+                await Init();
+                return;
+            }
 
-            if (Feedbacks == null || Feedbacks.HasMoreItems) return;
-
-            Feedbacks.Insert(0, fbDialog.CommentResult);
-            _addedCount++;
-            OnPropertyChanged(nameof(Count));
+            if (int.TryParse(Count, out int count))
+            {
+                Count = (count + 1).ToString();
+            }
+            else
+            {
+                Count = "1";
+            }
         }
     }
 }
