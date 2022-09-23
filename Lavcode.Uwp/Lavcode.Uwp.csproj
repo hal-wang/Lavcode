@@ -4,8 +4,8 @@
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
-    <PackageCertificateThumbprint>98A47C04D1C0CD4F142436A860530774F08AC232</PackageCertificateThumbprint>
-    <DefaultLanguage>zh-cn</DefaultLanguage>
+    <PackageCertificateThumbprint>DB8A9BBB31690BA103C6A81849AC2EB488CFBCB0</PackageCertificateThumbprint>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,8 +30,7 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateKeyFile>
-    </PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Lavcode.Uwp_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -377,6 +376,7 @@
     <Content Include="Assets\Images\windows_hello_11.png" />
     <Content Include="Assets\Images\wxpay.jpg" />
     <None Include=".editorconfig" />
+    <None Include="Lavcode.Uwp_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <None Include="README.md" />
