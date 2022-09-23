@@ -1,4 +1,4 @@
-name: "publish node"
+name: "Publish Node"
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: "client feedback"
+name: "Client Feedback"
 
 on:
   issues:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   create:
+    if: github.repository == 'hal-wang/Lavcode'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
