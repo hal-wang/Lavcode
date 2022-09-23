@@ -17,7 +17,7 @@ const body = args[5];
     {
       hostname: "api.github.com",
       port: 443,
-      path: `/repos/hal-wang/lavcode-test/issues/${issueNumber}`,
+      path: `/repos/hal-wang/Lavcode/issues/${issueNumber}`,
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
