@@ -17,12 +17,26 @@
 
 **主页查看更多详情：**<https://lavcode.hal.wang>
 
-## 下载使用
+## 安装使用
+
+可以从应用商店安装，也可以下载安装包安装
+
+### 从商店安装（推荐）
 
 `Lavcode` 发布在 `Win10/11` 应用商店 Microsoft Store
 
 - 应用商店内搜索 `Lavcode` 并下载安装
 - 也可以通过此链接跳转：<https://www.microsoft.com/store/apps/9N3N7R34ZJDC>
+
+### 使用安装包安装
+
+从 `v1.1.0` 开始，可以在 [Releases](https://github.com/hal-wang/Lavcode/releases) 下载安装包
+
+安装步骤如下
+
+1. 在 `系统设置 -> 隐私和安全性 -> 开发者选择`，打开 `开发人员模式`，等待系统安装完毕
+1. 在 [Releases](https://github.com/hal-wang/Lavcode/releases) 页面下载文件 `Lavcode.Uwp_*.*.*.*.zip` 并解压
+1. 使用管理员身份打开 `Windows PowerShell` 运行解压后的 `install.ps1` 文件
 
 ## 遇到问题？
 
