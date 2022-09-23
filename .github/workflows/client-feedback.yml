@@ -1,0 +1,16 @@
+name: "client feedback"
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          registry-url: https://registry.npmjs.org/
+      - run: node scripts/client-feedback.js ${{ secrets.GITHUB_TOKEN }} ${{ github.event.issue.number }} "${{ github.event.issue.title }}" ${{ github.event.issue.body }}
