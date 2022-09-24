@@ -8,15 +8,15 @@ on:
         required: true
         default: "0.0.0.0"
 
-jobs:
-  release:
-    runs-on: windows-2019
+env:
+  SigningCertificate: Lavcode.Uwp_TemporaryKey.pfx
+  Project_Path: Lavcode.Uwp\Lavcode.Uwp.csproj
+  UWP_Project_Directory: Lavcode.Uwp
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    env:
-      SigningCertificate: Lavcode.Uwp_TemporaryKey.pfx
-      Solution_Path: Lavcode.sln
-      UWP_Project_Directory: Lavcode.Uwp
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  release-bundle:
+    runs-on: windows-2019
 
     steps:
       - name: Configure Pagefile
@@ -44,43 +44,80 @@ jobs:
           $manifest.Package.Identity.Version = "${{github.event.inputs.version}}"
           $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
 
-      - name: Build x86
-        run: msbuild $env:Solution_Path /p:Platform=x86 /p:AppxBundlePlatforms="x86" /p:AppxPackageDir=C:\Package\x86 /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
+      - name: Build Bundle
+        run: msbuild $env:Project_Path /p:Platform=x86 /p:AppxBundlePlatforms="x86|x64|arm|arm64" /p:AppxPackageDir=C:\Package\Bundle /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
+        env:
+          AppxBundle: Always
+          BuildMode: StoreUpload
+          Configuration: Release
+
+      - name: Create Bundle archive
+        run: Compress-Archive -Path C:\Package\Bundle\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_Bundle.zip
+
+      - name: Create msixupload archive
+        run: Compress-Archive -Path C:\Package\Bundle\Lavcode.Uwp_${{github.event.inputs.version}}_x86_x64_arm_arm64_bundle.msixupload -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_msixupload.zip
+
+      - name: Update msixupload release asset
+        id: upload-release-asset-msixupload
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+          asset_path: C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_msixupload.zip
+          asset_name: Lavcode.Uwp_${{github.event.inputs.version}}_msixupload.zip
+          asset_content_type: application/zip
+
+      - name: Update Bundle release asset
+        id: upload-release-asset-bundle
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+          asset_path: C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_Bundle.zip
+          asset_name: Lavcode.Uwp_${{github.event.inputs.version}}_Bundle.zip
+          asset_content_type: application/zip
+
+  release-x86:
+    runs-on: windows-2019
+
+    steps:
+      - name: Configure Pagefile
+        uses: al-cheb/configure-pagefile-action@v1.2
+        with:
+          minimum-size: 32GB
+          maximum-size: 32GB
+          disk-root: "C:"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: release-drafter/release-drafter@v5
+        name: Create release draft
+        id: release-drafter
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.3
+
+      - name: Update manifest version
+        run: |
+          [xml]$manifest = get-content ".\$env:UWP_Project_Directory\Package.appxmanifest"
+          $manifest.Package.Identity.Version = "${{github.event.inputs.version}}"
+          $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
+
+      - name: Build
+        run: msbuild $env:Project_Path /p:Platform=x86 /p:AppxBundlePlatforms="x86" /p:AppxPackageDir=C:\Package\x86 /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
         env:
           BuildMode: SideloadOnly
           Configuration: Release
 
-      - name: Build x64
-        run: msbuild $env:Solution_Path /p:Platform=x64 /p:AppxBundlePlatforms="x64" /p:AppxPackageDir=C:\Package\x64 /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
-        env:
-          BuildMode: SideloadOnly
-          Configuration: Release
-
-      - name: Build ARM
-        run: msbuild $env:Solution_Path /p:Platform=ARM /p:AppxBundlePlatforms="ARM" /p:AppxPackageDir=C:\Package\ARM /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
-        env:
-          BuildMode: SideloadOnly
-          Configuration: Release
-
-      - name: Build ARM64
-        run: msbuild $env:Solution_Path /p:Platform=ARM64 /p:AppxBundlePlatforms="ARM64" /p:AppxPackageDir=C:\Package\ARM64 /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
-        env:
-          BuildMode: SideloadOnly
-          Configuration: Release
-
-      - name: Create x86 archive
+      - name: Create archive
         run: Compress-Archive -Path C:\Package\x86\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_x86.zip
 
-      - name: Create x64 archive
-        run: Compress-Archive -Path C:\Package\x64\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_x64.zip
-
-      - name: Create ARM archive
-        run: Compress-Archive -Path C:\Package\ARM\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_ARM.zip
-
-      - name: Create ARM64 archive
-        run: Compress-Archive -Path C:\Package\ARM64\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_ARM64.zip
-
-      - name: Update x86 release asset
+      - name: Update release asset
         id: upload-release-asset-x86
         uses: actions/upload-release-asset@v1
         env:
@@ -91,7 +128,45 @@ jobs:
           asset_name: Lavcode.Uwp_${{github.event.inputs.version}}_x86.zip
           asset_content_type: application/zip
 
-      - name: Update x64 release asset
+  release-x64:
+    runs-on: windows-2019
+
+    steps:
+      - name: Configure Pagefile
+        uses: al-cheb/configure-pagefile-action@v1.2
+        with:
+          minimum-size: 32GB
+          maximum-size: 32GB
+          disk-root: "C:"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: release-drafter/release-drafter@v5
+        name: Create release draft
+        id: release-drafter
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.3
+
+      - name: Update manifest version
+        run: |
+          [xml]$manifest = get-content ".\$env:UWP_Project_Directory\Package.appxmanifest"
+          $manifest.Package.Identity.Version = "${{github.event.inputs.version}}"
+          $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
+
+      - name: Build
+        run: msbuild $env:Project_Path /p:Platform=x64 /p:AppxBundlePlatforms="x64" /p:AppxPackageDir=C:\Package\x64 /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
+        env:
+          BuildMode: SideloadOnly
+          Configuration: Release
+
+      - name: Create archive
+        run: Compress-Archive -Path C:\Package\x64\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_x64.zip
+
+      - name: Update release asset
         id: upload-release-asset-x64
         uses: actions/upload-release-asset@v1
         env:
@@ -102,7 +177,45 @@ jobs:
           asset_name: Lavcode.Uwp_${{github.event.inputs.version}}_x64.zip
           asset_content_type: application/zip
 
-      - name: Update ARM release asset
+  release-arm:
+    runs-on: windows-2019
+
+    steps:
+      - name: Configure Pagefile
+        uses: al-cheb/configure-pagefile-action@v1.2
+        with:
+          minimum-size: 32GB
+          maximum-size: 32GB
+          disk-root: "C:"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: release-drafter/release-drafter@v5
+        name: Create release draft
+        id: release-drafter
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.3
+
+      - name: Update manifest version
+        run: |
+          [xml]$manifest = get-content ".\$env:UWP_Project_Directory\Package.appxmanifest"
+          $manifest.Package.Identity.Version = "${{github.event.inputs.version}}"
+          $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
+
+      - name: Build
+        run: msbuild $env:Project_Path /p:Platform=ARM /p:AppxBundlePlatforms="ARM" /p:AppxPackageDir=C:\Package\ARM /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
+        env:
+          BuildMode: SideloadOnly
+          Configuration: Release
+
+      - name: Create archive
+        run: Compress-Archive -Path C:\Package\ARM\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_ARM.zip
+
+      - name: Update release asset
         id: upload-release-asset-ARM
         uses: actions/upload-release-asset@v1
         env:
@@ -113,7 +226,45 @@ jobs:
           asset_name: Lavcode.Uwp_${{github.event.inputs.version}}_ARM.zip
           asset_content_type: application/zip
 
-      - name: Update ARM64 release asset
+  release-arm64:
+    runs-on: windows-2019
+
+    steps:
+      - name: Configure Pagefile
+        uses: al-cheb/configure-pagefile-action@v1.2
+        with:
+          minimum-size: 32GB
+          maximum-size: 32GB
+          disk-root: "C:"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: release-drafter/release-drafter@v5
+        name: Create release draft
+        id: release-drafter
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.3
+
+      - name: Update manifest version
+        run: |
+          [xml]$manifest = get-content ".\$env:UWP_Project_Directory\Package.appxmanifest"
+          $manifest.Package.Identity.Version = "${{github.event.inputs.version}}"
+          $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
+
+      - name: Build
+        run: msbuild $env:Project_Path /p:Platform=ARM64 /p:AppxBundlePlatforms="ARM64" /p:AppxPackageDir=C:\Package\ARM64 /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
+        env:
+          BuildMode: SideloadOnly
+          Configuration: Release
+
+      - name: Create archive
+        run: Compress-Archive -Path C:\Package\ARM64\Lavcode.Uwp_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\Lavcode.Uwp_${{github.event.inputs.version}}_ARM64.zip
+
+      - name: Update release asset
         id: upload-release-asset-ARM64
         uses: actions/upload-release-asset@v1
         env:
