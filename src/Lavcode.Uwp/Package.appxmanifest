@@ -10,7 +10,7 @@
 
   <Identity
     Name="524473F72DB2F.Lavcode"
-    Publisher="CN=hal-wang"
+    Publisher="CN=72C1148F-5C2B-4F28-9B8C-891A63D2777E"
     Version="1.2.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="cda4abc7-39a4-4c92-8937-e609f1c9fb70" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
