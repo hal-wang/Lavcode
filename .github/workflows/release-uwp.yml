@@ -10,8 +10,8 @@ on:
 
 env:
   SigningCertificate: Lavcode.Uwp_TemporaryKey.pfx
-  Project_Path: Lavcode.Uwp\Lavcode.Uwp.csproj
-  UWP_Project_Directory: Lavcode.Uwp
+  Project_Path: src\Lavcode.Uwp\Lavcode.Uwp.csproj
+  UWP_Project_Directory: src\Lavcode.Uwp
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:

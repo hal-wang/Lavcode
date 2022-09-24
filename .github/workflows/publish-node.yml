@@ -23,7 +23,7 @@ jobs:
           SECRET_KEY: ${{ secrets.NODE_SECRET_KEY }}
           ENV_ID: ${{ secrets.NODE_ENV_ID }}
         run: |
-          cd lavcode-node
+          cd src/lavcode-node
           npm install
           echo -e "SECRET_KEY=$SECRET_KEY\nENV_ID=$ENV_ID" > ./.env.local
       - name: Publish
@@ -31,6 +31,6 @@ jobs:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
         run: |
-          cd lavcode-node
+          cd src/lavcode-node
           npx tcb login --apiKeyId $TENCENT_SECRET_ID --apiKey $TENCENT_SECRET_KEY
           npx tcb framework deploy --mode local

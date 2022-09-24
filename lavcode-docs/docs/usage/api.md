@@ -18,7 +18,7 @@ Lavcode 没有提供直接用的接口，因为大多数人都不愿意将密码
 
 [cloudbase](https://www.cloudbase.net/) + nodejs + [ipare](https://ipare.org)
 
-源码目录 `lavcode-node`
+源码目录 `src/lavcode-node`
 
 此方案使用比较简单，适合零开发经验的用户，稍微有些开发经验就更好了
 
@@ -34,13 +34,13 @@ Lavcode 没有提供直接用的接口，因为大多数人都不愿意将密码
 
 此部分同样适用于零开发基础的普通用户，“有图有真相”
 
-使用源码提供的 `lavcode-node` 快速部署接口
+使用源码提供的 `src/lavcode-node` 快速部署接口
 
 按以下步骤进行
 
 1. 一键部署
 
-[![](https://main.qcloudimg.com/raw/67f5a389f1ac6f3b4d04c7256438e44f.svg)](https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Fhal-wang%2FLavcode&branch=main&workDir=lavcode-node)
+[![](https://main.qcloudimg.com/raw/67f5a389f1ac6f3b4d04c7256438e44f.svg)](https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Fhal-wang%2FLavcode&branch=main&workDir=src/lavcode-node)
 
 2. 设置环境变量
 
@@ -80,7 +80,7 @@ lavcode-node 使用了 nodejs 框架 [ipare](https://ipare.org)，按 Restful �
 
 你也可以选择本地运行 `lavcode-node`
 
-fork 并 clone 项目后，在 `lavcode-node` 目录下新增 `.env.local` 文件，内如如下
+fork 并 clone 项目后，在 `src/lavcode-node` 目录下新增 `.env.local` 文件，内如如下
 
 ```
 SECRET_KEY=云接口密码
@@ -97,7 +97,7 @@ TENCENT_SECRET_ID=腾讯云 SecretId
 npm install
 ```
 
-然后用 vscode 打开 `lavcode-node` 目录，按 F5 即可启动调试
+然后用 vscode 打开 `src/lavcode-node` 目录，按 F5 即可启动调试
 
 或执行命令
 
@@ -118,7 +118,7 @@ SECRET_KEY=云接口密码
 ENV_ID=CloudBase 环境Id
 ```
 
-然后在 `lavcode-node` 目录，运行下面命令
+然后在 `src/lavcode-node` 目录，运行下面命令
 
 ```sh
 npm install
