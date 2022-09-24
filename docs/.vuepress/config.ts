@@ -32,7 +32,7 @@ export default defineUserConfig({
     docsRepo: "hal-wang/Lavcode",
     docsBranch: "main",
     docsDir: "docs",
-    editLinkPattern: ":repo/edit/:branch/lavcode-docs/:path",
+    editLinkPattern: ":repo/edit/:branch/docs/:path",
     editLink: true,
     editLinkText: "编辑此页",
     logo: "/logo.png",

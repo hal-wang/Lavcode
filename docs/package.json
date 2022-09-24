@@ -3,9 +3,9 @@
   "version": "1.1.2",
   "description": "Lavcode 官方网站",
   "scripts": {
-    "start": "vuepress dev docs",
+    "start": "vuepress dev .",
     "dev": "npm start",
-    "build": "vuepress build docs"
+    "build": "vuepress build ."
   },
   "author": "hal-wang",
   "license": "MIT",

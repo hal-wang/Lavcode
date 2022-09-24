@@ -24,13 +24,13 @@ jobs:
           SECRET_KEY: ${{ secrets.NODE_SECRET_KEY }}
           ENV_ID: ${{ secrets.NODE_ENV_ID }}
         run: |
-          cd lavcode-docs
+          cd docs
           npm install
           npm run build
 
       - name: Init-Git
         run: |
-          cd lavcode-docs/docs/.vuepress/dist
+          cd docs/.vuepress/dist
           git config --global user.name 'hal-wang' 
           git config --global user.email 'hi@hal.wang'
           git init -b gh-pages
@@ -40,7 +40,7 @@ jobs:
       - name: Publish
         uses: ad-m/github-push-action@master
         with:
-          directory: lavcode-docs/docs/.vuepress/dist
+          directory: docs/.vuepress/dist
           repository: hal-wang/Lavcode
           force: true
           branch: gh-pages
