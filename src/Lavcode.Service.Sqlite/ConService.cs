@@ -1,10 +1,8 @@
 ﻿using HTools;
 using Lavcode.IService;
 using Lavcode.Service.Sqlite.Entities;
-using Newtonsoft.Json.Linq;
 using SQLite;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,22 +20,14 @@ namespace Lavcode.Service.Sqlite
             _args = args;
 
             var filePath = DynamicHelper.ToExpandoObject(args).FilePath as string;
-            try
+            Connection?.Dispose();
+            Connection = new SQLiteConnection(filePath);
+            await TaskExtend.Run(() =>
             {
-                Connection?.Dispose();
-                Connection = new SQLiteConnection(filePath);
-                await TaskExtend.Run(() =>
-                {
-                    CreateTables();
-                    TryUpdateKvpId();
-                });
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.Write(ex);
-                return false;
-            }
+                TryUpdateKvpId();
+                CreateTables();
+            });
+            return true;
         }
 
         public virtual async Task<bool> Refresh()
@@ -67,12 +57,15 @@ namespace Lavcode.Service.Sqlite
         {
             if (!IsKvpIdNeedUpdate()) return;
 
-            var kvps = Connection.Table<KeyValuePairEntity>().ToArray();
-            foreach (var kvp in kvps)
+            var index = 1;
+            var kvps = Connection.Table<BeforeKeyValuePairEntity>().ToArray().Select(item => new KeyValuePairEntity()
             {
                 // fix 合并冲突
-                kvp.Id = kvp.Id + kvp.PasswordId;
-            }
+                Id = item.Id + item.SourceId + index++,
+                PasswordId = item.SourceId,
+                Key = item.Key,
+                Value = item.Value,
+            });
             Connection.RunInTransaction(() =>
             {
                 Connection.Execute("drop table [KeyValuePair]");
