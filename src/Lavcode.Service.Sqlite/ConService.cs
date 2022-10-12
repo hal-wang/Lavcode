@@ -84,6 +84,7 @@ CREATE TABLE [KeyValuePair] (
         private bool IsKvpIdNeedUpdate()
         {
             var tableInfo = Connection.Query<TableInfo>("pragma table_info('KeyValuePair')");
+            if (tableInfo.Count == 0) return false;
             if (tableInfo.Count != 4)
             {
                 throw new Exception();
