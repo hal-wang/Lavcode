@@ -63,5 +63,15 @@
         {
             return base.GetHashCode();
         }
+
+        public IconModel DeepClone()
+        {
+            return new IconModel()
+            {
+                IconType = IconType,
+                Id = Id,
+                Value = Value,
+            };
+        }
     }
 }

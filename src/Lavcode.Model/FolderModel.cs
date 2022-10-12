@@ -15,5 +15,17 @@ namespace Lavcode.Model
         public DateTimeOffset UpdatedAt { get; set; }
 
         public IconModel Icon { get; set; }
+
+        public FolderModel DeepClone()
+        {
+            return new FolderModel()
+            {
+                Id = Id,
+                Name = Name,
+                Order = Order,
+                UpdatedAt = UpdatedAt,
+                Icon = Icon?.DeepClone(),
+            };
+        }
     }
 }

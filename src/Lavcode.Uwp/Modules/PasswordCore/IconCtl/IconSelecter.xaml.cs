@@ -1,5 +1,4 @@
-﻿using Force.DeepCloner;
-using HTools.Uwp.Helpers;
+﻿using HTools.Uwp.Helpers;
 using Lavcode.Model;
 using Microsoft.Toolkit.Uwp;
 using System;
