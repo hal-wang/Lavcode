@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTools;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Services.Store;
@@ -7,28 +8,35 @@ namespace Lavcode.Uwp.Helpers
 {
     public static class UpdateHelper
     {
-        public static async Task DownloadAndInstallAllUpdatesAsync()
+        public static async Task<bool> DownloadAndInstallAllUpdatesAsync()
         {
-            try
+            var result = false;
+            await TaskExtend.Run(async () =>
             {
-                var context = StoreContext.GetDefault();
-                var updates = await context.GetAppAndOptionalStorePackageUpdatesAsync();
-                if (updates.Count > 0)
+                try
                 {
-                    var downloadResult = await context.RequestDownloadStorePackageUpdatesAsync(updates);
-                    if (downloadResult.OverallState == StorePackageUpdateState.Completed)
+                    var context = StoreContext.GetDefault();
+                    var updates = await context.GetAppAndOptionalStorePackageUpdatesAsync();
+                    if (updates.Count > 0)
                     {
-                        await context.RequestDownloadAndInstallStorePackageUpdatesAsync(updates);
+                        var downloadResult = await context.RequestDownloadStorePackageUpdatesAsync(updates);
+                        if (downloadResult.OverallState == StorePackageUpdateState.Completed)
+                        {
+                            await context.RequestDownloadAndInstallStorePackageUpdatesAsync(updates);
+                        }
                     }
+                    result = updates.Count > 0;
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    result = false;
+                }
+            });
+            return result;
         }
 
-        public static async void DownloadAndInstallAllUpdates()
+        public static async void DownloadAndInstallAllUpdatesBackground()
         {
             await DownloadAndInstallAllUpdatesAsync();
         }

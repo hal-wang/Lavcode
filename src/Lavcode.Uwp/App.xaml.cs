@@ -48,7 +48,7 @@ namespace Lavcode.Uwp
 
 #if DEBUG
 #else
-            UpdateHelper.DownloadAndInstallAllUpdates();
+            UpdateHelper.DownloadAndInstallAllUpdatesBackground();
 #endif
 
             CreateFrame();
