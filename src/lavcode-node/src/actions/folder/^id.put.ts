@@ -1,7 +1,7 @@
-import { Inject } from "@ipare/inject";
-import { Body, Param } from "@ipare/pipe";
-import { Action } from "@ipare/router";
-import { V } from "@ipare/validator";
+import { Inject } from "@halsp/inject";
+import { Body, Param } from "@halsp/pipe";
+import { Action } from "@halsp/router";
+import { V } from "@halsp/validator";
 import { CollectionService } from "../../services/collection.service";
 import { GetFolderDto } from "./dtos/get-folder.dto";
 import { UpdateFolderDto } from "./dtos/update-folder.dto";

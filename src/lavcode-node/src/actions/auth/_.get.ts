@@ -1,10 +1,11 @@
-import { Inject } from "@ipare/inject";
-import { Query } from "@ipare/pipe";
-import { Action } from "@ipare/router";
-import { Logger, LoggerInject } from "@ipare/logger";
+import { ILogger } from "@halsp/core";
+import { Inject } from "@halsp/inject";
+import { Query } from "@halsp/pipe";
+import { Action } from "@halsp/router";
+import { Logger } from "@halsp/logger";
 import { Open } from "../../decorators/open.decorator";
-import { JwtService } from "@ipare/jwt";
-import { V } from "@ipare/validator";
+import { JwtService } from "@halsp/jwt";
+import { V } from "@halsp/validator";
 import { GetTokenDto } from "./dtos/get-token.dto";
 
 @Open
@@ -16,8 +17,6 @@ import { GetTokenDto } from "./dtos/get-token.dto";
 export default class extends Action {
   @Inject
   private readonly jwtService!: JwtService;
-  @LoggerInject()
-  private readonly logger!: Logger;
 
   @V().IsString().IsBase64().Description("Lavcode password")
   @Query("password")

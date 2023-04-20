@@ -1,4 +1,4 @@
-import { V } from "@ipare/validator";
+import { V } from "@halsp/validator";
 import { KeyValuePairEntity } from "../../../entities/key-value-pair.entity";
 
 export class GetKeyValuePairDto {

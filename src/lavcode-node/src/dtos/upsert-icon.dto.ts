@@ -1,4 +1,4 @@
-import { V } from "@ipare/validator";
+import { V } from "@halsp/validator";
 import { IconType } from "../enums/icon-type";
 
 export class UpsertIconDto {

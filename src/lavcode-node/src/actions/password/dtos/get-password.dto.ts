@@ -1,4 +1,4 @@
-import { V } from "@ipare/validator";
+import { V } from "@halsp/validator";
 import { GetIconDto } from "../../../dtos/get-icon.dto";
 import { IconEntity } from "../../../entities/icon.entity";
 import { KeyValuePairEntity } from "../../../entities/key-value-pair.entity";

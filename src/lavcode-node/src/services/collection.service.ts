@@ -1,5 +1,5 @@
 import { Database } from "@cloudbase/node-sdk";
-import { Inject } from "@ipare/inject";
+import { Inject } from "@halsp/inject";
 import { CbappService } from "./cbapp.service";
 
 declare module "@cloudbase/node-sdk" {

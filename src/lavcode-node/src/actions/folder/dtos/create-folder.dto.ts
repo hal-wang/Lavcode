@@ -1,4 +1,4 @@
-import { V } from "@ipare/validator";
+import { V } from "@halsp/validator";
 import { UpsertIconDto } from "../../../dtos/upsert-icon.dto";
 
 export class CreateFolderDto {

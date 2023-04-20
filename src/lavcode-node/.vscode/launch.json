@@ -3,7 +3,7 @@
   "configurations": [
     {
       "command": "npm start",
-      "name": "Ipare Http Debugger",
+      "name": "Halsp Http Debugger",
       "request": "launch",
       "type": "node-terminal"
     }

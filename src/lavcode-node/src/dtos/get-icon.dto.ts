@@ -1,4 +1,4 @@
-import { V } from "@ipare/validator";
+import { V } from "@halsp/validator";
 import { IconEntity } from "../entities/icon.entity";
 import { IconType } from "../enums/icon-type";
 

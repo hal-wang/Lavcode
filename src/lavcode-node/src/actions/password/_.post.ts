@@ -1,7 +1,7 @@
-import { Inject } from "@ipare/inject";
-import { Body } from "@ipare/pipe";
-import { Action } from "@ipare/router";
-import { V } from "@ipare/validator";
+import { Inject } from "@halsp/inject";
+import { Body } from "@halsp/pipe";
+import { Action } from "@halsp/router";
+import { V } from "@halsp/validator";
 import { CollectionService } from "../../services/collection.service";
 import { CreatePasswordDto } from "./dtos/craete-password.dto";
 import { GetPasswordDto } from "./dtos/get-password.dto";

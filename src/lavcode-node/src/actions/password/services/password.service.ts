@@ -1,4 +1,4 @@
-import { Inject } from "@ipare/inject";
+import { Inject } from "@halsp/inject";
 import { IconEntity } from "../../../entities/icon.entity";
 import { KeyValuePairEntity } from "../../../entities/key-value-pair.entity";
 import { PasswordEntity } from "../../../entities/password-entity";

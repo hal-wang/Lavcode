@@ -1,7 +1,7 @@
 import { FolderEntity } from "../../../entities/folder.entity";
 import { IconEntity } from "../../../entities/icon.entity";
 import { GetIconDto } from "../../../dtos/get-icon.dto";
-import { V } from "@ipare/validator";
+import { V } from "@halsp/validator";
 
 export class GetFolderDto {
   @V().Required()

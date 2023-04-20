@@ -1,23 +1,26 @@
-import { Startup } from "@ipare/core";
-import "@ipare/router";
-import "@ipare/swagger";
-import "@ipare/inject";
-import "@ipare/jwt";
-import "@ipare/validator";
-import "@ipare/env";
-import "@ipare/logger";
-import "@ipare/filter";
-import { getVersion } from "@ipare/env";
+import { HttpStartup } from "@halsp/http";
+import "@halsp/router";
+import "@halsp/swagger";
+import "@halsp/inject";
+import "@halsp/jwt";
+import "@halsp/validator";
+import "@halsp/env";
+import "@halsp/logger";
+import "@halsp/filter";
+import { getVersion } from "@halsp/env";
 import { AuthFilter } from "./filters/auth.filter";
 import { CollectionService } from "./services/collection.service";
-import { InjectType } from "@ipare/inject";
+import { InjectType } from "@halsp/inject";
 import { DbhelperService } from "./services/dbhelper.service";
 import { CbappService } from "./services/cbapp.service";
 
-export default <T extends Startup>(startup: T, mode: string) =>
+export default <T extends HttpStartup>(startup: T) =>
   startup
-    .useVersion()
-    .useEnv({ mode })
+    .use(async (ctx, next) => {
+      ctx.res.set("version", (await getVersion()) ?? "");
+      await next();
+    })
+    .useEnv()
     .useInject()
     .inject(CollectionService, InjectType.Singleton)
     .inject(DbhelperService, InjectType.Singleton)
@@ -35,7 +38,7 @@ export default <T extends Startup>(startup: T, mode: string) =>
     })
     .useSwagger({
       path: "",
-      basePath: mode == "production" ? "v1" : "",
+      basePath: process.env.NODE_ENV == "production" ? "v1" : "",
       builder: async (builder) =>
         builder
           .addInfo({
@@ -77,7 +80,7 @@ export default <T extends Startup>(startup: T, mode: string) =>
         const logger = await ctx.getLogger();
         logger.error("Token 无效，" + err.message);
 
-        ctx.unauthorizedMsg("请注销并重新登录");
+        ctx.res.unauthorizedMsg("请注销并重新登录");
       }
     )
     .useGlobalFilter(AuthFilter)

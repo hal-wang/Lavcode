@@ -1,14 +1,13 @@
-import { HttpContext } from "@ipare/core";
-import { AuthorizationFilter } from "@ipare/filter";
-import { Inject } from "@ipare/inject";
-import "@ipare/jwt";
-import { JwtService } from "@ipare/jwt";
+import { Context } from "@halsp/core";
+import { AuthorizationFilter } from "@halsp/filter";
+import { Inject } from "@halsp/inject";
+import { JwtService } from "@halsp/jwt";
 
 export class AuthFilter implements AuthorizationFilter {
   @Inject
   private readonly jwtService!: JwtService;
 
-  onAuthorization(ctx: HttpContext) {
+  onAuthorization(ctx: Context) {
     const isOpen = ctx.actionMetadata.open;
     if (isOpen) return true;
 

@@ -1,5 +1,5 @@
-import { LambdaStartup } from "@ipare/lambda";
+import { LambdaStartup } from "@halsp/lambda";
 import startup from "./startup";
 
-const app = startup(new LambdaStartup(), "production");
-export const main = (event: any, context: any) => app.run(event, context);
+const app = startup(new LambdaStartup());
+export const main = (e: any, c: any) => app.run(e, c);

@@ -1,5 +1,5 @@
-import { Action } from "@ipare/router";
-import { V } from "@ipare/validator";
+import { Action } from "@halsp/router";
+import { V } from "@halsp/validator";
 
 @V()
   .Tags("auth")

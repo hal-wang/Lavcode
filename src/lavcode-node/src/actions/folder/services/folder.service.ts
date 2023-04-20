@@ -1,4 +1,4 @@
-import { Inject } from "@ipare/inject";
+import { Inject } from "@halsp/inject";
 import { FolderEntity } from "../../../entities/folder.entity";
 import { IconEntity } from "../../../entities/icon.entity";
 import { CbappService } from "../../../services/cbapp.service";
