@@ -24,9 +24,11 @@ jobs:
           SECRET_KEY: ${{ secrets.NODE_SECRET_KEY }}
           ENV_ID: ${{ secrets.NODE_ENV_ID }}
         run: |
+          npm i -g yarn --force
+          yarn config set registry https://registry.npmjs.org
           cd docs
-          npm install
-          npm run build
+          yarn install
+          yarn build
 
       - name: Init-Git
         run: |
