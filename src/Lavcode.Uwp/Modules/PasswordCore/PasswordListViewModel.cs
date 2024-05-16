@@ -72,17 +72,19 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             {
                 SelectedPasswordItem = null;
             }
-            PasswordItems.Clear();
             if (folderItem == null)
             {
+                PasswordItems.Clear();
                 return;
             }
 
             try
             {
-                await foreach (var password in GetPasswordItems())
+                var passwords = await _passwordService.GetPasswords(_curFolder.Folder.Id);
+                PasswordItems.Clear();
+                foreach (var password in passwords)
                 {
-                    PasswordItems.Add(password);
+                    PasswordItems.Add(new PasswordItem(password));
                 }
             }
             catch (Exception ex)
@@ -91,38 +93,52 @@ namespace Lavcode.Uwp.Modules.PasswordCore
             }
         }
 
-        private async IAsyncEnumerable<PasswordItem> GetPasswordItems()
+        public async Task Search(string searchText)
         {
-            var passwords = await _passwordService.GetPasswords(_curFolder.Folder.Id);
-            foreach (var password in passwords)
+            if (string.IsNullOrEmpty(searchText))
             {
-                PasswordItem passwordItem = null;
-                await TaskExtend.Run(() =>
+                await Init(_curFolder);
+                return;
+            }
+
+            try
+            {
+                var passwords = await _passwordService.GetPasswords();
+                passwords = passwords
+                    .Where(p =>
+                        p.Title.Contains(searchText)
+                        || p.Remark.Contains(searchText)
+                        || p.Value.Contains(searchText)
+                        || p.KeyValuePairs.Any(kvp => kvp.Key.Contains(searchText) || kvp.Value.Contains(searchText)))
+                    .ToList();
+                PasswordItems.Clear();
+                foreach (var password in passwords)
                 {
-                    passwordItem = new PasswordItem(password);
-                });
-                yield return passwordItem;
+                    PasswordItems.Add(new PasswordItem(password));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex);
             }
         }
-
         #endregion
 
         private void PasswordAddOrEdited(PasswordModel password)
         {
-            if (_curFolder == null || _curFolder.Folder.Id != password.FolderId)
+            var existPassword = PasswordItems.Where((item) => item.Password.Id == password.Id).FirstOrDefault();
+            if (existPassword == null)
             {
-                return;
-            }
+                if (_curFolder == null || _curFolder.Folder.Id != password.FolderId)
+                {
+                    return;
+                }
 
-            var queryResult = PasswordItems.Where((item) => item.Password.Id == password.Id);
-            if (queryResult.Count() == 0)
-            {
                 PasswordItems.Add(new PasswordItem(password));
             }
             else
             {
-                var existItem = queryResult.First();
-                existItem.Set(password);
+                existPassword.Set(password);
             }
             SelectedPasswordItem = PasswordItems.Where((item) => item.Password == password).First();
         }

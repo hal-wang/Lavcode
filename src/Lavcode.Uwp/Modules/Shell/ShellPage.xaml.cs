@@ -1,6 +1,7 @@
 ﻿using HTools.Uwp.Helpers;
 using Lavcode.Uwp.Modules.SqliteSync;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -36,6 +37,18 @@ namespace Lavcode.Uwp.Modules.Shell
         // Using a DependencyProperty as the backing store for OpenedFile.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OpenedFileProperty =
             DependencyProperty.Register("OpenedFile", typeof(StorageFile), typeof(ShellPage), new PropertyMetadata(null));
+
+
+        public bool IsSearchOpen
+        {
+            get { return (bool)GetValue(IsSearchOpenProperty); }
+            set { SetValue(IsSearchOpenProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsSearchOpen.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSearchOpenProperty =
+            DependencyProperty.Register("IsSearchOpen", typeof(bool), typeof(ShellPage), new PropertyMetadata(false));
+
 
         private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -77,6 +90,7 @@ namespace Lavcode.Uwp.Modules.Shell
             FindName(nameof(PasswordDetail));
             FindName(nameof(PasswordList));
             FindName(nameof(FolderList));
+            FindName(nameof(SearchBar));
         }
     }
 }

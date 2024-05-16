@@ -36,6 +36,7 @@ namespace Lavcode.Uwp.Modules.PasswordCore
         {
             StrongReferenceMessenger.Default.Register<PasswordList, FolderItem, string>(this, "FolderSelected", (_, item) => FolderSelected(item));
             StrongReferenceMessenger.Default.Register<PasswordList, FolderItem, string>(this, "PasswordAddOrEdited", (_, item) => PasswordAddOrEdited());
+            StrongReferenceMessenger.Default.Register<string, string>(this, "Search", async (_, searchText) => await VM.Search(searchText));
         }
 
         public PasswordListViewModel VM { get; } = ServiceProvider.Services.GetService<PasswordListViewModel>();

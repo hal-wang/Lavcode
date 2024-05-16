@@ -188,6 +188,9 @@
     <Compile Include="Modules\FirstUse\ProviderSelectButton.xaml.cs">
       <DependentUpon>ProviderSelectButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Search\SearchBar.xaml.cs">
+      <DependentUpon>SearchBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\SqliteSync\SqliteSyncConstant.cs" />
     <Compile Include="Modules\SqliteSync\Crypto\Aes.cs" />
     <Compile Include="Modules\SqliteSync\Crypto\OperationType.cs" />
@@ -435,6 +438,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\FirstUse\ProviderSelectButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Search\SearchBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
