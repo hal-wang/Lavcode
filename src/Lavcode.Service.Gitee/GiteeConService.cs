@@ -75,7 +75,7 @@ namespace Lavcode.Service.Gitee
             };
         }
 
-        protected async override Task DeleteComment(int commentId)
+        protected async override Task DeleteComment(long commentId)
         {
             var res = await HttpClient.DeleteAsync($"repos/:owner/:repo/issues/comments/:id",
                 query: new
@@ -143,7 +143,7 @@ namespace Lavcode.Service.Gitee
                 .ToList();
         }
 
-        protected async override Task<CommentItem<T>> UpdateComment<T>(int commentId, T value)
+        protected async override Task<CommentItem<T>> UpdateComment<T>(long commentId, T value)
         {
             var res = await HttpClient.PatchAsync($"repos/:owner/:repo/issues/comments/:id",
                 query: new

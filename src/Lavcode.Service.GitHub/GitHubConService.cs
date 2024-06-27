@@ -51,12 +51,12 @@ namespace Lavcode.Service.GitHub
             };
         }
 
-        protected override async Task DeleteComment(int commentId)
+        protected override async Task DeleteComment(long commentId)
         {
             await Client.Issue.Comment.Delete(Repository.Id, commentId);
         }
 
-        protected override async Task<CommentItem<T>> UpdateComment<T>(int commentId, T value)
+        protected override async Task<CommentItem<T>> UpdateComment<T>(long commentId, T value)
         {
             var newComment = await Client.Issue.Comment.Update(Repository.Id, commentId, JsonConvert.SerializeObject(value));
             return new CommentItem<T>()

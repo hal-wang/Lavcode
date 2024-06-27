@@ -227,8 +227,8 @@ namespace Lavcode.Service.BaseGit
         protected abstract Task<bool> BeforeConnect(object args);
         protected abstract Task<string> GetUserLogin();
         protected abstract Task<RepositoryItem> GetRepository();
-        protected abstract Task DeleteComment(int commentId);
-        protected abstract Task<CommentItem<T>> UpdateComment<T>(int commentId, T value) where T : IEntity;
+        protected abstract Task DeleteComment(long commentId);
+        protected abstract Task<CommentItem<T>> UpdateComment<T>(long commentId, T value) where T : IEntity;
         protected abstract Task<IReadOnlyList<CommentItem<T>>> GetPageComments<T>(int page, OneOf<int, string> issueNumber) where T : IEntity;
         protected abstract Task<CommentItem<T>> CreateComment<T>(OneOf<int, string> issueNumber, T value) where T : IEntity;
         protected abstract Task<IReadOnlyList<IssueItem>> GetPageIssues(int page);

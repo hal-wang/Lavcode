@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HTools" Version="1.6.11" />
+    <PackageReference Include="HTools" Version="1.6.16" />
   </ItemGroup>
 
 </Project>

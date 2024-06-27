@@ -5,7 +5,7 @@ namespace Lavcode.Service.BaseGit.Models
 {
     public class IssueItem<T>
     {
-        public int IssueId { get; set; }
+        public long IssueId { get; set; }
         public OneOf<int, string> IssueNumber { get; set; }
         public string Title { get; set; }
         public IList<CommentItem<T>> Comments { get; set; }
