@@ -1,0 +1,16 @@
+{
+  "name": "Lavcode",
+  "short_name": "Lavcode",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Lavcode 开源密码管理",
+  "theme_color": "blue",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
