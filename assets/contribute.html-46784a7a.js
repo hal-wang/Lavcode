@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-38f70e76","path":"/usage/contribute.html","title":"贡献","lang":"zh-CN","frontmatter":{},"headers":[{"level":2,"title":"贡献列表","slug":"贡献列表","link":"#贡献列表","children":[]}],"git":{"updatedTime":1722041517000,"contributors":[{"name":"hal-wang","email":"hi@hal.wang","commits":1}]},"filePathRelative":"usage/contribute.md"}');export{e as data};

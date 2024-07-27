@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-aa05ecbc","path":"/usage/window.html","title":"多窗口","lang":"zh-CN","frontmatter":{},"headers":[{"level":2,"title":"多窗口联动","slug":"多窗口联动","link":"#多窗口联动","children":[]}],"git":{"updatedTime":1722041517000,"contributors":[{"name":"hal-wang","email":"hi@hal.wang","commits":1}]},"filePathRelative":"usage/window.md"}');export{e as data};
