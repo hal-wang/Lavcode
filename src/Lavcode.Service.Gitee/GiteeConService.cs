@@ -189,7 +189,7 @@ namespace Lavcode.Service.Gitee
                 res = await HttpClient.PostAsync($"user/repos", query: new
                 {
                     access_token = _token,
-                    repo = RepositoryConstant.GitStorageRepos,
+                    name = RepositoryConstant.GitStorageRepos,
                     @private = true,
                     homepage = CommonConstant.HomeUrl,
                     description = "Lavcode 存储密码的仓库，请勿手动修改",
