@@ -37,7 +37,7 @@ namespace Lavcode.Uwp.Modules.Feedback
             await TaskExtend.SleepAsync(100);
             try
             {
-                Feedbacks = new IncrementalLoadingCollection<IssueSource, Issue>(new IssueSource(new string[] { RepositoryConstant.FeedbackIssueTag }));
+                Feedbacks = new IncrementalLoadingCollection<IssueSource, Issue>(new IssueSource(new string[] { RepositoryConstant.FeedbackIssueTag }, ItemStateFilter.All));
                 Feedbacks.OnEndLoading += () =>
                 {
                     LoadingHelper.Hide();

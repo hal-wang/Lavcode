@@ -5,7 +5,6 @@ using Microsoft.Toolkit.Collections;
 using Octokit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,9 +13,11 @@ namespace Lavcode.Uwp.Modules.Feedback
     public class IssueSource : IIncrementalSource<Issue>
     {
         private readonly string[] _labels;
-        public IssueSource(string[] labels)
+        private readonly ItemStateFilter _state;
+        public IssueSource(string[] labels, ItemStateFilter state)
         {
             _labels = labels;
+            _state = state;
         }
 
         private readonly GitHubClient _client = GitHubHelper.GetBaseClient(RepositoryConstant.Repos);
@@ -28,7 +29,7 @@ namespace Lavcode.Uwp.Modules.Feedback
                 {
                     SortDirection = SortDirection.Descending,
                     SortProperty = IssueSort.Updated,
-                    State = ItemStateFilter.Open,
+                    State = _state,
                 };
                 if (_labels != null)
                 {
